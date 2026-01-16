@@ -5,202 +5,244 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MII STORE — Premium Digital Services</title>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Icons (Font Awesome) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
+    /* ===== THEME TOKENS (DARK default) ===== */
     :root{
       --bg0:#05070c;
       --bg1:#070b14;
       --bg2:#0b1224;
+
       --card:rgba(255,255,255,.06);
       --card2:rgba(255,255,255,.08);
       --line:rgba(255,255,255,.10);
+
       --txt:#eef1ff;
       --muted:rgba(238,241,255,.72);
       --muted2:rgba(238,241,255,.52);
+
       --brand:#5eead4;
       --brand2:#60a5fa;
       --ok:#22c55e;
       --warn:#fbbf24;
-      --shadow:0 18px 60px rgba(0,0,0,.65);
+
+      --shadow:0 18px 60px rgba(0,0,0,.55);
       --r:22px;
+
+      /* typography scale (proportional) */
+      --fs-base: 15px;
+      --fs-h1: 2.15rem;
+      --fs-h1-sub: 1.05rem;
+      --fs-h2: 1.05rem;
+      --fs-p: .95rem;
+      --fs-small: .86rem;
+    }
+
+    /* Light mode overrides */
+    html[data-theme="light"]{
+      --bg0:#f6f7fb;
+      --bg1:#eef1f8;
+      --bg2:#e8edf8;
+
+      --card:rgba(0,0,0,.04);
+      --card2:rgba(0,0,0,.06);
+      --line:rgba(0,0,0,.10);
+
+      --txt:#0b1224;
+      --muted:rgba(11,18,36,.70);
+      --muted2:rgba(11,18,36,.55);
+
+      --shadow:0 18px 60px rgba(0,0,0,.10);
     }
 
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
     body{
       font-family:'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--txt);
+      font-size: var(--fs-base);
+      line-height: 1.6;
+      color: var(--txt);
       background:
-        radial-gradient(1000px 560px at 15% -5%, rgba(96,165,250,.14), transparent 60%),
-        radial-gradient(900px 520px at 95% 10%, rgba(94,234,212,.12), transparent 65%),
-        radial-gradient(850px 520px at 45% 120%, rgba(167,139,250,.12), transparent 65%),
+        radial-gradient(1000px 560px at 15% -5%, rgba(96,165,250,.14), transparent 62%),
+        radial-gradient(900px 520px at 95% 10%, rgba(94,234,212,.12), transparent 66%),
+        radial-gradient(850px 520px at 45% 120%, rgba(167,139,250,.12), transparent 66%),
         linear-gradient(180deg, var(--bg0), var(--bg1) 35%, var(--bg2));
       min-height:100vh;
       overflow-x:hidden;
     }
-
     a{color:inherit;text-decoration:none}
     .container{width:min(1100px,92vw); margin:0 auto}
+
+    /* ===== NAV ===== */
     .topbar{
-      position:sticky; top:0; z-index:50;
+      position:sticky; top:0; z-index:60;
       backdrop-filter: blur(14px);
-      background: rgba(5,7,12,.55);
+      background: color-mix(in srgb, var(--bg0) 75%, transparent);
       border-bottom:1px solid var(--line);
     }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       padding:14px 0;
+      gap:14px;
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      font-weight:800; letter-spacing:.2px;
+      font-weight:900; letter-spacing:.2px;
     }
     .logoDot{
       width:34px; height:34px; border-radius:12px;
-      background: linear-gradient(135deg, rgba(96,165,250,.9), rgba(94,234,212,.9));
-      box-shadow: 0 10px 25px rgba(0,0,0,.45);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--brand2) 85%, white), color-mix(in srgb, var(--brand) 85%, white));
+      box-shadow: 0 10px 25px rgba(0,0,0,.20);
+      border:1px solid var(--line);
     }
     .menu{
-      display:flex; gap:18px; align-items:center;
-      font-weight:600; color:var(--muted);
-      font-size:.95rem;
+      display:flex; align-items:center; gap:16px;
+      font-weight:700; color:var(--muted);
+      font-size:.92rem;
+      flex-wrap:wrap;
     }
-    .menu a{opacity:.9}
-    .menu a:hover{opacity:1; color:var(--txt)}
-    .menu .pill{
-      padding:9px 12px; border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-    }
+    .menu a{opacity:.95}
+    .menu a:hover{opacity:1;color:var(--txt)}
 
-    /* Hero */
+    .tools{display:flex; align-items:center; gap:10px}
+    .iconBtn{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:42px; height:42px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: var(--card);
+      transition: transform .12s ease, background .12s ease;
+      cursor:pointer;
+    }
+    .iconBtn:hover{transform: translateY(-1px); background: var(--card2)}
+    .iconBtn i{font-size:16px; color:var(--txt)}
+
+    /* ===== HERO ===== */
     .hero{
-      padding:32px 0 10px;
+      padding:28px 0 10px;
       display:grid;
       grid-template-columns: 1.15fr .85fr;
-      gap:18px;
+      gap:16px;
       align-items:stretch;
     }
     .panel{
       border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      background: linear-gradient(180deg, var(--card2), var(--card));
       border-radius: var(--r);
       box-shadow: var(--shadow);
     }
-    .heroLeft{ padding:22px }
+    .heroLeft{padding:20px}
     .heroTag{
       display:inline-flex; align-items:center; gap:10px;
       padding:9px 12px; border-radius:999px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+      background: var(--card);
       color:var(--muted);
-      font-weight:700;
-      font-size:.9rem;
+      font-weight:800;
+      font-size:.88rem;
     }
     .dot{
       width:10px; height:10px; border-radius:99px;
       background: var(--ok);
       box-shadow: 0 0 0 4px rgba(34,197,94,.12);
     }
+
     .hero-title{
       margin:14px 0 8px;
-      font-size:2.7rem;
-      font-weight:800;
-      line-height:1.1;
-      letter-spacing:-.8px;
+      font-size: var(--fs-h1);
+      font-weight:900;
+      line-height:1.12;
+      letter-spacing:-.7px;
     }
     .hero-title .highlight{
       display:block;
       margin-top:8px;
-      font-size:1.35rem;
-      font-weight:700;
-      color:var(--brand);
-      letter-spacing:-.2px;
+      font-size: var(--fs-h1-sub);
+      font-weight:800;
+      color: var(--brand);
+      letter-spacing:-.1px;
     }
     .hero-desc{
       margin:10px 0 0;
       max-width:560px;
       color:var(--muted);
-      line-height:1.65;
-      font-weight:500;
+      font-weight:600;
+      font-size: var(--fs-p);
     }
 
-    .actions{
-      display:flex; gap:12px; flex-wrap:wrap;
-      margin-top:16px;
-    }
+    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:10px;
-      padding:12px 14px;
+      padding:11px 14px;
       border-radius: 14px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      font-weight:800;
+      background: var(--card);
+      font-weight:900;
+      font-size:.95rem;
+      transition: transform .12s ease, background .12s ease;
       cursor:pointer;
-      transition: transform .12s ease, background .12s ease, border .12s ease;
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.06)}
+    .btn:hover{transform: translateY(-1px); background: var(--card2)}
     .btn.primary{
-      border-color: rgba(94,234,212,.35);
-      background: linear-gradient(135deg, rgba(94,234,212,.18), rgba(96,165,250,.12));
+      border-color: color-mix(in srgb, var(--brand) 35%, var(--line));
+      background: linear-gradient(135deg, color-mix(in srgb, var(--brand) 18%, transparent), color-mix(in srgb, var(--brand2) 12%, transparent));
     }
-    .btn.primary i{color:var(--brand)}
-    .btn.ghost{color:var(--txt)}
-    .miniBadges{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:14px;
-    }
+    .btn.primary i{color: var(--brand)}
+    .miniBadges{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
     .badge{
       display:inline-flex; align-items:center; gap:8px;
       padding:9px 10px;
       border-radius: 999px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+      background: var(--card);
       color:var(--muted);
-      font-weight:700;
-      font-size:.9rem;
+      font-weight:800;
+      font-size:.88rem;
     }
     .badge i{color:var(--ok)}
+    .badge .warn{color:var(--warn)}
 
-    /* Right panel */
-    .heroRight{ padding:18px }
+    .heroRight{padding:18px}
     .heroRight h3{
       margin:0 0 6px;
-      font-size:1.05rem;
-      font-weight:800;
+      font-size: var(--fs-h2);
+      font-weight:900;
       letter-spacing:-.2px;
     }
-    .heroRight p{margin:0 0 12px; color:var(--muted); line-height:1.55; font-weight:500}
+    .heroRight p{
+      margin:0 0 12px;
+      color:var(--muted);
+      font-weight:600;
+      font-size: var(--fs-p);
+    }
     .check{
-      display:flex; gap:10px; padding:10px 12px;
+      display:flex; gap:10px;
+      padding:10px 12px;
       border-radius: 14px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+      background: var(--card);
       margin-bottom:10px;
       color:var(--muted);
-      font-weight:650;
-      font-size:.95rem;
+      font-weight:750;
+      font-size: .92rem;
     }
     .check i{color:var(--ok); margin-top:2px}
 
-    /* Sections */
+    /* ===== SECTIONS ===== */
     .section{padding:18px 0}
     .sectionTitle{
-      font-weight:900;
-      letter-spacing:-.3px;
-      margin:14px 0 12px;
-      color:var(--txt);
+      font-weight:950;
+      letter-spacing:-.25px;
+      margin:12px 0 12px;
+      font-size: 1.05rem;
     }
 
-    /* Product grid */
+    /* ===== PRODUCTS ===== */
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -208,22 +250,22 @@
     }
     .card{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.035);
+      background: var(--card);
       border-radius: var(--r);
       padding:16px;
-      box-shadow: 0 16px 50px rgba(0,0,0,.45);
+      box-shadow: 0 16px 50px rgba(0,0,0,.18);
     }
     .card h3{
       margin:0 0 6px;
-      font-size:1.05rem;
-      font-weight:900;
-      letter-spacing:-.25px;
+      font-size:1.02rem;
+      font-weight:950;
+      letter-spacing:-.2px;
     }
-    .card .sub{
+    .sub{
       margin:0 0 10px;
       color:var(--muted2);
-      font-weight:650;
-      font-size:.92rem;
+      font-weight:750;
+      font-size:.9rem;
     }
     .tags{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 12px}
     .tag{
@@ -231,108 +273,91 @@
       padding:7px 10px;
       border-radius:999px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+      background: color-mix(in srgb, var(--card) 70%, transparent);
       color:var(--muted);
-      font-weight:750;
+      font-weight:850;
     }
-    .tag.brand{border-color: rgba(94,234,212,.30)}
-    .tag.warn{border-color: rgba(251,191,36,.25); color: rgba(251,191,36,.95)}
-    .card .row{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px; margin-top:12px;
-    }
-    .price{
-      font-weight:900;
-      letter-spacing:-.2px;
-    }
-    .small{
-      color:var(--muted2);
-      font-weight:650;
-      font-size:.85rem;
-      margin-top:2px;
-    }
+    .tag.brand{border-color: color-mix(in srgb, var(--brand) 25%, var(--line))}
+    .tag.invite{border-color: color-mix(in srgb, var(--brand2) 25%, var(--line))}
+    .tag.private{border-color: color-mix(in srgb, var(--ok) 25%, var(--line))}
+    .tag.warn{border-color: color-mix(in srgb, var(--warn) 30%, var(--line)); color: color-mix(in srgb, var(--warn) 80%, var(--txt))}
+    .row{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:12px}
+    .price{font-weight:950; letter-spacing:-.1px}
+    .small{color:var(--muted2); font-weight:750; font-size: var(--fs-small); margin-top:2px}
     .btnSmall{
       display:inline-flex; align-items:center; gap:8px;
       padding:10px 12px;
       border-radius: 12px;
-      border:1px solid rgba(94,234,212,.35);
-      background: linear-gradient(135deg, rgba(94,234,212,.16), rgba(96,165,250,.10));
-      font-weight:900;
+      border:1px solid color-mix(in srgb, var(--brand) 35%, var(--line));
+      background: linear-gradient(135deg, color-mix(in srgb, var(--brand) 16%, transparent), color-mix(in srgb, var(--brand2) 10%, transparent));
+      font-weight:950;
       white-space:nowrap;
+      font-size:.92rem;
     }
-    .btnSmall i{color:var(--brand)}
+    .btnSmall i{color: var(--brand)}
 
-    /* How to order */
-    .how{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
-    .stepTop{
-      display:flex; align-items:center; gap:10px; margin-bottom:8px;
-    }
+    /* ===== HOW ===== */
+    .how{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+    .stepTop{display:flex; align-items:center; gap:10px; margin-bottom:8px}
     .num{
       width:30px; height:30px; border-radius:12px;
       display:inline-flex; align-items:center; justify-content:center;
-      background: rgba(96,165,250,.14);
-      border:1px solid rgba(96,165,250,.22);
-      font-weight:900;
+      background: color-mix(in srgb, var(--brand2) 14%, transparent);
+      border:1px solid color-mix(in srgb, var(--brand2) 25%, var(--line));
+      font-weight:950;
     }
-    .card p{margin:0; color:var(--muted); line-height:1.55; font-weight:520}
+    .card p{margin:0; color:var(--muted); font-weight:600; font-size: var(--fs-p)}
 
-    /* Social */
-    .social{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:12px;
-    }
+    /* ===== SOCIAL ===== */
+    .social{display:grid; grid-template-columns: repeat(4, 1fr); gap:12px}
     .social a{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+      background: var(--card);
       border-radius: 18px;
       padding:14px;
       display:flex; gap:12px; align-items:center;
       transition: transform .12s ease, background .12s ease;
     }
-    .social a:hover{transform: translateY(-1px); background: rgba(255,255,255,.06)}
+    .social a:hover{transform: translateY(-1px); background: var(--card2)}
     .ico{
       width:40px; height:40px; border-radius:16px;
       display:flex; align-items:center; justify-content:center;
-      background: rgba(255,255,255,.04);
+      background: color-mix(in srgb, var(--card2) 80%, transparent);
       border:1px solid var(--line);
     }
-    .social .t1{font-weight:900}
-    .social .t2{color:var(--muted2); font-weight:650; font-size:.9rem}
+    .social .t1{font-weight:950; font-size:.98rem}
+    .social .t2{color:var(--muted2); font-weight:750; font-size:.88rem}
 
-    /* FAQ (small) */
-    .faq{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
-    .faq .q{font-weight:900; margin:0 0 6px; font-size:.95rem}
-    .faq .a{margin:0; color:var(--muted); line-height:1.55; font-weight:520; font-size:.9rem}
+    /* ===== FAQ (small) ===== */
+    .faq{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
+    .faq .q{font-weight:950; margin:0 0 6px; font-size:.92rem}
+    .faq .a{margin:0; color:var(--muted); font-weight:600; font-size:.9rem}
 
     footer{
-      padding:18px 0 28px;
+      padding:16px 0 26px;
       color:var(--muted2);
-      font-weight:650;
-      font-size:.85rem;
+      font-weight:750;
+      font-size:.86rem;
       text-align:center;
     }
 
     /* Floating WhatsApp */
     .floatWA{
-      position:fixed; right:16px; bottom:16px; z-index:60;
+      position:fixed; right:16px; bottom:16px; z-index:70;
       display:inline-flex; align-items:center; gap:10px;
       padding:12px 14px;
       border-radius: 999px;
-      border:1px solid rgba(34,197,94,.35);
-      background: linear-gradient(135deg, rgba(34,197,94,.18), rgba(94,234,212,.10));
-      box-shadow: 0 18px 60px rgba(0,0,0,.55);
-      font-weight:900;
+      border:1px solid color-mix(in srgb, var(--ok) 35%, var(--line));
+      background: linear-gradient(135deg, color-mix(in srgb, var(--ok) 18%, transparent), color-mix(in srgb, var(--brand) 10%, transparent));
+      box-shadow: var(--shadow);
+      font-weight:950;
+      font-size:.95rem;
     }
-    .floatWA i{color:#22c55e}
+    .floatWA i{color: var(--ok)}
+
+    /* ===== SIMPLE ANIMATIONS ===== */
+    .reveal{opacity:0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1; transform:none}
 
     /* Responsive */
     @media(max-width: 980px){
@@ -341,7 +366,11 @@
       .how{grid-template-columns:1fr}
       .social{grid-template-columns:1fr 1fr}
       .faq{grid-template-columns:1fr}
-      .hero-title{font-size:2.15rem}
+      :root{ --fs-h1: 1.85rem; --fs-h1-sub: 1rem; }
+      .menu{display:none}
+    }
+    @media(max-width: 520px){
+      .social{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -353,74 +382,81 @@
         <div class="logoDot"></div>
         <div>MII STORE</div>
       </div>
+
       <div class="menu">
         <a href="#products">Products</a>
         <a href="#how">How to Order</a>
-        <a href="#social" class="pill">Social</a>
+        <a href="#social">Social</a>
         <a href="#faq">FAQ</a>
+      </div>
+
+      <div class="tools">
+        <button class="iconBtn" id="themeBtn" aria-label="Toggle theme" title="Toggle dark/light">
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
       </div>
     </div>
   </div>
 
   <main class="container">
     <section class="hero">
-      <div class="panel heroLeft">
-        <div class="heroTag"><span class="dot"></span> Fast supply • Support after order • IDN friendly</div>
+      <div class="panel heroLeft reveal">
+        <div class="heroTag"><span class="dot"></span> Fast supply • Support after order • International friendly</div>
 
         <h1 class="hero-title">
           Premium Digital Services
-          <span class="highlight">Fast • Secure • Elegant</span>
+          <span class="highlight">Fast • Trusted • Guaranteed</span>
         </h1>
 
         <p class="hero-desc">
-          Trusted provider of premium digital subscriptions (sharing/private depending on product).
-          Simple order via WhatsApp, fast processing, and clear guidance after purchase.
+          Trusted provider of premium digital subscriptions (sharing/private depending on the product).
+          Simple ordering via WhatsApp, fast processing, and clear guidance after purchase.
         </p>
 
         <div class="actions">
-          <a class="btn primary" href="https://wa.me/6282191223912" target="_blank">
+          <a class="btn primary" href="https://wa.me/6282191223912" target="_blank" rel="noopener">
             <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
           </a>
-          <a class="btn ghost" href="#products">
+          <a class="btn" href="#products">
             <i class="fa-solid fa-grid-2"></i> View Products
           </a>
-          <a class="btn ghost" href="#how">
+          <a class="btn" href="#how">
             <i class="fa-solid fa-list-check"></i> How to Order
           </a>
         </div>
 
         <div class="miniBadges">
           <div class="badge"><i class="fa-solid fa-circle-check"></i> Quick response</div>
-          <div class="badge"><i class="fa-solid fa-circle-check"></i> Login guide</div>
-          <div class="badge"><i class="fa-solid fa-circle-check"></i> Subscription ready</div>
-          <div class="badge"><i class="fa-solid fa-triangle-exclamation" style="color:var(--warn)"></i> Stock may change</div>
+          <div class="badge"><i class="fa-solid fa-circle-check"></i> Clear guidance</div>
+          <div class="badge"><i class="fa-solid fa-circle-check"></i> Buyer-friendly</div>
+          <div class="badge"><i class="fa-solid fa-triangle-exclamation warn"></i> Stock may change</div>
         </div>
       </div>
 
-      <div class="panel heroRight">
+      <div class="panel heroRight reveal">
         <h3>Why MII STORE?</h3>
-        <p>Focus on buyer experience: clear, fast, and clean. Order easily, get guidance.</p>
+        <p>Focused on clean service: clear info, fast processing, and support after purchase.</p>
 
-        <div class="check"><i class="fa-solid fa-check"></i> Easy order via WhatsApp + template message</div>
-        <div class="check"><i class="fa-solid fa-check"></i> Support after order + login/use guidance</div>
-        <div class="check"><i class="fa-solid fa-check"></i> Mobile-friendly layout, easy to choose products</div>
+        <div class="check"><i class="fa-solid fa-check"></i> Simple WhatsApp ordering</div>
+        <div class="check"><i class="fa-solid fa-check"></i> Fast processing & delivery</div>
+        <div class="check"><i class="fa-solid fa-check"></i> Post-purchase guidance & support</div>
 
         <p style="margin-top:10px">
-          <b>Note:</b> Price/stock may change depending on availability. Ask via WhatsApp to confirm.
+          <b>Note:</b> Policies may vary by product type (sharing/private/invite). Please confirm before ordering.
         </p>
       </div>
     </section>
 
-    <section class="section" id="products">
+    <section class="section reveal" id="products">
       <div class="sectionTitle">Products</div>
 
       <div class="grid">
         <div class="card">
           <h3>Canva Pro</h3>
-          <div class="sub">1 Month Subscription</div>
+          <div class="sub">1 Month — Sharing / Private</div>
           <div class="tags">
             <span class="tag brand">Sharing</span>
-            <span class="tag brand">Private</span>
+            <span class="tag private">Private</span>
             <span class="tag warn">Ask stock</span>
           </div>
           <div class="row">
@@ -428,7 +464,8 @@
               <div class="price">Ask price</div>
               <div class="small">Duration: 1 month</div>
             </div>
-            <a class="btnSmall" target="_blank" href="https://wa.me/6282191223912">
+            <a class="btnSmall" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20Canva%20Pro%20(1%20Month).%0AType:%20Sharing/Private%0A">
               <i class="fa-brands fa-whatsapp"></i> Order
             </a>
           </div>
@@ -438,7 +475,7 @@
           <h3>YouTube Premium</h3>
           <div class="sub">1 Month — Invite</div>
           <div class="tags">
-            <span class="tag brand">Invite</span>
+            <span class="tag invite">Invite</span>
             <span class="tag">No ads</span>
             <span class="tag warn">Ask stock</span>
           </div>
@@ -447,7 +484,8 @@
               <div class="price">Ask price</div>
               <div class="small">Duration: 1 month</div>
             </div>
-            <a class="btnSmall" target="_blank" href="https://wa.me/6282191223912">
+            <a class="btnSmall" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20YouTube%20Premium%20(1%20Month%20Invite).%0A">
               <i class="fa-brands fa-whatsapp"></i> Order
             </a>
           </div>
@@ -455,10 +493,10 @@
 
         <div class="card">
           <h3>Gemini Pro</h3>
-          <div class="sub">1 Month Subscription</div>
+          <div class="sub">1 Month — Sharing / Private</div>
           <div class="tags">
             <span class="tag brand">Sharing</span>
-            <span class="tag brand">Private</span>
+            <span class="tag private">Private</span>
             <span class="tag warn">Ask stock</span>
           </div>
           <div class="row">
@@ -466,7 +504,8 @@
               <div class="price">Ask price</div>
               <div class="small">Duration: 1 month</div>
             </div>
-            <a class="btnSmall" target="_blank" href="https://wa.me/6282191223912">
+            <a class="btnSmall" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20Gemini%20Pro%20(1%20Month).%0AType:%20Sharing/Private%0A">
               <i class="fa-brands fa-whatsapp"></i> Order
             </a>
           </div>
@@ -476,7 +515,7 @@
           <h3>ChatGPT Go</h3>
           <div class="sub">1 Year — Private</div>
           <div class="tags">
-            <span class="tag brand">Private</span>
+            <span class="tag private">Private</span>
             <span class="tag">Long-term</span>
             <span class="tag warn">Ask stock</span>
           </div>
@@ -485,7 +524,8 @@
               <div class="price">Ask price</div>
               <div class="small">Duration: 1 year</div>
             </div>
-            <a class="btnSmall" target="_blank" href="https://wa.me/6282191223912">
+            <a class="btnSmall" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20ChatGPT%20Go%20(1%20Year%20Private).%0A">
               <i class="fa-brands fa-whatsapp"></i> Order
             </a>
           </div>
@@ -493,10 +533,10 @@
 
         <div class="card">
           <h3>ChatGPT Plus</h3>
-          <div class="sub">1 Month Subscription</div>
+          <div class="sub">1 Month — Sharing / Private</div>
           <div class="tags">
             <span class="tag brand">Sharing</span>
-            <span class="tag brand">Private</span>
+            <span class="tag private">Private</span>
             <span class="tag warn">Ask stock</span>
           </div>
           <div class="row">
@@ -504,7 +544,8 @@
               <div class="price">Ask price</div>
               <div class="small">Duration: 1 month</div>
             </div>
-            <a class="btnSmall" target="_blank" href="https://wa.me/6282191223912">
+            <a class="btnSmall" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20ChatGPT%20Plus%20(1%20Month).%0AType:%20Sharing/Private%0A">
               <i class="fa-brands fa-whatsapp"></i> Order
             </a>
           </div>
@@ -514,7 +555,7 @@
           <h3>CapCut Pro</h3>
           <div class="sub">1 Month — Private</div>
           <div class="tags">
-            <span class="tag brand">Private</span>
+            <span class="tag private">Private</span>
             <span class="tag">Editing</span>
             <span class="tag warn">Ask stock</span>
           </div>
@@ -523,7 +564,8 @@
               <div class="price">Ask price</div>
               <div class="small">Duration: 1 month</div>
             </div>
-            <a class="btnSmall" target="_blank" href="https://wa.me/6282191223912">
+            <a class="btnSmall" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20CapCut%20Pro%20(1%20Month%20Private).%0A">
               <i class="fa-brands fa-whatsapp"></i> Order
             </a>
           </div>
@@ -542,56 +584,57 @@
               <div class="price">Ask price</div>
               <div class="small">Duration: 1 month</div>
             </div>
-            <a class="btnSmall" target="_blank" href="https://wa.me/6282191223912">
+            <a class="btnSmall" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20GetContact%20(1%20Month).%0A">
               <i class="fa-brands fa-whatsapp"></i> Order
             </a>
           </div>
         </div>
-
       </div>
-              </section><section class="section" id="how">
+    </section>
+
+    <section class="section reveal" id="how">
       <div class="sectionTitle">How to Order</div>
 
       <div class="how">
         <div class="card">
           <div class="stepTop">
             <div class="num">1</div>
-            <div style="font-weight:900">Choose product</div>
+            <div style="font-weight:950">Choose product</div>
           </div>
-          <p>Select the product you need. If unsure, chat first to confirm stock & details.</p>
+          <p>Select your product and confirm stock/type (sharing/private/invite).</p>
         </div>
 
         <div class="card">
           <div class="stepTop">
             <div class="num">2</div>
-            <div style="font-weight:900">Chat via WhatsApp</div>
+            <div style="font-weight:950">Message WhatsApp</div>
           </div>
-          <p>Tap the WhatsApp button and send your order. We reply as soon as possible.</p>
+          <p>Tap the WhatsApp button and send your order format. We reply ASAP.</p>
         </div>
 
         <div class="card">
           <div class="stepTop">
             <div class="num">3</div>
-            <div style="font-weight:900">Process & guidance</div>
+            <div style="font-weight:950">Delivery & guidance</div>
           </div>
-          <p>After payment, you’ll receive access/invite and usage guidance. Support available after order.</p>
+          <p>After payment, we deliver access/invite and provide clear guidance after purchase.</p>
         </div>
       </div>
     </section>
-
-    <section class="section" id="social">
+<!-- END PART 1 --><section class="section reveal" id="social">
       <div class="sectionTitle">Social Media</div>
 
       <div class="social">
-        <a target="_blank" href="https://www.instagram.com/miistore.99?igsh=ZmFqanZuOXo4cG92">
+        <a target="_blank" rel="noopener" href="https://www.instagram.com/miistore.99?igsh=ZmFqanZuOXo4cG92">
           <div class="ico"><i class="fa-brands fa-instagram"></i></div>
           <div>
             <div class="t1">Instagram</div>
-            <div class="t2">@miistore.99</div>
+            <div class="t2">miistore.99</div>
           </div>
         </a>
 
-        <a target="_blank" href="https://www.tiktok.com/@mii._002?_r=1&_t=ZS-9389yLXFP0v">
+        <a target="_blank" rel="noopener" href="https://www.tiktok.com/@mii._002?_r=1&_t=ZS-9389yLXFP0v">
           <div class="ico"><i class="fa-brands fa-tiktok"></i></div>
           <div>
             <div class="t1">TikTok</div>
@@ -599,7 +642,7 @@
           </div>
         </a>
 
-        <a target="_blank" href="https://youtube.com/@asami.0111?si=aUNOvu6z0I-8cdNz">
+        <a target="_blank" rel="noopener" href="https://youtube.com/@asami.0111?si=aUNOvu6z0I-8cdNz">
           <div class="ico"><i class="fa-brands fa-youtube"></i></div>
           <div>
             <div class="t1">YouTube</div>
@@ -607,7 +650,7 @@
           </div>
         </a>
 
-        <a target="_blank" href="https://wa.me/6282191223912">
+        <a target="_blank" rel="noopener" href="https://wa.me/6282191223912">
           <div class="ico"><i class="fa-brands fa-whatsapp"></i></div>
           <div>
             <div class="t1">WhatsApp</div>
@@ -617,34 +660,69 @@
       </div>
     </section>
 
-    <section class="section" id="faq">
+    <section class="section reveal" id="faq">
       <div class="sectionTitle">FAQ</div>
 
       <div class="faq">
         <div class="card">
           <p class="q">How fast is delivery?</p>
-          <p class="a">Depends on stock & queue. Usually fast if the order format is clear.</p>
+          <p class="a">Depends on stock and queue. Usually fast with clear order format.</p>
         </div>
 
         <div class="card">
-          <p class="q">Is there warranty?</p>
-          <p class="a">Depends on each product’s policy. Ask details before ordering.</p>
+          <p class="q">Is there a warranty?</p>
+          <p class="a">Warranty depends on each product policy. Please confirm before ordering.</p>
         </div>
 
         <div class="card">
-          <p class="q">Can I get login help?</p>
-          <p class="a">Yes. We provide guidance and support after order for common issues.</p>
+          <p class="q">Do you provide guidance?</p>
+          <p class="a">Yes. We provide post-purchase guidance and support for common issues.</p>
         </div>
       </div>
     </section>
 
     <footer>
-      © 2026 MII STORE • Since 2024
+      © 2026 MII STORE • Established in 2024
     </footer>
   </main>
 
-  <a class="floatWA" target="_blank" href="https://wa.me/6282191223912">
+  <a class="floatWA" target="_blank" rel="noopener" href="https://wa.me/6282191223912">
     <i class="fa-brands fa-whatsapp"></i> WhatsApp Order
   </a>
+
+  <script>
+    // ===== Theme toggle (save preference) =====
+    const root = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    const icon = document.getElementById('themeIcon');
+
+    function setTheme(mode){
+      if(mode === 'light'){
+        root.setAttribute('data-theme','light');
+        icon.className = 'fa-solid fa-sun';
+      } else {
+        root.removeAttribute('data-theme');
+        icon.className = 'fa-solid fa-moon';
+      }
+      localStorage.setItem('mii_theme', mode);
+    }
+
+    const saved = localStorage.getItem('mii_theme');
+    if(saved){ setTheme(saved); }
+
+    btn.addEventListener('click', () => {
+      const isLight = root.getAttribute('data-theme') === 'light';
+      setTheme(isLight ? 'dark' : 'light');
+    });
+
+    // ===== Reveal animation on scroll =====
+    const items = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add('show');
+      });
+    }, {threshold: 0.12});
+    items.forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
