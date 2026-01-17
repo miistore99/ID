@@ -1,533 +1,118 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MII STORE — Premium Digital Services</title>
-  <meta name="description" content="Trusted provider of premium digital subscriptions. Fast WhatsApp order, clear guidance after purchase." />
-
-  <style>
-    :root{
-      --bg:#07121a;
-      --bg2:#0b1b24;
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.09);
-      --stroke:rgba(255,255,255,.12);
-      --text:#eef6ff;
-      --muted:rgba(235,245,255,.75);
-      --gold:#cfae7a;
-      --gold2:#e5c590;
-      --choco:#d9c2a6;
-      --shadow: 0 16px 55px rgba(0,0,0,.35);
-      --radius:18px;
-      --max:1100px;
-    }
-    html[data-theme="light"]{
-      --bg:#f7f6f2;
-      --bg2:#ffffff;
-      --card:rgba(0,0,0,.05);
-      --card2:rgba(0,0,0,.07);
-      --stroke:rgba(0,0,0,.12);
-      --text:#0b1220;
-      --muted:rgba(10,18,32,.72);
-      --shadow: 0 18px 60px rgba(10,18,32,.14);
-    }
-
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background:
-        radial-gradient(1100px 700px at 10% 15%, rgba(109,199,255,.10), transparent 60%),
-        radial-gradient(900px 600px at 85% 60%, rgba(229,197,144,.12), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      color:var(--text);
-      min-height:100vh;
-      overflow-x:hidden;
-    }
-
-    /* ===== DECOR LAYERS ===== */
-    .decor{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden}
-
-    /* Soft vignette + glow */
-    .decor::after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(900px 520px at 10% 20%, rgba(109,199,255,.10), transparent 60%),
-        radial-gradient(900px 520px at 85% 78%, rgba(229,197,144,.14), transparent 65%),
-        radial-gradient(1400px 900px at 50% 120%, rgba(0,0,0,.35), transparent 60%);
-      pointer-events:none;
-    }
-
-    /* Chocolate bubbles (random-ish motion) */
-    .bubbles{position:absolute; inset:0; z-index:0}
-    .bubble{
-      position:absolute;
-      width:18px; height:18px;
-      border-radius:999px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.45), rgba(255,255,255,0) 42%),
-                  radial-gradient(circle at 55% 65%, rgba(0,0,0,.10), rgba(0,0,0,0) 55%),
-                  rgba(217,194,166,.35);
-      border:1px solid rgba(217,194,166,.22);
-      filter: blur(.2px);
-      opacity:.55;
-      animation: floatUp var(--dur) linear infinite;
-      transform: translate3d(0,0,0);
-    }
-    @keyframes floatUp{
-      0%   { transform: translate3d(0, 110vh, 0) rotate(0deg); }
-      100% { transform: translate3d(var(--dx), -20vh, 0) rotate(260deg); }
-    }
-
-    /* Character deco (more subtle & elegant) */
-    .deco{
-      position:absolute;
-      opacity:.09;
-      filter: blur(.2px) saturate(.92);
-      mix-blend-mode: screen;
-      animation: floatSoft 12s ease-in-out infinite;
-      transform-origin:center;
-      z-index:1;
-    }
-    @keyframes floatSoft{
-      0%,100%{transform: translateY(0) rotate(var(--rot))}
-      50%{transform: translateY(-10px) rotate(var(--rot))}
-    }
-    .d1{top:14%; left:-110px; width:260px; --rot:-10deg; animation-duration:13s}
-    .d2{bottom:-60px; right:-140px; width:340px; --rot:12deg; opacity:.07; animation-duration:16s}
-    .d3{top:58%; right:6%; width:190px; --rot:6deg; opacity:.06; animation-duration:12s}
-
-    header, main, footer{position:relative; z-index:2}
-    .wrap{max-width:var(--max); margin:0 auto; padding:18px 16px 50px}
-    .topbar{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:10px 0}
-    .brand{display:flex; align-items:center; gap:12px; min-width:0}
-    .logo{
-      width:38px;height:38px;border-radius:12px; object-fit:cover;
-      border:1px solid var(--stroke); box-shadow: var(--shadow);
-      background:var(--card);
-    }
-    .brand b{display:block; letter-spacing:.8px}
-    .brand small{display:block; color:var(--muted); margin-top:2px}
-
-    .nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
-    .pill{
-      text-decoration:none; color:var(--muted);
-      border:1px solid var(--stroke);
-      background:var(--card);
-      padding:8px 10px;
-      border-radius:999px;
-      font-weight:800;
-      font-size:12px;
-      letter-spacing:.6px;
-      transition:.2s;
-    }
-    .pill:hover{transform: translateY(-1px); background:var(--card2); color:var(--text)}
-    .themeBtn{
-      border:1px solid var(--stroke);
-      background:var(--card);
-      color:var(--text);
-      width:40px; height:40px; border-radius:14px;
-      display:grid; place-items:center;
-      box-shadow: var(--shadow);
-      cursor:pointer;
-      transition:.2s;
-    }
-    .themeBtn:hover{transform: translateY(-1px); background:var(--card2)}
-
-    .hero{
-      margin-top:10px;
-      border:1px solid var(--stroke);
-      background: linear-gradient(180deg, var(--card2), var(--card));
-      border-radius:var(--radius);
-      box-shadow: var(--shadow);
-      padding:18px;
-      overflow:hidden;
-      position:relative;
-    }
-    .ticker{
-      display:inline-flex; gap:10px; flex-wrap:wrap;
-      border:1px solid var(--stroke);
-      padding:8px 10px;
-      border-radius:999px;
-      background:rgba(0,0,0,.08);
-      color:var(--muted);
-      font-weight:900;
-      letter-spacing:1.2px;
-      font-size:11px;
-      text-transform:uppercase;
-    }
-    .heroGrid{display:grid; grid-template-columns: 1.15fr .85fr; gap:16px; align-items:stretch; margin-top:12px}
-    @media(max-width:900px){ .heroGrid{grid-template-columns:1fr} }
-    .hTitle{
-      font-size:32px;
-      font-weight:1000;
-      letter-spacing:1px;
-      margin:12px 0 6px;
-      text-transform:uppercase;
-    }
-    .hDesc{color:var(--muted); line-height:1.55; font-weight:700; margin:0}
-    .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
-    .btn{
-      display:inline-flex; align-items:center; gap:10px;
-      text-decoration:none;
-      border:1px solid var(--stroke);
-      background:var(--card2);
-      color:var(--text);
-      padding:11px 14px;
-      border-radius:14px;
-      font-weight:950;
-      letter-spacing:.6px;
-      transition:.2s;
-    }
-    .btn:hover{transform:translateY(-1px); background:rgba(0,0,0,.10)}
-    .btn.primary{border-color:rgba(229,197,144,.45); box-shadow: 0 0 0 1px rgba(229,197,144,.15) inset}
-
-    .featureRow{margin-top:14px; display:flex; gap:10px; flex-wrap:wrap}
-    .tag{
-      font-size:12px;
-      font-weight:900;
-      color:var(--muted);
-      border:1px solid var(--stroke);
-      background:rgba(0,0,0,.06);
-      padding:7px 10px;
-      border-radius:999px;
-      letter-spacing:.6px;
-    }
-
-    .heroArt{
-      border:1px solid var(--stroke);
-      border-radius:var(--radius);
-      background:rgba(0,0,0,.08);
-      min-height:220px;
-      overflow:hidden;
-      position:relative;
-    }
-    .heroArt img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05) contrast(1.02); transform: scale(1.02)}
-    .heroArt::after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(600px 240px at 20% 25%, rgba(229,197,144,.18), transparent 55%),
-        radial-gradient(700px 260px at 85% 55%, rgba(109,199,255,.12), transparent 60%),
-        linear-gradient(180deg, transparent, rgba(0,0,0,.32));
-      pointer-events:none;
-    }
-
-    .sectionTitle{
-      margin:22px 0 10px;
-      font-size:18px;
-      font-weight:1000;
-      letter-spacing:2px;
-      text-transform:uppercase;
-      color:var(--text);
-    }
-
-    .grid{display:grid; grid-template-columns: repeat(4, 1fr); gap:14px}
-    @media(max-width:980px){ .grid{grid-template-columns:repeat(2,1fr)} }
-    @media(max-width:520px){ .grid{grid-template-columns:1fr} }
-
-    .card{
-      border:1px solid var(--stroke);
-      background: linear-gradient(180deg, var(--card2), var(--card));
-      border-radius:var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      transform: translateY(10px);
-      opacity:0;
-      transition: .6s ease;
-    }
-    .card.show{transform: translateY(0); opacity:1}
-    .pimg{width:100%; height:170px; object-fit:cover; display:block; background:rgba(0,0,0,.06)}
-    .body{padding:12px}
-    .name{margin:0; font-size:16px; font-weight:1000; letter-spacing:.3px}
-    .sub{margin:6px 0 10px; color:var(--muted); font-weight:800; font-size:12px}
-    .chips{display:flex; gap:8px; flex-wrap:wrap}
-    .chip{
-      font-size:11px;
-      padding:6px 9px;
-      border-radius:999px;
-      border:1px solid var(--stroke);
-      background:rgba(0,0,0,.06);
-      color:var(--muted);
-      font-weight:900;
-      letter-spacing:.4px;
-    }
-    .actions{margin-top:12px; display:flex; align-items:center; justify-content:space-between; gap:10px}
-    .orderBtn{
-      display:inline-flex; align-items:center; gap:8px;
-      border:1px solid rgba(229,197,144,.45);
-      background:rgba(229,197,144,.12);
-      color:var(--text);
-      text-decoration:none;
-      padding:10px 12px;
-      border-radius:14px;
-      font-weight:1000;
-      letter-spacing:.6px;
-      transition:.2s;
-      white-space:nowrap;
-    }
-    .orderBtn:hover{transform:translateY(-1px); background:rgba(229,197,144,.18)}
-    .mini{font-size:11px; color:var(--muted); font-weight:900}
-
-    .twoCols{display:grid; grid-template-columns:1fr 1fr; gap:14px}
-    @media(max-width:900px){ .twoCols{grid-template-columns:1fr} }
-    .panel{
-      border:1px solid var(--stroke);
-      background:linear-gradient(180deg, var(--card2), var(--card));
-      border-radius:var(--radius);
-      box-shadow: var(--shadow);
-      padding:14px;
-    }
-    .steps{display:grid; gap:10px}
-    .step{
-      border:1px solid var(--stroke);
-      border-radius:14px;
-      padding:12px;
-      background:rgba(0,0,0,.06);
-    }
-    .step b{display:block; font-size:14px; letter-spacing:.7px}
-    .step p{margin:6px 0 0; color:var(--muted); font-weight:800; line-height:1.5}
-
-    .socialRow{display:flex; gap:10px; flex-wrap:wrap}
-    .socialBtn{
-      display:inline-flex; align-items:center; gap:10px;
-      border:1px solid var(--stroke);
-      background:rgba(0,0,0,.06);
-      color:var(--text);
-      text-decoration:none;
-      padding:10px 12px;
-      border-radius:14px;
-      font-weight:1000;
-      letter-spacing:.6px;
-      transition:.2s;
-    }
-    .socialBtn:hover{transform:translateY(-1px); background:var(--card2)}
-    .svgIco{width:18px; height:18px; display:block; fill: currentColor}
-
-    footer{
-      margin-top:22px;
-      padding-top:14px;
-      color:var(--muted);
-      font-weight:900;
-      text-align:center;
-      font-size:12px;
-      letter-spacing:.8px;
-    }
-    .line{height:1px; background:var(--stroke); margin-bottom:12px}
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
-  <!-- DECOR LAYERS -->
-  <div class="decor" aria-hidden="true">
-    <div class="bubbles">
-      <!-- bubbles positions + speeds (random-ish) -->
-      <span class="bubble" style="left:8%;  --dx: 40px; --dur: 16s; width:14px; height:14px;"></span>
-      <span class="bubble" style="left:18%; --dx:-30px; --dur: 22s; width:18px; height:18px; opacity:.45"></span>
-      <span class="bubble" style="left:28%; --dx: 55px; --dur: 18s; width:10px; height:10px; opacity:.40"></span>
-      <span class="bubble" style="left:40%; --dx:-60px; --dur: 26s; width:22px; height:22px; opacity:.35"></span>
-      <span class="bubble" style="left:52%; --dx: 35px; --dur: 20s; width:16px; height:16px;"></span>
-      <span class="bubble" style="left:63%; --dx:-45px; --dur: 24s; width:12px; height:12px; opacity:.42"></span>
-      <span class="bubble" style="left:74%; --dx: 60px; --dur: 19s; width:20px; height:20px; opacity:.38"></span>
-      <span class="bubble" style="left:86%; --dx:-35px; --dur: 28s; width:14px; height:14px; opacity:.40"></span>
-      <span class="bubble" style="left:92%; --dx: 25px; --dur: 21s; width:9px;  height:9px;  opacity:.35"></span>
-      <span class="bubble" style="left:34%; --dx: 28px; --dur: 30s; width:26px; height:26px; opacity:.28"></span>
-      <span class="bubble" style="left:6%;  --dx:-20px; --dur: 34s; width:30px; height:30px; opacity:.22"></span>
-      <span class="bubble" style="left:58%; --dx: 20px; --dur: 32s; width:28px; height:28px; opacity:.24"></span>
-    </div>
+<body data-theme="dark">
+  <!-- Falling bubbles -->
+  <div id="bubbles" aria-hidden="true"></div>
 
-    <img class="deco d1" src="deco-1.png" alt="" loading="lazy">
-    <img class="deco d2" src="deco-2.png" alt="" loading="lazy">
-    <img class="deco d3" src="deco-3.png" alt="" loading="lazy">
-  </div>
-
-  <header class="wrap">
-    <div class="topbar">
-      <div class="brand">
-        <img class="logo" src="Picsart_26-01-16_21-26-39-597.jpg" alt="MII STORE logo">
-        <div style="min-width:0">
-          <b>MII STORE</b>
-          <small>Premium Digital Services</small>
-        </div>
-      </div>
-
-      <div class="nav">
-        <a class="pill" href="#products">PRODUCTS</a>
-        <a class="pill" href="#order">HOW TO ORDER</a>
-        <a class="pill" href="#social">SOCIAL</a>
-        <button id="themeToggle" class="themeBtn" aria-label="Toggle theme">🌙</button>
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="Picsart_26-01-16_21-26-39-597.jpg" alt="MII STORE" />
+      <div class="brand-text">
+        <div class="brand-name">MII STORE</div>
+        <div class="brand-sub">Premium Digital Services</div>
       </div>
     </div>
 
-    <section class="hero">
-      <div class="ticker">FAST SUPPLY • INTERNATIONAL • TRUSTED SELLER</div>
-
-      <div class="heroGrid">
-        <div>
-          <div class="hTitle">PREMIUM DIGITAL SERVICES</div>
-          <p class="hDesc">
-            Trusted provider of premium digital subscriptions (sharing/private depending on product).
-            Simple order via WhatsApp, fast processing, and clear guidance after purchase.
-          </p>
-
-          <div class="btnRow">
-            <a class="btn primary" id="heroWa" href="#" target="_blank" rel="noreferrer">🟢 ORDER VIA WHATSAPP</a>
-            <a class="btn" href="#products">🧾 VIEW PRODUCTS</a>
-            <a class="btn" href="#order">📌 HOW TO ORDER</a>
-          </div>
-
-          <div class="featureRow">
-            <span class="tag">⚡ FAST RESPONSE</span>
-            <span class="tag">✅ CLEAR GUIDANCE</span>
-            <span class="tag">🌍 INTERNATIONAL FRIENDLY</span>
-            <span class="tag">📦 STOCK MAY CHANGE</span>
-          </div>
-        </div>
-
-        <div class="heroArt">
-          <img src="banner.jpg" alt="Banner">
-        </div>
-      </div>
-    </section>
+    <nav class="nav">
+      <a href="#products">PRODUCTS</a>
+      <a href="#how">HOW TO ORDER</a>
+      <a href="#social">SOCIAL</a>
+      <button id="themeToggle" class="theme" type="button" aria-label="Toggle theme">🌙</button>
+    </nav>
   </header>
 
   <main class="wrap">
-    <div class="sectionTitle" id="products">PRODUCTS</div>
-    <div class="grid" id="productGrid"></div>
+    <section class="hero">
+      <div class="hero-card reveal">
+        <div class="pill">FAST SUPPLY • INTERNATIONAL • TRUSTED SELLER</div>
 
-    <div class="sectionTitle" id="order">HOW TO ORDER</div>
-    <div class="twoCols">
-      <div class="panel">
-        <div class="steps">
-          <div class="step">
-            <b>01 — CHOOSE PRODUCT</b>
-            <p>Select the product and duration, then tap ORDER.</p>
-          </div>
-          <div class="step">
-            <b>02 — SEND DETAILS</b>
-            <p>Send required info (email/invite/account) based on the product type.</p>
-          </div>
-          <div class="step">
-            <b>03 — PROCESS & GUIDE</b>
-            <p>Fast processing + clear guidance after purchase.</p>
-          </div>
+        <h1 class="h1">PREMIUM DIGITAL SERVICES</h1>
+        <p class="lead">
+          Trusted provider of premium digital subscriptions (sharing/private depending on product).
+          Simple order via WhatsApp, fast processing, and clear guidance after purchase.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" id="orderTop" target="_blank" rel="noreferrer">🟢 ORDER VIA WHATSAPP</a>
+          <a class="btn" href="#products">🧾 VIEW PRODUCTS</a>
+          <a class="btn ghost" href="#how">📌 HOW TO ORDER</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">⚡ FAST RESPONSE</div>
+          <div class="stat">✅ CLEAR GUIDANCE</div>
+          <div class="stat">🌍 INTERNATIONAL FRIENDLY</div>
+          <div class="stat">📦 STOCK MAY CHANGE</div>
+        </div>
+
+        <div class="order-counter">
+          <span class="badge">🧾 TOTAL ORDER</span>
+          <span class="count" id="orderCount">0</span>
+          <button class="mini" id="resetOrders" type="button">Reset</button>
         </div>
       </div>
 
-      <div class="panel" id="social">
-        <div style="font-weight:1000; letter-spacing:1px; margin-bottom:10px;">SOCIAL & CONTACT</div>
-        <div class="socialRow">
-          <a class="socialBtn" id="waBtn" href="#" target="_blank" rel="noreferrer" aria-label="WhatsApp">
-            <svg class="svgIco" viewBox="0 0 32 32" aria-hidden="true">
-              <path d="M19.11 17.64c-.29-.14-1.68-.83-1.94-.92-.26-.1-.45-.14-.64.14-.19.29-.74.92-.9 1.11-.17.19-.33.21-.62.07-.29-.14-1.22-.45-2.33-1.43-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.56-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 1-1 2.44s1.03 2.83 1.17 3.03c.14.19 2.02 3.08 4.9 4.32.69.3 1.23.48 1.65.62.69.22 1.31.19 1.81.12.55-.08 1.68-.69 1.92-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33z"/>
-              <path d="M16 3C8.83 3 3 8.6 3 15.5c0 2.42.72 4.66 1.96 6.56L3 29l7.22-1.84c1.84 1 3.95 1.58 6.28 1.58 7.17 0 13-5.6 13-12.5S23.17 3 16 3zm0 22.84c-2.17 0-4.18-.64-5.86-1.75l-.42-.27-4.28 1.09 1.14-4.09-.28-.41A9.85 9.85 0 0 1 5.2 15.5C5.2 9.77 10.1 5.1 16 5.1S26.8 9.77 26.8 15.5 21.9 25.84 16 25.84z"/>
-            </svg>
-            WhatsApp
-          </a>
+      <div class="hero-media reveal">
+        <img class="hero-img" src="banner.jpg" alt="Violet Theme" />
+      </div>
+    </section>
 
-          <a class="socialBtn" href="https://www.tiktok.com/@mii._002?_r=1&_t=ZS-9389yLXFP0v" target="_blank" rel="noreferrer" aria-label="TikTok">
-            <svg class="svgIco" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M14 3v10.2a3.6 3.6 0 1 1-3-3.54V6.7a7.3 7.3 0 1 0 6.3 7.2V7.1c1.1.8 2.5 1.3 3.7 1.4V5.9c-2.1-.2-4-1.4-5-2.9H14z"/>
-            </svg>
-            TikTok
-          </a>
+    <section id="products" class="section">
+      <div class="section-title">PRODUCTS</div>
+      <div id="productGrid" class="product-grid"></div>
+    </section>
 
-          <a class="socialBtn" href="https://youtube.com/@asami.0111?si=aUNOvu6z0I-8cdNz" target="_blank" rel="noreferrer" aria-label="YouTube">
-            <svg class="svgIco" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.8 4.7 12 4.7 12 4.7s-5.8 0-7.5.4A3 3 0 0 0 2.4 7.2 31.8 31.8 0 0 0 2 12s.1 2.6.4 4.8a3 3 0 0 0 2.1 2.1c1.7.4 7.5.4 7.5.4s5.8 0 7.5-.4a3 3 0 0 0 2.1-2.1c.3-2.2.4-4.8.4-4.8s0-2.6-.4-4.8zM10 15.3V8.7L16 12l-6 3.3z"/>
-            </svg>
-            YouTube
-          </a>
-
-          <a class="socialBtn" href="https://www.instagram.com/miistore.99?igsh=ZmFqanZuOXo4cG92" target="_blank" rel="noreferrer" aria-label="Instagram">
-            <svg class="svgIco" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3z"/>
-              <path d="M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
-              <path d="M17.5 6.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-            </svg>
-            Instagram
-          </a>
+    <section id="how" class="section">
+      <div class="section-title">HOW TO ORDER</div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-title">CHOOSE PRODUCT</div>
+            <div class="step-desc">Pilih produk & durasi, lalu klik ORDER.</div>
+          </div>
         </div>
-
-        <div style="margin-top:12px; color:var(--muted); font-weight:900; line-height:1.6;">
-          Note: policies may vary by product type (sharing/private/invite). Please confirm before ordering.
+        <div class="step reveal">
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-title">SEND DETAILS</div>
+            <div class="step-desc">Kirim detail yang dibutuhkan (email/invite/akun) sesuai produk.</div>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">03</div>
+          <div>
+            <div class="step-title">PROCESS & GUIDE</div>
+            <div class="step-desc">Proses cepat + panduan jelas setelah pembelian.</div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <footer>
-      <div class="line"></div>
-      © <span id="year"></span> MII STORE — Established since 2024
+    <section id="social" class="section">
+      <div class="section-title">SOCIAL</div>
+      <div class="social-row reveal">
+        <a class="social" id="waBtn" target="_blank" rel="noreferrer">🟢 WhatsApp</a>
+        <a class="social" id="igBtn" target="_blank" rel="noreferrer">📷 Instagram</a>
+        <a class="social" id="ytBtn" target="_blank" rel="noreferrer">▶️ YouTube</a>
+        <a class="social" id="ttBtn" target="_blank" rel="noreferrer">🎵 TikTok</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-line"></div>
+      <div class="footer-text">© <span id="year"></span> MII STORE — Established since 2024</div>
     </footer>
   </main>
 
-  <script>
-    const STORE = {
-      waNumber: "6282191223912",
-      waMessage: "Hi MII STORE! I want to order: "
-    };
-
-    const PRODUCTS = [
-      { name:"CANVA PRO", sub:"1 MONTH — SHARING / PRIVATE", tags:["Sharing","Private","Ask Stock"], img:"Canva.jpg" },
-      { name:"CAPCUT PRO", sub:"1 MONTH — PRIVATE", tags:["Private","No Ads","Fast"], img:"Capcut.jpg" },
-      { name:"YOUTUBE PREMIUM", sub:"1 MONTH — INVITE", tags:["Invite","No Ads","Ask Stock"], img:"YOUTUBE.jpg" },
-      { name:"CHATGPT", sub:"1 YEAR — PRIVATE", tags:["Private","Fast","Guided"], img:"CHATGPT.jpg" },
-      { name:"GEMINI PRO", sub:"1 MONTH — SHARING / PRIVATE", tags:["Sharing","Private","Ask Stock"], img:"GEMINI.jpg" },
-      { name:"SPOTIFY PREMIUM", sub:"3 MONTHS — PRIVATE", tags:["Private","Music","Fast"], img:"Spotify.jpg" },
-      { name:"ALIGHT MOTION", sub:"1 YEAR — PRIVATE", tags:["Private","Editor","Long Term"], img:"ALIGHT MOTION.jpg" }
-    ];
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    function waLink(text){
-      return "https://wa.me/" + STORE.waNumber + "?text=" + encodeURIComponent(text);
-    }
-    document.getElementById("heroWa").href = waLink("Hi MII STORE! I want to order.");
-    document.getElementById("waBtn").href = waLink("Hi MII STORE! I want to order.");
-
-    // Render products
-    const grid = document.getElementById("productGrid");
-    PRODUCTS.forEach((p, i) => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.style.transitionDelay = (i * 0.08) + "s";
-      card.innerHTML = `
-        <img class="pimg" src="${p.img}" alt="${p.name}" loading="lazy" />
-        <div class="body">
-          <h3 class="name">${p.name}</h3>
-          <div class="sub">${p.sub}</div>
-          <div class="chips">${p.tags.map(t => `<span class="chip">${t}</span>`).join("")}</div>
-          <div class="actions">
-            <a class="orderBtn" target="_blank" rel="noreferrer"
-               href="${waLink(STORE.waMessage + p.name + " (" + p.sub + ")")}">
-              ORDER
-            </a>
-            <div class="mini">Ask price</div>
-          </div>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-
-    // Reveal animation
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("show"); });
-    }, { threshold: 0.15 });
-    document.querySelectorAll(".card").forEach(el => io.observe(el));
-
-    // Theme toggle
-    const toggle = document.getElementById("themeToggle");
-    function setTheme(mode){
-      document.documentElement.setAttribute("data-theme", mode);
-      localStorage.setItem("theme", mode);
-      toggle.textContent = (mode === "dark") ? "🌙" : "☀️";
-    }
-    toggle.addEventListener("click", ()=>{
-      const cur = document.documentElement.getAttribute("data-theme") || "dark";
-      setTheme(cur === "dark" ? "light" : "dark");
-    });
-    setTheme(localStorage.getItem("theme") || "dark");
-  </script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
