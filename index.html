@@ -1,198 +1,170 @@
-<!doctype html>
-<html lang="id">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MII STORE — Premium Digital Services</title>
-  <meta name="description" content="Trusted provider of premium digital subscriptions. Order via WhatsApp, fast processing, clear guidance." />
-  <link rel="icon" href="logo.jpg" />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MII STORE</title>
+
+<style>
+/* ===== THEME ===== */
+:root{
+  --bg:#0b1420;
+  --card:#151f2e;
+  --text:#eaf1ff;
+  --muted:#9fb0cc;
+  --accent:#c9b27c;
+}
+
+[data-theme="light"]{
+  --bg:#f3f5f9;
+  --card:#ffffff;
+  --text:#0b1420;
+  --muted:#4a5a70;
+}
+
+/* ===== BASE ===== */
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:20px;
+}
+h1,h2,h3{
+  margin:0 0 10px;
+}
+button{
+  cursor:pointer;
+}
+
+/* ===== HEADER ===== */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.theme-btn{
+  background:var(--card);
+  color:var(--text);
+  border:none;
+  padding:8px 12px;
+  border-radius:6px;
+}
+
+/* ===== HERO ===== */
+.hero{
+  margin-top:20px;
+  padding:20px;
+  background:var(--card);
+  border-radius:10px;
+}
+.hero p{
+  color:var(--muted);
+}
+
+/* ===== PRODUCTS ===== */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+.product{
+  background:var(--card);
+  padding:15px;
+  border-radius:10px;
+  animation:fadeUp .6s ease;
+}
+.product img{
+  width:100%;
+  border-radius:8px;
+}
+.product small{
+  color:var(--muted);
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  margin-top:40px;
+  color:var(--muted);
+  font-size:13px;
+}
+</style>
 </head>
 
 <body>
-  <!-- Background effects -->
-  <div class="bg">
-    <div class="grain"></div>
-    <div class="sparkles" aria-hidden="true"></div>
-  </div>
 
-  <!-- Floating decorations -->
-  <img class="decor d1" src="decor-1.png" alt="" aria-hidden="true" />
-  <img class="decor d2" src="decor-2.png" alt="" aria-hidden="true" />
-  <img class="decor d3" src="decor-3.png" alt="" aria-hidden="true" />
+<div class="container">
 
-  <header class="topbar">
-    <a class="brand" href="#home">
-      <img class="brand-logo" src="logo.jpg" alt="MII STORE logo" />
-      <div class="brand-text">
-        <div class="brand-name">MII STORE</div>
-        <div class="brand-sub">PREMIUM DIGITAL SERVICES</div>
-      </div>
-    </a>
+<header>
+  <h2>MII STORE</h2>
+  <button class="theme-btn" id="themeBtn">🌙</button>
+</header>
 
-    <nav class="nav">
-      <a href="#products">PRODUCTS</a>
-      <a href="#order">HOW TO ORDER</a>
-      <a href="#social">SOCIAL</a>
-      <a href="#faq">FAQ</a>
-    </nav>
+<section class="hero">
+  <h1>Premium Digital Services</h1>
+  <p>Fast Supply • International • Trusted Seller</p>
+</section>
 
-    <div class="actions">
-      <button class="btn ghost" id="themeBtn" type="button" aria-label="Toggle theme">
-        <span class="icon">☾</span>
-        <span class="hide-sm">Mode</span>
-      </button>
+<section class="products" id="products"></section>
 
-      <a class="btn primary" id="waTop" href="#" target="_blank" rel="noreferrer">
-        ORDER via WhatsApp
-      </a>
-    </div>
-  </header>
+<footer>
+  © 2026 MII STORE — Established since 2024
+</footer>
 
-  <main id="home" class="wrap">
-    <!-- HERO -->
-    <section class="hero card reveal">
-      <div class="hero-left">
-        <div class="ticker">
-          <span>INTERNATIONAL</span><span>•</span>
-          <span>FAST SUPPLY</span><span>•</span>
-          <span>INTERNATIONAL</span><span>•</span>
-          <span>FAST SUPPLY</span><span>•</span>
-        </div>
+</div>
 
-        <h1 class="title">PREMIUM DIGITAL SERVICES</h1>
-        <p class="subtitle">
-          Trusted provider of premium digital subscriptions (sharing/private depending on product).
-          Simple order via WhatsApp, fast processing, and clear guidance after purchase.
-        </p>
+<script>
+/* ===== DATA PRODUK ===== */
+const products = [
+  {name:"Canva Pro", img:"Canva.jpg", note:"1 Month • Sharing / Private"},
+  {name:"CapCut Pro", img:"Capcut.jpg", note:"1 Month • Private"},
+  {name:"YouTube Premium", img:"YOUTUBE.jpg", note:"1 Month • Invite"},
+  {name:"ChatGPT", img:"CHATGPT.jpg", note:"1 Year • Private"},
+  {name:"Gemini Pro", img:"GEMINI.jpg", note:"1 Month • Sharing / Private"},
+  {name:"Spotify Premium", img:"Spotify.jpg", note:"3 Months • Private"},
+  {name:"Alight Motion", img:"ALIGHT MOTION.jpg", note:"1 Year • Private"}
+];
 
-        <div class="cta-row">
-          <a class="btn primary" id="waHero" href="#" target="_blank" rel="noreferrer">ORDER via WhatsApp</a>
-          <a class="btn" href="#products">VIEW PRODUCTS</a>
-          <a class="btn ghost" href="#order">HOW TO ORDER</a>
-        </div>
+/* ===== RENDER PRODUK ===== */
+const grid = document.getElementById("products");
 
-        <div class="chips">
-          <span class="chip">⚡ Fast Response</span>
-          <span class="chip">✅ Clear Guidance</span>
-          <span class="chip">🌍 International Friendly</span>
-          <span class="chip">📦 Stock May Change</span>
-        </div>
-      </div>
+products.forEach(p=>{
+  const div = document.createElement("div");
+  div.className="product";
+  div.innerHTML = `
+    <img src="${p.img}">
+    <h3>${p.name}</h3>
+    <small>${p.note}</small>
+  `;
+  grid.appendChild(div);
+});
 
-      <div class="hero-right">
-        <div class="hero-img-wrap">
-          <img class="hero-img" src="hero.jpg" alt="Violet inspired hero art" />
-        </div>
-      </div>
-    </section>
+/* ===== THEME TOGGLE ===== */
+const btn = document.getElementById("themeBtn");
+btn.onclick = ()=>{
+  const html = document.documentElement;
+  const mode = html.getAttribute("data-theme");
+  if(mode==="light"){
+    html.removeAttribute("data-theme");
+    btn.textContent="🌙";
+  }else{
+    html.setAttribute("data-theme","light");
+    btn.textContent="☀️";
+  }
+};
+</script>
 
-    <!-- WHY -->
-    <section class="card reveal">
-      <h2 class="section-title">WHY MII STORE?</h2>
-      <div class="why-grid">
-        <div class="why">
-          <div class="why-title">Focused on Clean Service</div>
-          <div class="why-desc">Clear info • Fast processing • Support after purchase</div>
-        </div>
-        <div class="why">
-          <div class="why-title">Friendly for Global Buyers</div>
-          <div class="why-desc">Easy communication • Simple steps • Quick confirmation</div>
-        </div>
-        <div class="why">
-          <div class="why-title">Product Types Vary</div>
-          <div class="why-desc">Sharing / Private / Invite — depends on each product</div>
-        </div>
-      </div>
-      <div class="note">
-        Note: policies may vary by product type (sharing/private/invite). Please confirm before ordering.
-      </div>
-    </section>
-
-    <!-- PRODUCTS -->
-    <section id="products" class="reveal">
-      <h2 class="section-title big">PRODUCTS</h2>
-      <div id="productGrid" class="product-grid"></div>
-    </section>
-
-    <!-- HOW TO ORDER -->
-    <section id="order" class="card reveal">
-      <h2 class="section-title">HOW TO ORDER</h2>
-
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <div class="step-body">
-            <div class="step-title">Choose Product</div>
-            <div class="step-desc">Pick the service and duration, then click ORDER.</div>
-          </div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">02</div>
-          <div class="step-body">
-            <div class="step-title">Send Details</div>
-            <div class="step-desc">Send required info (email/invite/account) based on the product.</div>
-          </div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">03</div>
-          <div class="step-body">
-            <div class="step-title">Process & Guide</div>
-            <div class="step-desc">Fast processing + clear guidance after purchase.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="order-bar">
-        <a class="btn primary" id="waOrder" href="#" target="_blank" rel="noreferrer">ORDER via WhatsApp</a>
-        <div class="order-hint">Tip: Ask stock first if the product is limited.</div>
-      </div>
-    </section>
-
-    <!-- SOCIAL -->
-    <section id="social" class="card reveal">
-      <h2 class="section-title">SOCIAL</h2>
-      <div class="social-row">
-        <a class="social" href="#" id="socialWa" target="_blank" rel="noreferrer">💬 WhatsApp</a>
-        <a class="social" href="#" id="socialIg" target="_blank" rel="noreferrer">📷 Instagram</a>
-        <a class="social" href="#" id="socialYt" target="_blank" rel="noreferrer">▶️ YouTube</a>
-        <a class="social" href="#" id="socialTt" target="_blank" rel="noreferrer">🎵 TikTok</a>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="card reveal">
-      <h2 class="section-title">FAQ</h2>
-
-      <div class="faq">
-        <details>
-          <summary>Is there a warranty?</summary>
-          <div class="faq-body">Warranty depends on the product. Please confirm before ordering.</div>
-        </details>
-
-        <details>
-          <summary>Can I order from outside Indonesia?</summary>
-          <div class="faq-body">Yes. International friendly — fast supply and clear steps.</div>
-        </details>
-
-        <details>
-          <summary>Sharing or Private?</summary>
-          <div class="faq-body">Depends on product type. Each product card shows the type.</div>
-        </details>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="footer-line"></div>
-      <div class="footer-text">
-        © <span id="year"></span> MII STORE — Established since 2024
-      </div>
-    </footer>
-  </main>
-
-  <script src="data.js"></script>
-  <script src="app.js"></script>
 </body>
-          </html>
+</html>
