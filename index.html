@@ -6,334 +6,236 @@
 <title>Mii Store – Premium Digital Services</title>
 
 <style>
-/* ===== RESET ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-
-/* ===== BACKGROUND ===== */
+*{box-sizing:border-box;font-family:"Poppins",system-ui,sans-serif}
 body{
-  min-height:100vh;
-  color:#2b1d14;
-  background:
-    url("background.jpg") center/cover no-repeat fixed;
+  margin:0;
+  background:url("background.jpg") center/cover fixed;
+  color:#2b2b2b;
 }
 
-/* overlay biar teks kebaca */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:rgba(255,245,235,.85);
-  z-index:-1;
-}
-
-/* ===== HEADER ===== */
+/* HEADER */
 header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:16px 20px;
+  padding:14px 18px;
+  background:rgba(255,255,255,.6);
   backdrop-filter:blur(10px);
-  background:rgba(255,255,255,.35);
 }
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:700;
-  font-size:18px;
-}
-
-.logo img{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-}
-
-nav{
-  display:flex;
-  gap:14px;
-}
-
+header b{font-size:18px}
 nav a{
+  margin-left:14px;
   text-decoration:none;
-  color:#2b1d14;
-  font-weight:600;
-  font-size:14px;
+  color:#333;
+  font-weight:500;
 }
 
-/* ===== HERO ===== */
+/* HERO */
 .hero{
-  padding:24px 20px;
+  max-width:1100px;
+  margin:30px auto;
+  padding:24px;
+  background:rgba(255,255,255,.65);
+  border-radius:22px;
+  box-shadow:0 20px 60px rgba(0,0,0,.15);
+  position:relative;
+  overflow:hidden;
 }
-
-.hero-box{
-  background:rgba(255,255,255,.55);
+.hero h1{margin:10px 0;font-size:32px}
+.hero p{line-height:1.6}
+.hero img{
+  width:100%;
+  margin-top:18px;
   border-radius:18px;
-  padding:20px;
-  box-shadow:0 20px 40px rgba(0,0,0,.15);
 }
 
-.hero-tag{
-  display:inline-block;
-  background:#e8d2b8;
-  padding:6px 12px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:600;
-  margin-bottom:12px;
-}
-
-.hero h1{
-  font-size:28px;
-  margin-bottom:10px;
-}
-
-.hero p{
-  font-size:14px;
-  line-height:1.6;
-  margin-bottom:14px;
-}
-
-.hero-actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
+/* BUTTON */
 .btn{
-  padding:10px 14px;
-  border-radius:12px;
-  border:none;
-  cursor:pointer;
-  font-weight:600;
-  font-size:14px;
-}
-
-.btn-wa{background:#6fbf73;color:#fff}
-.btn-view{background:#ddd;color:#333}
-
-/* ===== TOTAL SOLD ===== */
-.total-sold{
-  margin-top:14px;
-  background:#fff;
-  padding:12px;
+  display:inline-block;
+  padding:12px 18px;
   border-radius:14px;
+  text-decoration:none;
+  font-weight:600;
+  margin:6px 6px 0 0;
+}
+.btn.wa{background:#6bcf8e;color:#fff}
+.btn.gray{background:#e5e5e5;color:#333}
+
+/* SOLD */
+.sold{
+  margin-top:16px;
+  padding:14px;
+  background:rgba(255,255,255,.8);
+  border-radius:14px;
+  font-weight:700;
   display:flex;
   justify-content:space-between;
+}
+
+/* SOCIAL */
+.social{
+  display:flex;
+  gap:14px;
+  margin-top:16px;
+}
+.social a{
+  width:46px;height:46px;
+  border-radius:14px;
+  display:flex;
   align-items:center;
-  font-weight:700;
-}
-
-/* ===== PRODUCTS ===== */
-.products{
-  padding:20px;
-}
-
-.products h2{
-  font-size:22px;
-  margin-bottom:10px;
-}
-
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:16px;
-}
-
-.card{
+  justify-content:center;
   background:rgba(255,255,255,.7);
-  border-radius:16px;
+}
+.social img{width:22px}
+
+/* PRODUCTS */
+.products{
+  max-width:1100px;
+  margin:40px auto;
+  padding:0 16px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+}
+.card{
+  background:rgba(255,255,255,.75);
+  border-radius:20px;
   overflow:hidden;
-  box-shadow:0 10px 25px rgba(0,0,0,.15);
-  transition:.3s;
+  box-shadow:0 15px 40px rgba(0,0,0,.12);
 }
-
-.card:hover{
-  transform:translateY(-4px);
-}
-
 .card img{
   width:100%;
-  height:140px;
+  height:170px;
   object-fit:cover;
 }
+.card .body{padding:14px}
+.card h3{margin:0}
+.card p{font-size:14px}
+.card .btn{width:100%;text-align:center}
 
-.card-body{
-  padding:12px;
-}
-
-.card-body h3{
-  font-size:16px;
-  margin-bottom:4px;
-}
-
-.card-body p{
-  font-size:12px;
-  margin-bottom:8px;
-}
-
-.order-btn{
-  width:100%;
-  padding:8px;
-  background:#6fbf73;
-  color:#fff;
-  border:none;
-  border-radius:10px;
-  font-weight:600;
-}
-
-/* ===== FOOTER ===== */
-footer{
-  text-align:center;
-  padding:20px;
-  font-size:12px;
-  opacity:.8;
-}
-
-/* ===== BUBBLE ANIMATION ===== */
+/* BUBBLE */
 .bubble{
   position:fixed;
-  bottom:-60px;
-  background:rgba(185,120,70,.35);
+  bottom:-100px;
+  background:rgba(210,180,140,.25);
   border-radius:50%;
-  animation:float 18s linear infinite;
-  z-index:-1;
+  animation:float 18s infinite linear;
 }
-
 @keyframes float{
   from{transform:translateY(0)}
   to{transform:translateY(-120vh)}
 }
 </style>
-</head><body>
+</head>
+
+<body>
 
 <header>
-  <div class="logo">
-    <img src="Picsart_26-01-16_21-26-39-597.jpg">
-    Mii Store
-  </div>
+  <b>Mii Store</b>
   <nav>
     <a href="#products">Products</a>
-    <a href="#">How To Order</a>
-    <a href="#">Social</a>
+    <a href="#social">Social</a>
   </nav>
 </header>
 
 <section class="hero">
-  <div class="hero-box">
-    <span class="hero-tag">Fast Supply • International • Trusted Seller</span>
-    <h1>Premium Digital Services</h1>
-    <p>
-      Trusted Provider Of Premium Digital Subscriptions
-      (Sharing / Private Depending On Product).
-      Simple Order Via WhatsApp, Fast Processing,
-      And Clear Guidance After Purchase.
-    </p>
+  <h1>Premium Digital Services</h1>
+  <p>
+    Trusted Provider Of Premium Digital Subscriptions  
+    (Sharing / Private Depending On Product).  
+    Simple Order Via WhatsApp, Fast Processing, And Clear Guidance.
+  </p>
 
-    <div class="hero-actions">
-      <button class="btn btn-wa"
-        onclick="window.open('https://wa.me/6282191223912','_blank')">
-        Order Via WhatsApp
-      </button>
-      <button class="btn btn-view"
-        onclick="document.getElementById('products').scrollIntoView()">
-        View Products
-      </button>
-    </div>
+  <a class="btn wa" href="https://wa.me/6282191223912" target="_blank">Order Via WhatsApp</a>
+  <a class="btn gray" href="#products">View Products</a>
 
-    <div class="total-sold">
-      <span>Total Products Sold</span>
-      <span>1098</span>
-    </div>
+  <div class="sold">
+    <span>Total Products Sold</span>
+    <span>1098</span>
+  </div>
+
+  <img src="banner.jpg" alt="Anime Banner">
+
+  <div class="social" id="social">
+    <a href="https://wa.me/6282191223912"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"></a>
+    <a href="https://instagram.com/asami.am0"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"></a>
+    <a href="https://tiktok.com/@mii._002"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg"></a>
+    <a href="https://youtube.com/@mii._002"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"></a>
   </div>
 </section>
 
 <section class="products" id="products">
-  <h2>Products</h2>
 
-  <div class="product-grid">
+<!-- CANVA -->
+<div class="card">
+<img src="Canva.jpg">
+<div class="body">
+<h3>Canva Pro</h3>
+<p>1 Month – Sharing / Private</p>
+<a class="btn wa" href="https://wa.me/6282191223912?text=Order Canva Pro">Order</a>
+</div>
+</div>
 
-    <div class="card">
-      <img src="Canva.jpg">
-      <div class="card-body">
-        <h3>Canva Pro</h3>
-        <p>1 Month — Sharing / Private</p>
-        <button class="order-btn">Order</button>
-      </div>
-    </div>
+<!-- CAPCUT -->
+<div class="card">
+<img src="Capcut.jpg">
+<div class="body">
+<h3>CapCut Pro</h3>
+<p>1 Month – Private</p>
+<a class="btn wa" href="https://wa.me/6282191223912?text=Order CapCut Pro">Order</a>
+</div>
+</div>
 
-    <div class="card">
-      <img src="Capcut.jpg">
-      <div class="card-body">
-        <h3>CapCut Pro</h3>
-        <p>1 Month — Private</p>
-        <button class="order-btn">Order</button>
-      </div>
-    </div>
+<!-- CHATGPT GO -->
+<div class="card">
+<img src="CHATGPT.jpg">
+<div class="body">
+<h3>ChatGPT Go</h3>
+<p>1 Year – Private</p>
+<a class="btn wa" href="https://wa.me/6282191223912?text=Order ChatGPT Go 1 Year Private">Order</a>
+</div>
+</div>
 
-    <div class="card">
-      <img src="YOUTUBE.jpg">
-      <div class="card-body">
-        <h3>YouTube Premium</h3>
-        <p>1 Month — Invite</p>
-        <button class="order-btn">Order</button>
-      </div>
-    </div>
+<!-- GEMINI -->
+<div class="card">
+<img src="GEMINI.jpg">
+<div class="body">
+<h3>Gemini Pro</h3>
+<p>1 Month – Private / Sharing</p>
+<a class="btn wa" href="https://wa.me/6282191223912?text=Order Gemini Pro 1 Month">Order</a>
+</div>
+</div>
 
-    <div class="card">
-      <img src="CHATGPT.jpg">
-      <div class="card-body">
-        <h3>ChatGPT Plus</h3>
-        <p>1 Month — Sharing / Private</p>
-        <button class="order-btn">Order</button>
-      </div>
-    </div>
+<!-- SPOTIFY -->
+<div class="card">
+<img src="Spotify.jpg">
+<div class="body">
+<h3>Spotify Premium</h3>
+<p>3 Months – Private</p>
+<a class="btn wa" href="https://wa.me/6282191223912?text=Order Spotify Premium">Order</a>
+</div>
+</div>
 
-    <div class="card">
-      <img src="GEMINI.jpg">
-      <div class="card-body">
-        <h3>Gemini Pro</h3>
-        <p>1 Year — Private</p>
-        <button class="order-btn">Order</button>
-      </div>
-    </div>
+<!-- ALIGHT MOTION -->
+<div class="card">
+<img src="ALIGHT MOTION.jpg">
+<div class="body">
+<h3>Alight Motion</h3>
+<p>1 Year – Private</p>
+<a class="btn wa" href="https://wa.me/6282191223912?text=Order Alight Motion 1 Year">Order</a>
+</div>
+</div>
 
-    <div class="card">
-      <img src="Spotify.jpg">
-      <div class="card-body">
-        <h3>Spotify Premium</h3>
-        <p>3 Months — Private</p>
-        <button class="order-btn">Order</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="ALIGHT MOTION.jpg">
-      <div class="card-body">
-        <h3>Alight Motion</h3>
-        <p>1 Year — Private</p>
-        <button class="order-btn">Order</button>
-      </div>
-    </div>
-
-  </div>
 </section>
-
-<footer>
-© 2026 Mii Store — Established Since 2024
-</footer>
 
 <!-- BUBBLES -->
 <script>
-for(let i=0;i<14;i++){
-  let b=document.createElement("div");
+for(let i=0;i<12;i++){
+  const b=document.createElement("div");
   b.className="bubble";
-  let s=Math.random()*80+20;
-  b.style.width=s+"px";
-  b.style.height=s+"px";
+  b.style.width=b.style.height=40+Math.random()*60+"px";
   b.style.left=Math.random()*100+"%";
-  b.style.animationDuration=12+Math.random()*20+"s";
+  b.style.animationDuration=12+Math.random()*10+"s";
   document.body.appendChild(b);
 }
 </script>
