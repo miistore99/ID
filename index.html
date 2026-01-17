@@ -1,228 +1,967 @@
+<!-- =========================
+INDEX.HTML (PART 1/2)
+Paste dari sini dulu
+========================= -->
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
   <title>Mii Store | Premium Digital Services</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    :root{
+      --bg1:#f4efe8;
+      --bg2:#eadfce;
+      --card:#ffffffcc;
+      --stroke:#00000012;
+      --text:#1f2328;
+      --muted:#525a63;
+      --brand:#56b870;
+      --brand2:#3aa55e;
+      --shadow: 0 18px 50px rgba(0,0,0,.12);
+      --radius:22px;
+      --radius2:16px;
+      --max: 1120px;
+    }
+    [data-theme="dark"]{
+      --bg1:#101217;
+      --bg2:#0a0c10;
+      --card:#151a22cc;
+      --stroke:#ffffff14;
+      --text:#eaf0ff;
+      --muted:#b7c3da;
+      --brand:#6bdc86;
+      --brand2:#4fc46c;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.15)),
+        url("background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow-x:hidden;
+      text-transform: capitalize; /* semua kata awal huruf besar */
+    }
+
+    /* overlay lembut biar teks kebaca */
+    .veil{
+      position:fixed; inset:0;
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(255,255,255,.55), transparent 60%),
+                  radial-gradient(900px 500px at 80% 30%, rgba(255,255,255,.35), transparent 60%);
+      pointer-events:none;
+      mix-blend-mode: soft-light;
+      opacity:.6;
+    }
+    [data-theme="dark"] .veil{opacity:.25}
+
+    /* Bubble layer */
+    .bubbles{
+      position:fixed; inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:1;
+    }
+    .bubble{
+      position:absolute;
+      width: var(--s);
+      height: var(--s);
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%),
+                  radial-gradient(circle at 70% 80%, rgba(0,0,0,.08), rgba(0,0,0,0) 60%),
+                  rgba(170, 120, 70, .25);
+      filter: blur(.2px);
+      animation: floatUp var(--d) linear infinite;
+      transform: translate3d(0,0,0);
+      opacity: var(--o);
+    }
+    @keyframes floatUp{
+      0%{ transform: translate(var(--x), 110vh) scale(var(--k)); }
+      100%{ transform: translate(calc(var(--x) + var(--drift)), -20vh) scale(var(--k)); }
+    }
+
+    /* Layout */
+    .wrap{
+      position:relative;
+      z-index:2;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 14px 70px;
+    }
+
+    /* Topbar */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      padding: 10px 0 12px;
+      backdrop-filter: blur(12px);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.35));
+      border:1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      border-radius: 999px;
+      padding: 10px 12px;
+    }
+    [data-theme="dark"] .topbar-inner{
+      background: linear-gradient(180deg, rgba(20,24,32,.75), rgba(20,24,32,.35));
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width: 220px;
+    }
+    .logo{
+      width:38px;height:38px;border-radius:12px;
+      object-fit:cover;
+      border:1px solid var(--stroke);
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    }
+    .brand b{display:block; font-size:14px; letter-spacing:.3px}
+    .brand small{display:block; color:var(--muted); font-size:11px; margin-top:1px; text-transform:none}
+
+    .nav{
+      display:flex; gap:6px; flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+    }
+    .nav a{
+      text-decoration:none;
+      color:var(--text);
+      font-weight:700;
+      font-size:12px;
+      padding: 10px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+      opacity:.9;
+    }
+    .nav a:hover{
+      border-color: var(--stroke);
+      background: rgba(255,255,255,.18);
+    }
+    [data-theme="dark"] .nav a:hover{ background: rgba(255,255,255,.06); }
+
+    .actions{
+      display:flex; align-items:center; gap:8px;
+      min-width: 160px;
+      justify-content:flex-end;
+    }
+    .toggle{
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.18);
+      color: var(--text);
+      padding: 9px 12px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:12px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    [data-theme="dark"] .toggle{ background: rgba(255,255,255,.06); }
+
+    /* Marquee */
+    .marquee{
+      margin: 12px 0 0;
+      border-radius: 999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.16);
+      overflow:hidden;
+    }
+    [data-theme="dark"] .marquee{ background: rgba(255,255,255,.06); }
+    .marquee-track{
+      display:flex;
+      gap:28px;
+      padding: 10px 0;
+      width:max-content;
+      animation: marquee 16s linear infinite;
+    }
+    .marquee span{
+      font-weight:900;
+      font-size:12px;
+      color: var(--text);
+      opacity:.85;
+      white-space:nowrap;
+    }
+    @keyframes marquee{
+      0%{ transform: translateX(0); }
+      100%{ transform: translateX(-50%); }
+    }
+
+    /* Hero */
+    .hero{
+      margin-top: 16px;
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.35));
+      overflow:hidden;
+      position:relative;
+    }
+    [data-theme="dark"] .hero{
+      background: linear-gradient(180deg, rgba(20,24,32,.72), rgba(20,24,32,.35));
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 14px;
+      padding: 16px;
+      align-items:stretch;
+    }
+    @media (max-width: 860px){
+      .hero-grid{ grid-template-columns: 1fr; }
+    }
+    .hero h1{
+      margin:0;
+      font-size: 34px;
+      line-height:1.05;
+      letter-spacing:.5px;
+    }
+    .hero p{
+      margin:10px 0 14px;
+      color: var(--muted);
+      font-weight:600;
+      line-height:1.5;
+      text-transform:none;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.16);
+      font-weight:900;
+      font-size:12px;
+    }
+    [data-theme="dark"] .pill{ background: rgba(255,255,255,.06); }
+
+    .btn-row{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border:1px solid var(--stroke);
+      font-weight:900;
+      font-size:13px;
+      cursor:pointer;
+      background: rgba(255,255,255,.16);
+      color: var(--text);
+    }
+    .btn.primary{
+      background: linear-gradient(180deg, var(--brand), var(--brand2));
+      border-color: rgba(0,0,0,.08);
+      color: #0b1a11;
+    }
+    [data-theme="dark"] .btn.primary{ color:#07110a; }
+
+    /* Sold bar */
+    .sold{
+      margin-top: 12px;
+      border:1px solid var(--stroke);
+      border-radius: 16px;
+      background: rgba(255,255,255,.16);
+      padding: 12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-weight:900;
+    }
+    [data-theme="dark"] .sold{ background: rgba(255,255,255,.06); }
+    .sold small{
+      display:block;
+      color: var(--muted);
+      font-weight:800;
+      text-transform:none;
+      margin-top:2px;
+    }
+    .sold .num{
+      font-size: 20px;
+      letter-spacing:.6px;
+    }
+
+    /* Banner */
+    .banner{
+      border-radius: var(--radius2);
+      overflow:hidden;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.10);
+      height: 100%;
+      min-height: 240px;
+      position:relative;
+    }
+    .banner img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.02);
+    }
+    .banner:after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(700px 300px at 30% 10%, rgba(255,255,255,.35), transparent 55%),
+                  linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.25));
+      pointer-events:none;
+    }
+
+    /* Social icons */
+    .social{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 12px;
+    }
+    .soc{
+      width:42px;height:42px;border-radius:14px;
+      display:grid; place-items:center;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.16);
+      color: var(--text);
+      text-decoration:none;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .soc:hover{ transform: translateY(-2px); }
+    [data-theme="dark"] .soc{ background: rgba(255,255,255,.06); }
+    .soc svg{ width:20px; height:20px; }
+
+    /* Section */
+    .section{
+      margin-top: 18px;
+    }
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin: 16px 2px 10px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 22px;
+      letter-spacing:.3px;
+    }
+    .section-title p{
+      margin:0;
+      color: var(--muted);
+      font-weight:700;
+      font-size: 12px;
+      text-transform:none;
+    }
+
+    /* Product grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 920px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.35));
+      border-radius: var(--radius);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      cursor:pointer;
+      transform: translateY(0);
+      transition: transform .18s ease, filter .18s ease;
+      position:relative;
+    }
+    [data-theme="dark"] .card{
+      background: linear-gradient(180deg, rgba(20,24,32,.72), rgba(20,24,32,.35));
+    }
+    .card:hover{ transform: translateY(-2px); }
+
+    .thumb{
+      height: 170px;
+      background: rgba(0,0,0,.08);
+      overflow:hidden;
+      position:relative;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .thumb:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.35));
+      pointer-events:none;
+    }
+
+    .body{
+      padding: 12px 12px 14px;
+    }
+    .name{
+      margin:0;
+      font-size: 16px;
+      font-weight:950;
+      letter-spacing:.2px;
+    }
+    .sub{
+      margin:6px 0 10px;
+      color: var(--muted);
+      font-weight:700;
+      font-size: 12px;
+      text-transform:none;
+    }
+    .meta{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-top: 10px;
+    }
+    .price{
+      font-weight:950;
+      font-size: 13px;
+      letter-spacing:.2px;
+    }
+    .order{
+      border:1px solid rgba(0,0,0,.08);
+      background: linear-gradient(180deg, var(--brand), var(--brand2));
+      color:#0b1a11;
+      font-weight:950;
+      padding: 10px 12px;
+      border-radius: 14px;
+      text-decoration:none;
+      font-size: 12px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width: 92px;
+    }
+
+    /* Modal detail (ala lynk) */
+    .modal{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal.show{ display:flex; }
+    .sheet{
+      width: min(920px, 100%);
+      border-radius: 22px;
+      overflow:hidden;
+      border:1px solid var(--stroke);
+      background: var(--bg1);
+      box-shadow: 0 30px 120px rgba(0,0,0,.45);
+    }
+    [data-theme="dark"] .sheet{ background: #0f1218; }
+    .sheet-head{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--stroke);
+      background: rgba(255,255,255,.50);
+    }
+    [data-theme="dark"] .sheet-head{ background: rgba(255,255,255,.06); }
+    .sheet-head b{ font-size: 14px; }
+    .close{
+      border:1px solid var(--stroke);
+      background: transparent;
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-weight:950;
+      cursor:pointer;
+    }
+    .sheet-body{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      padding: 14px;
+    }
+    @media (max-width: 860px){ .sheet-body{ grid-template-columns: 1fr; } }
+    .sheet-img{
+      border:1px solid var(--stroke);
+      border-radius: 18px;
+      overflow:hidden;
+      background: rgba(0,0,0,.10);
+      min-height: 260px;
+    }
+    .sheet-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .sheet-info{
+      border:1px solid var(--stroke);
+      border-radius: 18px;
+      background: rgba(255,255,255,.55);
+      padding: 14px;
+    }
+    [data-theme="dark"] .sheet-info{ background: rgba(255,255,255,.06); }
+    .sheet-info h3{ margin:0; font-size: 18px; letter-spacing:.2px; }
+    .sheet-info .line{ margin:8px 0 10px; color: var(--muted); font-weight:700; text-transform:none; }
+    .sheet-info .desc{ margin:0; color: var(--text); opacity:.92; line-height:1.55; font-weight:650; text-transform:none; }
+    .sheet-buy{
+      margin-top: 12px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+    }
+    .sheet-buy .big{
+      font-size: 18px;
+      font-weight:950;
+    }
+    .sheet-buy a{
+      text-decoration:none;
+      background: linear-gradient(180deg, var(--brand), var(--brand2));
+      color:#0b1a11;
+      font-weight:950;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border:1px solid rgba(0,0,0,.08);
+    }
+
+    /* Reveal animation */
+    .reveal{ opacity:0; transform: translateY(10px); transition: .55s ease; }
+    .reveal.show{ opacity:1; transform: translateY(0); }
+
+    footer{
+      margin-top: 18px;
+      color: var(--muted);
+      font-weight:700;
+      font-size: 12px;
+      text-align:center;
+      text-transform:none;
+    }
+  </style>
 </head>
 
-<body>
-  <!-- TOP BAR -->
-  <header class="topbar">
-    <div class="brand">
-      <img class="avatar" src="Picsart_26-01-16_21-26-39-597.jpg" alt="Mii Store" />
-      <div class="brandText">
-        <div class="brandName">Mii Store</div>
-        <div class="brandSub">Premium Digital Services</div>
+<body data-theme="light">
+  <div class="bubbles" id="bubbles"></div>
+  <div class="veil"></div>
+
+  <div class="wrap">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <img class="logo" src="Picsart_26-01-16_21-26-39-597.jpg" alt="Mii Store Logo">
+          <div>
+            <b>Mii Store</b>
+            <small>Premium Digital Services</small>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <a href="#products">Products</a>
+          <a href="#how">How To Order</a>
+          <a href="#social">Social</a>
+        </nav>
+
+        <div class="actions">
+          <button class="toggle" id="themeToggle" type="button">
+            <span id="themeDot" style="width:10px;height:10px;border-radius:999px;background:#111;display:inline-block"></span>
+            <span id="themeText">Light</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="marquee">
+        <div class="marquee-track" id="marqueeTrack">
+          <span>Fast Supply • International • Trusted Seller • Clear Guidance •</span>
+          <span>Fast Supply • International • Trusted Seller • Clear Guidance •</span>
+          <span>Fast Supply • International • Trusted Seller • Clear Guidance •</span>
+          <span>Fast Supply • International • Trusted Seller • Clear Guidance •</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero reveal">
+      <div class="hero-grid">
+        <div>
+          <div class="pill">Fast Supply • International • Trusted Seller</div>
+          <h1 style="margin-top:10px;">Premium Digital Services</h1>
+          <p>
+            Trusted Provider Of Premium Digital Subscriptions (Sharing / Private Depending On Product).
+            Simple Order Via WhatsApp, Fast Processing, And Clear Guidance After Purchase.
+          </p>
+
+          <div class="btn-row">
+            <a class="btn primary" id="orderAllBtn" href="#" target="_blank" rel="noreferrer">Order Via WhatsApp</a>
+            <a class="btn" href="#products">View Products</a>
+            <a class="btn" href="#how">How To Order</a>
+          </div>
+
+          <div class="sold">
+            <div>
+              Total Products Sold
+              <small>Static Number (No Auto Count)</small>
+            </div>
+            <div class="num" id="soldNum">1098</div>
+          </div>
+
+          <div class="social" id="socialMini">
+            <!-- icons diisi via JS -->
+          </div>
+        </div>
+
+        <div class="banner">
+          <img src="banner.jpg" alt="Violet Banner">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <div class="section-title">
+        <div>
+          <h2>Products</h2>
+          <p>Click A Product To See Detail Like Lynk, Then Tap Order</p>
+        </div>
+        <p id="hintText">Prices Visible On Cards</p>
+      </div>
+
+      <div class="grid" id="productGrid"></div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="section-title">
+        <div>
+          <h2>How To Order</h2>
+          <p>Simple Steps</p>
+        </div>
+      </div>
+
+      <div class="card reveal" style="cursor:default;">
+        <div class="body">
+          <p class="sub" style="margin:0; font-size:13px;">
+            1) Choose Product → 2) Tap Order → 3) Send Details On WhatsApp → 4) Process & Guide
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="social">
+      <div class="section-title">
+        <div>
+          <h2>Social</h2>
+          <p>Tap Icons To Open</p>
+        </div>
+      </div>
+
+      <div class="card reveal" style="cursor:default;">
+        <div class="body">
+          <div class="social" id="socialFull"></div>
+          <p class="sub" style="margin-top:12px;">
+            Need Help? Tap WhatsApp For Fast Response.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Mii Store — Established Since 2024
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="sheet">
+      <div class="sheet-head">
+        <b id="mTitle">Product Detail</b>
+        <button class="close" id="mClose" type="button">Close</button>
+      </div>
+      <div class="sheet-body">
+        <div class="sheet-img">
+          <img id="mImg" src="" alt="Product Image">
+        </div>
+        <div class="sheet-info">
+          <h3 id="mName">Product Name</h3>
+          <div class="line" id="mLine">Duration • Type</div>
+          <p class="desc" id="mDesc"></p>
+          <div class="sheet-buy">
+            <div class="big" id="mPrice">IDR 0</div>
+            <a id="mOrder" href="#" target="_blank" rel="noreferrer">Order Via WhatsApp</a>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+  <!-- =========================
+INDEX.HTML (PART 2/2)
+Paste lanjutan ini tepat di bawah PART 1
+========================= -->
+  <script>
+    // ===== CONFIG =====
+    const STORE = {
+      waNumber: "6282191223912",
+      waMessage: "Hi Mii Store, I Want To Order:",
+      instagram: "https://www.instagram.com/asami.am0/",
+      youtube: "https://youtube.com/@mii._002",
+      tiktok: "https://tiktok.com/@mii._002"
+    };
 
-    <nav class="nav">
-      <a href="#products">Products</a>
-      <a href="#how">How To Order</a>
-      <a href="#social">Social</a>
-    </nav>
-  </header>
+    // Produk (kamu bisa edit harga & deskripsi di sini)
+    const PRODUCTS = [
+      {
+        id:"canva",
+        name:"Canva Pro",
+        sub:"1 Month — Sharing / Private",
+        price:"Ask Price",
+        img:"Canva.jpg",
+        desc:"Canva Pro With Premium Features. Sharing Or Private Depending On Stock. Fast Setup And Clear Guide."
+      },
+      {
+        id:"capcut",
+        name:"Capcut Pro",
+        sub:"1 Month — Private",
+        price:"Ask Price",
+        img:"Capcut.jpg",
+        desc:"Capcut Pro Private. No Ads, Premium Tools. Fast Delivery And Guidance."
+      },
+      {
+        id:"yt",
+        name:"Youtube Premium",
+        sub:"1 Month — Invite",
+        price:"Ask Price",
+        img:"YOUTUBE.jpg",
+        desc:"Youtube Premium Invite. No Ads, Background Play. Easy Order Via WhatsApp."
+      },
+      {
+        id:"chatgptgo",
+        name:"Chatgpt Go",
+        sub:"1 Year — Private",
+        price:"Ask Price",
+        img:"CHATGPT.jpg",
+        desc:"Chatgpt Go Private For 1 Year. Stable And Guided Setup. Stock May Change."
+      },
+      {
+        id:"chatgptplus",
+        name:"Chatgpt Plus",
+        sub:"1 Month — Sharing / Private",
+        price:"Ask Price",
+        img:"CHATGPT.jpg",
+        desc:"Chatgpt Plus 1 Month. Sharing Or Private Depending On Availability. Fast Processing."
+      },
+      {
+        id:"geminipro",
+        name:"Gemini Pro",
+        sub:"1 Month — Sharing / Private",
+        price:"Ask Price",
+        img:"GEMINI.jpg",
+        desc:"Gemini Pro 1 Month. Sharing Or Private Depending On Product Type. Clear Guidance After Purchase."
+      },
+      {
+        id:"geminiyear",
+        name:"Gemini Pro",
+        sub:"1 Year — Sharing / Private",
+        price:"Ask Price",
+        img:"GEMINI.jpg",
+        desc:"Gemini Pro 1 Year Plan. Long Term Option. Please Confirm Stock Before Order."
+      },
+      {
+        id:"spotify",
+        name:"Spotify Premium",
+        sub:"3 Months — Private",
+        price:"Ask Price",
+        img:"Spotify.jpg",
+        desc:"Spotify Premium 3 Months Private. Music Premium Features. Fast Delivery."
+      },
+      {
+        id:"alight",
+        name:"Alight Motion",
+        sub:"1 Year — Private",
+        price:"IDR 20,000",
+        img:"ALIGHT MOTION.jpg",
+        desc:"Alight Motion Premium 1 Year Private. No Watermark, High Quality, No Ads, Support Xml 5Mb, Android / Ios."
+      }
+    ];
 
-  <!-- HERO -->
-  <main class="wrap">
-    <section class="hero">
-      <div class="heroCard">
-        <div class="pill">Fast Supply • International • Trusted Seller</div>
+    // ===== ICONS (SVG) =====
+    const ICONS = {
+      whatsapp: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M20.5 11.8c0 4.8-3.9 8.7-8.7 8.7-1.5 0-2.9-.4-4.2-1l-3.1 1 1-3c-.7-1.3-1.1-2.7-1.1-4.2C4.4 7 8.3 3.1 13.1 3.1c4.8 0 7.4 3.9 7.4 8.7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+        <path d="M10.3 9.2c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.3l.7 1.8c.1.2.1.5 0 .7l-.4.5c-.1.2-.2.4 0 .6.4.7 1.3 1.6 2 2 .2.1.4.1.6 0l.7-.4c.2-.1.5-.1.7 0l1.7.7c.2.1.3.3.3.5v.6c0 .3-.1.6-.4.7-.5.3-1.4.6-2.6.3-1.9-.5-4.3-2.8-5.3-4.7-.6-1.2-.2-2.2.1-2.7Z" fill="currentColor" opacity=".9"/>
+      </svg>`,
+      instagram: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M7.2 3.8h9.6A3.4 3.4 0 0 1 20.2 7.2v9.6a3.4 3.4 0 0 1-3.4 3.4H7.2a3.4 3.4 0 0 1-3.4-3.4V7.2a3.4 3.4 0 0 1 3.4-3.4Z" stroke="currentColor" stroke-width="1.7"/>
+        <path d="M12 15.8a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6Z" stroke="currentColor" stroke-width="1.7"/>
+        <path d="M17.3 6.8h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </svg>`,
+      tiktok: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M14.5 4c.7 2.7 2.7 4.6 5.4 4.9V12c-2-.1-3.7-.8-5.4-2.1V16c0 3-2.5 5.5-5.5 5.5S3.5 19 3.5 16.1c0-3 2.4-5.4 5.4-5.4.4 0 .8 0 1.1.1v3c-.3-.2-.7-.3-1.1-.3-1.3 0-2.4 1.1-2.4 2.5 0 1.4 1.1 2.5 2.5 2.5 1.4 0 2.5-1 2.5-2.8V4h3Z" fill="currentColor" opacity=".9"/>
+      </svg>`,
+      youtube: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M21 12s0-3.3-.4-4.8c-.2-.8-.9-1.5-1.7-1.7C17.4 5 12 5 12 5s-5.4 0-6.9.5c-.8.2-1.5.9-1.7 1.7C3 8.7 3 12 3 12s0 3.3.4 4.8c.2.8.9 1.5 1.7 1.7 1.5.5 6.9.5 6.9.5s5.4 0 6.9-.5c.8-.2 1.5-.9 1.7-1.7.4-1.5.4-4.8.4-4.8Z" fill="currentColor" opacity=".9"/>
+        <path d="M10.3 9.4v5.2l4.6-2.6-4.6-2.6Z" fill="#fff"/>
+      </svg>`
+    };
 
-        <h1>Premium Digital Services</h1>
-        <p class="desc">
-          Trusted Provider Of Premium Digital Subscriptions (Sharing / Private Depending On Product).
-          Simple Order Via WhatsApp, Fast Processing, And Clear Guidance After Purchase.
-        </p>
+    // ===== UTIL =====
+    function waLink(productName){
+      const text = `${STORE.waMessage} ${productName}`;
+      return `https://wa.me/${STORE.waNumber}?text=${encodeURIComponent(text)}`;
+    }
 
-        <div class="ctaRow">
-          <a class="btn primary" target="_blank"
-             href="https://wa.me/6282191223912?text=Hi%20Mii%20Store!%20I%20Want%20To%20Order.">
-            Order Via WhatsApp
-          </a>
-          <a class="btn" href="#products">View Products</a>
-        </div>
+    // ===== RENDER =====
+    const grid = document.getElementById("productGrid");
+    const orderAllBtn = document.getElementById("orderAllBtn");
 
-        <div class="sold">
-          <div class="soldLabel">Total Products Sold</div>
-          <div class="soldValue">1098</div>
-        </div>
-      </div>
+    orderAllBtn.href = waLink("I Need Help / Ask Stock");
 
-      <div class="heroBanner">
-        <img src="banner.jpg" alt="Violet" />
-      </div>
-    </section>
-
-    <!-- PRODUCTS -->
-    <section id="products" class="section">
-      <h2>Products</h2>
-
-      <div class="grid">
-        <!-- Canva -->
-        <article class="card">
-          <img class="cover" src="Canva.jpg" alt="Canva Pro" />
+    function renderProducts(){
+      grid.innerHTML = "";
+      PRODUCTS.forEach((p, i) => {
+        const card = document.createElement("div");
+        card.className = "card reveal";
+        card.innerHTML = `
+          <div class="thumb"><img src="${p.img}" alt="${p.name}"></div>
           <div class="body">
-            <h3>Canva Pro</h3>
-            <p>1 Month — Sharing / Private</p>
-            <a class="btn primary" target="_blank"
-               href="https://wa.me/6282191223912?text=Order%20Canva%20Pro%201%20Month%20(Sharing/Private)">
-              Order
-            </a>
+            <p class="name">${p.name}</p>
+            <p class="sub">${p.sub}</p>
+            <div class="meta">
+              <div class="price">${p.price}</div>
+              <a class="order" href="${waLink(p.name)}" target="_blank" rel="noreferrer" onclick="event.stopPropagation()">Order</a>
+            </div>
           </div>
-        </article>
+        `;
+        card.addEventListener("click", () => openModal(p));
+        grid.appendChild(card);
+      });
+    }
 
-        <!-- CapCut -->
-        <article class="card">
-          <img class="cover" src="Capcut.jpg" alt="CapCut Pro" />
-          <div class="body">
-            <h3>CapCut Pro</h3>
-            <p>1 Month — Private</p>
-            <a class="btn primary" target="_blank"
-               href="https://wa.me/6282191223912?text=Order%20CapCut%20Pro%201%20Month%20(Private)">
-              Order
-            </a>
-          </div>
-        </article>
+    // ===== MODAL =====
+    const modal = document.getElementById("modal");
+    const mClose = document.getElementById("mClose");
+    const mTitle = document.getElementById("mTitle");
+    const mImg = document.getElementById("mImg");
+    const mName = document.getElementById("mName");
+    const mLine = document.getElementById("mLine");
+    const mDesc = document.getElementById("mDesc");
+    const mPrice = document.getElementById("mPrice");
+    const mOrder = document.getElementById("mOrder");
 
-        <!-- YouTube -->
-        <article class="card">
-          <img class="cover" src="YOUTUBE.jpg" alt="YouTube Premium" />
-          <div class="body">
-            <h3>YouTube Premium</h3>
-            <p>1 Month — Invite</p>
-            <a class="btn primary" target="_blank"
-               href="https://wa.me/6282191223912?text=Order%20YouTube%20Premium%201%20Month%20(Invite)">
-              Order
-            </a>
-          </div>
-        </article>
+    function openModal(p){
+      mTitle.textContent = "Product Detail";
+      mImg.src = p.img;
+      mName.textContent = p.name;
+      mLine.textContent = p.sub;
+      mDesc.textContent = p.desc;
+      mPrice.textContent = p.price;
+      mOrder.href = waLink(p.name);
+      modal.classList.add("show");
+    }
+    function closeModal(){ modal.classList.remove("show"); }
+    mClose.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
 
-        <!-- ChatGPT GO -->
-        <article class="card">
-          <img class="cover" src="CHATGPT.jpg" alt="ChatGPT Go" />
-          <div class="body">
-            <h3>ChatGPT Go</h3>
-            <p>1 Year — Private</p>
-            <a class="btn primary" target="_blank"
-               href="https://wa.me/6282191223912?text=Order%20ChatGPT%20Go%201%20Year%20(Private)">
-              Order
-            </a>
-          </div>
-        </article>
+    // ===== SOCIAL RENDER =====
+    function socialBtn(icon, url){
+      const a = document.createElement("a");
+      a.className = "soc";
+      a.href = url;
+      a.target = "_blank";
+      a.rel = "noreferrer";
+      a.innerHTML = icon;
+      return a;
+    }
+    function renderSocial(){
+      const mini = document.getElementById("socialMini");
+      const full = document.getElementById("socialFull");
 
-        <!-- ChatGPT PLUS -->
-        <article class="card">
-          <img class="cover" src="CHATGPT.jpg" alt="ChatGPT Plus" />
-          <div class="body">
-            <h3>ChatGPT Plus</h3>
-            <p>1 Month — Sharing / Private</p>
-            <a class="btn primary" target="_blank"
-               href="https://wa.me/6282191223912?text=Order%20ChatGPT%20Plus%201%20Month%20(Sharing/Private)">
-              Order
-            </a>
-          </div>
-        </article>
+      const wa = socialBtn(ICONS.whatsapp, waLink("I Want To Ask / Order"));
+      const ig = socialBtn(ICONS.instagram, STORE.instagram);
+      const tt = socialBtn(ICONS.tiktok, STORE.tiktok);
+      const yt = socialBtn(ICONS.youtube, STORE.youtube);
 
-        <!-- Gemini 1 Month -->
-        <article class="card">
-          <img class="cover" src="GEMINI.jpg" alt="Gemini Pro" />
-          <div class="body">
-            <h3>Gemini Pro</h3>
-            <p>1 Month — Sharing / Private</p>
-            <a class="btn primary" target="_blank"
-               href="https://wa.me/6282191223912?text=Order%20Gemini%20Pro%201%20Month%20(Sharing/Private)">
-              Order
-            </a>
-          </div>
-        </article>
+      mini.appendChild(wa.cloneNode(true));
+      mini.appendChild(ig.cloneNode(true));
+      mini.appendChild(tt.cloneNode(true));
+      mini.appendChild(yt.cloneNode(true));
 
-        <!-- Gemini 1 Year -->
-        <article class="card">
-          <img class="cover" src="GEMINI.jpg" alt="Gemini Pro 1 Year" />
-          <div class="body">
-            <h3>Gemini Pro</h3>
-            <p>1 Year — Private</p>
-            <a class="btn primary" target="_blank"
-               href="https://wa.me/6282191223912?text=Order%20Gemini%20Pro%201%20Year%20(Private)">
-              Order
-            </a>
-          </div>
-        </article>
+      full.appendChild(wa);
+      full.appendChild(ig);
+      full.appendChild(tt);
+      full.appendChild(yt);
+    }
 
-        <!-- Spotify -->
-        <article class="card">
-          <img class="cover" src="Spotify.jpg" alt="Spotify Premium" />
-          <div class="body">
-            <h3>Spotify Premium</h3>
-            <p>3 Months — Private</p>
-            <a class="btn primary" target="_blank"
-               href="https://wa.me/6282191223912?text=Order%20Spotify%20Premium%203%20Months%20(Private)">
-              Order
-            </a>
-          </div>
-        </article>
+    // ===== THEME =====
+    const themeToggle = document.getElementById("themeToggle");
+    const themeText = document.getElementById("themeText");
+    const themeDot = document.getElementById("themeDot");
 
-        <!-- Alight Motion -->
-        <article class="card">
-          <img class="cover" src="ALIGHT%20MOTION.jpg" alt="Alight Motion" />
-          <div class="body">
-            <h3>Alight Motion</h3>
-            <p>1 Year — Private</p>
-            <a class="btn primary" target="_blank"
-               href="https://wa.me/6282191223912?text=Order%20Alight%20Motion%201%20Year%20(Private)">
-              Order
-            </a>
-          </div>
-        </article>
-      </div>
-    </section>
+    function setTheme(mode){
+      document.body.setAttribute("data-theme", mode);
+      localStorage.setItem("theme", mode);
+      themeText.textContent = mode === "dark" ? "Dark" : "Light";
+      themeDot.style.background = mode === "dark" ? "#ffd36b" : "#111";
+    }
+    themeToggle.addEventListener("click", () => {
+      const cur = document.body.getAttribute("data-theme") || "light";
+      setTheme(cur === "dark" ? "light" : "dark");
+    });
 
-    <!-- HOW TO ORDER -->
-    <section id="how" class="section">
-      <h2>How To Order</h2>
-      <div class="howCard">
-        <ol>
-          <li>Choose Product.</li>
-          <li>Click Order (WhatsApp).</li>
-          <li>Send Details (Email / Invite / Account) As Needed.</li>
-          <li>Fast Processing + Clear Guidance After Purchase.</li>
-        </ol>
-      </div>
-    </section>
+    // ===== REVEAL =====
+    function setupReveal(){
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{
+          if(en.isIntersecting) en.target.classList.add("show");
+        });
+      }, { threshold: 0.10 });
+      document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+    }
 
-    <!-- SOCIAL -->
-    <section id="social" class="section">
-      <h2>Social</h2>
-      <div class="socialRow">
-        <a class="socialBtn" target="_blank" href="https://wa.me/6282191223912">
-          <img src="icon-wa.png" alt="WhatsApp" />
-          <span>WhatsApp</span>
-        </a>
-        <a class="socialBtn" target="_blank" href="https://www.instagram.com/asami.am0/">
-          <img src="icon-ig.png" alt="Instagram" />
-          <span>Instagram</span>
-        </a>
-        <a class="socialBtn" target="_blank" href="https://tiktok.com/@mii._002">
-          <img src="icon-tt.png" alt="TikTok" />
-          <span>TikTok</span>
-        </a>
-        <a class="socialBtn" target="_blank" href="https://youtube.com/@mii._002">
-          <img src="icon-yt.png" alt="YouTube" />
-          <span>YouTube</span>
-        </a>
-      </div>
+    // ===== BUBBLES (random hidup) =====
+    function makeBubbles(){
+      const layer = document.getElementById("bubbles");
+      layer.innerHTML = "";
+      const count = 22;
 
-      <p class="note">
-        Note: Product Type May Vary (Sharing/Private/Invite). Please Confirm Before Ordering.
-      </p>
-    </section>
+      for(let i=0;i<count;i++){
+        const b = document.createElement("div");
+        b.className = "bubble";
 
-    <footer class="footer">
-      © 2026 Mii Store — Established Since 2024
-    </footer>
-  </main>
+        const s = Math.floor(30 + Math.random()*140);       // size
+        const d = (10 + Math.random()*18).toFixed(2) + "s"; // duration
+        const o = (0.12 + Math.random()*0.30).toFixed(2);   // opacity
+        const x = Math.floor(Math.random()*100) + "vw";
+        const drift = (Math.random() < .5 ? "-" : "") + Math.floor(10 + Math.random()*25) + "vw";
+        const k = (0.6 + Math.random()*1.2).toFixed(2);
+
+        b.style.setProperty("--s", s + "px");
+        b.style.setProperty("--d", d);
+        b.style.setProperty("--o", o);
+        b.style.setProperty("--x", x);
+        b.style.setProperty("--drift", drift);
+        b.style.setProperty("--k", k);
+
+        // random delay biar gak barengan
+        b.style.animationDelay = (-Math.random()*20).toFixed(2) + "s";
+
+        layer.appendChild(b);
+      }
+    }
+
+    // ===== INIT =====
+    document.getElementById("year").textContent = new Date().getFullYear();
+    renderProducts();
+    renderSocial();
+    setupReveal();
+    makeBubbles();
+
+    // Theme saved
+    const saved = localStorage.getItem("theme") || "light";
+    setTheme(saved);
+
+    // Refresh bubbles setiap 25 detik biar makin random
+    setInterval(makeBubbles, 25000);
+  </script>
 </body>
-            </html>
+</html>
