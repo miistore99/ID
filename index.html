@@ -1,165 +1,342 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MII Store — Premium Digital Services</title>
-  <meta name="description" content="Trusted provider of premium digital subscriptions. Simple order via WhatsApp, fast processing, and clear guidance after purchase." />
-  <link rel="stylesheet" href="styles.css" />
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mii Store – Premium Digital Services</title>
 
-<body>
-  <!-- Background + Bubbles -->
-  <div class="bg-layer" aria-hidden="true"></div>
-  <div class="bubbles" id="bubbles" aria-hidden="true"></div>
+<style>
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 
-  <!-- Top Bar -->
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <img class="brand-logo" src="Picsart_26-01-16_21-26-39-597.jpg" alt="MII Store Logo" />
-        <div class="brand-text">
-          <div class="brand-name">Mii Store</div>
-          <div class="brand-sub">Premium Digital Services</div>
-        </div>
-      </div>
+/* ===== BACKGROUND ===== */
+body{
+  min-height:100vh;
+  color:#2b1d14;
+  background:
+    url("background.jpg") center/cover no-repeat fixed;
+}
 
-      <nav class="nav">
-        <a href="#products">Products</a>
-        <a href="#how">How To Order</a>
-        <a href="#social">Social</a>
-      </nav>
+/* overlay biar teks kebaca */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(255,245,235,.85);
+  z-index:-1;
+}
 
-      <button id="themeToggle" class="theme-btn" type="button" aria-label="Toggle Theme">
-        <span class="theme-dot"></span>
-        <span class="theme-label">Dark</span>
+/* ===== HEADER ===== */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 20px;
+  backdrop-filter:blur(10px);
+  background:rgba(255,255,255,.35);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  font-size:18px;
+}
+
+.logo img{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+}
+
+nav{
+  display:flex;
+  gap:14px;
+}
+
+nav a{
+  text-decoration:none;
+  color:#2b1d14;
+  font-weight:600;
+  font-size:14px;
+}
+
+/* ===== HERO ===== */
+.hero{
+  padding:24px 20px;
+}
+
+.hero-box{
+  background:rgba(255,255,255,.55);
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+
+.hero-tag{
+  display:inline-block;
+  background:#e8d2b8;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+  margin-bottom:12px;
+}
+
+.hero h1{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:14px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:10px 14px;
+  border-radius:12px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  font-size:14px;
+}
+
+.btn-wa{background:#6fbf73;color:#fff}
+.btn-view{background:#ddd;color:#333}
+
+/* ===== TOTAL SOLD ===== */
+.total-sold{
+  margin-top:14px;
+  background:#fff;
+  padding:12px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:700;
+}
+
+/* ===== PRODUCTS ===== */
+.products{
+  padding:20px;
+}
+
+.products h2{
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:16px;
+}
+
+.card{
+  background:rgba(255,255,255,.7);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+}
+
+.card img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+}
+
+.card-body{
+  padding:12px;
+}
+
+.card-body h3{
+  font-size:16px;
+  margin-bottom:4px;
+}
+
+.card-body p{
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.order-btn{
+  width:100%;
+  padding:8px;
+  background:#6fbf73;
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  font-weight:600;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:20px;
+  font-size:12px;
+  opacity:.8;
+}
+
+/* ===== BUBBLE ANIMATION ===== */
+.bubble{
+  position:fixed;
+  bottom:-60px;
+  background:rgba(185,120,70,.35);
+  border-radius:50%;
+  animation:float 18s linear infinite;
+  z-index:-1;
+}
+
+@keyframes float{
+  from{transform:translateY(0)}
+  to{transform:translateY(-120vh)}
+}
+</style>
+</head><body>
+
+<header>
+  <div class="logo">
+    <img src="Picsart_26-01-16_21-26-39-597.jpg">
+    Mii Store
+  </div>
+  <nav>
+    <a href="#products">Products</a>
+    <a href="#">How To Order</a>
+    <a href="#">Social</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-box">
+    <span class="hero-tag">Fast Supply • International • Trusted Seller</span>
+    <h1>Premium Digital Services</h1>
+    <p>
+      Trusted Provider Of Premium Digital Subscriptions
+      (Sharing / Private Depending On Product).
+      Simple Order Via WhatsApp, Fast Processing,
+      And Clear Guidance After Purchase.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn btn-wa"
+        onclick="window.open('https://wa.me/6282191223912','_blank')">
+        Order Via WhatsApp
+      </button>
+      <button class="btn btn-view"
+        onclick="document.getElementById('products').scrollIntoView()">
+        View Products
       </button>
     </div>
-  </header>
 
-  <main class="container">
-    <!-- HERO -->
-    <section class="hero card reveal">
-      <div class="hero-left">
-        <div class="pill">Fast Supply • International • Trusted Seller</div>
+    <div class="total-sold">
+      <span>Total Products Sold</span>
+      <span>1098</span>
+    </div>
+  </div>
+</section>
 
-        <h1 class="hero-title">Premium Digital Services</h1>
+<section class="products" id="products">
+  <h2>Products</h2>
 
-        <p class="hero-desc">
-          Trusted Provider Of Premium Digital Subscriptions (Sharing/Private Depending On Product).
-          Simple Order Via WhatsApp, Fast Processing, And Clear Guidance After Purchase.
-        </p>
+  <div class="product-grid">
 
-        <div class="hero-actions">
-          <a class="btn primary" id="btnWhatsAppTop" href="#" target="_blank" rel="noopener">
-            <img class="btn-ic" src="icon-whatsapp.png" alt="" />
-            Order Via WhatsApp
-          </a>
-
-          <a class="btn" href="#products">
-            View Products
-          </a>
-
-          <a class="btn ghost" href="#how">
-            How To Order
-          </a>
-        </div>
-
-        <div class="chips">
-          <div class="chip">Fast Response</div>
-          <div class="chip">Clear Guidance</div>
-          <div class="chip">International Friendly</div>
-          <div class="chip">Stock May Change</div>
-        </div>
-
-        <div class="stats card-mini">
-          <div class="stats-left">
-            <div class="stats-label">Total Sold</div>
-            <div class="stats-value" id="soldCount">1098</div>
-          </div>
-          <div class="stats-right">
-            <div class="stats-note">Updated Manually</div>
-          </div>
-        </div>
+    <div class="card">
+      <img src="Canva.jpg">
+      <div class="card-body">
+        <h3>Canva Pro</h3>
+        <p>1 Month — Sharing / Private</p>
+        <button class="order-btn">Order</button>
       </div>
+    </div>
 
-      <div class="hero-right">
-        <img class="hero-img" src="banner.jpg" alt="Hero Banner" />
+    <div class="card">
+      <img src="Capcut.jpg">
+      <div class="card-body">
+        <h3>CapCut Pro</h3>
+        <p>1 Month — Private</p>
+        <button class="order-btn">Order</button>
       </div>
-    </section>
+    </div>
 
-    <!-- PRODUCTS -->
-    <section id="products" class="section">
-      <div class="section-head">
-        <h2 class="section-title">Products</h2>
-        <p class="section-sub">Choose Your Product — Click Order — Then Send Details On WhatsApp.</p>
+    <div class="card">
+      <img src="YOUTUBE.jpg">
+      <div class="card-body">
+        <h3>YouTube Premium</h3>
+        <p>1 Month — Invite</p>
+        <button class="order-btn">Order</button>
       </div>
+    </div>
 
-      <div id="productGrid" class="grid"></div>
-    </section>
-
-    <!-- HOW TO ORDER -->
-    <section id="how" class="section card reveal">
-      <h2 class="section-title">How To Order</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-no">01</div>
-          <div class="step-body">
-            <div class="step-title">Choose Product</div>
-            <div class="step-desc">Pick The Product And Duration, Then Tap Order.</div>
-          </div>
-        </div>
-
-        <div class="step">
-          <div class="step-no">02</div>
-          <div class="step-body">
-            <div class="step-title">Send Details</div>
-            <div class="step-desc">Send Required Info (Email/Invite/Account) Based On Product Type.</div>
-          </div>
-        </div>
-
-        <div class="step">
-          <div class="step-no">03</div>
-          <div class="step-body">
-            <div class="step-title">Process & Guide</div>
-            <div class="step-desc">Fast Processing And Clear Guidance After Purchase.</div>
-          </div>
-        </div>
+    <div class="card">
+      <img src="CHATGPT.jpg">
+      <div class="card-body">
+        <h3>ChatGPT Plus</h3>
+        <p>1 Month — Sharing / Private</p>
+        <button class="order-btn">Order</button>
       </div>
-    </section>
+    </div>
 
-    <!-- SOCIAL -->
-    <section id="social" class="section card reveal">
-      <h2 class="section-title">Social</h2>
-      <div class="social-row">
-        <a class="social" id="waLink" href="#" target="_blank" rel="noopener">
-          <img src="icon-whatsapp.png" alt="WhatsApp" />
-          <span>WhatsApp</span>
-        </a>
-        <a class="social" id="igLink" href="#" target="_blank" rel="noopener">
-          <img src="icon-instagram.png" alt="Instagram" />
-          <span>Instagram</span>
-        </a>
-        <a class="social" id="ttLink" href="#" target="_blank" rel="noopener">
-          <img src="icon-tiktok.png" alt="TikTok" />
-          <span>TikTok</span>
-        </a>
-        <a class="social" id="ytLink" href="#" target="_blank" rel="noopener">
-          <img src="icon-youtube.png" alt="YouTube" />
-          <span>YouTube</span>
-        </a>
+    <div class="card">
+      <img src="GEMINI.jpg">
+      <div class="card-body">
+        <h3>Gemini Pro</h3>
+        <p>1 Year — Private</p>
+        <button class="order-btn">Order</button>
       </div>
-    </section>
+    </div>
 
-    <footer class="footer">
-      <div class="footer-line"></div>
-      <div class="footer-text">
-        © <span id="year"></span> Mii Store — Established Since 2024
+    <div class="card">
+      <img src="Spotify.jpg">
+      <div class="card-body">
+        <h3>Spotify Premium</h3>
+        <p>3 Months — Private</p>
+        <button class="order-btn">Order</button>
       </div>
-    </footer>
-  </main>
+    </div>
 
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+    <div class="card">
+      <img src="ALIGHT MOTION.jpg">
+      <div class="card-body">
+        <h3>Alight Motion</h3>
+        <p>1 Year — Private</p>
+        <button class="order-btn">Order</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+© 2026 Mii Store — Established Since 2024
+</footer>
+
+<!-- BUBBLES -->
+<script>
+for(let i=0;i<14;i++){
+  let b=document.createElement("div");
+  b.className="bubble";
+  let s=Math.random()*80+20;
+  b.style.width=s+"px";
+  b.style.height=s+"px";
+  b.style.left=Math.random()*100+"%";
+  b.style.animationDuration=12+Math.random()*20+"s";
+  document.body.appendChild(b);
+}
+</script>
+
 </body>
-  </html>
+</html>
