@@ -1,244 +1,228 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mii Store – Premium Digital Services</title>
-
-<style>
-*{box-sizing:border-box;font-family:"Poppins",system-ui,sans-serif}
-body{
-  margin:0;
-  background:url("background.jpg") center/cover fixed;
-  color:#2b2b2b;
-}
-
-/* HEADER */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 18px;
-  background:rgba(255,255,255,.6);
-  backdrop-filter:blur(10px);
-}
-header b{font-size:18px}
-nav a{
-  margin-left:14px;
-  text-decoration:none;
-  color:#333;
-  font-weight:500;
-}
-
-/* HERO */
-.hero{
-  max-width:1100px;
-  margin:30px auto;
-  padding:24px;
-  background:rgba(255,255,255,.65);
-  border-radius:22px;
-  box-shadow:0 20px 60px rgba(0,0,0,.15);
-  position:relative;
-  overflow:hidden;
-}
-.hero h1{margin:10px 0;font-size:32px}
-.hero p{line-height:1.6}
-.hero img{
-  width:100%;
-  margin-top:18px;
-  border-radius:18px;
-}
-
-/* BUTTON */
-.btn{
-  display:inline-block;
-  padding:12px 18px;
-  border-radius:14px;
-  text-decoration:none;
-  font-weight:600;
-  margin:6px 6px 0 0;
-}
-.btn.wa{background:#6bcf8e;color:#fff}
-.btn.gray{background:#e5e5e5;color:#333}
-
-/* SOLD */
-.sold{
-  margin-top:16px;
-  padding:14px;
-  background:rgba(255,255,255,.8);
-  border-radius:14px;
-  font-weight:700;
-  display:flex;
-  justify-content:space-between;
-}
-
-/* SOCIAL */
-.social{
-  display:flex;
-  gap:14px;
-  margin-top:16px;
-}
-.social a{
-  width:46px;height:46px;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(255,255,255,.7);
-}
-.social img{width:22px}
-
-/* PRODUCTS */
-.products{
-  max-width:1100px;
-  margin:40px auto;
-  padding:0 16px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:18px;
-}
-.card{
-  background:rgba(255,255,255,.75);
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 15px 40px rgba(0,0,0,.12);
-}
-.card img{
-  width:100%;
-  height:170px;
-  object-fit:cover;
-}
-.card .body{padding:14px}
-.card h3{margin:0}
-.card p{font-size:14px}
-.card .btn{width:100%;text-align:center}
-
-/* BUBBLE */
-.bubble{
-  position:fixed;
-  bottom:-100px;
-  background:rgba(210,180,140,.25);
-  border-radius:50%;
-  animation:float 18s infinite linear;
-}
-@keyframes float{
-  from{transform:translateY(0)}
-  to{transform:translateY(-120vh)}
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mii Store | Premium Digital Services</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="brand">
+      <img class="avatar" src="Picsart_26-01-16_21-26-39-597.jpg" alt="Mii Store" />
+      <div class="brandText">
+        <div class="brandName">Mii Store</div>
+        <div class="brandSub">Premium Digital Services</div>
+      </div>
+    </div>
 
-<header>
-  <b>Mii Store</b>
-  <nav>
-    <a href="#products">Products</a>
-    <a href="#social">Social</a>
-  </nav>
-</header>
+    <nav class="nav">
+      <a href="#products">Products</a>
+      <a href="#how">How To Order</a>
+      <a href="#social">Social</a>
+    </nav>
+  </header>
 
-<section class="hero">
-  <h1>Premium Digital Services</h1>
-  <p>
-    Trusted Provider Of Premium Digital Subscriptions  
-    (Sharing / Private Depending On Product).  
-    Simple Order Via WhatsApp, Fast Processing, And Clear Guidance.
-  </p>
+  <!-- HERO -->
+  <main class="wrap">
+    <section class="hero">
+      <div class="heroCard">
+        <div class="pill">Fast Supply • International • Trusted Seller</div>
 
-  <a class="btn wa" href="https://wa.me/6282191223912" target="_blank">Order Via WhatsApp</a>
-  <a class="btn gray" href="#products">View Products</a>
+        <h1>Premium Digital Services</h1>
+        <p class="desc">
+          Trusted Provider Of Premium Digital Subscriptions (Sharing / Private Depending On Product).
+          Simple Order Via WhatsApp, Fast Processing, And Clear Guidance After Purchase.
+        </p>
 
-  <div class="sold">
-    <span>Total Products Sold</span>
-    <span>1098</span>
-  </div>
+        <div class="ctaRow">
+          <a class="btn primary" target="_blank"
+             href="https://wa.me/6282191223912?text=Hi%20Mii%20Store!%20I%20Want%20To%20Order.">
+            Order Via WhatsApp
+          </a>
+          <a class="btn" href="#products">View Products</a>
+        </div>
 
-  <img src="banner.jpg" alt="Anime Banner">
+        <div class="sold">
+          <div class="soldLabel">Total Products Sold</div>
+          <div class="soldValue">1098</div>
+        </div>
+      </div>
 
-  <div class="social" id="social">
-    <a href="https://wa.me/6282191223912"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"></a>
-    <a href="https://instagram.com/asami.am0"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"></a>
-    <a href="https://tiktok.com/@mii._002"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg"></a>
-    <a href="https://youtube.com/@mii._002"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"></a>
-  </div>
-</section>
+      <div class="heroBanner">
+        <img src="banner.jpg" alt="Violet" />
+      </div>
+    </section>
 
-<section class="products" id="products">
+    <!-- PRODUCTS -->
+    <section id="products" class="section">
+      <h2>Products</h2>
 
-<!-- CANVA -->
-<div class="card">
-<img src="Canva.jpg">
-<div class="body">
-<h3>Canva Pro</h3>
-<p>1 Month – Sharing / Private</p>
-<a class="btn wa" href="https://wa.me/6282191223912?text=Order Canva Pro">Order</a>
-</div>
-</div>
+      <div class="grid">
+        <!-- Canva -->
+        <article class="card">
+          <img class="cover" src="Canva.jpg" alt="Canva Pro" />
+          <div class="body">
+            <h3>Canva Pro</h3>
+            <p>1 Month — Sharing / Private</p>
+            <a class="btn primary" target="_blank"
+               href="https://wa.me/6282191223912?text=Order%20Canva%20Pro%201%20Month%20(Sharing/Private)">
+              Order
+            </a>
+          </div>
+        </article>
 
-<!-- CAPCUT -->
-<div class="card">
-<img src="Capcut.jpg">
-<div class="body">
-<h3>CapCut Pro</h3>
-<p>1 Month – Private</p>
-<a class="btn wa" href="https://wa.me/6282191223912?text=Order CapCut Pro">Order</a>
-</div>
-</div>
+        <!-- CapCut -->
+        <article class="card">
+          <img class="cover" src="Capcut.jpg" alt="CapCut Pro" />
+          <div class="body">
+            <h3>CapCut Pro</h3>
+            <p>1 Month — Private</p>
+            <a class="btn primary" target="_blank"
+               href="https://wa.me/6282191223912?text=Order%20CapCut%20Pro%201%20Month%20(Private)">
+              Order
+            </a>
+          </div>
+        </article>
 
-<!-- CHATGPT GO -->
-<div class="card">
-<img src="CHATGPT.jpg">
-<div class="body">
-<h3>ChatGPT Go</h3>
-<p>1 Year – Private</p>
-<a class="btn wa" href="https://wa.me/6282191223912?text=Order ChatGPT Go 1 Year Private">Order</a>
-</div>
-</div>
+        <!-- YouTube -->
+        <article class="card">
+          <img class="cover" src="YOUTUBE.jpg" alt="YouTube Premium" />
+          <div class="body">
+            <h3>YouTube Premium</h3>
+            <p>1 Month — Invite</p>
+            <a class="btn primary" target="_blank"
+               href="https://wa.me/6282191223912?text=Order%20YouTube%20Premium%201%20Month%20(Invite)">
+              Order
+            </a>
+          </div>
+        </article>
 
-<!-- GEMINI -->
-<div class="card">
-<img src="GEMINI.jpg">
-<div class="body">
-<h3>Gemini Pro</h3>
-<p>1 Month – Private / Sharing</p>
-<a class="btn wa" href="https://wa.me/6282191223912?text=Order Gemini Pro 1 Month">Order</a>
-</div>
-</div>
+        <!-- ChatGPT GO -->
+        <article class="card">
+          <img class="cover" src="CHATGPT.jpg" alt="ChatGPT Go" />
+          <div class="body">
+            <h3>ChatGPT Go</h3>
+            <p>1 Year — Private</p>
+            <a class="btn primary" target="_blank"
+               href="https://wa.me/6282191223912?text=Order%20ChatGPT%20Go%201%20Year%20(Private)">
+              Order
+            </a>
+          </div>
+        </article>
 
-<!-- SPOTIFY -->
-<div class="card">
-<img src="Spotify.jpg">
-<div class="body">
-<h3>Spotify Premium</h3>
-<p>3 Months – Private</p>
-<a class="btn wa" href="https://wa.me/6282191223912?text=Order Spotify Premium">Order</a>
-</div>
-</div>
+        <!-- ChatGPT PLUS -->
+        <article class="card">
+          <img class="cover" src="CHATGPT.jpg" alt="ChatGPT Plus" />
+          <div class="body">
+            <h3>ChatGPT Plus</h3>
+            <p>1 Month — Sharing / Private</p>
+            <a class="btn primary" target="_blank"
+               href="https://wa.me/6282191223912?text=Order%20ChatGPT%20Plus%201%20Month%20(Sharing/Private)">
+              Order
+            </a>
+          </div>
+        </article>
 
-<!-- ALIGHT MOTION -->
-<div class="card">
-<img src="ALIGHT MOTION.jpg">
-<div class="body">
-<h3>Alight Motion</h3>
-<p>1 Year – Private</p>
-<a class="btn wa" href="https://wa.me/6282191223912?text=Order Alight Motion 1 Year">Order</a>
-</div>
-</div>
+        <!-- Gemini 1 Month -->
+        <article class="card">
+          <img class="cover" src="GEMINI.jpg" alt="Gemini Pro" />
+          <div class="body">
+            <h3>Gemini Pro</h3>
+            <p>1 Month — Sharing / Private</p>
+            <a class="btn primary" target="_blank"
+               href="https://wa.me/6282191223912?text=Order%20Gemini%20Pro%201%20Month%20(Sharing/Private)">
+              Order
+            </a>
+          </div>
+        </article>
 
-</section>
+        <!-- Gemini 1 Year -->
+        <article class="card">
+          <img class="cover" src="GEMINI.jpg" alt="Gemini Pro 1 Year" />
+          <div class="body">
+            <h3>Gemini Pro</h3>
+            <p>1 Year — Private</p>
+            <a class="btn primary" target="_blank"
+               href="https://wa.me/6282191223912?text=Order%20Gemini%20Pro%201%20Year%20(Private)">
+              Order
+            </a>
+          </div>
+        </article>
 
-<!-- BUBBLES -->
-<script>
-for(let i=0;i<12;i++){
-  const b=document.createElement("div");
-  b.className="bubble";
-  b.style.width=b.style.height=40+Math.random()*60+"px";
-  b.style.left=Math.random()*100+"%";
-  b.style.animationDuration=12+Math.random()*10+"s";
-  document.body.appendChild(b);
-}
-</script>
+        <!-- Spotify -->
+        <article class="card">
+          <img class="cover" src="Spotify.jpg" alt="Spotify Premium" />
+          <div class="body">
+            <h3>Spotify Premium</h3>
+            <p>3 Months — Private</p>
+            <a class="btn primary" target="_blank"
+               href="https://wa.me/6282191223912?text=Order%20Spotify%20Premium%203%20Months%20(Private)">
+              Order
+            </a>
+          </div>
+        </article>
 
+        <!-- Alight Motion -->
+        <article class="card">
+          <img class="cover" src="ALIGHT%20MOTION.jpg" alt="Alight Motion" />
+          <div class="body">
+            <h3>Alight Motion</h3>
+            <p>1 Year — Private</p>
+            <a class="btn primary" target="_blank"
+               href="https://wa.me/6282191223912?text=Order%20Alight%20Motion%201%20Year%20(Private)">
+              Order
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- HOW TO ORDER -->
+    <section id="how" class="section">
+      <h2>How To Order</h2>
+      <div class="howCard">
+        <ol>
+          <li>Choose Product.</li>
+          <li>Click Order (WhatsApp).</li>
+          <li>Send Details (Email / Invite / Account) As Needed.</li>
+          <li>Fast Processing + Clear Guidance After Purchase.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- SOCIAL -->
+    <section id="social" class="section">
+      <h2>Social</h2>
+      <div class="socialRow">
+        <a class="socialBtn" target="_blank" href="https://wa.me/6282191223912">
+          <img src="icon-wa.png" alt="WhatsApp" />
+          <span>WhatsApp</span>
+        </a>
+        <a class="socialBtn" target="_blank" href="https://www.instagram.com/asami.am0/">
+          <img src="icon-ig.png" alt="Instagram" />
+          <span>Instagram</span>
+        </a>
+        <a class="socialBtn" target="_blank" href="https://tiktok.com/@mii._002">
+          <img src="icon-tt.png" alt="TikTok" />
+          <span>TikTok</span>
+        </a>
+        <a class="socialBtn" target="_blank" href="https://youtube.com/@mii._002">
+          <img src="icon-yt.png" alt="YouTube" />
+          <span>YouTube</span>
+        </a>
+      </div>
+
+      <p class="note">
+        Note: Product Type May Vary (Sharing/Private/Invite). Please Confirm Before Ordering.
+      </p>
+    </section>
+
+    <footer class="footer">
+      © 2026 Mii Store — Established Since 2024
+    </footer>
+  </main>
 </body>
-</html>
+            </html>
