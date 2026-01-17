@@ -1,239 +1,174 @@
-<!doctype html>
-<html lang="id" data-theme="dark">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mii Store — Premium Digital Services</title>
 
-  <link rel="stylesheet" href="/ID/styles.css?v=1" />
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Icon logo asli -->
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    integrity="sha512-Avb2QiuDEEvB4bZJYdftzHkFfF+7qkQFf4S5f6L0h3nqf2bCwQqCkR+f1u1D8pG7GqP7q9xOqV8cQ1sQ6w=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  <!-- ICON -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-  <!-- Background + bubbles -->
-  <div class="bg" aria-hidden="true"></div>
-  <div class="bubbles" aria-hidden="true">
-    <span class="b b1"></span><span class="b b2"></span><span class="b b3"></span>
-    <span class="b b4"></span><span class="b b5"></span><span class="b b6"></span>
-    <span class="b b7"></span><span class="b b8"></span><span class="b b9"></span>
-  </div>
+<body class="dark">
 
-  <!-- Topbar -->
-  <header class="topbar">
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+  <div class="nav-left">
+    <img src="Picsart_26-01-16_21-26-39-597.jpg" class="logo" />
     <div class="brand">
-      <img class="brand__avatar" src="/ID/Picsart_26-01-16_21-26-39-597.jpg" alt="Mii Store" />
-      <div class="brand__text">
-        <div class="brand__name">Mii Store</div>
-        <div class="brand__tag">Premium Digital Services</div>
-      </div>
-    </div>
-
-    <nav class="nav">
-      <a href="#products" class="nav__link">Products</a>
-      <a href="#how" class="nav__link">How To Order</a>
-      <a href="#social" class="nav__link">Social</a>
-    </nav>
-
-    <div class="actions">
-      <button class="icon-btn" id="themeBtn" title="Toggle Theme" aria-label="Toggle Theme">
-        <i class="fa-solid fa-moon"></i>
-        <span class="icon-btn__txt" id="themeTxt">Dark</span>
-      </button>
-
-      <button class="icon-btn cart-btn" id="cartOpen" title="Cart" aria-label="Open Cart">
-        <i class="fa-solid fa-cart-shopping"></i>
-        <span class="badge" id="cartCount">0</span>
-      </button>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero__card">
-        <div class="pill shimmer">Fast Supply • International • Trusted Seller</div>
-
-        <h1 class="title floaty">Premium Digital Services</h1>
-
-        <p class="desc">
-          Trusted Provider Of Premium Digital Subscriptions (Sharing / Private Depending On Product).
-          Simple Order Via WhatsApp, Fast Processing, And Clear Guidance After Purchase.
-        </p>
-
-        <div class="hero__buttons">
-          <a class="btn btn--primary" id="waMain" href="#" target="_blank" rel="noopener">
-            Order Via WhatsApp
-          </a>
-          <a class="btn btn--ghost" href="#products">View Products</a>
-        </div>
-
-        <div class="sold">
-          <div class="sold__left">
-            <div class="sold__title">Total Products Sold</div>
-            <div class="sold__sub">Fixed Counter</div>
-          </div>
-          <div class="sold__num" id="soldNum">1098</div>
-        </div>
-
-        <div class="social-mini">
-          <a class="social-mini__btn" id="waSocial" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
-          <a class="social-mini__btn" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a class="social-mini__btn" href="https://tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
-            <i class="fa-brands fa-tiktok"></i>
-          </a>
-          <a class="social-mini__btn" href="https://youtube.com/@asami.0111?si=aCmKvQvwMrfKZgyd" target="_blank" rel="noopener" aria-label="YouTube">
-            <i class="fa-brands fa-youtube"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="hero__media">
-        <div class="media__frame">
-          <!-- Gambar besar hero (anime) -->
-          <img
-            class="media__img"
-            src="/ID/hero.jpg"
-            alt="Hero"
-            onerror="this.src='/ID/products/gemini1y.jpg';"
-          />
-          <div class="media__glow" aria-hidden="true"></div>
-        </div>
-
-        <div class="tip">
-          <span class="dot"></span>
-          <span class="tip__txt">Tap “Detail” To See Description Like Lynk.id</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRODUCTS -->
-    <section id="products" class="section">
-      <div class="section__head">
-        <h2 class="section__title">Products</h2>
-        <div class="section__sub">Choose Your Product — Click Detail Or Order — Then Send Details On WhatsApp.</div>
-      </div>
-
-      <div class="grid" id="productGrid">
-        <!-- Cards di-generate dari app.js -->
-      </div>
-    </section>
-
-    <!-- HOW TO ORDER -->
-    <section id="how" class="section">
-      <div class="section__head">
-        <h2 class="section__title">How To Order</h2>
-        <div class="section__sub">Step 1 — Choose Product. Step 2 — Click Order. Step 3 — Send Details On WhatsApp.</div>
-      </div>
-
-      <div class="steps">
-        <div class="step">
-          <div class="step__num">1</div>
-          <div class="step__title">Choose The Product You Want</div>
-          <div class="step__txt">Select Product & Read Detail If Needed.</div>
-        </div>
-        <div class="step">
-          <div class="step__num">2</div>
-          <div class="step__title">Click Order Button</div>
-          <div class="step__txt">Order Will Open WhatsApp With Auto Message.</div>
-        </div>
-        <div class="step">
-          <div class="step__num">3</div>
-          <div class="step__title">Send Details On WhatsApp</div>
-          <div class="step__txt">Send Email / Invite / Notes (If Needed). Done.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOCIAL -->
-    <section id="social" class="section">
-      <div class="section__head">
-        <h2 class="section__title">Social</h2>
-        <div class="section__sub">Follow For Updates, Proof, And New Stock.</div>
-      </div>
-
-      <div class="social-row">
-        <a class="social-card" id="socialWa" href="#" target="_blank" rel="noopener">
-          <i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span>
-        </a>
-        <a class="social-card" href="https://instagram.com/" target="_blank" rel="noopener">
-          <i class="fa-brands fa-instagram"></i><span>Instagram</span>
-        </a>
-        <a class="social-card" href="https://tiktok.com/" target="_blank" rel="noopener">
-          <i class="fa-brands fa-tiktok"></i><span>TikTok</span>
-        </a>
-        <a class="social-card" href="https://youtube.com/@asami.0111?si=aCmKvQvwMrfKZgyd" target="_blank" rel="noopener">
-          <i class="fa-brands fa-youtube"></i><span>YouTube</span>
-        </a>
-      </div>
-    </section>
-
-    <footer class="footer">© 2026 Mii Store — Established Since 2024</footer>
-  </main>
-
-  <!-- DETAIL MODAL -->
-  <div class="modal" id="detailModal" aria-hidden="true">
-    <div class="modal__backdrop" data-close="1"></div>
-    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Product Detail">
-      <button class="modal__close" data-close="1" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-
-      <div class="modal__top">
-        <img class="modal__img" id="detailImg" alt="Product" />
-        <div class="modal__info">
-          <div class="modal__name" id="detailName">Product</div>
-          <div class="modal__meta" id="detailMeta">Meta</div>
-          <div class="modal__price" id="detailPrice">Ask Price</div>
-
-          <div class="modal__btns">
-            <button class="btn btn--soft" id="addToCartBtn"><i class="fa-solid fa-cart-plus"></i> Add To Cart</button>
-            <a class="btn btn--primary" id="orderNowBtn" href="#" target="_blank" rel="noopener">
-              <i class="fa-brands fa-whatsapp"></i> Order Now
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal__body">
-        <div class="modal__section-title">Benefits</div>
-        <ul class="list" id="detailBenefits"></ul>
-
-        <div class="modal__section-title">Notes</div>
-        <div class="note" id="detailNote"></div>
-      </div>
+      <h1>Mii Store</h1>
+      <span>Premium Digital Services</span>
     </div>
   </div>
 
-  <!-- CART DRAWER -->
-  <aside class="cart" id="cart" aria-hidden="true">
-    <div class="cart__head">
-      <div class="cart__title"><i class="fa-solid fa-cart-shopping"></i> Cart</div>
-      <button class="cart__close" id="cartClose" aria-label="Close Cart">Close</button>
+  <nav class="nav-center">
+    <a href="#products">Products</a>
+    <a href="#how">How To Order</a>
+    <a href="#social">Social</a>
+  </nav>
+
+  <div class="nav-right">
+    <button id="themeToggle" class="theme-btn">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <div class="cart">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span class="badge">0</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="badge-text">FAST SUPPLY • INTERNATIONAL • TRUSTED SELLER</span>
+
+    <h2 class="hero-title animate-text">
+      Premium Digital Services
+    </h2>
+
+    <p class="hero-desc">
+      Trusted Provider Of Premium Digital Subscriptions (Sharing / Private Depending On Product).
+      Simple Order Via WhatsApp, Fast Processing, And Clear Guidance After Purchase.
+    </p>
+
+    <div class="hero-actions">
+      <a href="https://wa.me/6282191223912" class="btn primary">Order Via WhatsApp</a>
+      <a href="#products" class="btn secondary">View Products</a>
     </div>
 
-    <div class="cart__body" id="cartItems">
-      <div class="cart__empty">Cart Is Empty</div>
+    <div class="sold-box">
+      <span>Total Products Sold</span>
+      <strong>1098</strong>
     </div>
 
-    <div class="cart__foot">
-      <button class="btn btn--ghost" id="cartClear">Clear</button>
-      <a class="btn btn--primary" id="cartCheckout" href="#" target="_blank" rel="noopener">
-        Checkout WhatsApp
-      </a>
+    <div class="social-icons">
+      <a href="https://wa.me/6282191223912"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/asami.am0/"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@mii._002"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="https://youtube.com/@asami.0111"><i class="fa-brands fa-youtube"></i></a>
     </div>
-  </aside>
+  </div>
 
-  <script src="/ID/app.js?v=1"></script>
+  <div class="hero-right">
+    <img src="violet.jpg" class="hero-img" />
+  </div>
+</section>
+
+<!-- ===== END PART 1 ===== --><!-- ================= PRODUCTS ================= -->
+<section id="products" class="products">
+  <h3 class="section-title">Products</h3>
+  <p class="section-sub">Choose Your Product — Click Order — Then Send Details On WhatsApp.</p>
+
+  <div class="product-grid">
+
+    <!-- Canva -->
+    <div class="product-card">
+      <img src="img/canva.png">
+      <h4>Canva Pro</h4>
+      <span>1 Month — Sharing / Private</span>
+      <button class="btn primary">Order</button>
+    </div>
+
+    <!-- CapCut -->
+    <div class="product-card">
+      <img src="img/capcut.png">
+      <h4>CapCut Pro</h4>
+      <span>1 Month — Private</span>
+      <button class="btn primary">Order</button>
+    </div>
+
+    <!-- YouTube -->
+    <div class="product-card">
+      <img src="img/youtube.png">
+      <h4>YouTube Premium</h4>
+      <span>1 Month — Invite</span>
+      <button class="btn primary">Order</button>
+    </div>
+
+    <!-- ChatGPT Go -->
+    <div class="product-card">
+      <img src="img/chatgpt.png">
+      <h4>ChatGPT Go</h4>
+      <span>1 Year — Private</span>
+      <button class="btn primary">Order</button>
+    </div>
+
+    <!-- ChatGPT Plus -->
+    <div class="product-card">
+      <img src="img/chatgpt.png">
+      <h4>ChatGPT Plus</h4>
+      <span>1 Month — Sharing / Private</span>
+      <button class="btn primary">Order</button>
+    </div>
+
+    <!-- Gemini -->
+    <div class="product-card">
+      <img src="img/gemini.png">
+      <h4>Gemini Pro</h4>
+      <span>1 Month / 1 Year — Private / Sharing</span>
+      <button class="btn primary">Order</button>
+    </div>
+
+    <!-- Spotify -->
+    <div class="product-card">
+      <img src="img/spotify.png">
+      <h4>Spotify Premium</h4>
+      <span>3 Months — Private</span>
+      <button class="btn primary">Order</button>
+    </div>
+
+    <!-- Alight Motion -->
+    <div class="product-card">
+      <img src="img/alight.png">
+      <h4>Alight Motion</h4>
+      <span>1 Year — Private</span>
+      <button class="btn primary">Order</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= HOW TO ORDER ================= -->
+<section id="how" class="how">
+  <h3 class="section-title">How To Order</h3>
+  <div class="steps">
+    <div class="step">1. Choose Product</div>
+    <div class="step">2. Click Order</div>
+    <div class="step">3. Send Details On WhatsApp</div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <p>© 2026 Mii Store — Established Since 2024</p>
+</footer>
+
 </body>
-          </html>
+</html>
