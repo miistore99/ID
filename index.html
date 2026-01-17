@@ -1,318 +1,818 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mii Store – Premium Digital Services</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mii Store – Premium Digital Services</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg-light:#f4ede4;
-  --card-light:#ffffffd8;
-  --text-light:#2a1e16;
+  <style>
+    :root{
+      --bg: radial-gradient(1200px 600px at 20% 10%, #3a271a 0%, rgba(58,39,26,0) 60%),
+            radial-gradient(900px 500px at 80% 20%, #1d3a2a 0%, rgba(29,58,42,0) 55%),
+            radial-gradient(900px 600px at 50% 90%, #2b1b12 0%, rgba(43,27,18,0) 60%),
+            #120c08;
 
-  --bg-dark:#1b120c;
-  --card-dark:#2a1d14e6;
-  --text-dark:#f3eee9;
+      --panel: rgba(30, 20, 14, .72);
+      --panel2: rgba(22, 14, 10, .58);
+      --stroke: rgba(255,255,255,.08);
+      --text: rgba(245,240,235,.95);
+      --muted: rgba(245,240,235,.72);
 
-  --accent:#57b46b;
-}
+      --brand: #56b56c;
+      --brand2:#2e8a46;
 
-body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:var(--bg-light);
-  color:var(--text-light);
-  transition:.4s;
-}
+      --chip: rgba(255,255,255,.08);
+      --chipText: rgba(245,240,235,.86);
 
-body.dark{
-  background:radial-gradient(circle at top right,#2b1a10,#120b07);
-  color:var(--text-dark);
-}
+      --shadow: 0 18px 40px rgba(0,0,0,.42);
+      --radius: 20px;
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
+      --fontTitle: "Playfair Display", serif;
+      --fontBody: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
 
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  margin-bottom:30px;
-}
+    body.light{
+      --bg: radial-gradient(1200px 600px at 20% 10%, rgba(165,125,92,.35) 0%, rgba(165,125,92,0) 60%),
+            radial-gradient(900px 500px at 80% 20%, rgba(120,165,135,.28) 0%, rgba(120,165,135,0) 55%),
+            radial-gradient(900px 600px at 50% 90%, rgba(175,140,105,.25) 0%, rgba(175,140,105,0) 60%),
+            #f3ebe1;
 
-.brand{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-.brand img{
-  width:42px;height:42px;border-radius:50%;
-}
-.brand h1{
-  font-family:"Playfair Display";
-  font-size:18px;margin:0;
-}
+      --panel: rgba(255,255,255,.72);
+      --panel2: rgba(255,255,255,.62);
+      --stroke: rgba(20,10,5,.10);
+      --text: rgba(38,24,16,.92);
+      --muted: rgba(38,24,16,.70);
 
-nav button{
-  border:none;
-  padding:8px 14px;
-  border-radius:999px;
-  background:#ffffffaa;
-  cursor:pointer;
-}
-body.dark nav button{background:#00000055;color:#fff}
+      --chip: rgba(20,10,5,.07);
+      --chipText: rgba(38,24,16,.78);
 
-.hero{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:20px;
-  background:var(--card-light);
-  border-radius:20px;
-  padding:24px;
-  position:relative;
-  overflow:hidden;
-}
-body.dark .hero{background:var(--card-dark)}
+      --shadow: 0 18px 40px rgba(20,10,5,.16);
+    }
 
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:-50%;
-  background:
-    radial-gradient(circle,#caa27a33 20%,transparent 60%);
-  animation:float 18s linear infinite;
-}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: var(--fontBody);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x:hidden;
+      transition: background .35s ease, color .35s ease;
+    }
 
-@keyframes float{
-  from{transform:rotate(0)}
-  to{transform:rotate(360deg)}
-}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:18px}
 
-.hero-content{
-  position:relative;
-  z-index:2;
-}
+    /* ======= Floating bubbles (animated) ======= */
+    .bubbles{
+      position:fixed; inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:0;
+    }
+    .bubble{
+      position:absolute;
+      width:220px; height:220px;
+      border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(210,170,120,.26), rgba(210,170,120,0) 60%);
+      filter: blur(0.2px);
+      opacity:.75;
+      animation: drift 18s linear infinite;
+      mix-blend-mode: screen;
+    }
+    body.light .bubble{
+      background: radial-gradient(circle at 30% 30%, rgba(165,125,92,.22), rgba(165,125,92,0) 60%);
+      mix-blend-mode: multiply;
+      opacity:.55;
+    }
+    @keyframes drift{
+      0%{ transform: translate3d(0,0,0) scale(1); }
+      50%{ transform: translate3d(80px,-120px,0) scale(1.08); }
+      100%{ transform: translate3d(160px,-240px,0) scale(1); }
+    }
 
-.hero-content h2{
-  font-family:"Playfair Display";
-  font-size:30px;
-  margin:0 0 10px;
-  animation:fadeUp .8s ease;
-}
+    /* ======= Topbar ======= */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(0,0,0,.22), rgba(0,0,0,0));
+      padding:10px 0 14px;
+    }
+    body.light .topbar{
+      background: linear-gradient(to bottom, rgba(255,255,255,.65), rgba(255,255,255,0));
+    }
 
-.hero-content p{
-  opacity:.85;
-  animation:fadeUp 1.1s ease;
-}
+    .navWrap{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width: 220px;
+    }
+    .brand img{
+      width:44px; height:44px; border-radius:50%;
+      border:1px solid var(--stroke);
+      box-shadow: 0 8px 18px rgba(0,0,0,.25);
+      object-fit:cover;
+      background:#00000022;
+    }
+    .brand .t1{
+      font-family: var(--fontTitle);
+      font-weight:700;
+      line-height:1.05;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .brand .t2{
+      font-size:12px;
+      color: var(--muted);
+    }
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:none}
-}
+    .navPills{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+    }
+    .pill{
+      padding:9px 14px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,.15);
+      font-weight:600;
+      font-size:12px;
+      letter-spacing:.25px;
+      cursor:pointer;
+      transition:.25s;
+    }
+    body.light .pill{ background: rgba(255,255,255,.55); }
+    .pill:hover{ transform: translateY(-2px); box-shadow: 0 10px 18px rgba(0,0,0,.18); }
 
-.actions{
-  display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;
-}
-.actions a{
-  text-decoration:none;
-  padding:10px 16px;
-  border-radius:12px;
-  font-weight:600;
-}
-.btn-main{background:var(--accent);color:#fff}
-.btn-sec{background:#ddd;color:#000}
-body.dark .btn-sec{background:#00000055;color:#fff}
+    .rightTools{
+      display:flex; align-items:center; gap:10px;
+    }
+    .modeBtn{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,.18);
+      cursor:pointer;
+      font-weight:700;
+      font-size:12px;
+      transition:.25s;
+      display:flex; align-items:center; gap:8px;
+    }
+    body.light .modeBtn{ background: rgba(255,255,255,.55); }
+    .modeDot{
+      width:8px;height:8px;border-radius:999px;
+      background: #ffd36b;
+      box-shadow: 0 0 18px rgba(255,211,107,.6);
+    }
+    body.light .modeDot{ background:#6b59ff; box-shadow: 0 0 18px rgba(107,89,255,.35); }
 
-.counter{
-  margin-top:15px;
-  padding:12px 16px;
-  border-radius:14px;
-  background:#ffffffcc;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-body.dark .counter{background:#00000055}
+    /* ======= Sections ======= */
+    .panel{
+      position:relative;
+      z-index:2;
+      border:1px solid var(--stroke);
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
 
-.social{
-  display:flex;gap:10px;margin-top:12px;
-}
-.social img{width:26px;opacity:.8}
+    .hero{
+      margin-top:14px;
+      padding:18px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:16px;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(210,170,120,.12), rgba(0,0,0,0) 55%);
+      animation: glowSpin 16s linear infinite;
+      opacity:.9;
+    }
+    body.light .hero::before{
+      background: radial-gradient(circle at 30% 30%, rgba(165,125,92,.18), rgba(0,0,0,0) 55%);
+      opacity:.75;
+    }
+    @keyframes glowSpin{
+      from{transform:rotate(0)}
+      to{transform:rotate(360deg)}
+    }
 
-.hero-img{
-  position:relative;
-  z-index:2;
-}
-.hero-img img{
-  width:100%;
-  border-radius:18px;
-  box-shadow:0 20px 40px #00000055;
-}
+    .heroLeft{position:relative; z-index:2; padding:10px 10px 4px;}
+    .heroRight{position:relative; z-index:2;}
 
-.products{
-  margin-top:40px;
-}
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: var(--panel2);
+      color: var(--muted);
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.4px;
+      text-transform:uppercase;
+    }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:16px;
-}
+    .title{
+      margin:12px 0 8px;
+      font-family: var(--fontTitle);
+      font-size:34px;
+      line-height:1.06;
+      letter-spacing:.2px;
+      text-shadow: 0 10px 28px rgba(0,0,0,.32);
+      animation: titlePop .85s ease both;
+    }
+    @keyframes titlePop{
+      from{opacity:0; transform: translateY(16px); filter: blur(2px);}
+      to{opacity:1; transform:none; filter:none;}
+    }
 
-.card{
-  background:var(--card-light);
-  border-radius:16px;
-  padding:14px;
-  transition:.3s;
-}
-body.dark .card{background:var(--card-dark)}
-.card:hover{transform:translateY(-6px)}
+    .desc{
+      margin:0 0 14px;
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.6;
+      max-width: 520px;
+      animation: fadeIn .9s ease .18s both;
+    }
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-.card img{
-  width:100%;
-  border-radius:12px;
-}
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 12px;}
+    .btn{
+      border:none;
+      padding:10px 14px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:12px;
+      letter-spacing:.25px;
+      transition:.25s;
+      border:1px solid var(--stroke);
+    }
+    .btnMain{
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      color:#fff;
+      box-shadow: 0 14px 26px rgba(86,181,108,.25);
+    }
+    .btnMain:hover{ transform: translateY(-2px); box-shadow: 0 18px 32px rgba(86,181,108,.30); }
+    .btnGhost{
+      background: rgba(255,255,255,.07);
+      color: var(--text);
+    }
+    body.light .btnGhost{ background: rgba(0,0,0,.05); }
+    .btnGhost:hover{ transform: translateY(-2px); }
 
-.card h3{
-  margin:10px 0 4px;
-  font-size:16px;
-}
+    .soldBox{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid var(--stroke);
+      background: var(--panel2);
+      margin-top:10px;
+    }
+    .soldBox small{display:block; color:var(--muted); font-weight:700;}
+    .soldNum{
+      font-family: var(--fontTitle);
+      font-size:24px;
+      letter-spacing:.6px;
+    }
 
-.card p{font-size:13px;opacity:.8}
+    .socialRow{
+      display:flex; gap:10px; margin-top:10px;
+    }
+    .iconBtn{
+      width:38px; height:38px;
+      display:grid; place-items:center;
+      border-radius:14px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      transition:.25s;
+    }
+    body.light .iconBtn{ background: rgba(0,0,0,.04); }
+    .iconBtn:hover{ transform: translateY(-2px); box-shadow: 0 12px 18px rgba(0,0,0,.18); }
 
-.card button{
-  margin-top:8px;
-  width:100%;
-  padding:10px;
-  border:none;
-  border-radius:12px;
-  background:var(--accent);
-  color:#fff;
-  cursor:pointer;
-}
+    .iconBtn img{width:18px;height:18px; opacity:.9}
 
-footer{
-  margin:40px 0 10px;
-  text-align:center;
-  opacity:.6;
-}
-</style>
+    .heroPic{
+      width:100%;
+      border-radius:18px;
+      border:1px solid var(--stroke);
+      box-shadow: 0 24px 48px rgba(0,0,0,.45);
+      object-fit:cover;
+      aspect-ratio: 16/10;
+    }
+
+    /* ======= Products ======= */
+    .section{
+      margin-top:18px;
+      padding:18px;
+    }
+
+    .secTitle{
+      font-family: var(--fontTitle);
+      font-size:24px;
+      margin:0 0 6px;
+    }
+    .secSub{
+      margin:0 0 16px;
+      color: var(--muted);
+      font-size:12px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+
+    .card{
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,.10);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow: 0 14px 28px rgba(0,0,0,.25);
+      transition:.25s;
+      position:relative;
+      transform: translateY(8px);
+      opacity:0;
+    }
+    body.light .card{ background: rgba(255,255,255,.55); }
+
+    .card.show{
+      transform: none;
+      opacity: 1;
+      transition: .55s ease;
+    }
+
+    .card:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 18px 34px rgba(0,0,0,.32);
+    }
+
+    .thumb{
+      width:100%;
+      height:120px;
+      object-fit:cover;
+      display:block;
+      background:#0000001f;
+    }
+
+    .cardBody{padding:12px 12px 14px;}
+    .pName{font-weight:800; margin:2px 0 4px;}
+    .pMeta{font-size:12px; color: var(--muted); margin:0 0 10px;}
+
+    .chipRow{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;}
+    .chip{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: var(--chip);
+      color: var(--chipText);
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    .btnRow{display:flex; gap:10px;}
+    .orderBtn{
+      flex:1;
+      border:none;
+      padding:10px 12px;
+      border-radius:14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      color:#fff;
+      font-weight:900;
+      cursor:pointer;
+      transition:.25s;
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .orderBtn:hover{ transform: translateY(-2px); box-shadow: 0 16px 26px rgba(86,181,108,.25); }
+    .detailBtn{
+      width:92px;
+      border:none;
+      padding:10px 12px;
+      border-radius:14px;
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      font-weight:900;
+      cursor:pointer;
+      border:1px solid var(--stroke);
+      transition:.25s;
+    }
+    body.light .detailBtn{ background: rgba(0,0,0,.05); }
+    .detailBtn:hover{ transform: translateY(-2px); }
+
+    /* ======= Modal detail ======= */
+    .modalBack{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      z-index:999;
+      padding:18px;
+    }
+    .modalBack.show{display:flex; align-items:center; justify-content:center;}
+    .modal{
+      width:min(520px, 100%);
+      border-radius:18px;
+      border:1px solid var(--stroke);
+      background: var(--panel);
+      box-shadow: 0 30px 70px rgba(0,0,0,.55);
+      overflow:hidden;
+      animation: pop .22s ease;
+    }
+    @keyframes pop{from{transform:scale(.96);opacity:.5}to{transform:scale(1);opacity:1}}
+    .modalHead{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:12px 14px;
+      background: rgba(0,0,0,.18);
+      border-bottom:1px solid var(--stroke);
+    }
+    body.light .modalHead{ background: rgba(255,255,255,.55); }
+    .modalTitle{font-weight:900}
+    .closeBtn{
+      border:none; cursor:pointer;
+      padding:8px 10px;
+      border-radius:12px;
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      font-weight:900;
+      border:1px solid var(--stroke);
+    }
+    .modalBody{padding:14px; color: var(--muted); line-height:1.6; font-size:13px;}
+
+    /* ======= How to order ======= */
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+    .step{
+      padding:12px 12px;
+      border-radius:18px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.05);
+    }
+    body.light .step{ background: rgba(0,0,0,.04); }
+    .step b{display:block; margin-bottom:6px}
+
+    footer{
+      text-align:center;
+      margin:16px 0 6px;
+      color: var(--muted);
+      font-size:12px;
+    }
+
+    /* ======= Responsive ======= */
+    @media (max-width: 900px){
+      .hero{ grid-template-columns:1fr; }
+      .heroPic{ aspect-ratio: 16/9; }
+      .grid{ grid-template-columns: repeat(2, 1fr); }
+      .steps{ grid-template-columns: 1fr; }
+      .brand{min-width:auto}
+    }
+    @media (max-width: 520px){
+      .grid{ grid-template-columns: 1fr; }
+      .title{font-size:30px}
+      .thumb{height:150px}
+    }
+  </style>
 </head>
 
 <body>
-<div class="container">
-
-<header>
-  <div class="brand">
-    <img src="Picsart_26-01-16_21-26-39-597.jpg">
-    <h1>Mii Store<br><small>Premium Digital Services</small></h1>
+  <!-- background bubbles -->
+  <div class="bubbles" aria-hidden="true">
+    <div class="bubble" style="left:-40px; top:60%; animation-duration:22s;"></div>
+    <div class="bubble" style="left:20%; top:20%; width:260px;height:260px; animation-duration:26s;"></div>
+    <div class="bubble" style="left:62%; top:68%; width:300px;height:300px; animation-duration:28s;"></div>
+    <div class="bubble" style="left:78%; top:10%; width:220px;height:220px; animation-duration:24s;"></div>
   </div>
-  <nav>
-    <button onclick="toggleTheme()">🌙</button>
-  </nav>
-</header>
 
-<section class="hero">
-  <div class="hero-content">
-    <h2>Premium Digital Services</h2>
-    <p>Trusted Provider Of Premium Digital Subscriptions. Simple Order Via WhatsApp, Fast Processing.</p>
+  <div class="topbar">
+    <div class="container">
+      <div class="navWrap">
+        <div class="brand">
+          <img src="Picsart_26-01-16_21-26-39-597.jpg" alt="Mii Store">
+          <div>
+            <div class="t1">Mii Store</div>
+            <div class="t2">Premium Digital Services</div>
+          </div>
+        </div>
 
-    <div class="actions">
-      <a class="btn-main" href="https://wa.me/6282191223912">Order Via WhatsApp</a>
-      <a class="btn-sec" href="#products">View Products</a>
-    </div>
+        <div class="navPills">
+          <a class="pill" href="#products">Products</a>
+          <a class="pill" href="#how">How To Order</a>
+          <a class="pill" href="#social">Social</a>
+        </div>
 
-    <div class="counter">
-      <span>Total Products Sold</span>
-      <strong>1098</strong>
-    </div>
-
-    <div class="social">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png">
-      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png">
-      <a href="https://youtube.com/@asami.0111" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png">
-      </a>
+        <div class="rightTools">
+          <button class="modeBtn" onclick="toggleTheme()">
+            <span class="modeDot"></span>
+            <span id="modeText">Light</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="hero-img">
-    <img src="violet.jpg">
+  <div class="container">
+
+    <section class="panel hero" id="top">
+      <div class="heroLeft">
+        <div class="badge">Fast Supply • International • Trusted Seller</div>
+
+        <div class="title">Premium Digital Services</div>
+        <p class="desc">
+          Trusted Provider Of Premium Digital Subscriptions (Sharing / Private Depending On Product).
+          Simple Order Via WhatsApp, Fast Processing, And Clear Guidance After Purchase.
+        </p>
+
+        <div class="ctaRow">
+          <button class="btn btnMain" onclick="openWA('General Order')">Order Via WhatsApp</button>
+          <a class="btn btnGhost" href="#products">View Products</a>
+        </div>
+
+        <div class="soldBox">
+          <div>
+            <b>Total Products Sold</b>
+            <small>Fixed Counter</small>
+          </div>
+          <div class="soldNum">1098</div>
+        </div>
+
+        <div class="socialRow">
+          <a class="iconBtn" href="https://wa.me/6282191223912" target="_blank" aria-label="WhatsApp">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WA">
+          </a>
+          <a class="iconBtn" href="https://instagram.com/asami.am0" target="_blank" aria-label="Instagram">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="IG">
+          </a>
+          <a class="iconBtn" href="https://tiktok.com/@mii._002" target="_blank" aria-label="TikTok">
+            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TT">
+          </a>
+          <a class="iconBtn" href="https://youtube.com/@asami.0111?si=aCmKvQvwMrfKZgyd" target="_blank" aria-label="YouTube">
+            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YT">
+          </a>
+        </div>
+      </div>
+
+      <div class="heroRight">
+        <img class="heroPic" src="violet.jpg" alt="Violet">
+      </div>
+    </section>
+
+    <section class="panel section" id="products">
+      <div class="secTitle">Products</div>
+      <div class="secSub">Choose Your Product — Click Detail Or Order — Then Send Details On WhatsApp.</div>
+
+      <div class="grid" id="productGrid"><!-- 1 -->
+        <div class="card" data-name="Canva Pro" data-desc="Canva Pro 1 Month (Sharing / Private). Suitable For Design, Templates, Social Media Content.">
+          <img class="thumb" src="canva.jpg" alt="Canva">
+          <div class="cardBody">
+            <div class="pName">Canva Pro</div>
+            <div class="pMeta">1 Month — Sharing / Private</div>
+            <div class="chipRow">
+              <span class="chip">Sharing</span>
+              <span class="chip">Private</span>
+              <span class="chip">Ask Stock</span>
+            </div>
+            <div class="btnRow">
+              <button class="orderBtn" onclick="openWA('Canva Pro — 1 Month')">Order</button>
+              <button class="detailBtn" onclick="openDetail(this)">Detail</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="card" data-name="CapCut Pro" data-desc="CapCut Pro 1 Month (Private). No Ads, Editing Features Unlocked.">
+          <img class="thumb" src="capcut.jpg" alt="CapCut">
+          <div class="cardBody">
+            <div class="pName">CapCut Pro</div>
+            <div class="pMeta">1 Month — Private</div>
+            <div class="chipRow">
+              <span class="chip">Private</span>
+              <span class="chip">No Ads</span>
+              <span class="chip">Fast</span>
+            </div>
+            <div class="btnRow">
+              <button class="orderBtn" onclick="openWA('CapCut Pro — 1 Month')">Order</button>
+              <button class="detailBtn" onclick="openDetail(this)">Detail</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="card" data-name="YouTube Premium" data-desc="YouTube Premium 1 Month (Invite). No Ads + Background Play.">
+          <img class="thumb" src="youtube.jpg" alt="YouTube">
+          <div class="cardBody">
+            <div class="pName">YouTube Premium</div>
+            <div class="pMeta">1 Month — Invite</div>
+            <div class="chipRow">
+              <span class="chip">Invite</span>
+              <span class="chip">No Ads</span>
+              <span class="chip">Ask Stock</span>
+            </div>
+            <div class="btnRow">
+              <button class="orderBtn" onclick="openWA('YouTube Premium — 1 Month')">Order</button>
+              <button class="detailBtn" onclick="openDetail(this)">Detail</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="card" data-name="ChatGPT Go" data-desc="ChatGPT Go 1 Year (Private). Suitable For AI Chat & Daily Productivity.">
+          <img class="thumb" src="chatgpt.jpg" alt="ChatGPT Go">
+          <div class="cardBody">
+            <div class="pName">ChatGPT Go</div>
+            <div class="pMeta">1 Year — Private</div>
+            <div class="chipRow">
+              <span class="chip">Private</span>
+              <span class="chip">Fast</span>
+              <span class="chip">Guided</span>
+            </div>
+            <div class="btnRow">
+              <button class="orderBtn" onclick="openWA('ChatGPT Go — 1 Year')">Order</button>
+              <button class="detailBtn" onclick="openDetail(this)">Detail</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="card" data-name="ChatGPT Plus" data-desc="ChatGPT Plus 1 Month (Sharing / Private). Faster Response + Priority Access (Depends On Stock).">
+          <img class="thumb" src="chatgpt.jpg" alt="ChatGPT Plus">
+          <div class="cardBody">
+            <div class="pName">ChatGPT Plus</div>
+            <div class="pMeta">1 Month — Sharing / Private</div>
+            <div class="chipRow">
+              <span class="chip">Sharing</span>
+              <span class="chip">Private</span>
+              <span class="chip">Ask Stock</span>
+            </div>
+            <div class="btnRow">
+              <button class="orderBtn" onclick="openWA('ChatGPT Plus — 1 Month')">Order</button>
+              <button class="detailBtn" onclick="openDetail(this)">Detail</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="card" data-name="Gemini Pro" data-desc="Gemini Pro 1 Month / 1 Year. Private / Sharing Depends On Product.">
+          <img class="thumb" src="gemini.jpg" alt="Gemini">
+          <div class="cardBody">
+            <div class="pName">Gemini Pro</div>
+            <div class="pMeta">1 Month / 1 Year — Private / Sharing</div>
+            <div class="chipRow">
+              <span class="chip">Private</span>
+              <span class="chip">Sharing</span>
+              <span class="chip">Ask Stock</span>
+            </div>
+            <div class="btnRow">
+              <button class="orderBtn" onclick="openWA('Gemini Pro — 1 Month / 1 Year')">Order</button>
+              <button class="detailBtn" onclick="openDetail(this)">Detail</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="card" data-name="Spotify Premium" data-desc="Spotify Premium 3 Months (Private). Music Premium, No Ads.">
+          <img class="thumb" src="spotify.jpg" alt="Spotify">
+          <div class="cardBody">
+            <div class="pName">Spotify Premium</div>
+            <div class="pMeta">3 Months — Private</div>
+            <div class="chipRow">
+              <span class="chip">Private</span>
+              <span class="chip">Music</span>
+              <span class="chip">Fast</span>
+            </div>
+            <div class="btnRow">
+              <button class="orderBtn" onclick="openWA('Spotify Premium — 3 Months')">Order</button>
+              <button class="detailBtn" onclick="openDetail(this)">Detail</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="card" data-name="Alight Motion" data-desc="Alight Motion Premium 1 Year (Private). No Watermark, High Quality, Support XML Presets.">
+          <img class="thumb" src="alight.jpg" alt="Alight Motion">
+          <div class="cardBody">
+            <div class="pName">Alight Motion</div>
+            <div class="pMeta">1 Year — Private</div>
+            <div class="chipRow">
+              <span class="chip">Private</span>
+              <span class="chip">Editor</span>
+              <span class="chip">Long Term</span>
+            </div>
+            <div class="btnRow">
+              <button class="orderBtn" onclick="openWA('Alight Motion — 1 Year')">Order</button>
+              <button class="detailBtn" onclick="openDetail(this)">Detail</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="panel section" id="how">
+      <div class="secTitle">How To Order</div>
+      <div class="secSub">Step 1 — Choose Product. Step 2 — Click Order. Step 3 — Send Details On WhatsApp.</div>
+
+      <div class="steps">
+        <div class="step"><b>1) Choose The Product You Want</b>Scroll Products Section And Select The Product.</div>
+        <div class="step"><b>2) Click Order Button</b>It Will Open WhatsApp With The Product Name Included.</div>
+        <div class="step"><b>3) Send Details On WhatsApp</b>Send Email / Invite Info If Needed. We Process Fast.</div>
+      </div>
+    </section>
+
+    <section class="panel section" id="social">
+      <div class="secTitle">Social</div>
+      <div class="secSub">Follow For Updates, Proof, And New Stock.</div>
+
+      <div class="socialRow">
+        <a class="iconBtn" href="https://wa.me/6282191223912" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WA"></a>
+        <a class="iconBtn" href="https://instagram.com/asami.am0" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="IG"></a>
+        <a class="iconBtn" href="https://tiktok.com/@mii._002" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TT"></a>
+        <a class="iconBtn" href="https://youtube.com/@asami.0111?si=aCmKvQvwMrfKZgyd" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YT"></a>
+      </div>
+    </section>
+
+    <footer>© 2026 Mii Store — Established Since 2024</footer>
   </div>
-</section><section id="products" class="products">
-  <h2>Products</h2>
 
-  <div class="grid">
-    <div class="card">
-      <img src="canva.jpg">
-      <h3>Canva Pro</h3>
-      <p>1 Month — Sharing / Private</p>
-      <button>Order</button>
-    </div>
-
-    <div class="card">
-      <img src="capcut.jpg">
-      <h3>CapCut Pro</h3>
-      <p>1 Month — Private</p>
-      <button>Order</button>
-    </div>
-
-    <div class="card">
-      <img src="chatgpt.jpg">
-      <h3>ChatGPT Go</h3>
-      <p>1 Year — Private</p>
-      <button>Order</button>
-    </div>
-
-    <div class="card">
-      <img src="chatgpt.jpg">
-      <h3>ChatGPT Plus</h3>
-      <p>1 Month — Sharing / Private</p>
-      <button>Order</button>
-    </div>
-
-    <div class="card">
-      <img src="gemini.jpg">
-      <h3>Gemini Pro</h3>
-      <p>1 Month / 1 Year</p>
-      <button>Order</button>
-    </div>
-
-    <div class="card">
-      <img src="spotify.jpg">
-      <h3>Spotify Premium</h3>
-      <p>3 Months — Private</p>
-      <button>Order</button>
-    </div>
-
-    <div class="card">
-      <img src="alight.jpg">
-      <h3>Alight Motion</h3>
-      <p>1 Year — Private</p>
-      <button>Order</button>
+  <!-- Modal -->
+  <div class="modalBack" id="modalBack" onclick="closeDetail(event)">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modalHead">
+        <div class="modalTitle" id="mTitle">Detail</div>
+        <button class="closeBtn" onclick="closeDetail()">Close</button>
+      </div>
+      <div class="modalBody" id="mBody">...</div>
     </div>
   </div>
-</section>
 
-<footer>
-  © 2026 Mii Store — Established Since 2024
-</footer>
+  <script>
+    // Theme
+    const modeText = document.getElementById('modeText');
+    function applyMode(){
+      const isLight = document.body.classList.contains('light');
+      modeText.textContent = isLight ? 'Dark' : 'Light';
+    }
+    function toggleTheme(){
+      document.body.classList.toggle('light');
+      localStorage.setItem('miimode', document.body.classList.contains('light') ? 'light' : 'dark');
+      applyMode();
+    }
+    (function initMode(){
+      const saved = localStorage.getItem('miimode');
+      if(saved === 'light') document.body.classList.add('light');
+      applyMode();
+    })();
 
-</div>
+    // WhatsApp
+    function openWA(product){
+      const number = "6282191223912";
+      const msg =
+`Halo Mii Store, Saya Mau Order:
+• Produk: ${product}
 
-<script>
-function toggleTheme(){
-  document.body.classList.toggle("dark");
-}
-</script>
+Mohon Info Harga & Stock.
+Terima Kasih.`;
+      const url = "https://wa.me/" + number + "?text=" + encodeURIComponent(msg);
+      window.open(url, "_blank");
+    }
 
+    // Detail modal
+    function openDetail(btn){
+      const card = btn.closest('.card');
+      const title = card.getAttribute('data-name') || 'Detail';
+      const desc  = card.getAttribute('data-desc') || 'No Description.';
+      document.getElementById('mTitle').textContent = title;
+      document.getElementById('mBody').textContent  = desc;
+      document.getElementById('modalBack').classList.add('show');
+    }
+    function closeDetail(e){
+      if(e && e.target && e.target.id !== 'modalBack') return;
+      document.getElementById('modalBack').classList.remove('show');
+    }
+
+    // Scroll reveal cards
+    const cards = document.querySelectorAll('.card');
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting){
+          en.target.classList.add('show');
+          obs.unobserve(en.target);
+        }
+      });
+    }, {threshold:0.12});
+    cards.forEach(c=>obs.observe(c));
+  </script>
 </body>
-</html>
+                </html>
