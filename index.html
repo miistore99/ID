@@ -1,899 +1,217 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mii Store — Premium Digital Services</title>
 
-  <!-- Elegant Fonts -->
+  <!-- Font elegan -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --bg1:#f4efe6;
-      --bg2:#efe6d9;
-      --card:#ffffffcc;
-      --card2:#ffffffb8;
-      --stroke: rgba(0,0,0,.10);
-      --text:#2b221c;
-      --muted:#6a5b50;
-      --accent:#2f7a4d;
-      --accent2:#5e3aa6;
-      --btn:#2f7a4d;
-      --btnText:#ffffff;
-      --chip:#ffffffc8;
-      --shadow: 0 18px 60px rgba(30,18,12,.18);
-      --shadow2: 0 10px 26px rgba(30,18,12,.14);
-      --radius: 22px;
-    }
-    html,body{height:100%;}
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      overflow-x:hidden;
-      background: linear-gradient(180deg,var(--bg1),var(--bg2));
-    }
-
-    /* Background Image + gradient overlay */
-    .bg-photo{
-      position:fixed; inset:0;
-      background:
-        radial-gradient(1200px 520px at 12% 10%, rgba(94,58,166,.18), transparent 60%),
-        linear-gradient(180deg, rgba(244,239,230,.92), rgba(239,230,217,.70)),
-        url("./background.jpg");
-      background-size:cover;
-      background-position:center;
-      background-repeat:no-repeat;
-      pointer-events:none;
-      z-index:-5;
-      filter:saturate(1) contrast(1.05);
-    }
-    /* soften everything for readability */
-    .bg-dim{
-      position:fixed; inset:0;
-      background: radial-gradient(900px 520px at 70% 10%, rgba(0,0,0,.04), transparent 60%);
-      pointer-events:none;
-      z-index:-4;
-    }
-
-    /* Dark theme */
-    body[data-theme="dark"]{
-      --bg1:#170f0c;
-      --bg2:#231611;
-      --card: rgba(20,14,12,.78);
-      --card2: rgba(20,14,12,.62);
-      --stroke: rgba(255,255,255,.10);
-      --text:#f3eee8;
-      --muted:#c9bdb3;
-      --accent:#3bc472;
-      --accent2:#caa46c;
-      --btn:#3bc472;
-      --btnText:#08130c;
-      --chip: rgba(255,255,255,.10);
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --shadow2: 0 10px 26px rgba(0,0,0,.45);
-    }
-    body[data-theme="dark"] .bg-photo{
-      background:
-        radial-gradient(1200px 520px at 12% 10%, rgba(202,164,108,.14), transparent 60%),
-        linear-gradient(180deg, rgba(14,10,8,.86), rgba(30,18,12,.70)),
-        url("./background.jpg");
-      filter:saturate(.9) contrast(1.12) brightness(.85);
-    }
-    body[data-theme="dark"] .bg-dim{
-      background: radial-gradient(900px 520px at 70% 10%, rgba(0,0,0,.28), transparent 60%);
-    }
-
-    /* layout */
-    .wrap{max-width:1100px; margin:0 auto; padding:18px 14px 44px;}
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px;
-      padding:12px 10px;
-      border-radius: 26px;
-      background: var(--card2);
-      border:1px solid var(--stroke);
-      box-shadow: var(--shadow2);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 10px;
-      z-index: 10;
-    }
-    .brand{display:flex; align-items:center; gap:10px; min-width: 180px;}
-    .brand img{
-      width:40px; height:40px; border-radius: 12px;
-      object-fit:cover;
-      border:1px solid var(--stroke);
-      box-shadow: 0 10px 20px rgba(0,0,0,.12);
-    }
-    .brand .name{
-      font-weight:800; letter-spacing:.2px;
-      font-family: "Playfair Display", serif;
-      font-size:18px;
-      text-transform: capitalize;
-      line-height:1.1;
-    }
-    .brand .sub{font-size:12px; color:var(--muted); margin-top:2px; text-transform: capitalize;}
-    .nav{
-      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-      justify-content:center;
-    }
-    .pill{
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--stroke);
-      background: var(--chip);
-      color: var(--text);
-      text-decoration:none;
-      font-weight:700;
-      font-size:12px;
-      letter-spacing:.6px;
-      text-transform: uppercase;
-      transition: transform .15s ease, filter .2s ease;
-    }
-    .pill:active{transform: scale(.98);}
-    .actions{
-      display:flex; align-items:center; gap:10px;
-      min-width: 140px;
-      justify-content:flex-end;
-    }
-    .iconBtn{
-      width:42px; height:42px;
-      border-radius: 999px;
-      border:1px solid var(--stroke);
-      background: var(--chip);
-      display:grid; place-items:center;
-      cursor:pointer;
-      box-shadow: 0 10px 20px rgba(0,0,0,.10);
-      transition: transform .15s ease, filter .2s ease;
-    }
-    .iconBtn:active{transform: scale(.98);}
-    .badge{
-      position:absolute;
-      transform: translate(13px,-13px);
-      background:#3bc472;
-      color:#08130c;
-      font-weight:900;
-      font-size:12px;
-      border-radius:999px;
-      padding:3px 8px;
-      border:1px solid rgba(0,0,0,.15);
-    }
-
-    /* hero */
-    .hero{
-      margin-top:14px;
-      border-radius: var(--radius);
-      background: var(--card);
-      border:1px solid var(--stroke);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      padding: 18px;
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 16px;
-      overflow:hidden;
-      position:relative;
-    }
-    .hero:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(520px 240px at 20% 0%, rgba(94,58,166,.12), transparent 60%),
-        radial-gradient(520px 240px at 80% 20%, rgba(47,122,77,.10), transparent 60%);
-      pointer-events:none;
-    }
-    .hero-left{position:relative; z-index:1;}
-    .kicker{
-      display:inline-flex; gap:10px; align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid var(--stroke);
-      background: var(--chip);
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.6px;
-      text-transform: uppercase;
-    }
-    .title{
-      margin:12px 0 6px;
-      font-family: "Playfair Display", serif;
-      font-size: 40px;
-      line-height:1.02;
-      letter-spacing:.2px;
-      text-transform: capitalize;
-      position:relative;
-      display:inline-block;
-    }
-    /* Text shimmer (subtle, not annoying) */
-    .title .shine{
-      background: linear-gradient(90deg, var(--text), var(--accent2), var(--text));
-      background-size: 220% 100%;
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      animation: shine 3.8s ease-in-out infinite;
-    }
-    @keyframes shine{
-      0%{background-position: 0% 50%}
-      100%{background-position: 220% 50%}
-    }
-    .desc{
-      margin:0;
-      color:var(--muted);
-      line-height:1.55;
-      font-size:14px;
-      text-transform: capitalize;
-      max-width: 46ch;
-    }
-    .hero-cta{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:14px;
-    }
-    .btn{
-      padding:12px 16px;
-      border-radius: 14px;
-      border:1px solid var(--stroke);
-      background: var(--btn);
-      color: var(--btnText);
-      font-weight:900;
-      letter-spacing:.6px;
-      text-transform: uppercase;
-      font-size:12px;
-      text-decoration:none;
-      display:inline-flex; align-items:center; gap:10px;
-      box-shadow: 0 12px 26px rgba(47,122,77,.18);
-    }
-    .btn.secondary{
-      background: var(--chip);
-      color: var(--text);
-      box-shadow:none;
-    }
-    .sold{
-      margin-top:12px;
-      border-radius: 16px;
-      border:1px solid var(--stroke);
-      background: var(--chip);
-      padding: 12px 14px;
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-    }
-    .sold .label{
-      font-weight:900;
-      text-transform: uppercase;
-      letter-spacing:.6px;
-      font-size:12px;
-    }
-    .sold .sub{
-      color: var(--muted);
-      font-size:12px;
-      text-transform: capitalize;
-      margin-top:3px;
-    }
-    .sold .num{
-      font-family:"Playfair Display", serif;
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing:.4px;
-    }
-    .socialRow{
-      margin-top:10px;
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .soc{
-      width:44px; height:44px;
-      border-radius: 14px;
-      border:1px solid var(--stroke);
-      background: var(--chip);
-      display:grid; place-items:center;
-      cursor:pointer;
-      box-shadow: 0 10px 20px rgba(0,0,0,.10);
-      transition: transform .15s ease, filter .2s ease;
-      text-decoration:none;
-    }
-    .soc:active{transform: scale(.98);}
-    .soc svg{width:20px; height:20px; fill: var(--text); opacity:.9;}
-    body[data-theme="dark"] .soc svg{fill: var(--text); opacity:.95;}
-
-    .hero-right{
-      position:relative; z-index:1;
-      border-radius: 18px;
-      border:1px solid var(--stroke);
-      overflow:hidden;
-      background: rgba(0,0,0,.06);
-      min-height: 220px;
-      box-shadow: 0 14px 30px rgba(0,0,0,.14);
-    }
-    .hero-right img{
-      width:100%; height:100%;
-      object-fit: cover;
-      display:block;
-      transform: scale(1.02);
-    }
-    /* subtle vignette */
-    .hero-right:after{
-      content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(900px 260px at 50% 30%, transparent 60%, rgba(0,0,0,.25));
-      pointer-events:none;
-    }
-    /* reveal animation */
-    .reveal{opacity:0; transform: translateY(10px); transition: .7s ease;}
-    .reveal.show{opacity:1; transform: translateY(0);}
-    /* section */
-    .sectionTitle{
-      margin:18px 4px 8px;
-      font-family:"Playfair Display", serif;
-      font-size: 28px;
-      text-transform: capitalize;
-    }
-    .sectionSub{
-      margin:0 4px 14px;
-      color: var(--muted);
-      text-transform: capitalize;
-      font-size: 13px;
-      line-height:1.5;
-    }
-
-    /* products grid */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    .card{
-      border-radius: 20px;
-      border:1px solid var(--stroke);
-      background: var(--card);
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-      backdrop-filter: blur(10px);
-      position:relative;
-      transform: translateY(0);
-      transition: transform .18s ease, filter .2s ease;
-    }
-    .card:active{transform: scale(.99);}
-    .thumb{
-      height: 170px;
-      background: rgba(0,0,0,.04);
-      border-bottom:1px solid var(--stroke);
-    }
-    .thumb img{
-      width:100%; height:100%;
-      object-fit: cover;
-      display:block;
-    }
-    .body{
-      padding: 12px 12px 14px;
-    }
-    .pname{
-      margin:0;
-      font-weight:900;
-      letter-spacing:.2px;
-      text-transform: capitalize;
-      font-size: 15px;
-    }
-    .psub{
-      margin:4px 0 8px;
-      color: var(--muted);
-      font-size: 12px;
-      text-transform: capitalize;
-    }
-    .chips{
-      display:flex; flex-wrap:wrap; gap:8px;
-      margin-bottom: 10px;
-    }
-    .chip{
-      border:1px solid var(--stroke);
-      background: var(--chip);
-      padding:6px 10px;
-      border-radius:999px;
-      font-size: 11px;
-      font-weight:800;
-      letter-spacing:.4px;
-      text-transform: uppercase;
-    }
-    .row{
-      display:flex; gap:10px; align-items:center; justify-content:space-between;
-    }
-    .price{
-      font-weight:900;
-      font-size:12px;
-      letter-spacing:.6px;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .btnSmall{
-      padding:11px 14px;
-      border-radius: 14px;
-      border:1px solid var(--stroke);
-      background: var(--btn);
-      color: var(--btnText);
-      font-weight: 900;
-      letter-spacing:.6px;
-      text-transform: uppercase;
-      font-size: 12px;
-      cursor:pointer;
-    }
-    .btnSmall.secondary{
-      background: var(--chip);
-      color: var(--text);
-    }
-
-    /* modal */
-    .modalBack{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.42);
-      display:none;
-      align-items:flex-end;
-      justify-content:center;
-      padding: 16px;
-      z-index: 50;
-    }
-    .modalBack.show{display:flex;}
-    .modal{
-      width: min(720px, 100%);
-      border-radius: 20px;
-      background: var(--card);
-      border:1px solid var(--stroke);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      backdrop-filter: blur(12px);
-    }
-    .modalTop{
-      padding: 12px 14px;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      border-bottom:1px solid var(--stroke);
-      background: var(--card2);
-    }
-    .modalTop .mtitle{
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing:.6px;
-      font-size:12px;
-    }
-    .closeBtn{
-      border:1px solid var(--stroke);
-      background: var(--chip);
-      border-radius: 12px;
-      padding:10px 12px;
-      cursor:pointer;
-      font-weight:900;
-      letter-spacing:.6px;
-      text-transform: uppercase;
-      font-size:12px;
-      color: var(--text);
-    }
-    .modalBody{
-      padding: 14px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-    .mimg{
-      border-radius: 16px;
-      overflow:hidden;
-      border:1px solid var(--stroke);
-      background: rgba(0,0,0,.04);
-    }
-    .mimg img{width:100%; height:240px; object-fit:cover; display:block;}
-    .mdesc{
-      color: var(--muted);
-      line-height:1.6;
-      font-size: 13px;
-      text-transform: capitalize;
-    }
-    .modalActions{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-
-    /* responsive */
-    @media (max-width: 900px){
-      .hero{grid-template-columns:1fr; }
-      .title{font-size: 34px;}
-      .grid{grid-template-columns: repeat(2, 1fr);}
-      .thumb{height: 160px;}
-    }
-    @media (max-width: 520px){
-      .grid{grid-template-columns: 1fr;}
-      .thumb{height: 190px;}
-      .topbar{gap:10px;}
-      .brand{min-width:auto;}
-      .actions{min-width:auto;}
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body data-theme="light">
-  <div class="bg-photo"></div>
-  <div class="bg-dim"></div>
+<body>
+  <!-- Background image (opsional) -->
+  <div class="bg"></div>
 
-  <div class="wrap">
-    <header class="topbar">
-      <div class="brand">
-        <!-- kecil violet logo -->
-        <img src="./violet.png" alt="Mii Store Logo" onerror="this.src='./deco-1.png'">
-        <div>
-          <div class="name">Mii Store</div>
-          <div class="sub">Premium Digital Services</div>
-        </div>
+  <!-- Header -->
+  <header class="topbar">
+    <div class="brand">
+      <img src="./Picsart_26-01-16_21-26-39-597.jpg" class="brand__avatar" alt="Mii Store Logo">
+      <div class="brand__text">
+        <div class="brand__name">Mii Store</div>
+        <div class="brand__sub">Premium Digital Services</div>
       </div>
+    </div>
 
-      <nav class="nav">
-        <a class="pill" href="#products">Products</a>
-        <a class="pill" href="#how">How To Order</a>
-        <a class="pill" href="#social">Social</a>
-      </nav>
+    <nav class="nav">
+      <a href="#products" class="nav__link">Products</a>
+      <a href="#how" class="nav__link">How To Order</a>
+      <a href="#social" class="nav__link">Social</a>
+    </nav>
 
-      <div class="actions">
-        <button class="iconBtn" id="themeBtn" aria-label="Toggle theme" title="Toggle Theme">
-          🌙
-        </button>
+    <button id="themeBtn" class="themeBtn" type="button" aria-label="Toggle Theme">
+      <span id="themeIcon">🌙</span>
+      <span id="themeText">Dark</span>
+    </button>
+  </header>
 
-        <div style="position:relative">
-          <button class="iconBtn" id="cartBtn" aria-label="Cart" title="Cart">
-            🛒
-          </button>
-          <div class="badge" id="cartCount">0</div>
-        </div>
-      </div>
-    </header>
+  <!-- Hero -->
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero__card">
+        <div class="pill">Fast Supply • International • Trusted Seller</div>
 
-    <section class="hero reveal show">
-      <div class="hero-left">
-        <div class="kicker">Fast Supply • International • Trusted Seller</div>
-
-        <h1 class="title"><span class="shine">Premium Digital Services</span></h1>
+        <h1 class="title">
+          Premium Digital Services
+        </h1>
 
         <p class="desc">
           Trusted Provider Of Premium Digital Subscriptions (Sharing / Private Depending On Product).
           Simple Order Via WhatsApp, Fast Processing, And Clear Guidance After Purchase.
         </p>
 
-        <div class="hero-cta">
-          <a class="btn" id="waMain" href="#" target="_blank" rel="noopener">Order Via WhatsApp</a>
-          <a class="btn secondary" href="#products">View Products</a>
+        <div class="cta">
+          <a class="btn btn--primary" href="https://wa.me/6282191223912" target="_blank" rel="noreferrer">
+            Order Via WhatsApp
+          </a>
+          <a class="btn btn--ghost" href="#products">
+            View Products
+          </a>
         </div>
 
         <div class="sold">
-          <div>
-            <div class="label">Total Products Sold</div>
-            <div class="sub">Fixed Counter</div>
+          <div class="sold__left">
+            <div class="sold__label">Total Products Sold</div>
+            <div class="sold__hint">Fixed Counter</div>
           </div>
-          <div class="num" id="soldCount">1098</div>
+          <div class="sold__num">1098</div>
         </div>
 
-        <div class="socialRow" id="socialRow">
-          <!-- icons injected by JS -->
+        <div class="socialRow" id="social">
+          <!-- YouTube (link yang kamu kasih) -->
+          <a class="iconBtn" href="https://youtube.com/@asami.0111?si=aCmKvQvwMrfKZgyd" target="_blank" rel="noreferrer" aria-label="YouTube">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube">
+          </a>
+
+          <!-- TikTok (isi link kamu sendiri kalau mau) -->
+          <a class="iconBtn" href="https://www.tiktok.com/@mii._002/" target="_blank" rel="noreferrer" aria-label="TikTok">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok">
+          </a>
+
+          <!-- Instagram (isi link kamu sendiri kalau mau) -->
+          <a class="iconBtn" href="https://www.instagram.com/asami.am0/" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
+          </a>
+
+          <!-- WhatsApp -->
+          <a class="iconBtn" href="https://wa.me/6282191223912" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
+          </a>
         </div>
       </div>
 
-      <div class="hero-right">
-        <!-- hero image panjang -->
-        <img src="./banner.jpg" alt="Violet" onerror="this.src='./banner.png'">
+      <div class="hero__image">
+        <!-- gambar besar (banner / violet panjang) -->
+        <img src="./banner.jpg" alt="Banner" class="heroImg">
       </div>
     </section>
 
-    <h2 id="products" class="sectionTitle reveal">Products</h2>
-    <p class="sectionSub reveal">Choose Your Product — Click Detail Or Order — Then Send Details On WhatsApp.</p>
+    <!-- Products -->
+    <section id="products" class="section">
+      <div class="sectionHead">
+        <h2 class="sectionTitle">Products</h2>
+        <p class="sectionSub">Choose Your Product — Click Order — Then Send Details On WhatsApp.</p>
+      </div>
 
-    <div class="grid" id="productGrid"></div>
+      <div class="grid" id="productGrid"></div>
+    </section>
 
-    <h2 id="how" class="sectionTitle reveal">How To Order</h2>
-    <p class="sectionSub reveal">Step 1 — Choose Product. Step 2 — Click Order. Step 3 — Send Details On WhatsApp.</p>
+    <!-- How to order -->
+    <section id="how" class="section">
+      <div class="sectionHead">
+        <h2 class="sectionTitle">How To Order</h2>
+        <p class="sectionSub">Step 1 — Choose Product. Step 2 — Click Order. Step 3 — Send Details On WhatsApp.</p>
+      </div>
 
-    <h2 id="social" class="sectionTitle reveal">Social</h2>
-    <p class="sectionSub reveal">Follow Our Social Media For Updates, Proof, And New Stock.</p>
+      <div class="how">
+        <div class="howCard">
+          <div class="howNum">1</div>
+          <div class="howTxt">Choose The Product You Want</div>
+        </div>
+        <div class="howCard">
+          <div class="howNum">2</div>
+          <div class="howTxt">Click Order Button</div>
+        </div>
+        <div class="howCard">
+          <div class="howNum">3</div>
+          <div class="howTxt">Send Details On WhatsApp</div>
+        </div>
+      </div>
+    </section>
 
-    <footer style="margin-top:18px; padding:18px 4px; color:var(--muted); font-size:12px; text-transform: capitalize;">
+    <footer class="footer">
       © <span id="year"></span> Mii Store — Established Since 2024
     </footer>
-  </div>
-  <!-- Detail Modal -->
-  <div class="modalBack" id="modalBack">
-    <div class="modal">
-      <div class="modalTop">
-        <div class="mtitle" id="modalTitle">Detail</div>
-        <button class="closeBtn" id="modalClose">Close</button>
-      </div>
-      <div class="modalBody">
-        <div class="mimg"><img id="modalImg" alt="Product"></div>
-        <div class="mdesc" id="modalDesc"></div>
-        <div class="modalActions">
-          <button class="btnSmall" id="modalOrder">Order</button>
-          <button class="btnSmall secondary" id="modalAddCart">Add To Cart</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Cart Modal -->
-  <div class="modalBack" id="cartBack">
-    <div class="modal">
-      <div class="modalTop">
-        <div class="mtitle">Cart</div>
-        <button class="closeBtn" id="cartClose">Close</button>
-      </div>
-      <div class="modalBody">
-        <div id="cartList" class="mdesc" style="text-transform:none"></div>
-        <div class="modalActions">
-          <button class="btnSmall secondary" id="cartClear">Clear</button>
-          <a class="btnSmall" id="cartCheckout" href="#" target="_blank" rel="noopener">Checkout WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  </main>
 
   <script>
-    // ====== EDIT DI SINI AJA (WA + LINK SOSMED) ======
-    const STORE = {
-      waNumber: "6282191223912",
-      waMessage: "Hi Mii Store! I Want To Order:",
-      instagram: "https://instagram.com/asami.am0",
-      tiktok: "https://tiktok.com/@mii._002",
-      youtube: "https://youtube.com/@mii._002"
-    };
+    // YEAR
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ====== PRODUCTS (Nama file gambar HARUS sama dengan yang di repo) ======
-    const PRODUCTS = [
-      {
-        id:"canva",
-        name:"Canva Pro",
-        sub:"1 Month — Sharing / Private",
-        tags:["Sharing","Private","Ask Stock"],
-        img:"canva.jpg",
-        price:"Ask Price",
-        desc:"Canva Pro For 1 Month. Sharing Or Private Depending On Stock. Suitable For Design, Templates, And Export Without Limit."
-      },
-      {
-        id:"capcut",
-        name:"CapCut Pro",
-        sub:"1 Month — Private",
-        tags:["Private","No Ads","Fast"],
-        img:"capcut.jpg",
-        price:"Ask Price",
-        desc:"CapCut Pro 1 Month Private. No Ads, Full Features, And Smooth Editing. Works For Mobile Creators."
-      },
-      {
-        id:"yt",
-        name:"YouTube Premium",
-        sub:"1 Month — Invite",
-        tags:["Invite","No Ads","Ask Stock"],
-        img:"youtube.jpg",
-        price:"Ask Price",
-        desc:"YouTube Premium 1 Month Invite. Enjoy No Ads, Background Play, And Music Access (Depending On Region)."
-      },
-      {
-        id:"go",
-        name:"ChatGPT Go",
-        sub:"1 Year — Private",
-        tags:["Private","Fast","Guided"],
-        img:"chatgpt.jpg",
-        price:"Ask Price",
-        desc:"ChatGPT Go 1 Year Private. Stable Access With Guidance After Purchase. Stock May Change."
-      },
-      {
-        id:"plus",
-        name:"ChatGPT Plus",
-        sub:"1 Month — Sharing / Private",
-        tags:["Sharing","Private","Ask Stock"],
-        img:"chatgpt.jpg",
-        price:"Ask Price",
-        desc:"ChatGPT Plus 1 Month. Sharing Or Private Depending On Stock. Suitable For Daily Use And Productivity."
-      },
-      {
-        id:"gemini1m",
-        name:"Gemini Pro",
-        sub:"1 Month — Private / Sharing",
-        tags:["Private","Sharing","Ask Stock"],
-        img:"gemini.jpg",
-        price:"Ask Price",
-        desc:"Gemini Pro 1 Month. Private Or Sharing Depending On Stock. Includes Premium AI Access (Depends On Plan And Region)."
-      },
-      {
-        id:"gemini1y",
-        name:"Gemini Pro",
-        sub:"1 Year — Private / Sharing",
-        tags:["Private","Sharing","Ask Stock"],
-        img:"gemini.jpg",
-        price:"Ask Price",
-        desc:"Gemini Pro 1 Year. Private Or Sharing Depending On Stock. Long Term Use With Fast Setup."
-      },
-      {
-        id:"spotify",
-        name:"Spotify Premium",
-        sub:"3 Months — Private",
-        tags:["Private","Music","Fast"],
-        img:"spotify.jpg",
-        price:"Ask Price",
-        desc:"Spotify Premium 3 Months Private. Enjoy No Ads, Offline Listening, And Better Quality."
-      },
-      {
-        id:"alight",
-        name:"Alight Motion",
-        sub:"1 Year — Private",
-        tags:["Private","Editor","Long Term"],
-        img:"alight-motion.jpg",
-        price:"Ask Price",
-        desc:"Alight Motion Premium 1 Year Private. No Watermark, High Quality Export, And Full Features."
-      }
+    // PRODUCTS DATA (nama file harus sama persis)
+    const WA = "6282191223912";
+    const products = [
+      { name: "Canva Pro",           sub: "1 Month — Sharing / Private", img: "Canva.jpg" },
+      { name: "CapCut Pro",          sub: "1 Month — Private",           img: "Capcut.jpg" },
+      { name: "YouTube Premium",     sub: "1 Month — Invite",            img: "YOUTUBE.jpg" },
+
+      { name: "ChatGPT Go",          sub: "1 Year — Private",            img: "CHATGPT.jpg" },
+      { name: "ChatGPT Plus",        sub: "1 Month — Sharing / Private", img: "CHATGPT.jpg" },
+
+      { name: "Gemini Pro",          sub: "1 Month — Private / Sharing", img: "GEMINI.jpg" },
+      { name: "Gemini Pro",          sub: "1 Year — Private / Sharing",  img: "GEMINI.jpg" },
+
+      { name: "Spotify Premium",     sub: "3 Months — Private",          img: "Spotify.jpg" },
+      { name: "Alight Motion",       sub: "1 Year — Private",            img: "ALIGHT MOTION.jpg" }
     ];
 
-    // ====== HELPERS ======
-    const $ = (q)=>document.querySelector(q);
-    const el = (tag)=>document.createElement(tag);
+    // RENDER
+    const grid = document.getElementById("productGrid");
+    products.forEach((p, i) => {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.style.animationDelay = `${i * 0.05}s`;
 
-    function waLink(text){
-      return `https://wa.me/${STORE.waNumber}?text=${encodeURIComponent(text)}`;
-    }
-
-    // ====== Year ======
-    $("#year").textContent = new Date().getFullYear();
-
-    // ====== Theme ======
-    const themeBtn = $("#themeBtn");
-    function setTheme(mode){
-      document.body.setAttribute("data-theme", mode);
-      localStorage.setItem("theme", mode);
-      themeBtn.textContent = mode === "dark" ? "☀️" : "🌙";
-    }
-    setTheme(localStorage.getItem("theme") || "light");
-    themeBtn.addEventListener("click", ()=>{
-      const cur = document.body.getAttribute("data-theme");
-      setTheme(cur === "dark" ? "light" : "dark");
-    });
-
-    // ====== Main WhatsApp ======
-    $("#waMain").href = waLink(STORE.waMessage);
-
-    // ====== Social Icons (Asli, SVG) ======
-    const socialRow = $("#socialRow");
-    const icons = [
-      {name:"WhatsApp", href: waLink(STORE.waMessage), svg:`<svg viewBox="0 0 24 24"><path d="M20.5 3.5A11 11 0 0 0 2.9 17.1L2 22l5-1.3A11 11 0 0 0 20.5 3.5ZM12 20a9 9 0 0 1-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3A9 9 0 1 1 12 20Zm5.2-6.6c-.3-.2-1.8-.9-2-.9s-.5-.2-.7.2-.8.9-1 .9-.4 0-.7-.2a7.4 7.4 0 0 1-2.2-1.3A8.2 8.2 0 0 1 9 9.8c-.2-.4 0-.6.2-.8l.5-.6c.2-.2.2-.4.3-.6s0-.4 0-.6-.7-1.7-1-2.4c-.3-.6-.6-.5-.8-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.1-1.2 2.8 1.2 3.2 1.4 3.4 2.3 3.5 5.6 4.9c.8.3 1.4.5 1.9.6.8.2 1.6.2 2.2.1.7-.1 1.8-.7 2.1-1.4s.3-1.3.2-1.4-.2-.2-.5-.4Z"/></svg>`},
-      {name:"Instagram", href: STORE.instagram, svg:`<svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-5 4.5A5.5 5.5 0 1 1 6.5 14 5.5 5.5 0 0 1 12 8.5Zm0 2A3.5 3.5 0 1 0 15.5 14 3.5 3.5 0 0 0 12 10.5ZM18 6.7a1 1 0 1 1-1 1 1 1 0 0 1 1-1Z"/></svg>`},
-      {name:"TikTok", href: STORE.tiktok, svg:`<svg viewBox="0 0 24 24"><path d="M16.7 2h-3.2v13.2a2.7 2.7 0 1 1-2.2-2.7v-3.3A6 6 0 1 0 16.7 15V8.5a7.6 7.6 0 0 0 4.3 1.3V6.6a4.4 4.4 0 0 1-4.3-4.6Z"/></svg>`},
-      {name:"YouTube", href: STORE.youtube, svg:`<svg viewBox="0 0 24 24"><path d="M21.8 8.1a3 3 0 0 0-2.1-2.1C18 5.5 12 5.5 12 5.5s-6 0-7.7.5A3 3 0 0 0 2.2 8.1 31.7 31.7 0 0 0 2 12a31.7 31.7 0 0 0 .2 3.9 3 3 0 0 0 2.1 2.1c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a3 3 0 0 0 2.1-2.1A31.7 31.7 0 0 0 22 12a31.7 31.7 0 0 0-.2-3.9ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg>`}
-    ];
-    icons.forEach(i=>{
-      const a = document.createElement("a");
-      a.className="soc";
-      a.href=i.href;
-      a.target="_blank";
-      a.rel="noopener";
-      a.title=i.name;
-      a.innerHTML=i.svg;
-      socialRow.appendChild(a);
-    });
-
-    // ====== Render Products ======
-    const grid = $("#productGrid");
-
-    function productCard(p, idx){
-      const card = el("div");
-      card.className = "card reveal";
-      card.style.transitionDelay = (idx * 0.06) + "s";
+      const msg = `Hi Mii Store! I Want To Order: ${p.name} — ${p.sub}`;
+      const waLink = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
 
       card.innerHTML = `
-        <div class="thumb"><img src="./${p.img}" alt="${p.name}"></div>
-        <div class="body">
-          <h3 class="pname">${p.name}</h3>
-          <div class="psub">${p.sub}</div>
-          <div class="chips">${p.tags.map(t=>`<span class="chip">${t}</span>`).join("")}</div>
-          <div class="row">
-            <button class="btnSmall" data-order="${p.id}">Order</button>
-            <button class="btnSmall secondary" data-detail="${p.id}">Detail</button>
-          </div>
-          <div style="margin-top:10px" class="row">
-            <div class="price">${p.price}</div>
-            <button class="btnSmall secondary" data-add="${p.id}">Add</button>
+        <div class="cardMedia">
+          <img src="./${p.img}" alt="${p.name}" loading="lazy"
+               onerror="this.src='https://placehold.co/600x400?text=Image+Not+Found'; this.classList.add('imgError');" />
+        </div>
+
+        <div class="cardBody">
+          <div class="cardTitle">${p.name}</div>
+          <div class="cardSub">${p.sub}</div>
+
+          <div class="cardRow">
+            <div class="price">Ask Price</div>
+            <a class="orderBtn" href="${waLink}" target="_blank" rel="noreferrer">Order</a>
           </div>
         </div>
       `;
-      return card;
-    }
-
-    PRODUCTS.forEach((p, idx)=> grid.appendChild(productCard(p, idx)));
-
-    // ====== Reveal on scroll ======
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting) e.target.classList.add("show");
-      });
-    }, {threshold: 0.12});
-    document.querySelectorAll(".reveal").forEach(x=>observer.observe(x));
-
-    // ====== Detail Modal ======
-    const modalBack = $("#modalBack");
-    const modalClose = $("#modalClose");
-    const modalTitle = $("#modalTitle");
-    const modalImg = $("#modalImg");
-    const modalDesc = $("#modalDesc");
-    const modalOrder = $("#modalOrder");
-    const modalAddCart = $("#modalAddCart");
-    let activeProduct = null;
-
-    function openDetail(p){
-      activeProduct = p;
-      modalTitle.textContent = p.name;
-      modalImg.src = "./" + p.img;
-      modalDesc.textContent = p.desc;
-      modalBack.classList.add("show");
-    }
-    function closeDetail(){ modalBack.classList.remove("show"); }
-    modalClose.addEventListener("click", closeDetail);
-    modalBack.addEventListener("click", (e)=>{ if(e.target===modalBack) closeDetail(); });
-
-    // ====== Cart ======
-    const cartBtn = $("#cartBtn");
-    const cartBack = $("#cartBack");
-    const cartClose = $("#cartClose");
-    const cartList = $("#cartList");
-    const cartCount = $("#cartCount");
-    const cartClear = $("#cartClear");
-    const cartCheckout = $("#cartCheckout");
-    let cart = [];
-
-    function openCart(){ cartBack.classList.add("show"); renderCart(); }
-    function closeCart(){ cartBack.classList.remove("show"); }
-    cartBtn.addEventListener("click", openCart);
-    cartClose.addEventListener("click", closeCart);
-    cartBack.addEventListener("click", (e)=>{ if(e.target===cartBack) closeCart(); });
-
-    function addToCart(p){
-      cart.push(p);
-      cartCount.textContent = cart.length;
-    }
-    function renderCart(){
-      if(cart.length===0){
-        cartList.textContent = "Cart Is Empty";
-        cartCheckout.href = waLink(STORE.waMessage + " (Cart: Empty)");
-        return;
-      }
-      const lines = cart.map((p,i)=> `${i+1}. ${p.name} — ${p.sub}`).join("\n");
-      cartList.textContent = lines;
-
-      cartCheckout.href = waLink(`${STORE.waMessage}\n\n${lines}`);
-    }
-    cartClear.addEventListener("click", ()=>{
-      cart = [];
-      cartCount.textContent = "0";
-      renderCart();
+      grid.appendChild(card);
     });
 
-    // ====== Click Handlers (Order/Detail/Add) ======
-    document.addEventListener("click", (e)=>{
-      const orderId = e.target.getAttribute("data-order");
-      const detailId = e.target.getAttribute("data-detail");
-      const addId = e.target.getAttribute("data-add");
+    // THEME TOGGLE
+    const root = document.documentElement;
+    const themeBtn = document.getElementById("themeBtn");
+    const themeIcon = document.getElementById("themeIcon");
+    const themeText = document.getElementById("themeText");
 
-      if(orderId){
-        const p = PRODUCTS.find(x=>x.id===orderId);
-        const msg = `${STORE.waMessage}\n${p.name}\n${p.sub}\n${p.price}`;
-        window.open(waLink(msg), "_blank");
+    function setTheme(mode) {
+      root.setAttribute("data-theme", mode);
+      localStorage.setItem("theme", mode);
+      if (mode === "dark") {
+        themeIcon.textContent = "☀️";
+        themeText.textContent = "Light";
+      } else {
+        themeIcon.textContent = "🌙";
+        themeText.textContent = "Dark";
       }
-      if(detailId){
-        const p = PRODUCTS.find(x=>x.id===detailId);
-        openDetail(p);
-      }
-      if(addId){
-        const p = PRODUCTS.find(x=>x.id===addId);
-        addToCart(p);
-      }
+    }
+
+    themeBtn.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") || "light";
+      setTheme(current === "light" ? "dark" : "light");
     });
 
-    // modal actions
-    modalOrder.addEventListener("click", ()=>{
-      if(!activeProduct) return;
-      const p = activeProduct;
-      const msg = `${STORE.waMessage}\n${p.name}\n${p.sub}\n${p.price}`;
-      window.open(waLink(msg), "_blank");
-    });
-    modalAddCart.addEventListener("click", ()=>{
-      if(!activeProduct) return;
-      addToCart(activeProduct);
-    });
+    setTheme(localStorage.getItem("theme") || "light");
   </script>
 </body>
 </html>
