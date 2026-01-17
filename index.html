@@ -1,87 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MII STORE — Premium Digital Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MII STORE — PREMIUM DIGITAL SERVICES</title>
 
+  <!-- Fonts (elegan: serif + clean) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
-    /* ===== THEME TOKENS (DARK default) ===== */
     :root{
-      --bg0:#05070c;
-      --bg1:#070b14;
-      --bg2:#0b1224;
-
+      /* VIOLET EVERGARDEN INSPIRED PALETTE (mirip foto: cream + teal + navy + blush) */
+      --bg0:#0b1620;      /* navy deep */
+      --bg1:#0f2331;      /* teal navy */
+      --bg2:#112a3c;      /* panel */
+      --cream:#efe6cf;    /* hat cream */
+      --blush:#e9c4b4;    /* hair peach */
+      --teal:#74c7d3;     /* eye teal */
+      --teal2:#3aa7b8;
+      --ink:#eaf4ff;
+      --muted:rgba(234,244,255,.72);
+      --line:rgba(234,244,255,.12);
       --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.08);
-      --line:rgba(255,255,255,.10);
-
-      --txt:#eef1ff;
-      --muted:rgba(238,241,255,.72);
-      --muted2:rgba(238,241,255,.52);
-
-      --brand:#5eead4;
-      --brand2:#60a5fa;
-      --ok:#22c55e;
-      --warn:#fbbf24;
-
-      --shadow:0 18px 60px rgba(0,0,0,.55);
+      --card2:rgba(255,255,255,.09);
+      --shadow:0 22px 70px rgba(0,0,0,.55);
       --r:22px;
-
-      /* typography scale (proportional) */
-      --fs-base: 15px;
-      --fs-h1: 2.15rem;
-      --fs-h1-sub: 1.05rem;
-      --fs-h2: 1.05rem;
-      --fs-p: .95rem;
-      --fs-small: .86rem;
-    }
-
-    /* Light mode overrides */
-    html[data-theme="light"]{
-      --bg0:#f6f7fb;
-      --bg1:#eef1f8;
-      --bg2:#e8edf8;
-
-      --card:rgba(0,0,0,.04);
-      --card2:rgba(0,0,0,.06);
-      --line:rgba(0,0,0,.10);
-
-      --txt:#0b1224;
-      --muted:rgba(11,18,36,.70);
-      --muted2:rgba(11,18,36,.55);
-
-      --shadow:0 18px 60px rgba(0,0,0,.10);
     }
 
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
     body{
-      font-family:'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      font-size: var(--fs-base);
-      line-height: 1.6;
-      color: var(--txt);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
       background:
-        radial-gradient(1000px 560px at 15% -5%, rgba(96,165,250,.14), transparent 62%),
-        radial-gradient(900px 520px at 95% 10%, rgba(94,234,212,.12), transparent 66%),
-        radial-gradient(850px 520px at 45% 120%, rgba(167,139,250,.12), transparent 66%),
-        linear-gradient(180deg, var(--bg0), var(--bg1) 35%, var(--bg2));
+        radial-gradient(900px 520px at 22% 12%, rgba(116,199,211,.14), transparent 60%),
+        radial-gradient(900px 620px at 85% 20%, rgba(233,196,180,.12), transparent 62%),
+        radial-gradient(760px 520px at 50% 88%, rgba(58,167,184,.10), transparent 62%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
       min-height:100vh;
       overflow-x:hidden;
     }
-    a{color:inherit;text-decoration:none}
-    .container{width:min(1100px,92vw); margin:0 auto}
 
-    /* ===== NAV ===== */
-    .topbar{
-      position:sticky; top:0; z-index:60;
-      backdrop-filter: blur(14px);
-      background: color-mix(in srgb, var(--bg0) 75%, transparent);
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1120px, 92vw); margin:0 auto}
+    .upper{letter-spacing:.08em; text-transform:uppercase}
+
+    /* Background floating “petals” */
+    .petals{
+      position:fixed; inset:-40px; pointer-events:none; z-index:-1;
+      opacity:.55; filter: blur(0.2px);
+    }
+    .petal{
+      position:absolute; width:10px; height:10px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(239,230,207,.9), rgba(233,196,180,.45));
+      box-shadow: 0 0 18px rgba(233,196,180,.22);
+      animation: drift 10s linear infinite;
+      opacity:.7;
+    }
+    @keyframes drift{
+      0%{ transform: translate3d(0,0,0) rotate(0deg); }
+      100%{ transform: translate3d(120px, 520px, 0) rotate(280deg); }
+    }
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      background: linear-gradient(180deg, rgba(11,22,32,.82), rgba(11,22,32,.35));
+      backdrop-filter: blur(10px);
       border-bottom:1px solid var(--line);
     }
     .nav{
@@ -89,640 +79,727 @@
       padding:14px 0;
       gap:14px;
     }
+
     .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:900; letter-spacing:.2px;
+      display:flex; align-items:center; gap:12px;
+      min-width: 220px;
     }
-    .logoDot{
-      width:34px; height:34px; border-radius:12px;
-      background: linear-gradient(135deg, color-mix(in srgb, var(--brand2) 85%, white), color-mix(in srgb, var(--brand) 85%, white));
-      box-shadow: 0 10px 25px rgba(0,0,0,.20);
-      border:1px solid var(--line);
+
+    /* VE-inspired logo (bukan logo resmi) */
+    .logo{
+      width:42px; height:42px; border-radius:14px;
+      background:
+        radial-gradient(18px 18px at 35% 35%, rgba(116,199,211,.85), transparent 60%),
+        radial-gradient(24px 24px at 70% 75%, rgba(233,196,180,.55), transparent 60%),
+        linear-gradient(135deg, rgba(239,230,207,.18), rgba(116,199,211,.14));
+      border:1px solid rgba(239,230,207,.22);
+      box-shadow: 0 14px 40px rgba(0,0,0,.45);
+      position:relative;
+      overflow:hidden;
     }
-    .menu{
-      display:flex; align-items:center; gap:16px;
-      font-weight:700; color:var(--muted);
-      font-size:.92rem;
+    .logo:before{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 180deg, transparent, rgba(239,230,207,.22), transparent);
+      animation: sheen 6s linear infinite;
+    }
+    @keyframes sheen{
+      0%{ transform: rotate(0deg); }
+      100%{ transform: rotate(360deg); }
+    }
+    .brandText{
+      display:flex; flex-direction:column; line-height:1.05;
+    }
+    .brandText b{
+      font-family: "Cormorant Garamond", serif;
+      font-size:20px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .brandText span{
+      font-size:11px; opacity:.78;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+
+    .navLinks{
+      display:flex; gap:16px; align-items:center;
       flex-wrap:wrap;
+      justify-content:flex-end;
     }
-    .menu a{opacity:.95}
-    .menu a:hover{opacity:1;color:var(--txt)}
-
-    .tools{display:flex; align-items:center; gap:10px}
-    .iconBtn{
-      display:inline-flex; align-items:center; justify-content:center;
-      width:42px; height:42px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background: var(--card);
-      transition: transform .12s ease, background .12s ease;
-      cursor:pointer;
+    .navLinks a{
+      font-size:12px; letter-spacing:.12em;
+      text-transform:uppercase;
+      opacity:.8;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition: transform .18s ease, opacity .18s ease, border-color .18s ease, background .18s ease;
     }
-    .iconBtn:hover{transform: translateY(-1px); background: var(--card2)}
-    .iconBtn i{font-size:16px; color:var(--txt)}
+    .navLinks a:hover{
+      opacity:1;
+      transform: translateY(-2px);
+      border-color: rgba(239,230,207,.18);
+      background: rgba(255,255,255,.04);
+    }
 
-    /* ===== HERO ===== */
+    /* Hero */
+    .heroWrap{ padding:26px 0 10px; }
     .hero{
-      padding:28px 0 10px;
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:16px;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
       align-items:stretch;
     }
+    @media (max-width: 980px){
+      .hero{ grid-template-columns: 1fr; }
+      .brand{ min-width:auto; }
+    }
+
     .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
       border:1px solid var(--line);
-      background: linear-gradient(180deg, var(--card2), var(--card));
       border-radius: var(--r);
       box-shadow: var(--shadow);
+      padding:22px;
+      position:relative;
+      overflow:hidden;
     }
-    .heroLeft{padding:20px}
-    .heroTag{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:9px 12px; border-radius:999px;
-      border:1px solid var(--line);
-      background: var(--card);
-      color:var(--muted);
-      font-weight:800;
-      font-size:.88rem;
+    .panel:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(400px 160px at 10% 10%, rgba(239,230,207,.10), transparent 60%),
+        radial-gradient(420px 180px at 85% 20%, rgba(116,199,211,.12), transparent 62%);
+      pointer-events:none;
+    }
+
+    /* Hero Image (kamu kasih gambar → tinggal ganti URL) */
+    .heroArt{
+      display:flex; align-items:center; justify-content:center;
+      border-radius: 18px;
+      border:1px solid rgba(239,230,207,.16);
+      background: rgba(0,0,0,.18);
+      overflow:hidden;
+      aspect-ratio: 16/10;
+      position:relative;
+    }
+    .heroArt img{
+      width:100%; height:100%; object-fit:cover;
+      opacity:.92;
+      transform: scale(1.02);
+      filter: contrast(1.02) saturate(1.08);
+    }
+    .heroArt .artGlow{
+      position:absolute; inset:-30%;
+      background: radial-gradient(circle at 30% 30%, rgba(116,199,211,.18), transparent 55%),
+                  radial-gradient(circle at 70% 60%, rgba(233,196,180,.12), transparent 60%);
+      filter: blur(22px);
+      animation: artPulse 5.5s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+    @keyframes artPulse{
+      from{ transform: translate3d(-10px,-8px,0) scale(1); opacity:.55; }
+      to{ transform: translate3d(12px,10px,0) scale(1.05); opacity:.8; }
+    }
+
+    /* Animated ticker (FAST SUPPLY • INTERNATIONAL) */
+    .ticker{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:10px 12px;
+      border:1px solid rgba(239,230,207,.16);
+      background: rgba(0,0,0,.16);
+      border-radius: 999px;
+      overflow:hidden;
+      width: fit-content;
+      max-width:100%;
     }
     .dot{
       width:10px; height:10px; border-radius:99px;
-      background: var(--ok);
-      box-shadow: 0 0 0 4px rgba(34,197,94,.12);
+      background: rgba(116,199,211,.9);
+      box-shadow: 0 0 16px rgba(116,199,211,.35);
+      flex:0 0 auto;
+      animation: dotBlink 1.4s ease-in-out infinite;
+    }
+    @keyframes dotBlink{
+      0%,100%{ transform: scale(.9); opacity:.7; }
+      50%{ transform: scale(1.25); opacity:1; }
+    }
+    .marquee{
+      position:relative;
+      white-space:nowrap;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      opacity:.9;
+      min-width: 240px;
+    }
+    .marquee span{
+      display:inline-block;
+      padding-left: 0;
+      animation: marquee 7.5s linear infinite;
+    }
+    @keyframes marquee{
+      0%{ transform: translateX(0); }
+      100%{ transform: translateX(-50%); }
     }
 
-    .hero-title{
-      margin:14px 0 8px;
-      font-size: var(--fs-h1);
-      font-weight:900;
-      line-height:1.12;
-      letter-spacing:-.7px;
+    .heroTitle{
+      font-family: "Cormorant Garamond", serif;
+      font-size: 44px;
+      line-height:1.02;
+      margin:12px 0 10px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
     }
-    .hero-title .highlight{
-      display:block;
+    @media (max-width: 480px){
+      .heroTitle{ font-size: 36px; }
+    }
+    .heroSub{
+      font-size: 14px;
+      line-height:1.65;
+      color: var(--muted);
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      margin:0 0 16px;
+    }
+
+    .ctaRow{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
       margin-top:8px;
-      font-size: var(--fs-h1-sub);
-      font-weight:800;
-      color: var(--brand);
-      letter-spacing:-.1px;
+      position:relative;
+      z-index:1;
     }
-    .hero-desc{
-      margin:10px 0 0;
-      max-width:560px;
-      color:var(--muted);
-      font-weight:600;
-      font-size: var(--fs-p);
-    }
-
-    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding:11px 14px;
+      display:inline-flex; gap:10px; align-items:center; justify-content:center;
+      padding:12px 14px;
       border-radius: 14px;
-      border:1px solid var(--line);
-      background: var(--card);
-      font-weight:900;
-      font-size:.95rem;
-      transition: transform .12s ease, background .12s ease;
-      cursor:pointer;
+      border:1px solid rgba(239,230,207,.18);
+      background: rgba(255,255,255,.06);
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
     }
-    .btn:hover{transform: translateY(-1px); background: var(--card2)}
+    .btn:hover{ transform: translateY(-3px); background: rgba(255,255,255,.10); border-color: rgba(116,199,211,.22); }
     .btn.primary{
-      border-color: color-mix(in srgb, var(--brand) 35%, var(--line));
-      background: linear-gradient(135deg, color-mix(in srgb, var(--brand) 18%, transparent), color-mix(in srgb, var(--brand2) 12%, transparent));
+      background: linear-gradient(135deg, rgba(116,199,211,.22), rgba(233,196,180,.12));
+      border-color: rgba(116,199,211,.25);
     }
-    .btn.primary i{color: var(--brand)}
-    .miniBadges{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:9px 10px;
+    .chips{
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin-top:14px;
+      position:relative;
+      z-index:1;
+    }
+    .chip{
+      font-size:11px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      padding:8px 10px;
       border-radius: 999px;
-      border:1px solid var(--line);
-      background: var(--card);
-      color:var(--muted);
-      font-weight:800;
-      font-size:.88rem;
+      border:1px solid rgba(239,230,207,.14);
+      background: rgba(0,0,0,.14);
+      opacity:.92;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
     }
-    .badge i{color:var(--ok)}
-    .badge .warn{color:var(--warn)}
+    .chip i{ color: rgba(116,199,211,.9); }
 
-    .heroRight{padding:18px}
-    .heroRight h3{
-      margin:0 0 6px;
-      font-size: var(--fs-h2);
-      font-weight:900;
-      letter-spacing:-.2px;
-    }
-    .heroRight p{
-      margin:0 0 12px;
-      color:var(--muted);
-      font-weight:600;
-      font-size: var(--fs-p);
-    }
-    .check{
-      display:flex; gap:10px;
-      padding:10px 12px;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: var(--card);
-      margin-bottom:10px;
-      color:var(--muted);
-      font-weight:750;
-      font-size: .92rem;
-    }
-    .check i{color:var(--ok); margin-top:2px}
-
-    /* ===== SECTIONS ===== */
-    .section{padding:18px 0}
-    .sectionTitle{
-      font-weight:950;
-      letter-spacing:-.25px;
-      margin:12px 0 12px;
-      font-size: 1.05rem;
+    /* Sections */
+    section{ padding: 14px 0; }
+    .secTitle{
+      font-family: "Cormorant Garamond", serif;
+      font-size: 22px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin: 16px 0 10px;
     }
 
-    /* ===== PRODUCTS ===== */
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap:14px;
     }
+    @media (max-width: 980px){ .grid{ grid-template-columns: 1fr; } }
+
     .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
       border:1px solid var(--line);
-      background: var(--card);
-      border-radius: var(--r);
-      padding:16px;
-      box-shadow: 0 16px 50px rgba(0,0,0,.18);
-    }
-    .card h3{
-      margin:0 0 6px;
-      font-size:1.02rem;
-      font-weight:950;
-      letter-spacing:-.2px;
-    }
-    .sub{
-      margin:0 0 10px;
-      color:var(--muted2);
-      font-weight:750;
-      font-size:.9rem;
-    }
-    .tags{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 12px}
-    .tag{
-      font-size:.82rem;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: color-mix(in srgb, var(--card) 70%, transparent);
-      color:var(--muted);
-      font-weight:850;
-    }
-    .tag.brand{border-color: color-mix(in srgb, var(--brand) 25%, var(--line))}
-    .tag.invite{border-color: color-mix(in srgb, var(--brand2) 25%, var(--line))}
-    .tag.private{border-color: color-mix(in srgb, var(--ok) 25%, var(--line))}
-    .tag.warn{border-color: color-mix(in srgb, var(--warn) 30%, var(--line)); color: color-mix(in srgb, var(--warn) 80%, var(--txt))}
-    .row{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:12px}
-    .price{font-weight:950; letter-spacing:-.1px}
-    .small{color:var(--muted2); font-weight:750; font-size: var(--fs-small); margin-top:2px}
-    .btnSmall{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px;
-      border-radius: 12px;
-      border:1px solid color-mix(in srgb, var(--brand) 35%, var(--line));
-      background: linear-gradient(135deg, color-mix(in srgb, var(--brand) 16%, transparent), color-mix(in srgb, var(--brand2) 10%, transparent));
-      font-weight:950;
-      white-space:nowrap;
-      font-size:.92rem;
-    }
-    .btnSmall i{color: var(--brand)}
-
-    /* ===== HOW ===== */
-    .how{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
-    .stepTop{display:flex; align-items:center; gap:10px; margin-bottom:8px}
-    .num{
-      width:30px; height:30px; border-radius:12px;
-      display:inline-flex; align-items:center; justify-content:center;
-      background: color-mix(in srgb, var(--brand2) 14%, transparent);
-      border:1px solid color-mix(in srgb, var(--brand2) 25%, var(--line));
-      font-weight:950;
-    }
-    .card p{margin:0; color:var(--muted); font-weight:600; font-size: var(--fs-p)}
-
-    /* ===== SOCIAL ===== */
-    .social{display:grid; grid-template-columns: repeat(4, 1fr); gap:12px}
-    .social a{
-      border:1px solid var(--line);
-      background: var(--card);
       border-radius: 18px;
       padding:14px;
-      display:flex; gap:12px; align-items:center;
-      transition: transform .12s ease, background .12s ease;
+      box-shadow: 0 16px 55px rgba(0,0,0,.35);
+      transition: transform .2s ease, border-color .2s ease;
+      position:relative;
+      overflow:hidden;
     }
-    .social a:hover{transform: translateY(-1px); background: var(--card2)}
-    .ico{
-      width:40px; height:40px; border-radius:16px;
-      display:flex; align-items:center; justify-content:center;
-      background: color-mix(in srgb, var(--card2) 80%, transparent);
-      border:1px solid var(--line);
+    .card:hover{
+      transform: translateY(-6px);
+      border-color: rgba(116,199,211,.22);
     }
-    .social .t1{font-weight:950; font-size:.98rem}
-    .social .t2{color:var(--muted2); font-weight:750; font-size:.88rem}
+    .card h3{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .card p{
+      margin:8px 0 12px;
+      color: var(--muted);
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      line-height:1.55;
+    }
+    .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+    .tag{
+      font-size:10px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      padding:6px 8px;
+      border-radius: 999px;
+      border:1px solid rgba(239,230,207,.14);
+      background: rgba(0,0,0,.14);
+      opacity:.95;
+    }
+    .row{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+    }
+    .miniBtn{
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(116,199,211,.22);
+      background: rgba(116,199,211,.10);
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      display:inline-flex; gap:8px; align-items:center;
+      transition: transform .18s ease, background .18s ease;
+      white-space:nowrap;
+    }
+    .miniBtn:hover{ transform: translateY(-3px); background: rgba(116,199,211,.16); }
 
-    /* ===== FAQ (small) ===== */
-    .faq{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
-    .faq .q{font-weight:950; margin:0 0 6px; font-size:.92rem}
-    .faq .a{margin:0; color:var(--muted); font-weight:600; font-size:.9rem}
+    /* Social animated badges */
+    .socialGrid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 980px){ .socialGrid{ grid-template-columns: repeat(2, 1fr);} }
+    .social{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .social:hover{ transform: translateY(-5px); border-color: rgba(233,196,180,.22); background: rgba(255,255,255,.07); }
+    .social .left{ display:flex; align-items:center; gap:10px; }
+    .badge{
+      width:42px; height:42px; border-radius:14px;
+      display:grid; place-items:center;
+      border:1px solid rgba(239,230,207,.18);
+      background: radial-gradient(circle at 30% 30%, rgba(239,230,207,.10), rgba(116,199,211,.08));
+      position:relative;
+      overflow:hidden;
+    }
+    .badge:after{
+      content:"";
+      position:absolute; inset:-60%;
+      background: conic-gradient(from 90deg, transparent, rgba(116,199,211,.20), transparent);
+      animation: spin 4.8s linear infinite;
+      opacity:.7;
+    }
+    @keyframes spin{ to{ transform: rotate(360deg);} }
+    .badge i{ position:relative; z-index:1; font-size:18px; color: rgba(239,230,207,.92); text-shadow: 0 0 18px rgba(116,199,211,.2); }
+    .social b{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .social small{
+      display:block;
+      margin-top:3px;
+      font-size:10px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      opacity:.78;
+    }
+    .go{
+      font-size:12px;
+      opacity:.9;
+      padding:10px 10px;
+      border-radius: 12px;
+      border:1px solid rgba(239,230,207,.14);
+      background: rgba(0,0,0,.12);
+      transition: transform .18s ease;
+    }
+    .social:hover .go{ transform: translateX(2px); }
+
+    /* FAQ kecil */
+    .faqGrid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; }
+    @media (max-width: 980px){ .faqGrid{ grid-template-columns: 1fr; } }
+    details{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: 18px;
+      padding:12px 14px;
+    }
+    summary{
+      cursor:pointer;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      list-style:none;
+    }
+    details p{
+      margin:10px 0 0;
+      color: var(--muted);
+      font-size:11px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      line-height:1.6;
+    }
 
     footer{
-      padding:16px 0 26px;
-      color:var(--muted2);
-      font-weight:750;
-      font-size:.86rem;
+      margin-top:18px;
+      padding:18px 0 26px;
+      border-top:1px solid var(--line);
+      color: rgba(234,244,255,.75);
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
       text-align:center;
     }
 
-    /* Floating WhatsApp */
-    .floatWA{
-      position:fixed; right:16px; bottom:16px; z-index:70;
-      display:inline-flex; align-items:center; gap:10px;
-      padding:12px 14px;
-      border-radius: 999px;
-      border:1px solid color-mix(in srgb, var(--ok) 35%, var(--line));
-      background: linear-gradient(135deg, color-mix(in srgb, var(--ok) 18%, transparent), color-mix(in srgb, var(--brand) 10%, transparent));
-      box-shadow: var(--shadow);
-      font-weight:950;
-      font-size:.95rem;
+    /* Reveal on scroll */
+    .reveal{ opacity:0; transform: translateY(18px) scale(.985); filter: blur(6px);
+      transition: opacity .7s ease, transform .7s ease, filter .7s ease;
     }
-    .floatWA i{color: var(--ok)}
-
-    /* ===== SIMPLE ANIMATIONS ===== */
-    .reveal{opacity:0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease}
-    .reveal.show{opacity:1; transform:none}
-
-    /* Responsive */
-    @media(max-width: 980px){
-      .hero{grid-template-columns:1fr; gap:14px}
-      .grid{grid-template-columns:1fr}
-      .how{grid-template-columns:1fr}
-      .social{grid-template-columns:1fr 1fr}
-      .faq{grid-template-columns:1fr}
-      :root{ --fs-h1: 1.85rem; --fs-h1-sub: 1rem; }
-      .menu{display:none}
-    }
-    @media(max-width: 520px){
-      .social{grid-template-columns:1fr}
-    }
+    .reveal.show{ opacity:1; transform:none; filter: blur(0); }
   </style>
-</head>
+</head><body>
+  <!-- Floating petals background -->
+  <div class="petals" aria-hidden="true" id="petals"></div>
 
-<body>
-  <div class="topbar">
+  <header>
     <div class="container nav">
       <div class="brand">
-        <div class="logoDot"></div>
-        <div>MII STORE</div>
+        <div class="logo" aria-hidden="true"></div>
+        <div class="brandText">
+          <b>MII STORE</b>
+          <span>PREMIUM DIGITAL SERVICES</span>
+        </div>
       </div>
 
-      <div class="menu">
-        <a href="#products">Products</a>
-        <a href="#how">How to Order</a>
-        <a href="#social">Social</a>
+      <div class="navLinks">
+        <a href="#products">PRODUCTS</a>
+        <a href="#how">HOW TO ORDER</a>
+        <a href="#social">SOCIAL</a>
         <a href="#faq">FAQ</a>
       </div>
-
-      <div class="tools">
-        <button class="iconBtn" id="themeBtn" aria-label="Toggle theme" title="Toggle dark/light">
-          <i class="fa-solid fa-moon" id="themeIcon"></i>
-        </button>
-      </div>
     </div>
-  </div>
+  </header><main class="container">
+    <div class="heroWrap">
+      <div class="hero">
+        <div class="panel reveal">
+          <div class="ticker">
+            <div class="dot"></div>
+            <div class="marquee">
+              <span>FAST SUPPLY • INTERNATIONAL • FAST SUPPLY • INTERNATIONAL • FAST SUPPLY • INTERNATIONAL • </span>
+            </div>
+          </div>
 
-  <main class="container">
-    <section class="hero">
-      <div class="panel heroLeft reveal">
-        <div class="heroTag"><span class="dot"></span> Fast supply • Support after order • International friendly</div>
+          <div class="heroTitle">PREMIUM DIGITAL SERVICES</div>
 
-        <h1 class="hero-title">
-          Premium Digital Services
-          <span class="highlight">Fast • Trusted • Guaranteed</span>
-        </h1>
+          <!-- SEMUA KAPITAL (sesuai request) -->
+          <p class="heroSub">
+            TRUSTED PROVIDER OF PREMIUM DIGITAL SUBSCRIPTIONS (SHARING/PRIVATE DEPENDING ON PRODUCT).
+            EASY ORDER VIA WHATSAPP, FAST PROCESSING, AND CLEAR GUIDANCE AFTER PURCHASE.
+          </p>
 
-        <p class="hero-desc">
-          Trusted provider of premium digital subscriptions (sharing/private depending on the product).
-          Simple ordering via WhatsApp, fast processing, and clear guidance after purchase.
-        </p>
+          <div class="ctaRow">
+            <a class="btn primary" href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20TO%20ORDER." target="_blank" rel="noopener">
+              <i class="fa-brands fa-whatsapp"></i> ORDER VIA WHATSAPP
+            </a>
+            <a class="btn" href="#products"><i class="fa-solid fa-bag-shopping"></i> VIEW PRODUCTS</a>
+            <a class="btn" href="#how"><i class="fa-solid fa-list-check"></i> HOW TO ORDER</a>
+          </div>
 
-        <div class="actions">
-          <a class="btn primary" href="https://wa.me/6282191223912" target="_blank" rel="noopener">
-            <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
-          </a>
-          <a class="btn" href="#products">
-            <i class="fa-solid fa-grid-2"></i> View Products
-          </a>
-          <a class="btn" href="#how">
-            <i class="fa-solid fa-list-check"></i> How to Order
-          </a>
+          <div class="chips">
+            <span class="chip"><i class="fa-solid fa-bolt"></i> FAST RESPONSE</span>
+            <span class="chip"><i class="fa-solid fa-book"></i> CLEAR GUIDANCE</span>
+            <span class="chip"><i class="fa-solid fa-globe"></i> INTERNATIONAL FRIENDLY</span>
+            <span class="chip"><i class="fa-solid fa-triangle-exclamation"></i> STOCK MAY CHANGE</span>
+          </div>
         </div>
 
-        <div class="miniBadges">
-          <div class="badge"><i class="fa-solid fa-circle-check"></i> Quick response</div>
-          <div class="badge"><i class="fa-solid fa-circle-check"></i> Clear guidance</div>
-          <div class="badge"><i class="fa-solid fa-circle-check"></i> Buyer-friendly</div>
-          <div class="badge"><i class="fa-solid fa-triangle-exclamation warn"></i> Stock may change</div>
+        <div class="panel reveal">
+          <div class="heroArt">
+            <!-- GANTI LINK GAMBAR DI BAWAH dengan gambar yang kamu kirim / gambar AI -->
+            <img src="PASTE_IMAGE_URL_HERE" alt="Violet-inspired theme art">
+            <div class="artGlow"></div>
+          </div>
+
+          <div style="margin-top:14px">
+            <div class="secTitle">WHY MII STORE?</div>
+            <div class="card" style="margin-top:10px">
+              <h3>FOCUSED ON CLEAN SERVICE</h3>
+              <p>CLEAR INFO • FAST PROCESSING • SUPPORT AFTER PURCHASE</p>
+              <div class="tags">
+                <span class="tag">WHATSAPP ORDERING</span>
+                <span class="tag">FAST DELIVERY</span>
+                <span class="tag">AFTER-SALES SUPPORT</span>
+              </div>
+              <p style="margin:0">
+                NOTE: POLICIES MAY VARY BY PRODUCT TYPE (SHARING/PRIVATE/INVITE). PLEASE CONFIRM BEFORE ORDERING.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="panel heroRight reveal">
-        <h3>Why MII STORE?</h3>
-        <p>Focused on clean service: clear info, fast processing, and support after purchase.</p>
-
-        <div class="check"><i class="fa-solid fa-check"></i> Simple WhatsApp ordering</div>
-        <div class="check"><i class="fa-solid fa-check"></i> Fast processing & delivery</div>
-        <div class="check"><i class="fa-solid fa-check"></i> Post-purchase guidance & support</div>
-
-        <p style="margin-top:10px">
-          <b>Note:</b> Policies may vary by product type (sharing/private/invite). Please confirm before ordering.
-        </p>
-      </div>
-    </section>
-
-    <section class="section reveal" id="products">
-      <div class="sectionTitle">Products</div>
+              </div><section id="products" class="reveal">
+      <div class="secTitle">PRODUCTS</div>
 
       <div class="grid">
         <div class="card">
-          <h3>Canva Pro</h3>
-          <div class="sub">1 Month — Sharing / Private</div>
+          <h3>CANVA PRO</h3>
+          <p>1 MONTH — SHARING / PRIVATE</p>
           <div class="tags">
-            <span class="tag brand">Sharing</span>
-            <span class="tag private">Private</span>
-            <span class="tag warn">Ask stock</span>
+            <span class="tag">SHARING</span><span class="tag">PRIVATE</span><span class="tag">ASK STOCK</span>
           </div>
           <div class="row">
-            <div>
-              <div class="price">Ask price</div>
-              <div class="small">Duration: 1 month</div>
-            </div>
-            <a class="btnSmall" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20Canva%20Pro%20(1%20Month).%0AType:%20Sharing/Private%0A">
-              <i class="fa-brands fa-whatsapp"></i> Order
+            <span class="tag">ASK PRICE</span>
+            <a class="miniBtn" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20CANVA%20PRO%201%20MONTH%20(SHARING%2FPRIVATE).%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
+              <i class="fa-brands fa-whatsapp"></i> ORDER
             </a>
           </div>
         </div>
 
         <div class="card">
-          <h3>YouTube Premium</h3>
-          <div class="sub">1 Month — Invite</div>
+          <h3>YOUTUBE PREMIUM</h3>
+          <p>1 MONTH — INVITE</p>
           <div class="tags">
-            <span class="tag invite">Invite</span>
-            <span class="tag">No ads</span>
-            <span class="tag warn">Ask stock</span>
+            <span class="tag">INVITE</span><span class="tag">NO ADS</span><span class="tag">ASK STOCK</span>
           </div>
           <div class="row">
-            <div>
-              <div class="price">Ask price</div>
-              <div class="small">Duration: 1 month</div>
-            </div>
-            <a class="btnSmall" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20YouTube%20Premium%20(1%20Month%20Invite).%0A">
-              <i class="fa-brands fa-whatsapp"></i> Order
+            <span class="tag">ASK PRICE</span>
+            <a class="miniBtn" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20YOUTUBE%20PREMIUM%201%20MONTH%20(INVITE).%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
+              <i class="fa-brands fa-whatsapp"></i> ORDER
             </a>
           </div>
         </div>
 
         <div class="card">
-          <h3>Gemini Pro</h3>
-          <div class="sub">1 Month — Sharing / Private</div>
+          <h3>GEMINI PRO</h3>
+          <p>1 MONTH — SHARING / PRIVATE</p>
           <div class="tags">
-            <span class="tag brand">Sharing</span>
-            <span class="tag private">Private</span>
-            <span class="tag warn">Ask stock</span>
+            <span class="tag">SHARING</span><span class="tag">PRIVATE</span><span class="tag">ASK STOCK</span>
           </div>
           <div class="row">
-            <div>
-              <div class="price">Ask price</div>
-              <div class="small">Duration: 1 month</div>
-            </div>
-            <a class="btnSmall" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20Gemini%20Pro%20(1%20Month).%0AType:%20Sharing/Private%0A">
-              <i class="fa-brands fa-whatsapp"></i> Order
+            <span class="tag">ASK PRICE</span>
+            <a class="miniBtn" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20GEMINI%20PRO%201%20MONTH%20(SHARING%2FPRIVATE).%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
+              <i class="fa-brands fa-whatsapp"></i> ORDER
             </a>
           </div>
         </div>
 
         <div class="card">
-          <h3>ChatGPT Go</h3>
-          <div class="sub">1 Year — Private</div>
+          <h3>CHATGPT GO</h3>
+          <p>1 YEAR — PRIVATE</p>
           <div class="tags">
-            <span class="tag private">Private</span>
-            <span class="tag">Long-term</span>
-            <span class="tag warn">Ask stock</span>
+            <span class="tag">PRIVATE</span><span class="tag">LONG-TERM</span><span class="tag">ASK STOCK</span>
           </div>
           <div class="row">
-            <div>
-              <div class="price">Ask price</div>
-              <div class="small">Duration: 1 year</div>
-            </div>
-            <a class="btnSmall" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20ChatGPT%20Go%20(1%20Year%20Private).%0A">
-              <i class="fa-brands fa-whatsapp"></i> Order
+            <span class="tag">ASK PRICE</span>
+            <a class="miniBtn" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20CHATGPT%20GO%201%20YEAR%20(PRIVATE).%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
+              <i class="fa-brands fa-whatsapp"></i> ORDER
             </a>
           </div>
         </div>
 
         <div class="card">
-          <h3>ChatGPT Plus</h3>
-          <div class="sub">1 Month — Sharing / Private</div>
+          <h3>CHATGPT PLUS</h3>
+          <p>1 MONTH — SHARING / PRIVATE</p>
           <div class="tags">
-            <span class="tag brand">Sharing</span>
-            <span class="tag private">Private</span>
-            <span class="tag warn">Ask stock</span>
+            <span class="tag">SHARING</span><span class="tag">PRIVATE</span><span class="tag">ASK STOCK</span>
           </div>
           <div class="row">
-            <div>
-              <div class="price">Ask price</div>
-              <div class="small">Duration: 1 month</div>
-            </div>
-            <a class="btnSmall" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20ChatGPT%20Plus%20(1%20Month).%0AType:%20Sharing/Private%0A">
-              <i class="fa-brands fa-whatsapp"></i> Order
+            <span class="tag">ASK PRICE</span>
+            <a class="miniBtn" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20CHATGPT%20PLUS%201%20MONTH%20(SHARING%2FPRIVATE).%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
+              <i class="fa-brands fa-whatsapp"></i> ORDER
             </a>
           </div>
         </div>
 
         <div class="card">
-          <h3>CapCut Pro</h3>
-          <div class="sub">1 Month — Private</div>
+          <h3>CAPCUT PRO</h3>
+          <p>1 MONTH — PRIVATE</p>
           <div class="tags">
-            <span class="tag private">Private</span>
-            <span class="tag">Editing</span>
-            <span class="tag warn">Ask stock</span>
+            <span class="tag">PRIVATE</span><span class="tag">EDITING</span><span class="tag">ASK STOCK</span>
           </div>
           <div class="row">
-            <div>
-              <div class="price">Ask price</div>
-              <div class="small">Duration: 1 month</div>
-            </div>
-            <a class="btnSmall" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20CapCut%20Pro%20(1%20Month%20Private).%0A">
-              <i class="fa-brands fa-whatsapp"></i> Order
+            <span class="tag">ASK PRICE</span>
+            <a class="miniBtn" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20CAPCUT%20PRO%201%20MONTH%20(PRIVATE).%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
+              <i class="fa-brands fa-whatsapp"></i> ORDER
             </a>
           </div>
         </div>
 
         <div class="card">
-          <h3>GetContact</h3>
-          <div class="sub">1 Month Subscription</div>
+          <h3>GETCONTACT</h3>
+          <p>1 MONTH</p>
           <div class="tags">
-            <span class="tag">Caller ID</span>
-            <span class="tag brand">Premium</span>
-            <span class="tag warn">Ask stock</span>
+            <span class="tag">PREMIUM</span><span class="tag">1 MONTH</span><span class="tag">ASK STOCK</span>
           </div>
           <div class="row">
-            <div>
-              <div class="price">Ask price</div>
-              <div class="small">Duration: 1 month</div>
-            </div>
-            <a class="btnSmall" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=Hello%20MII%20STORE,%20I%20want%20to%20order%20GetContact%20(1%20Month).%0A">
-              <i class="fa-brands fa-whatsapp"></i> Order
+            <span class="tag">ASK PRICE</span>
+            <a class="miniBtn" target="_blank" rel="noopener"
+              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20GETCONTACT%201%20MONTH.%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
+              <i class="fa-brands fa-whatsapp"></i> ORDER
             </a>
           </div>
         </div>
       </div>
-    </section>
+              </section><section id="how" class="reveal">
+      <div class="secTitle">HOW TO ORDER</div>
 
-    <section class="section reveal" id="how">
-      <div class="sectionTitle">How to Order</div>
-
-      <div class="how">
+      <div class="grid">
         <div class="card">
-          <div class="stepTop">
-            <div class="num">1</div>
-            <div style="font-weight:950">Choose product</div>
-          </div>
-          <p>Select your product and confirm stock/type (sharing/private/invite).</p>
+          <h3>STEP 1 — CHOOSE PRODUCT</h3>
+          <p>PICK A PRODUCT FROM THE LIST ABOVE.</p>
         </div>
-
         <div class="card">
-          <div class="stepTop">
-            <div class="num">2</div>
-            <div style="font-weight:950">Message WhatsApp</div>
-          </div>
-          <p>Tap the WhatsApp button and send your order format. We reply ASAP.</p>
+          <h3>STEP 2 — WHATSAPP ORDER</h3>
+          <p>CLICK “ORDER” AND SEND YOUR REQUEST VIA WHATSAPP.</p>
         </div>
-
         <div class="card">
-          <div class="stepTop">
-            <div class="num">3</div>
-            <div style="font-weight:950">Delivery & guidance</div>
-          </div>
-          <p>After payment, we deliver access/invite and provide clear guidance after purchase.</p>
+          <h3>STEP 3 — PROCESS & GUIDANCE</h3>
+          <p>WE PROCESS FAST AND PROVIDE CLEAR GUIDANCE AFTER PURCHASE.</p>
         </div>
       </div>
     </section>
-<!-- END PART 1 --><section class="section reveal" id="social">
-      <div class="sectionTitle">Social Media</div>
 
-      <div class="social">
-        <a target="_blank" rel="noopener" href="https://www.instagram.com/miistore.99?igsh=ZmFqanZuOXo4cG92">
-          <div class="ico"><i class="fa-brands fa-instagram"></i></div>
-          <div>
-            <div class="t1">Instagram</div>
-            <div class="t2">miistore.99</div>
+    <section id="social" class="reveal">
+      <div class="secTitle">SOCIAL</div>
+
+      <div class="socialGrid">
+        <a class="social" target="_blank" rel="noopener"
+          href="https://www.instagram.com/miistore.99?igsh=ZmFqanZuOXo4cG92">
+          <div class="left">
+            <div class="badge"><i class="fa-brands fa-instagram"></i></div>
+            <div>
+              <b>INSTAGRAM</b>
+              <small>PROFILE</small>
+            </div>
           </div>
+          <div class="go"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
 
-        <a target="_blank" rel="noopener" href="https://www.tiktok.com/@mii._002?_r=1&_t=ZS-9389yLXFP0v">
-          <div class="ico"><i class="fa-brands fa-tiktok"></i></div>
-          <div>
-            <div class="t1">TikTok</div>
-            <div class="t2">@mii._002</div>
+        <a class="social" target="_blank" rel="noopener"
+          href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20TO%20ASK%20ABOUT%20PRODUCTS.">
+          <div class="left">
+            <div class="badge"><i class="fa-brands fa-whatsapp"></i></div>
+            <div>
+              <b>WHATSAPP</b>
+              <small>CHAT ORDER</small>
+            </div>
           </div>
+          <div class="go"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
 
-        <a target="_blank" rel="noopener" href="https://youtube.com/@asami.0111?si=aUNOvu6z0I-8cdNz">
-          <div class="ico"><i class="fa-brands fa-youtube"></i></div>
-          <div>
-            <div class="t1">YouTube</div>
-            <div class="t2">@asami.0111</div>
+        <a class="social" target="_blank" rel="noopener"
+          href="https://youtube.com/@asami.0111?si=aUNOvu6z0I-8cdNz">
+          <div class="left">
+            <div class="badge"><i class="fa-brands fa-youtube"></i></div>
+            <div>
+              <b>YOUTUBE</b>
+              <small>CHANNEL</small>
+            </div>
           </div>
+          <div class="go"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
 
-        <a target="_blank" rel="noopener" href="https://wa.me/6282191223912">
-          <div class="ico"><i class="fa-brands fa-whatsapp"></i></div>
-          <div>
-            <div class="t1">WhatsApp</div>
-            <div class="t2">Chat order</div>
+        <a class="social" target="_blank" rel="noopener"
+          href="https://www.tiktok.com/@mii._002?_r=1&_t=ZS-9389yLXFP0v">
+          <div class="left">
+            <div class="badge"><i class="fa-brands fa-tiktok"></i></div>
+            <div>
+              <b>TIKTOK</b>
+              <small>PROFILE</small>
+            </div>
           </div>
+          <div class="go"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
       </div>
-    </section>
+    </section><section id="faq" class="reveal">
+      <div class="secTitle">FAQ</div>
 
-    <section class="section reveal" id="faq">
-      <div class="sectionTitle">FAQ</div>
+      <div class="faqGrid">
+        <details>
+          <summary>HOW FAST IS DELIVERY?</summary>
+          <p>DEPENDS ON STOCK & QUEUE. USUALLY FAST WHEN ORDER FORMAT IS CLEAR.</p>
+        </details>
 
-      <div class="faq">
-        <div class="card">
-          <p class="q">How fast is delivery?</p>
-          <p class="a">Depends on stock and queue. Usually fast with clear order format.</p>
-        </div>
+        <details>
+          <summary>IS THERE WARRANTY?</summary>
+          <p>POLICY DEPENDS ON PRODUCT TYPE. PLEASE CONFIRM BEFORE PAYMENT.</p>
+        </details>
 
-        <div class="card">
-          <p class="q">Is there a warranty?</p>
-          <p class="a">Warranty depends on each product policy. Please confirm before ordering.</p>
-        </div>
-
-        <div class="card">
-          <p class="q">Do you provide guidance?</p>
-          <p class="a">Yes. We provide post-purchase guidance and support for common issues.</p>
-        </div>
+        <details>
+          <summary>CAN I ASK FOR GUIDANCE?</summary>
+          <p>YES. WE PROVIDE CLEAR GUIDANCE AFTER PURCHASE FOR COMMON ISSUES.</p>
+        </details>
       </div>
     </section>
 
     <footer>
-      © 2026 MII STORE • Established in 2024
+      © 2026 MII STORE — ESTABLISHED SINCE 2024
     </footer>
   </main>
 
-  <a class="floatWA" target="_blank" rel="noopener" href="https://wa.me/6282191223912">
-    <i class="fa-brands fa-whatsapp"></i> WhatsApp Order
-  </a>
-
   <script>
-    // ===== Theme toggle (save preference) =====
-    const root = document.documentElement;
-    const btn = document.getElementById('themeBtn');
-    const icon = document.getElementById('themeIcon');
-
-    function setTheme(mode){
-      if(mode === 'light'){
-        root.setAttribute('data-theme','light');
-        icon.className = 'fa-solid fa-sun';
-      } else {
-        root.removeAttribute('data-theme');
-        icon.className = 'fa-solid fa-moon';
-      }
-      localStorage.setItem('mii_theme', mode);
+    // Petals generator
+    const petals = document.getElementById('petals');
+    const count = 18;
+    for(let i=0;i<count;i++){
+      const p = document.createElement('div');
+      p.className = 'petal';
+      const left = Math.random()*100;
+      const top = Math.random()*60;
+      const size = 6 + Math.random()*9;
+      const dur = 7 + Math.random()*9;
+      const delay = -(Math.random()*dur);
+      p.style.left = left + 'vw';
+      p.style.top = top + 'vh';
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.animationDuration = dur + 's';
+      p.style.animationDelay = delay + 's';
+      p.style.opacity = (0.35 + Math.random()*0.45).toFixed(2);
+      petals.appendChild(p);
     }
 
-    const saved = localStorage.getItem('mii_theme');
-    if(saved){ setTheme(saved); }
-
-    btn.addEventListener('click', () => {
-      const isLight = root.getAttribute('data-theme') === 'light';
-      setTheme(isLight ? 'dark' : 'light');
-    });
-
-    // ===== Reveal animation on scroll =====
+    // Reveal on scroll
     const items = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
         if(e.isIntersecting) e.target.classList.add('show');
       });
-    }, {threshold: 0.12});
-    items.forEach(el => io.observe(el));
+    }, { threshold: 0.12 });
+    items.forEach(el=>io.observe(el));
   </script>
 </body>
 </html>
