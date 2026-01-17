@@ -1,118 +1,732 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MII STORE — Premium Digital Services</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Mii Store — Premium Digital Services</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: rgba(12, 18, 30, .72);
+      --card: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(245, 248, 255, .92);
+      --muted: rgba(235, 242, 255, .72);
+      --accent: #93c5fd;     /* blue */
+      --accent2:#a78bfa;     /* violet */
+      --gold:   #fbbf24;     /* warm highlight */
+      --good:   #34d399;     /* green */
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 1100px;
+      --title: "Fraunces", serif;
+      --body:  "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    }
+
+    /* Light mode */
+    html[data-theme="light"]{
+      --bg: #f7f2ea;
+      --panel: rgba(255, 255, 255, .72);
+      --card: rgba(0,0,0,.06);
+      --stroke: rgba(0,0,0,.12);
+      --text: rgba(20, 25, 35, .92);
+      --muted: rgba(20, 25, 35, .70);
+      --shadow: 0 16px 40px rgba(15,18,22,.18);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--body);
+      color: var(--text);
+      background: var(--bg);
+      overflow-x:hidden;
+      text-transform: capitalize; /* semua teks tampil Title Case */
+    }
+
+    /* Background image (user upload) */
+    .bg{
+      position:fixed; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.55)),
+        url("background.jpg") center/cover no-repeat;
+      filter:saturate(1.05);
+      transform: scale(1.02);
+      z-index:-2;
+    }
+    html[data-theme="light"] .bg{
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.25)),
+        url("background.jpg") center/cover no-repeat;
+      filter:saturate(1.02);
+    }
+
+    /* soft vignette */
+    .vignette{
+      position:fixed; inset:0;
+      background: radial-gradient(1200px 700px at 50% 10%, rgba(167,139,250,.22), transparent 65%),
+                  radial-gradient(1000px 600px at 20% 80%, rgba(147,197,253,.18), transparent 60%),
+                  radial-gradient(900px 600px at 80% 85%, rgba(251,191,36,.10), transparent 55%);
+      z-index:-1;
+      pointer-events:none;
+    }
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(8,12,18,.30);
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    html[data-theme="light"] .topbar{
+      background: rgba(255,255,255,.55);
+      border-bottom:1px solid rgba(0,0,0,.10);
+    }
+    .topbar-inner{
+      max-width: var(--max);
+      margin:0 auto;
+      padding:12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width: 170px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: rgba(255,255,255,.12);
+      border:1px solid var(--stroke);
+      overflow:hidden;
+      box-shadow: 0 10px 22px rgba(0,0,0,.22);
+      flex:0 0 auto;
+    }
+    .logo img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .brand-text{
+      line-height:1.05;
+    }
+    .brand-text .name{
+      font-weight:800;
+      letter-spacing:.3px;
+    }
+    .brand-text .sub{
+      font-size:12px;
+      color: var(--muted);
+      margin-top:2px;
+    }
+
+    .nav{
+      display:flex; align-items:center; gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      color: var(--text);
+      text-decoration:none;
+      font-weight:700;
+      font-size:12px;
+      letter-spacing:.7px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+      opacity:.92;
+    }
+    .nav a:hover{
+      border-color: var(--stroke);
+      background: rgba(255,255,255,.06);
+    }
+
+    .toggle{
+      cursor:pointer;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border-radius:999px;
+      padding:10px 12px;
+      font-weight:800;
+      font-size:12px;
+      letter-spacing:.6px;
+      display:flex; align-items:center; gap:8px;
+    }
+
+    /* Layout */
+    .wrap{
+      max-width: var(--max);
+      margin:0 auto;
+      padding:18px 14px 70px;
+    }
+
+    /* Hero */
+    .hero{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+
+    .panel{
+      border-radius: var(--radius);
+      background: var(--panel);
+      border:1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-left{
+      padding:18px;
+      position:relative;
+    }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--accent2);
+      box-shadow: 0 0 0 4px rgba(167,139,250,.16);
+    }
+
+    .h1{
+      font-family: var(--title);
+      margin:14px 0 8px;
+      font-weight:700;
+      letter-spacing:.6px;
+      font-size:40px;
+      line-height:1.08;
+    }
+    @media (max-width: 420px){
+      .h1{ font-size:34px; }
+    }
+    .desc{
+      margin:0;
+      color: var(--muted);
+      font-size:14px;
+      line-height:1.7;
+      max-width: 62ch;
+    }
+
+    .actions{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--stroke);
+      text-decoration:none;
+      color: var(--text);
+      font-weight:900;
+      font-size:13px;
+      background: rgba(255,255,255,.06);
+      transition: transform .2s ease, background .2s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); }
+    .btn.primary{
+      border-color: rgba(52,211,153,.35);
+      background: linear-gradient(180deg, rgba(52,211,153,.22), rgba(255,255,255,.06));
+    }
+
+    .badges{
+      margin-top:12px;
+      display:flex; flex-wrap:wrap; gap:8px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.05);
+      font-weight:800;
+      font-size:12px;
+      color: var(--muted);
+    }
+    .badge b{ color: var(--accent); }
+    .badge .mini{ color: var(--gold); }
+
+    /* Order counter */
+    .counter{
+      margin-top:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px;
+      border-radius: 16px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.05);
+    }
+    .counter .label{
+      font-weight:900;
+      letter-spacing:.6px;
+      color: var(--muted);
+      font-size:12px;
+    }
+    .counter .value{
+      font-family: var(--title);
+      font-weight:700;
+      font-size:26px;
+      color: var(--text);
+      letter-spacing:.6px;
+    }
+    .counter .reset{
+      cursor:pointer;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border-radius:12px;
+      padding:10px 12px;
+      font-weight:900;
+      font-size:12px;
+    }
+
+    /* Right hero image (BIG) */
+    .hero-right{
+      position:relative;
+      padding:0;
+      min-height: 260px;
+    }
+    .hero-right img{
+      width:100%; height:100%;
+      display:block;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-right::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(700px 260px at 20% 20%, rgba(167,139,250,.22), transparent 60%),
+                  linear-gradient(180deg, transparent, rgba(0,0,0,.18));
+      pointer-events:none;
+    }
+
+    /* Section title */
+    .section-title{
+      margin:24px 0 10px;
+      font-family: var(--title);
+      font-size:22px;
+      letter-spacing:.8px;
+    }
+    .section-sub{
+      margin:-6px 0 14px;
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    /* Products grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border-radius: var(--radius);
+      border:1px solid var(--stroke);
+      background: var(--panel);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      transform: translateY(6px);
+      opacity:0;
+      transition: transform .6s ease, opacity .6s ease;
+      position:relative;
+    }
+    .card.show{
+      transform: translateY(0);
+      opacity:1;
+    }
+    .thumb{
+      position:relative;
+      height: 180px;
+      background: rgba(255,255,255,.06);
+      overflow:hidden;
+    }
+    .thumb img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.02);
+    }
+
+    /* Small violet-style “overlay” in product cards (subtle, not decoration heavy) */
+    .thumb::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(260px 120px at 20% 20%, rgba(167,139,250,.22), transparent 60%),
+        radial-gradient(240px 120px at 80% 40%, rgba(147,197,253,.16), transparent 60%),
+        linear-gradient(180deg, transparent, rgba(0,0,0,.22));
+      pointer-events:none;
+      opacity:.9;
+    }
+    html[data-theme="light"] .thumb::after{
+      background:
+        radial-gradient(260px 120px at 20% 20%, rgba(167,139,250,.16), transparent 60%),
+        radial-gradient(240px 120px at 80% 40%, rgba(147,197,253,.12), transparent 60%),
+        linear-gradient(180deg, transparent, rgba(0,0,0,.10));
+    }
+
+    .card-body{
+      padding:14px;
+    }
+    .pname{
+      margin:0;
+      font-weight:950;
+      letter-spacing:.8px;
+      color: var(--text);
+      font-size:14px;
+    }
+    .psub{
+      margin:6px 0 10px;
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+    .tags{
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin-bottom:12px;
+    }
+    .tag{
+      font-size:11px;
+      font-weight:900;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      letter-spacing:.6px;
+    }
+
+    .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .order{
+      cursor:pointer;
+      border:1px solid rgba(52,211,153,.35);
+      background: linear-gradient(180deg, rgba(52,211,153,.18), rgba(255,255,255,.06));
+      color: var(--text);
+      border-radius:12px;
+      padding:10px 12px;
+      font-weight:950;
+      font-size:12px;
+      letter-spacing:.8px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+    }
+    .ask{
+      color: var(--muted);
+      font-weight:900;
+      font-size:11px;
+      letter-spacing:.7px;
+      opacity:.9;
+    }
+
+    /* Social row with icons */
+    .social{
+      margin-top:20px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .sbtn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:.6px;
+    }
+    .ico{
+      width:18px; height:18px; display:inline-block;
+    }
+
+    footer{
+      margin-top:22px;
+      color: var(--muted);
+      font-size:12px;
+      text-align:center;
+      padding-top:18px;
+      border-top:1px solid rgba(255,255,255,.10);
+    }
+    html[data-theme="light"] footer{
+      border-top:1px solid rgba(0,0,0,.10);
+    }
+  </style>
 </head>
 
-<body data-theme="dark">
-  <!-- Falling bubbles -->
-  <div id="bubbles" aria-hidden="true"></div>
+<body>
+  <div class="bg"></div>
+  <div class="vignette"></div>
 
   <header class="topbar">
-    <div class="brand">
-      <img class="brand-logo" src="Picsart_26-01-16_21-26-39-597.jpg" alt="MII STORE" />
-      <div class="brand-text">
-        <div class="brand-name">MII STORE</div>
-        <div class="brand-sub">Premium Digital Services</div>
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo">
+          <img src="Picsart_26-01-16_21-26-39-597.jpg" alt="Mii Store Logo">
+        </div>
+        <div class="brand-text">
+          <div class="name">Mii Store</div>
+          <div class="sub">Premium Digital Services</div>
+        </div>
       </div>
-    </div>
 
-    <nav class="nav">
-      <a href="#products">PRODUCTS</a>
-      <a href="#how">HOW TO ORDER</a>
-      <a href="#social">SOCIAL</a>
-      <button id="themeToggle" class="theme" type="button" aria-label="Toggle theme">🌙</button>
-    </nav>
+      <nav class="nav">
+        <a href="#products">Products</a>
+        <a href="#how">How To Order</a>
+        <a href="#social">Social</a>
+        <button id="themeToggle" class="toggle" type="button">🌙 Dark</button>
+      </nav>
+    </div>
   </header>
 
   <main class="wrap">
+    <!-- HERO -->
     <section class="hero">
-      <div class="hero-card reveal">
-        <div class="pill">FAST SUPPLY • INTERNATIONAL • TRUSTED SELLER</div>
+      <div class="panel hero-left">
+        <div class="pill"><span class="dot"></span> Fast Supply • International • Trusted Seller</div>
 
-        <h1 class="h1">PREMIUM DIGITAL SERVICES</h1>
-        <p class="lead">
-          Trusted provider of premium digital subscriptions (sharing/private depending on product).
-          Simple order via WhatsApp, fast processing, and clear guidance after purchase.
+        <h1 class="h1" style="color:var(--text);">
+          Premium Digital Services
+        </h1>
+
+        <p class="desc">
+          Trusted Provider Of Premium Digital Subscriptions (Sharing/Private Depending On Product).
+          Simple Order Via WhatsApp, Fast Processing, And Clear Guidance After Purchase.
         </p>
 
-        <div class="hero-actions">
-          <a class="btn primary" id="orderTop" target="_blank" rel="noreferrer">🟢 ORDER VIA WHATSAPP</a>
-          <a class="btn" href="#products">🧾 VIEW PRODUCTS</a>
-          <a class="btn ghost" href="#how">📌 HOW TO ORDER</a>
+        <div class="actions">
+          <a class="btn primary" id="waMain" target="_blank" rel="noopener">✅ Order Via Whatsapp</a>
+          <a class="btn" href="#products">📦 View Products</a>
+          <a class="btn" href="#how">📌 How To Order</a>
         </div>
 
-        <div class="stats">
-          <div class="stat">⚡ FAST RESPONSE</div>
-          <div class="stat">✅ CLEAR GUIDANCE</div>
-          <div class="stat">🌍 INTERNATIONAL FRIENDLY</div>
-          <div class="stat">📦 STOCK MAY CHANGE</div>
+        <div class="badges">
+          <div class="badge">⚡ <b>Fast</b> Response</div>
+          <div class="badge">✅ <b>Clear</b> Guidance</div>
+          <div class="badge">🌍 <b>International</b> Friendly</div>
+          <div class="badge">📦 <span class="mini">Stock</span> May Change</div>
         </div>
 
-        <div class="order-counter">
-          <span class="badge">🧾 TOTAL ORDER</span>
-          <span class="count" id="orderCount">0</span>
-          <button class="mini" id="resetOrders" type="button">Reset</button>
-        </div>
-      </div>
-
-      <div class="hero-media reveal">
-        <img class="hero-img" src="banner.jpg" alt="Violet Theme" />
-      </div>
-    </section>
-
-    <section id="products" class="section">
-      <div class="section-title">PRODUCTS</div>
-      <div id="productGrid" class="product-grid"></div>
-    </section>
-
-    <section id="how" class="section">
-      <div class="section-title">HOW TO ORDER</div>
-      <div class="steps">
-        <div class="step reveal">
-          <div class="step-num">01</div>
+        <div class="counter">
           <div>
-            <div class="step-title">CHOOSE PRODUCT</div>
-            <div class="step-desc">Pilih produk & durasi, lalu klik ORDER.</div>
+            <div class="label">Total Order</div>
+            <div class="value" id="orderCount">0</div>
           </div>
+          <button class="reset" id="resetCount" type="button">Reset</button>
         </div>
-        <div class="step reveal">
-          <div class="step-num">02</div>
-          <div>
-            <div class="step-title">SEND DETAILS</div>
-            <div class="step-desc">Kirim detail yang dibutuhkan (email/invite/akun) sesuai produk.</div>
-          </div>
-        </div>
-        <div class="step reveal">
-          <div class="step-num">03</div>
-          <div>
-            <div class="step-title">PROCESS & GUIDE</div>
-            <div class="step-desc">Proses cepat + panduan jelas setelah pembelian.</div>
-          </div>
+      </div>
+
+      <!-- BIG IMAGE TOP -->
+      <div class="panel hero-right">
+        <img src="banner.jpg" alt="Banner">
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products">
+      <h2 class="section-title" style="color:var(--accent2);">Products</h2>
+      <p class="section-sub">
+        Choose Your Product — Click Order — Then Send Details On WhatsApp.
+      </p>
+
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <!-- HOW TO ORDER -->
+    <section id="how">
+      <h2 class="section-title" style="color:var(--accent);">How To Order</h2>
+      <p class="section-sub">
+        Simple Steps, Fast Process, And Clear Guidance After Purchase.
+      </p>
+
+      <div class="panel" style="padding:16px;">
+        <div style="display:grid; gap:10px;">
+          <div class="badge">01 — Choose Product & Duration</div>
+          <div class="badge">02 — Click Order (Whatsapp)</div>
+          <div class="badge">03 — Send Required Details (Email/Invite/Account)</div>
+          <div class="badge">04 — Processing & Guidance After Purchase</div>
         </div>
       </div>
     </section>
 
-    <section id="social" class="section">
-      <div class="section-title">SOCIAL</div>
-      <div class="social-row reveal">
-        <a class="social" id="waBtn" target="_blank" rel="noreferrer">🟢 WhatsApp</a>
-        <a class="social" id="igBtn" target="_blank" rel="noreferrer">📷 Instagram</a>
-        <a class="social" id="ytBtn" target="_blank" rel="noreferrer">▶️ YouTube</a>
-        <a class="social" id="ttBtn" target="_blank" rel="noreferrer">🎵 TikTok</a>
+    <!-- SOCIAL -->
+    <section id="social">
+      <h2 class="section-title" style="color:var(--gold);">Social</h2>
+      <p class="section-sub">
+        Follow For Updates, Proof, And Fast Contact.
+      </p>
+
+      <div class="social">
+        <a class="sbtn" target="_blank" rel="noopener" href="https://wa.me/6282191223912">
+          <span class="ico">
+            <!-- WhatsApp SVG -->
+            <svg viewBox="0 0 32 32" width="18" height="18" fill="currentColor" aria-hidden="true">
+              <path d="M16 3C9.4 3 4 8.1 4 14.4c0 2.5.9 4.8 2.4 6.7L5 29l8.2-2.1c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.1 12-11.4S22.6 3 16 3zm0 21.2c-1.9 0-3.7-.5-5.2-1.4l-.4-.2-4.9 1.3 1.3-4.6-.3-.4c-1.1-1.5-1.7-3.2-1.7-5.1C5.8 9.3 10.4 5 16 5s10.2 4.3 10.2 9.6-4.6 9.6-10.2 9.6zm5.7-7.2c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.1s-.8.9-1 1.1-.4.2-.6.1c-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.6.1-.1.3-.4.4-.5.1-.2.1-.3.2-.5.1-.2 0-.3 0-.4s-.7-1.6-.9-2.2c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.1s.9 2.4 1.1 2.6c.1.2 1.7 2.7 4.2 3.8.6.3 1.1.4 1.4.5.6.2 1.2.2 1.6.1.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.1-1.3-.1-.1-.3-.2-.6-.3z"/>
+            </svg>
+          </span>
+          Whatsapp
+        </a>
+
+        <a class="sbtn" target="_blank" rel="noopener" href="https://youtube.com/@asami.0111?si=aUNOvu6z0I-8cdNz">
+          <span class="ico">▶️</span>
+          Youtube
+        </a>
+
+        <a class="sbtn" target="_blank" rel="noopener" href="https://www.instagram.com/miistore.99?igsh=ZmFqanZuOXo4cG92">
+          <span class="ico">📷</span>
+          Instagram
+        </a>
+
+        <a class="sbtn" target="_blank" rel="noopener" href="https://www.tiktok.com/@mii._002?_r=1&_t=ZS-9389yLXFP0v">
+          <span class="ico">🎵</span>
+          Tiktok
+        </a>
       </div>
     </section>
 
-    <footer class="footer">
-      <div class="footer-line"></div>
-      <div class="footer-text">© <span id="year"></span> MII STORE — Established since 2024</div>
+    <footer>
+      © <span id="year"></span> Mii Store — Established Since 2024
     </footer>
   </main>
 
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  <script>
+    // ===== BASIC SETTINGS =====
+    const WA_NUMBER = "6282191223912";
+    const WA_TEXT = "Hi Mii Store! I Want To Order: ";
+
+    // ===== YEAR =====
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ===== MAIN WA BUTTON =====
+    const waMain = document.getElementById("waMain");
+    waMain.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Mii Store! I Want To Order.")}`;
+
+    // ===== THEME TOGGLE =====
+    const root = document.documentElement;
+    const toggle = document.getElementById("themeToggle");
+
+    function setTheme(mode){
+      root.setAttribute("data-theme", mode);
+      localStorage.setItem("theme", mode);
+      toggle.textContent = mode === "dark" ? "🌙 Dark" : "☀️ Light";
+    }
+    toggle.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") || "dark";
+      setTheme(current === "dark" ? "light" : "dark");
+    });
+    setTheme(localStorage.getItem("theme") || "dark");
+
+    // ===== ORDER COUNTER =====
+    const orderEl = document.getElementById("orderCount");
+    const resetBtn = document.getElementById("resetCount");
+    let orderCount = Number(localStorage.getItem("orderCount") || 0);
+    orderEl.textContent = orderCount;
+
+    function addOrder(){
+      orderCount += 1;
+      orderEl.textContent = orderCount;
+      localStorage.setItem("orderCount", String(orderCount));
+    }
+    resetBtn.addEventListener("click", () => {
+      orderCount = 0;
+      orderEl.textContent = 0;
+      localStorage.setItem("orderCount", "0");
+    });
+
+    // ===== PRODUCTS (Edit Here Only) =====
+    const PRODUCTS = [
+      { name:"Canva Pro",      sub:"1 Month — Sharing / Private",  tags:["Sharing","Private","Ask Stock"], img:"Canva.jpg" },
+      { name:"Capcut Pro",     sub:"1 Month — Private",            tags:["Private","No Ads","Fast"],       img:"Capcut.jpg" },
+      { name:"Youtube Premium",sub:"1 Month — Invite",             tags:["Invite","No Ads","Ask Stock"],   img:"YOUTUBE.jpg" },
+      { name:"Chatgpt Go",     sub:"1 Year — Private",             tags:["Private","Long Term","Guided"],  img:"CHATGPT.jpg" },
+      { name:"Gemini Pro",     sub:"1 Month — Sharing / Private",  tags:["Sharing","Private","Ask Stock"], img:"GEMINI.jpg" },
+      { name:"Gemini Pro",     sub:"1 Year — Private",             tags:["Private","Long Term","Fast"],    img:"GEMINI.jpg" },
+      { name:"Spotify Premium",sub:"3 Months — Private",           tags:["Private","Music","Fast"],        img:"Spotify.jpg" },
+      { name:"Alight Motion",  sub:"1 Year — Private",             tags:["Private","Editor","Long Term"],  img:"ALIGHT MOTION.jpg" }
+    ];
+
+    // ===== RENDER PRODUCTS =====
+    const grid = document.getElementById("grid");
+
+    PRODUCTS.forEach((p, i) => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <div class="thumb">
+          <img src="${p.img}" alt="${p.name}">
+        </div>
+        <div class="card-body">
+          <h3 class="pname" style="color:${i % 3 === 0 ? "var(--accent2)" : (i % 3 === 1 ? "var(--accent)" : "var(--gold)")};">
+            ${p.name}
+          </h3>
+          <p class="psub">${p.sub}</p>
+          <div class="tags">
+            ${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+          </div>
+          <div class="row">
+            <a class="order" target="_blank" rel="noopener"
+              href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_TEXT + p.name + " (" + p.sub + ")")}">
+              ✅ Order
+            </a>
+            <span class="ask">Ask Price</span>
+          </div>
+        </div>
+      `;
+
+      // count order on click
+      card.querySelector(".order").addEventListener("click", addOrder);
+
+      grid.appendChild(card);
+    });
+
+    // ===== SCROLL REVEAL =====
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("show");
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".card").forEach(el => obs.observe(el));
+  </script>
 </body>
 </html>
