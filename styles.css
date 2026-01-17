@@ -1,33 +1,328 @@
-/* ===============================
-   GLOBAL BACKGROUND (FULL PAGE)
-   =============================== */
+/* ===================== THEME ===================== */
+:root{
+  --radius: 18px;
+  --max: 1080px;
 
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
+  --shadow: 0 18px 70px rgba(0,0,0,.35);
+  --stroke: rgba(255,255,255,.12);
+  --glass: rgba(10,18,30,.55);
+  --glass2: rgba(10,18,30,.38);
+
+  --text: #eaf2ff;
+  --muted: rgba(234,242,255,.72);
+
+  --btn: rgba(255,255,255,.08);
+  --btn2: rgba(255,255,255,.12);
+
+  --gold: #d7c08a;
+  --gold2:#a7d7ff;
+
+  --bubble: rgba(210, 170, 125, .28); /* coklat muda */
 }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+[data-theme="light"]{
+  --shadow: 0 18px 70px rgba(0,0,0,.12);
+  --stroke: rgba(0,0,0,.10);
+  --glass: rgba(255,255,255,.62);
+  --glass2: rgba(255,255,255,.45);
 
-  /* BACKGROUND IMAGE */
-  background-image: url("background.jpg");
-  background-size: cover;        /* full layar */
-  background-position: center;   /* tengah */
-  background-repeat: no-repeat;
-  background-attachment: fixed;  /* biar elegan */
+  --text: #0c1420;
+  --muted: rgba(12,20,32,.70);
 
-  /* OVERLAY BIAR TEKS JELAS */
-  position: relative;
-  color: #eef6ff;
+  --btn: rgba(0,0,0,.06);
+  --btn2: rgba(0,0,0,.10);
+
+  --gold: #8b6c36;
+  --gold2:#2b5ca0;
+
+  --bubble: rgba(180, 130, 80, .22);
 }
 
-/* DARK OVERLAY */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 18, 30, 0.78);
-  z-index: -1;
+/* ===================== BASE ===================== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--text);
+  overflow-x:hidden;
+
+  /* ✅ BACKGROUND DARI FILE UPLOAD */
+  background:
+    radial-gradient(900px 500px at 30% 10%, rgba(120,170,255,.18), transparent 60%),
+    radial-gradient(800px 600px at 80% 30%, rgba(255,210,170,.10), transparent 65%),
+    url("background.jpg");
+  background-size: cover, cover, cover;
+  background-position: center, center, center;
+  background-attachment: fixed;
 }
+
+.wrap{max-width:var(--max); margin:0 auto; padding:18px 14px 40px}
+
+/* ===================== TOPBAR ===================== */
+.topbar{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:14px 14px 0;
+  display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:50;
+  backdrop-filter: blur(14px);
+}
+.topbar::before{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.22), transparent);
+  pointer-events:none;
+}
+.brand{display:flex; gap:10px; align-items:center; position:relative}
+.brand-logo{
+  width:38px; height:38px; border-radius:10px;
+  object-fit:cover;
+  border:1px solid var(--stroke);
+  box-shadow: var(--shadow);
+}
+.brand-name{font-weight:900; letter-spacing:.4px}
+.brand-sub{font-size:12px; opacity:.8}
+
+.nav{display:flex; gap:10px; align-items:center; position:relative}
+.nav a{
+  text-decoration:none; color:var(--text);
+  font-weight:800; font-size:12px;
+  letter-spacing:.8px;
+  padding:10px 10px;
+  border-radius:999px;
+  background: transparent;
+}
+.nav a:hover{background: var(--btn)}
+.theme{
+  border:1px solid var(--stroke);
+  background: var(--btn);
+  color:var(--text);
+  border-radius:999px;
+  padding:10px 12px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+/* ===================== HERO ===================== */
+.hero{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap:14px;
+  align-items:stretch;
+}
+@media (max-width: 900px){
+  .hero{grid-template-columns:1fr}
+}
+
+.hero-card, .hero-media, .card, .step{
+  border:1px solid var(--stroke);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--glass), var(--glass2));
+  box-shadow: var(--shadow);
+}
+
+.hero-card{padding:18px; position:relative; overflow:hidden}
+.pill{
+  display:inline-flex;
+  padding:8px 12px;
+  border-radius:999px;
+  background: rgba(0,0,0,.10);
+  border:1px solid var(--stroke);
+  font-weight:900;
+  letter-spacing:.7px;
+  font-size:11px;
+  text-transform:uppercase;
+}
+.h1{
+  margin:12px 0 8px;
+  font-weight:950;
+  letter-spacing:1px;
+  font-size:32px;
+}
+.lead{margin:0 0 12px; color:var(--muted); line-height:1.55}
+
+.hero-actions{display:flex; flex-wrap:wrap; gap:10px; margin:12px 0}
+.btn{
+  text-decoration:none;
+  color:var(--text);
+  font-weight:900;
+  font-size:12px;
+  letter-spacing:.8px;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--stroke);
+  background: var(--btn);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.btn:hover{transform: translateY(-1px); background: var(--btn2)}
+.btn.primary{background: rgba(40,180,110,.22)}
+.btn.ghost{background: transparent}
+
+.stats{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+.stat{
+  font-size:11px;
+  padding:8px 10px;
+  border-radius:999px;
+  border:1px solid var(--stroke);
+  background: rgba(0,0,0,.08);
+  color:var(--muted);
+  font-weight:800;
+}
+
+/* total order */
+.order-counter{
+  margin-top:12px;
+  display:flex; align-items:center; gap:10px;
+}
+.badge{
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.8px;
+  padding:8px 10px;
+  border-radius:999px;
+  border:1px solid var(--stroke);
+  background: rgba(0,0,0,.08);
+}
+.count{
+  font-size:20px;
+  font-weight:950;
+  color: var(--gold2);
+}
+.mini{
+  margin-left:auto;
+  border:1px solid var(--stroke);
+  background: var(--btn);
+  color:var(--text);
+  padding:8px 10px;
+  border-radius:10px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.hero-media{overflow:hidden; position:relative}
+.hero-img{width:100%; height:100%; object-fit:cover; display:block; border-radius: var(--radius)}
+
+/* ===================== SECTIONS ===================== */
+.section{margin-top:18px}
+.section-title{
+  font-weight:950;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin:0 0 10px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* ===================== PRODUCTS ===================== */
+.product-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:12px;
+}
+@media (max-width: 650px){
+  .product-grid{grid-template-columns:1fr}
+}
+.card{
+  overflow:hidden;
+  position:relative;
+}
+.pimg{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  display:block;
+}
+
+/* ✅ Violet “stamp” kecil-kecil di card */
+.card::after{
+  content:"";
+  position:absolute;
+  right:-20px;
+  top:-20px;
+  width:110px;
+  height:110px;
+  background: url("deco-1.png") no-repeat center/contain;
+  opacity:.18;
+  transform: rotate(10deg);
+  pointer-events:none;
+}
+
+.card-body{padding:12px}
+.title{
+  margin:0;
+  font-weight:950;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  font-size:15px;
+}
+.sub{margin:6px 0 8px; color:var(--muted); font-size:12px}
+.tags{display:flex; gap:8px; flex-wrap:wrap}
+.tag{
+  font-size:11px;
+  padding:7px 9px;
+  border-radius:999px;
+  border:1px solid var(--stroke);
+  background: rgba(0,0,0,.06);
+  color:var(--muted);
+  font-weight:850;
+}
+.actions{display:flex; align-items:center; justify-content:space-between; margin-top:10px}
+.small{font-size:11px; color:var(--muted)}
+
+/* ===================== HOW ===================== */
+.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+@media (max-width: 900px){.steps{grid-template-columns:1fr}}
+.step{padding:14px; display:flex; gap:12px; align-items:flex-start}
+.step-num{font-weight:950; color:var(--gold); font-size:18px}
+.step-title{font-weight:950; letter-spacing:.6px}
+.step-desc{color:var(--muted); font-size:12px; margin-top:6px; line-height:1.55}
+
+/* ===================== SOCIAL ===================== */
+.social-row{display:flex; flex-wrap:wrap; gap:10px}
+.social{
+  text-decoration:none;
+  color:var(--text);
+  font-weight:950;
+  border:1px solid var(--stroke);
+  background: var(--btn);
+  padding:12px 14px;
+  border-radius:12px;
+}
+.social:hover{transform: translateY(-1px); background: var(--btn2)}
+
+/* ===================== FOOTER ===================== */
+.footer{margin-top:20px; padding:14px 2px 0}
+.footer-line{height:1px; background: var(--stroke); opacity:.8; margin-bottom:10px}
+.footer-text{color:var(--muted); font-size:12px; letter-spacing:.6px}
+
+/* ===================== REVEAL ANIM ===================== */
+.reveal{opacity:0; transform: translateY(10px); transition:.6s ease}
+.reveal.show{opacity:1; transform: translateY(0)}
+
+/* ===================== FALLING BUBBLES ===================== */
+#bubbles{
+  position:fixed; inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
+}
+.bubble{
+  position:absolute;
+  top:-120px;
+  width:70px; height:70px;
+  border-radius:999px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 55%),
+              var(--bubble);
+  filter: blur(.2px);
+  animation: fall linear forwards;
+}
+@keyframes fall{
+  to{ transform: translateY(120vh) translateX(var(--drift)); opacity:.10; }
+}
+
+/* biar konten di atas bubbles */
+.topbar, .wrap{position:relative; z-index:2}
