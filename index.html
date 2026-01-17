@@ -2,1171 +2,197 @@
 <html lang="id">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MII STORE — PREMIUM DIGITAL SERVICES</title>
-
-  <link rel="stylesheet" href="base.css" />
-  <link rel="stylesheet" href="components.css" />
-  <link rel="stylesheet" href="animations.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MII STORE — Premium Digital Services</title>
+  <meta name="description" content="Trusted provider of premium digital subscriptions. Order via WhatsApp, fast processing, clear guidance." />
+  <link rel="icon" href="logo.jpg" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-  <div class="bg-grain"></div>
-  <div class="bg-vignette"></div>
+  <!-- Background effects -->
+  <div class="bg">
+    <div class="grain"></div>
+    <div class="sparkles" aria-hidden="true"></div>
+  </div>
 
-  <!-- DECORATIONS (floating) -->
-  <div class="decor-wrap" id="decorWrap"></div>
+  <!-- Floating decorations -->
+  <img class="decor d1" src="decor-1.png" alt="" aria-hidden="true" />
+  <img class="decor d2" src="decor-2.png" alt="" aria-hidden="true" />
+  <img class="decor d3" src="decor-3.png" alt="" aria-hidden="true" />
 
-  <!-- HEADER -->
   <header class="topbar">
-    <div class="container topbar-inner">
-      <a class="brand" href="#top">
-        <img class="brand-logo" id="brandLogo" alt="MII STORE logo" />
-        <div class="brand-text">
-          <div class="brand-name">MII STORE</div>
-          <div class="brand-sub">PREMIUM DIGITAL SERVICES</div>
-        </div>
-      </a>
+    <a class="brand" href="#home">
+      <img class="brand-logo" src="logo.jpg" alt="MII STORE logo" />
+      <div class="brand-text">
+        <div class="brand-name">MII STORE</div>
+        <div class="brand-sub">PREMIUM DIGITAL SERVICES</div>
+      </div>
+    </a>
 
-      <nav class="nav">
-        <a href="#products">PRODUCTS</a>
-        <a href="#how">HOW TO ORDER</a>
-        <a href="#social">SOCIAL</a>
-        <a href="#faq">FAQ</a>
-      </nav>
+    <nav class="nav">
+      <a href="#products">PRODUCTS</a>
+      <a href="#order">HOW TO ORDER</a>
+      <a href="#social">SOCIAL</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="actions">
+      <button class="btn ghost" id="themeBtn" type="button" aria-label="Toggle theme">
+        <span class="icon">☾</span>
+        <span class="hide-sm">Mode</span>
+      </button>
+
+      <a class="btn primary" id="waTop" href="#" target="_blank" rel="noreferrer">
+        ORDER via WhatsApp
+      </a>
     </div>
   </header>
 
-  <!-- HERO -->
-  <main id="top" class="container">
-    <section class="hero">
-      <div class="hero-marquee" aria-hidden="true">
-        <div class="marquee-track">
-          <span>FAST SUPPLY • INTERNATIONAL • FAST SUPPLY • INTERNATIONAL • </span>
-          <span>FAST SUPPLY • INTERNATIONAL • FAST SUPPLY • INTERNATIONAL • </span>
+  <main id="home" class="wrap">
+    <!-- HERO -->
+    <section class="hero card reveal">
+      <div class="hero-left">
+        <div class="ticker">
+          <span>INTERNATIONAL</span><span>•</span>
+          <span>FAST SUPPLY</span><span>•</span>
+          <span>INTERNATIONAL</span><span>•</span>
+          <span>FAST SUPPLY</span><span>•</span>
+        </div>
+
+        <h1 class="title">PREMIUM DIGITAL SERVICES</h1>
+        <p class="subtitle">
+          Trusted provider of premium digital subscriptions (sharing/private depending on product).
+          Simple order via WhatsApp, fast processing, and clear guidance after purchase.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" id="waHero" href="#" target="_blank" rel="noreferrer">ORDER via WhatsApp</a>
+          <a class="btn" href="#products">VIEW PRODUCTS</a>
+          <a class="btn ghost" href="#order">HOW TO ORDER</a>
+        </div>
+
+        <div class="chips">
+          <span class="chip">⚡ Fast Response</span>
+          <span class="chip">✅ Clear Guidance</span>
+          <span class="chip">🌍 International Friendly</span>
+          <span class="chip">📦 Stock May Change</span>
         </div>
       </div>
 
-      <div class="hero-card">
-        <div class="hero-left">
-          <h1 class="title">PREMIUM DIGITAL SERVICES</h1>
-
-          <p class="desc">
-            PENYEDIA LANGGANAN DIGITAL PREMIUM TEPERCAYA (BERBAGI/PRIBADI TERGANTUNG PRODUK).
-            PEMESANAN MUDAH MELALUI WHATSAPP, PROSES CEPAT, DAN PANDUAN JELAS SETELAH PEMBELIAN.
-          </p>
-
-          <div class="cta-row">
-            <a class="btn primary" id="btnWaTop" target="_blank" rel="noreferrer">ORDER VIA WHATSAPP</a>
-            <a class="btn" href="#products">VIEW PRODUCTS</a>
-            <a class="btn" href="#how">HOW TO ORDER</a>
-          </div>
-
-          <div class="pill-row">
-            <div class="pill">⚡ FAST RESPONSE</div>
-            <div class="pill">✅ CLEAR GUIDANCE</div>
-            <div class="pill">🌍 INTERNATIONAL FRIENDLY</div>
-            <div class="pill">📦 STOCK MAY CHANGE</div>
-          </div>
-        </div>
-
-        <div class="hero-right">
-          <div class="hero-art">
-            <img id="heroImage" alt="Violet-inspired hero art" />
-            <div class="hero-glow"></div>
-          </div>
+      <div class="hero-right">
+        <div class="hero-img-wrap">
+          <img class="hero-img" src="hero.jpg" alt="Violet inspired hero art" />
         </div>
       </div>
     </section>
 
     <!-- WHY -->
-    <section class="section why">
-      <div class="section-card">
-        <div class="section-title">WHY MII STORE?</div>
-        <div class="why-head">FOCUSED ON CLEAN SERVICE</div>
-        <div class="why-sub">CLEAR INFO • FAST PROCESSING • SUPPORT AFTER PURCHASE</div>
-
-        <div class="mini-tags">
-          <span class="chip">WHATSAPP ORDERING</span>
-          <span class="chip">FAST DELIVERY</span>
-          <span class="chip">AFTER-SALES SUPPORT</span>
+    <section class="card reveal">
+      <h2 class="section-title">WHY MII STORE?</h2>
+      <div class="why-grid">
+        <div class="why">
+          <div class="why-title">Focused on Clean Service</div>
+          <div class="why-desc">Clear info • Fast processing • Support after purchase</div>
         </div>
-
-        <div class="note">
-          NOTE: POLICIES MAY VARY BY PRODUCT TYPE (SHARING/PRIVATE/INVITE). PLEASE CONFIRM BEFORE ORDERING.
+        <div class="why">
+          <div class="why-title">Friendly for Global Buyers</div>
+          <div class="why-desc">Easy communication • Simple steps • Quick confirmation</div>
         </div>
+        <div class="why">
+          <div class="why-title">Product Types Vary</div>
+          <div class="why-desc">Sharing / Private / Invite — depends on each product</div>
+        </div>
+      </div>
+      <div class="note">
+        Note: policies may vary by product type (sharing/private/invite). Please confirm before ordering.
       </div>
     </section>
 
     <!-- PRODUCTS -->
-    <section class="section" id="products">
-      <div class="section-title">PRODUCTS</div>
-      <div class="grid" id="productGrid"></div>
+    <section id="products" class="reveal">
+      <h2 class="section-title big">PRODUCTS</h2>
+      <div id="productGrid" class="product-grid"></div>
     </section>
 
     <!-- HOW TO ORDER -->
-    <section class="section" id="how">
-      <div class="section-title">HOW TO ORDER</div>
-      <div class="how-grid">
-        <div class="how-card">
-          <div class="how-num">01</div>
-          <div class="how-h">CHOOSE PRODUCT</div>
-          <div class="how-p">PILIH PRODUK & DURASI, LALU KLIK ORDER.</div>
+    <section id="order" class="card reveal">
+      <h2 class="section-title">HOW TO ORDER</h2>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <div class="step-title">Choose Product</div>
+            <div class="step-desc">Pick the service and duration, then click ORDER.</div>
+          </div>
         </div>
-        <div class="how-card">
-          <div class="how-num">02</div>
-          <div class="how-h">SEND DETAILS</div>
-          <div class="how-p">KIRIM DETAIL YANG DIBUTUHKAN (EMAIL/INVITE/AKUN) SESUAI PRODUK.</div>
+
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <div class="step-title">Send Details</div>
+            <div class="step-desc">Send required info (email/invite/account) based on the product.</div>
+          </div>
         </div>
-        <div class="how-card">
-          <div class="how-num">03</div>
-          <div class="how-h">PROCESS & GUIDE</div>
-          <div class="how-p">PROSES CEPAT + PANDUAN JELAS SETELAH PEMBELIAN.</div>
+
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <div class="step-title">Process & Guide</div>
+            <div class="step-desc">Fast processing + clear guidance after purchase.</div>
+          </div>
         </div>
+      </div>
+
+      <div class="order-bar">
+        <a class="btn primary" id="waOrder" href="#" target="_blank" rel="noreferrer">ORDER via WhatsApp</a>
+        <div class="order-hint">Tip: Ask stock first if the product is limited.</div>
       </div>
     </section>
 
     <!-- SOCIAL -->
-    <section class="section" id="social">
-      <div class="section-title">SOCIAL</div>
+    <section id="social" class="card reveal">
+      <h2 class="section-title">SOCIAL</h2>
       <div class="social-row">
-        <a class="social-btn wa" id="waBtn" target="_blank" rel="noreferrer">
-          <span class="icon">📲</span><span>WHATSAPP</span>
-        </a>
-        <a class="social-btn ig" id="igBtn" target="_blank" rel="noreferrer">
-          <span class="icon">📷</span><span>INSTAGRAM</span>
-        </a>
-        <a class="social-btn yt" id="ytBtn" target="_blank" rel="noreferrer">
-          <span class="icon">▶️</span><span>YOUTUBE</span>
-        </a>
-        <a class="social-btn tk" id="ttBtn" target="_blank" rel="noreferrer">
-          <span class="icon">🎵</span><span>TIKTOK</span>
-        </a>
+        <a class="social" href="#" id="socialWa" target="_blank" rel="noreferrer">💬 WhatsApp</a>
+        <a class="social" href="#" id="socialIg" target="_blank" rel="noreferrer">📷 Instagram</a>
+        <a class="social" href="#" id="socialYt" target="_blank" rel="noreferrer">▶️ YouTube</a>
+        <a class="social" href="#" id="socialTt" target="_blank" rel="noreferrer">🎵 TikTok</a>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section" id="faq">
-      <div class="section-title">FAQ</div>
+    <section id="faq" class="card reveal">
+      <h2 class="section-title">FAQ</h2>
 
       <div class="faq">
         <details>
-          <summary>GARANSI ADA?</summary>
-          <div class="faq-body">GARANSI TERGANTUNG PRODUK. TANYA DULU SAAT ORDER.</div>
+          <summary>Is there a warranty?</summary>
+          <div class="faq-body">Warranty depends on the product. Please confirm before ordering.</div>
         </details>
+
         <details>
-          <summary>BISA ORDER INTERNATIONAL?</summary>
-          <div class="faq-body">BISA. FAST SUPPLY • INTERNATIONAL FRIENDLY.</div>
+          <summary>Can I order from outside Indonesia?</summary>
+          <div class="faq-body">Yes. International friendly — fast supply and clear steps.</div>
         </details>
+
         <details>
-          <summary>PRODUK SHARING / PRIVATE?</summary>
-          <div class="faq-body">TERGANTUNG PRODUK. LABELNYA ADA DI CARD PRODUK.</div>
+          <summary>Sharing or Private?</summary>
+          <div class="faq-body">Depends on product type. Each product card shows the type.</div>
         </details>
       </div>
     </section>
 
     <footer class="footer">
       <div class="footer-line"></div>
-      <div class="footer-text">© <span id="year"></span> MII STORE — PREMIUM DIGITAL SERVICES</div>
+      <div class="footer-text">
+        © <span id="year"></span> MII STORE — Established since 2024
+      </div>
     </footer>
   </main>
 
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
-</html>:root{
-  --bg:#0b1220;
-  --bg2:#070c15;
-  --card: rgba(255,255,255,.06);
-  --card2: rgba(255,255,255,.08);
-  --stroke: rgba(255,255,255,.10);
-
-  --text:#eaf2ff;
-  --muted: rgba(234,242,255,.72);
-
-  --gold: #c7ab6a;
-  --gold2:#e0c98a;
-
-  --violet:#31415e;
-  --violet2:#22304a;
-
-  --shadow: 0 16px 50px rgba(0,0,0,.45);
-  --radius: 22px;
-}
-
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: ui-serif, Georgia, "Times New Roman", serif;
-  background: radial-gradient(1200px 700px at 20% 10%, rgba(199,171,106,.12), transparent 55%),
-              radial-gradient(900px 600px at 80% 20%, rgba(49,65,94,.22), transparent 60%),
-              linear-gradient(180deg, var(--bg), var(--bg2));
-  color:var(--text);
-  overflow-x:hidden;
-}
-
-a{color:inherit;text-decoration:none}
-.container{
-  width:min(1100px, calc(100% - 32px));
-  margin:0 auto;
-}
-
-.bg-grain{
-  position:fixed; inset:0;
-  pointer-events:none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
-  opacity:.35;
-}
-.bg-vignette{
-  position:fixed; inset:-1px;
-  pointer-events:none;
-  background: radial-gradient(circle at 50% 35%, transparent 50%, rgba(0,0,0,.55) 100%);
-  opacity:.8;
-}
-
-.section{margin:26px 0 0}
-.section-title{
-  font-family: ui-serif, Georgia, "Times New Roman", serif;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  font-size:14px;
-  color:rgba(224,201,138,.92);
-  margin:18px 4px 12px;
-}
-
-.footer{padding:34px 0 40px}
-.footer-line{
-  height:1px;background:linear-gradient(90deg, transparent, rgba(199,171,106,.35), transparent);
-  margin-bottom:14px;
-}
-.footer-text{
-  font-size:12px; letter-spacing:.12em; text-transform:uppercase;
-  color:rgba(234,242,255,.55);
-}.topbar{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter: blur(10px);
-  background: linear-gradient(180deg, rgba(7,12,21,.78), rgba(7,12,21,.35));
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-.topbar-inner{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:12px 0;
-  gap:16px;
-}
-.brand{display:flex; align-items:center; gap:12px}
-.brand-logo{
-  width:42px;height:42px;border-radius:14px;
-  border:1px solid rgba(199,171,106,.25);
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-  object-fit:cover;
-}
-.brand-name{
-  font-weight:700; letter-spacing:.2em; text-transform:uppercase;
-  font-size:13px;
-}
-.brand-sub{
-  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-  color:rgba(234,242,255,.55);
-}
-.nav{display:flex; gap:16px; align-items:center}
-.nav a{
-  font-size:12px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:rgba(234,242,255,.7);
-  padding:10px 10px;
-  border-radius:12px;
-}
-.nav a:hover{background:rgba(255,255,255,.06); color:rgba(234,242,255,.9)}
-
-.hero{padding:18px 0 0}
-.hero-marquee{
-  position:relative;
-  height:34px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.08);
-  background:rgba(255,255,255,.04);
-  overflow:hidden;
-  margin:12px 0 12px;
-}
-.marquee-track{
-  display:flex;
-  width:max-content;
-  gap:0;
-  padding-left:10px;
-}
-.marquee-track span{
-  font-size:12px;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:rgba(224,201,138,.9);
-  white-space:nowrap;
-  padding:9px 0;
-}
-
-.hero-card{
-  display:grid;
-  grid-template-columns: 1.15fr .85fr;
-  gap:16px;
-  padding:18px;
-  border-radius: var(--radius);
-  border:1px solid rgba(255,255,255,.09);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  box-shadow: var(--shadow);
-}
-.title{
-  margin:0;
-  font-size:32px;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-}
-.desc{
-  margin:12px 0 16px;
-  color:rgba(234,242,255,.72);
-  letter-spacing:.06em;
-  line-height:1.55;
-  text-transform:uppercase;
-  font-size:12px;
-}
-
-.cta-row{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 14px}
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:10px 12px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.06);
-  color:rgba(234,242,255,.86);
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  font-size:11px;
-}
-.btn:hover{background: rgba(255,255,255,.09)}
-.btn.primary{
-  background: linear-gradient(180deg, rgba(199,171,106,.24), rgba(199,171,106,.12));
-  border-color: rgba(199,171,106,.35);
-}
-
-.pill-row{display:flex; flex-wrap:wrap; gap:10px}
-.pill{
-  font-size:11px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  padding:9px 12px;
-  border-radius:999px;
-  background: rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  color:rgba(234,242,255,.78);
-}
-
-.hero-right{display:flex; align-items:stretch}
-.hero-art{
-  position:relative;
-  width:100%;
-  border-radius: 20px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.08);
-  background: radial-gradient(700px 380px at 40% 0%, rgba(199,171,106,.14), transparent 60%),
-              linear-gradient(180deg, rgba(34,48,74,.7), rgba(7,12,21,.6));
-  min-height: 290px;
-}
-.hero-art img{
-  position:absolute; inset:0;
-  width:100%; height:100%;
-  object-fit:cover;
-  opacity:.95;
-  transform: scale(1.02);
-}
-.hero-glow{
-  position:absolute; inset:-30%;
-  background: radial-gradient(circle at 70% 20%, rgba(224,201,138,.18), transparent 55%),
-              radial-gradient(circle at 20% 60%, rgba(49,65,94,.28), transparent 60%);
-  mix-blend-mode: screen;
-}
-
-.section-card{
-  padding:18px;
-  border-radius: var(--radius);
-  border:1px solid rgba(255,255,255,.09);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  box-shadow: var(--shadow);
-}
-.why-head{
-  margin-top:8px;
-  font-size:14px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-.why-sub{
-  margin-top:6px;
-  font-size:12px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:rgba(234,242,255,.65);
-}
-.mini-tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
-.chip{
-  font-size:10px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  padding:8px 10px;
-  border-radius:999px;
-  background: rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  color:rgba(234,242,255,.75);
-}
-.note{
-  margin-top:12px;
-  font-size:10px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:rgba(234,242,255,.55);
-}
-
-.grid{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap:12px;
-}
-.card{
-  border-radius: var(--radius);
-  border:1px solid rgba(255,255,255,.09);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  box-shadow: var(--shadow);
-  overflow:hidden;
-}
-.card-top{
-  display:flex; gap:12px;
-  padding:14px;
-  align-items:center;
-}
-.prod-img{
-  width:54px; height:54px;
-  border-radius:16px;
-  object-fit:cover;
-  border:1px solid rgba(199,171,106,.25);
-  background: rgba(255,255,255,.04);
-}
-.prod-title{
-  font-size:13px;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  margin:0 0 4px;
-}
-.prod-sub{
-  font-size:11px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:rgba(234,242,255,.62);
-  margin:0;
-}
-.card-mid{padding:0 14px 14px}
-.tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
-.tag{
-  font-size:10px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  padding:7px 9px;
-  border-radius:999px;
-  background: rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  color:rgba(234,242,255,.75);
-}
-.card-actions{
-  display:flex; justify-content:space-between; align-items:center;
-  padding:12px 14px 14px;
-  border-top:1px solid rgba(255,255,255,.06);
-}
-.order-btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:10px 12px;
-  border-radius:14px;
-  border:1px solid rgba(199,171,106,.35);
-  background: linear-gradient(180deg, rgba(199,171,106,.22), rgba(199,171,106,.10));
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  font-size:11px;
-}
-.order-btn:hover{filter:brightness(1.06)}
-.small-muted{
-  font-size:10px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:rgba(234,242,255,.55);
-}
-
-.how-grid{
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap:12px;
-}
-.how-card{
-  padding:16px;
-  border-radius: var(--radius);
-  border:1px solid rgba(255,255,255,.09);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  box-shadow: var(--shadow);
-}
-.how-num{
-  font-size:12px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:rgba(224,201,138,.9);
-}
-.how-h{
-  margin-top:8px;
-  font-size:12px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-.how-p{
-  margin-top:8px;
-  font-size:11px;
-  letter-spacing:.10em;
-  text-transform:uppercase;
-  color:rgba(234,242,255,.65);
-  line-height:1.55;
-}
-
-.social-row{
-  display:flex; flex-wrap:wrap; gap:12px;
-}
-.social-btn{
-  flex:1;
-  min-width: 170px;
-  display:flex; align-items:center; justify-content:center;
-  gap:10px;
-  padding:12px 14px;
-  border-radius: 18px;
-  border:1px solid rgba(255,255,255,.09);
-  background: rgba(255,255,255,.05);
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  font-size:11px;
-  box-shadow: var(--shadow);
-}
-.social-btn .icon{font-size:16px}
-.social-btn:hover{background: rgba(255,255,255,.08)}
-
-.faq details{
-  border-radius: 18px;
-  border:1px solid rgba(255,255,255,.09);
-  background: rgba(255,255,255,.05);
-  padding:12px 14px;
-  margin-bottom:10px;
-}
-.faq summary{
-  cursor:pointer;
-  list-style:none;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  font-size:11px;
-}
-.faq summary::-webkit-details-marker{display:none}
-.faq-body{
-  margin-top:10px;
-  color:rgba(234,242,255,.65);
-  letter-spacing:.10em;
-  text-transform:uppercase;
-  font-size:11px;
-  line-height:1.55;
-}
-
-.decor-wrap{
-  position:fixed; inset:0;
-  pointer-events:none;
-  z-index:5;
-}
-
-@media (max-width: 880px){
-  .hero-card{grid-template-columns:1fr}
-  .nav{display:none}
-  .grid{grid-template-columns:1fr}
-  .how-grid{grid-template-columns:1fr}
-  .title{font-size:26px}
-}.topbar{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter: blur(10px);
-  background: linear-gradient(180deg, rgba(7,12,21,.78), rgba(7,12,21,.35));
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-.topbar-inner{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:12px 0;
-  gap:16px;
-}
-.brand{display:flex; align-items:center; gap:12px}
-.brand-logo{
-  width:42px;height:42px;border-radius:14px;
-  border:1px solid rgba(199,171,106,.25);
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-  object-fit:cover;
-}
-.brand-name{
-  font-weight:700; letter-spacing:.2em; text-transform:uppercase;
-  font-size:13px;
-}
-.brand-sub{
-  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-  color:rgba(234,242,255,.55);
-}
-.nav{display:flex; gap:16px; align-items:center}
-.nav a{
-  font-size:12px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:rgba(234,242,255,.7);
-  padding:10px 10px;
-  border-radius:12px;
-}
-.nav a:hover{background:rgba(255,255,255,.06); color:rgba(234,242,255,.9)}
-
-.hero{padding:18px 0 0}
-.hero-marquee{
-  position:relative;
-  height:34px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.08);
-  background:rgba(255,255,255,.04);
-  overflow:hidden;
-  margin:12px 0 12px;
-}
-.marquee-track{
-  display:flex;
-  width:max-content;
-  gap:0;
-  padding-left:10px;
-}
-.marquee-track span{
-  font-size:12px;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:rgba(224,201,138,.9);
-  white-space:nowrap;
-  padding:9px 0;
-}
-
-.hero-card{
-  display:grid;
-  grid-template-columns: 1.15fr .85fr;
-  gap:16px;
-  padding:18px;
-  border-radius: var(--radius);
-  border:1px solid rgba(255,255,255,.09);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  box-shadow: var(--shadow);
-}
-.title{
-  margin:0;
-  font-size:32px;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-}
-.desc{
-  margin:12px 0 16px;
-  color:rgba(234,242,255,.72);
-  letter-spacing:.06em;
-  line-height:1.55;
-  text-transform:uppercase;
-  font-size:12px;
-}
-
-.cta-row{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 14px}
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:10px 12px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.06);
-  color:rgba(234,242,255,.86);
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  font-size:11px;
-}
-.btn:hover{background: rgba(255,255,255,.09)}
-.btn.primary{
-  background: linear-gradient(180deg, rgba(199,171,106,.24), rgba(199,171,106,.12));
-  border-color: rgba(199,171,106,.35);
-}
-
-.pill-row{display:flex; flex-wrap:wrap; gap:10px}
-.pill{
-  font-size:11px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  padding:9px 12px;
-  border-radius:999px;
-  background: rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  color:rgba(234,242,255,.78);
-}
-
-.hero-right{display:flex; align-items:stretch}
-.hero-art{
-  position:relative;
-  width:100%;
-  border-radius: 20px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.08);
-  background: radial-gradient(700px 380px at 40% 0%, rgba(199,171,106,.14), transparent 60%),
-              linear-gradient(180deg, rgba(34,48,74,.7), rgba(7,12,21,.6));
-  min-height: 290px;
-}
-.hero-art img{
-  position:absolute; inset:0;
-  width:100%; height:100%;
-  object-fit:cover;
-  opacity:.95;
-  transform: scale(1.02);
-}
-.hero-glow{
-  position:absolute; inset:-30%;
-  background: radial-gradient(circle at 70% 20%, rgba(224,201,138,.18), transparent 55%),
-              radial-gradient(circle at 20% 60%, rgba(49,65,94,.28), transparent 60%);
-  mix-blend-mode: screen;
-}
-
-.section-card{
-  padding:18px;
-  border-radius: var(--radius);
-  border:1px solid rgba(255,255,255,.09);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  box-shadow: var(--shadow);
-}
-.why-head{
-  margin-top:8px;
-  font-size:14px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-.why-sub{
-  margin-top:6px;
-  font-size:12px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:rgba(234,242,255,.65);
-}
-.mini-tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
-.chip{
-  font-size:10px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  padding:8px 10px;
-  border-radius:999px;
-  background: rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  color:rgba(234,242,255,.75);
-}
-.note{
-  margin-top:12px;
-  font-size:10px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:rgba(234,242,255,.55);
-}
-
-.grid{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap:12px;
-}
-.card{
-  border-radius: var(--radius);
-  border:1px solid rgba(255,255,255,.09);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  box-shadow: var(--shadow);
-  overflow:hidden;
-}
-.card-top{
-  display:flex; gap:12px;
-  padding:14px;
-  align-items:center;
-}
-.prod-img{
-  width:54px; height:54px;
-  border-radius:16px;
-  object-fit:cover;
-  border:1px solid rgba(199,171,106,.25);
-  background: rgba(255,255,255,.04);
-}
-.prod-title{
-  font-size:13px;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  margin:0 0 4px;
-}
-.prod-sub{
-  font-size:11px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:rgba(234,242,255,.62);
-  margin:0;
-}
-.card-mid{padding:0 14px 14px}
-.tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
-.tag{
-  font-size:10px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  padding:7px 9px;
-  border-radius:999px;
-  background: rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  color:rgba(234,242,255,.75);
-}
-.card-actions{
-  display:flex; justify-content:space-between; align-items:center;
-  padding:12px 14px 14px;
-  border-top:1px solid rgba(255,255,255,.06);
-}
-.order-btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:10px 12px;
-  border-radius:14px;
-  border:1px solid rgba(199,171,106,.35);
-  background: linear-gradient(180deg, rgba(199,171,106,.22), rgba(199,171,106,.10));
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  font-size:11px;
-}
-.order-btn:hover{filter:brightness(1.06)}
-.small-muted{
-  font-size:10px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:rgba(234,242,255,.55);
-}
-
-.how-grid{
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap:12px;
-}
-.how-card{
-  padding:16px;
-  border-radius: var(--radius);
-  border:1px solid rgba(255,255,255,.09);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  box-shadow: var(--shadow);
-}
-.how-num{
-  font-size:12px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:rgba(224,201,138,.9);
-}
-.how-h{
-  margin-top:8px;
-  font-size:12px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-.how-p{
-  margin-top:8px;
-  font-size:11px;
-  letter-spacing:.10em;
-  text-transform:uppercase;
-  color:rgba(234,242,255,.65);
-  line-height:1.55;
-}
-
-.social-row{
-  display:flex; flex-wrap:wrap; gap:12px;
-}
-.social-btn{
-  flex:1;
-  min-width: 170px;
-  display:flex; align-items:center; justify-content:center;
-  gap:10px;
-  padding:12px 14px;
-  border-radius: 18px;
-  border:1px solid rgba(255,255,255,.09);
-  background: rgba(255,255,255,.05);
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  font-size:11px;
-  box-shadow: var(--shadow);
-}
-.social-btn .icon{font-size:16px}
-.social-btn:hover{background: rgba(255,255,255,.08)}
-
-.faq details{
-  border-radius: 18px;
-  border:1px solid rgba(255,255,255,.09);
-  background: rgba(255,255,255,.05);
-  padding:12px 14px;
-  margin-bottom:10px;
-}
-.faq summary{
-  cursor:pointer;
-  list-style:none;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  font-size:11px;
-}
-.faq summary::-webkit-details-marker{display:none}
-.faq-body{
-  margin-top:10px;
-  color:rgba(234,242,255,.65);
-  letter-spacing:.10em;
-  text-transform:uppercase;
-  font-size:11px;
-  line-height:1.55;
-}
-
-.decor-wrap{
-  position:fixed; inset:0;
-  pointer-events:none;
-  z-index:5;
-}
-
-@media (max-width: 880px){
-  .hero-card{grid-template-columns:1fr}
-  .nav{display:none}
-  .grid{grid-template-columns:1fr}
-  .how-grid{grid-template-columns:1fr}
-  .title{font-size:26px}
-}/* Marquee loop */
-.marquee-track{
-  animation: marquee 14s linear infinite;
-}
-@keyframes marquee{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
-}
-
-/* Floating particles (light) */
-@keyframes floaty {
-  0%{transform:translateY(0) translateX(0)}
-  50%{transform:translateY(-10px) translateX(4px)}
-  100%{transform:translateY(0) translateX(0)}
-}
-
-/* Social bounce loop */
-.social-btn{
-  animation: softPulse 2.8s ease-in-out infinite;
-}
-.social-btn.ig{animation-delay:.2s}
-.social-btn.yt{animation-delay:.4s}
-.social-btn.tk{animation-delay:.6s}
-
-@keyframes softPulse{
-  0%,100%{transform:translateY(0); filter:brightness(1)}
-  50%{transform:translateY(-3px); filter:brightness(1.06)}
-}
-
-/* Decorations float */
-.decor{
-  position:absolute;
-  opacity:.9;
-  filter: drop-shadow(0 18px 28px rgba(0,0,0,.35));
-  animation: decorFloat 6s ease-in-out infinite;
-}
-.decor.d2{animation-duration:7.5s}
-.decor.d3{animation-duration:8.2s}
-
-@keyframes decorFloat{
-  0%,100%{transform:translateY(0) rotate(-1deg)}
-  50%{transform:translateY(-14px) rotate(1deg)}
-}// === CONFIG ===
-// WA kamu:
-const WHATSAPP_NUMBER = "6282191223912";
-
-// Social links (isi sesuai akunmu)
-const SOCIAL = {
-  instagram: "https://www.instagram.com/asami.am0/",
-  youtube: "https://www.youtube.com/@mii._002",
-  tiktok: "https://www.tiktok.com/@mii._002/"
-};
-
-// Images (pakai nama file yang kamu upload di folder /ID)
-const ASSETS = {
-  // Logo 1:1 (kamu sudah punya ini)
-  logo: "Picsart_26-01-16_21-26-39-597.jpg",
-
-  // Hero art 16:32 (kamu upload yang wide itu)
-  hero: "0ee77f13d04bd9cb4b5dfa8bd8fbab3e.jpg",
-
-  // Decorations (3 PNG Violet) — isi dengan nama file PNG kamu (lebih enak kalau rename jadi deco1.png dll)
-  // Kalau kamu belum rename, nanti aku ajarin cara ambil nama + linknya (copy raw).
-  deco1: "", // contoh: "deco-1.png"
-  deco2: "",
-  deco3: ""
-};
-
-// Product images (yang kamu sebut)
-const PRODUCT_IMAGES = {
-  CANVA: "Canva.jpg",
-  CAPCUT: "Capcut.jpg",
-  YOUTUBE: "YOUTUBE.jpg",
-  CHATGPT: "CHATGPT.jpg",
-  GEMINI: "GEMINI.jpg",
-  SPOTIFY: "Spotify.jpg",
-  ALIGHT: "ALIGHT MOTION.jpg"
-};
-
-// Product list
-const PRODUCTS = [
-  {
-    id: "canva",
-    name: "CANVA PRO",
-    duration: "1 MONTH",
-    type: "SHARING / PRIVATE",
-    image: PRODUCT_IMAGES.CANVA,
-    tags: ["SHARING", "PRIVATE", "ASK STOCK"],
-    waText: "ORDER CANVA PRO (1 MONTH) — SHARING/PRIVATE. PLEASE CONFIRM STOCK & PRICE."
-  },
-  {
-    id: "youtube",
-    name: "YOUTUBE PREMIUM",
-    duration: "1 MONTH",
-    type: "INVITE",
-    image: PRODUCT_IMAGES.YOUTUBE,
-    tags: ["INVITE", "NO ADS", "ASK STOCK"],
-    waText: "ORDER YOUTUBE PREMIUM (1 MONTH) — INVITE. PLEASE CONFIRM STOCK & PRICE."
-  },
-  {
-    id: "gemini",
-    name: "GEMINI PRO",
-    duration: "1 MONTH",
-    type: "SHARING / PRIVATE",
-    image: PRODUCT_IMAGES.GEMINI,
-    tags: ["SHARING", "PRIVATE", "ASK STOCK"],
-    waText: "ORDER GEMINI PRO (1 MONTH) — SHARING/PRIVATE. PLEASE CONFIRM STOCK & PRICE."
-  },
-  {
-    id: "chatgpt",
-    name: "CHATGPT",
-    duration: "1 MONTH / 1 YEAR",
-    type: "PRIVATE (DEPENDS)",
-    image: PRODUCT_IMAGES.CHATGPT,
-    tags: ["PRIVATE", "FAST", "ASK STOCK"],
-    waText: "ORDER CHATGPT — PLEASE CONFIRM PLAN (MONTH/YEAR) + STOCK & PRICE."
-  },
-  {
-    id: "capcut",
-    name: "CAPCUT PRO",
-    duration: "1 MONTH",
-    type: "PRIVATE / INVITE (DEPENDS)",
-    image: PRODUCT_IMAGES.CAPCUT,
-    tags: ["FAST", "GUIDE", "ASK STOCK"],
-    waText: "ORDER CAPCUT PRO (1 MONTH) — PLEASE CONFIRM TYPE (PRIVATE/INVITE) + PRICE."
-  },
-  {
-    id: "spotify",
-    name: "SPOTIFY PREMIUM",
-    duration: "3 MONTHS",
-    type: "INVITE / UPGRADE (DEPENDS)",
-    image: PRODUCT_IMAGES.SPOTIFY,
-    tags: ["3 MONTHS", "FAST", "ASK STOCK"],
-    waText: "ORDER SPOTIFY PREMIUM (3 MONTHS) — PLEASE CONFIRM TYPE (INVITE/UPGRADE) + PRICE."
-  },
-  {
-    id: "alight",
-    name: "ALIGHT MOTION PRO",
-    duration: "1 YEAR",
-    type: "PRIVATE / LICENSE (DEPENDS)",
-    image: PRODUCT_IMAGES.ALIGHT,
-    tags: ["1 YEAR", "MOBILE", "ASK STOCK"],
-    waText: "ORDER ALIGHT MOTION PRO (1 YEAR) — PLEASE CONFIRM TYPE (PRIVATE/LICENSE) + PRICE."
-  }
-];function waLink(message){
-  const text = encodeURIComponent(message);
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
-}
-
-function setImage(el, fileName){
-  // kalau fileName sudah berupa URL https://... maka pakai langsung
-  if (!fileName) return;
-  if (fileName.startsWith("http")) {
-    el.src = fileName;
-    return;
-  }
-  el.src = fileName; // asumsi file ada di folder /ID yang sama dengan index.html
-}
-
-function renderProducts(){
-  const grid = document.getElementById("productGrid");
-  grid.innerHTML = "";
-
-  PRODUCTS.forEach(p => {
-    const card = document.createElement("div");
-    card.className = "card";
-
-    card.innerHTML = `
-      <div class="card-top">
-        <img class="prod-img" alt="${p.name}" />
-        <div>
-          <p class="prod-title">${p.name}</p>
-          <p class="prod-sub">${p.duration} — ${p.type}</p>
-        </div>
-      </div>
-
-      <div class="card-mid">
-        <div class="tag-row">
-          ${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}
-        </div>
-      </div>
-
-      <div class="card-actions">
-        <div class="small-muted">FAST SUPPLY • INTERNATIONAL</div>
-        <a class="order-btn" target="_blank" rel="noreferrer">ORDER</a>
-      </div>
-    `;
-
-    // set image
-    const img = card.querySelector(".prod-img");
-    setImage(img, p.image);
-
-    // wa button
-    const btn = card.querySelector(".order-btn");
-    btn.href = waLink(p.waText);
-
-    grid.appendChild(card);
-  });
-}
-
-function renderDecor(){
-  const wrap = document.getElementById("decorWrap");
-  wrap.innerHTML = "";
-
-  const list = [
-    { src: ASSETS.deco1, cls:"decor d1", style:"left:-14px; top:130px; width:160px; opacity:.85;" },
-    { src: ASSETS.deco2, cls:"decor d2", style:"right:-18px; top:260px; width:170px; opacity:.82;" },
-    { src: ASSETS.deco3, cls:"decor d3", style:"left:18px; bottom:60px; width:150px; opacity:.78;" }
-  ].filter(x => x.src && x.src.trim().length);
-
-  list.forEach(d => {
-    const img = document.createElement("img");
-    img.className = d.cls;
-    img.style = d.style;
-    setImage(img, d.src);
-    wrap.appendChild(img);
-  });
-}
-
-function initTopLinks(){
-  // Logo & Hero
-  setImage(document.getElementById("brandLogo"), ASSETS.logo);
-  setImage(document.getElementById("heroImage"), ASSETS.hero);
-
-  // Top WA button
-  const topWa = document.getElementById("btnWaTop");
-  topWa.href = waLink("HALO MII STORE, SAYA MAU ORDER. PRODUK: ____ DURASI: ____");
-
-  // Social buttons
-  document.getElementById("waBtn").href = waLink("HALO MII STORE, SAYA MAU ORDER. PRODUK: ____ DURASI: ____");
-  document.getElementById("igBtn").href = SOCIAL.instagram;
-  document.getElementById("ytBtn").href = SOCIAL.youtube;
-  document.getElementById("ttBtn").href = SOCIAL.tiktok;
-
-  // Year
-  document.getElementById("year").textContent = new Date().getFullYear();
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  initTopLinks();
-  renderProducts();
-  renderDecor();
-});
+          </html>
