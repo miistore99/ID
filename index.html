@@ -1,805 +1,1172 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MII STORE — PREMIUM DIGITAL SERVICES</title>
 
-  <!-- Fonts (elegan: serif + clean) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="components.css" />
+  <link rel="stylesheet" href="animations.css" />
+</head>
+<body>
+  <div class="bg-grain"></div>
+  <div class="bg-vignette"></div>
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- DECORATIONS (floating) -->
+  <div class="decor-wrap" id="decorWrap"></div>
 
-  <style>
-    :root{
-      /* VIOLET EVERGARDEN INSPIRED PALETTE (mirip foto: cream + teal + navy + blush) */
-      --bg0:#0b1620;      /* navy deep */
-      --bg1:#0f2331;      /* teal navy */
-      --bg2:#112a3c;      /* panel */
-      --cream:#efe6cf;    /* hat cream */
-      --blush:#e9c4b4;    /* hair peach */
-      --teal:#74c7d3;     /* eye teal */
-      --teal2:#3aa7b8;
-      --ink:#eaf4ff;
-      --muted:rgba(234,244,255,.72);
-      --line:rgba(234,244,255,.12);
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.09);
-      --shadow:0 22px 70px rgba(0,0,0,.55);
-      --r:22px;
-    }
-
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(900px 520px at 22% 12%, rgba(116,199,211,.14), transparent 60%),
-        radial-gradient(900px 620px at 85% 20%, rgba(233,196,180,.12), transparent 62%),
-        radial-gradient(760px 520px at 50% 88%, rgba(58,167,184,.10), transparent 62%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-      min-height:100vh;
-      overflow-x:hidden;
-    }
-
-    a{color:inherit;text-decoration:none}
-    .container{width:min(1120px, 92vw); margin:0 auto}
-    .upper{letter-spacing:.08em; text-transform:uppercase}
-
-    /* Background floating “petals” */
-    .petals{
-      position:fixed; inset:-40px; pointer-events:none; z-index:-1;
-      opacity:.55; filter: blur(0.2px);
-    }
-    .petal{
-      position:absolute; width:10px; height:10px; border-radius:999px;
-      background: radial-gradient(circle at 30% 30%, rgba(239,230,207,.9), rgba(233,196,180,.45));
-      box-shadow: 0 0 18px rgba(233,196,180,.22);
-      animation: drift 10s linear infinite;
-      opacity:.7;
-    }
-    @keyframes drift{
-      0%{ transform: translate3d(0,0,0) rotate(0deg); }
-      100%{ transform: translate3d(120px, 520px, 0) rotate(280deg); }
-    }
-
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:50;
-      background: linear-gradient(180deg, rgba(11,22,32,.82), rgba(11,22,32,.35));
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:14px;
-    }
-
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      min-width: 220px;
-    }
-
-    /* VE-inspired logo (bukan logo resmi) */
-    .logo{
-      width:42px; height:42px; border-radius:14px;
-      background:
-        radial-gradient(18px 18px at 35% 35%, rgba(116,199,211,.85), transparent 60%),
-        radial-gradient(24px 24px at 70% 75%, rgba(233,196,180,.55), transparent 60%),
-        linear-gradient(135deg, rgba(239,230,207,.18), rgba(116,199,211,.14));
-      border:1px solid rgba(239,230,207,.22);
-      box-shadow: 0 14px 40px rgba(0,0,0,.45);
-      position:relative;
-      overflow:hidden;
-    }
-    .logo:before{
-      content:"";
-      position:absolute; inset:-40%;
-      background: conic-gradient(from 180deg, transparent, rgba(239,230,207,.22), transparent);
-      animation: sheen 6s linear infinite;
-    }
-    @keyframes sheen{
-      0%{ transform: rotate(0deg); }
-      100%{ transform: rotate(360deg); }
-    }
-    .brandText{
-      display:flex; flex-direction:column; line-height:1.05;
-    }
-    .brandText b{
-      font-family: "Cormorant Garamond", serif;
-      font-size:20px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-    .brandText span{
-      font-size:11px; opacity:.78;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-    }
-
-    .navLinks{
-      display:flex; gap:16px; align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .navLinks a{
-      font-size:12px; letter-spacing:.12em;
-      text-transform:uppercase;
-      opacity:.8;
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid transparent;
-      transition: transform .18s ease, opacity .18s ease, border-color .18s ease, background .18s ease;
-    }
-    .navLinks a:hover{
-      opacity:1;
-      transform: translateY(-2px);
-      border-color: rgba(239,230,207,.18);
-      background: rgba(255,255,255,.04);
-    }
-
-    /* Hero */
-    .heroWrap{ padding:26px 0 10px; }
-    .hero{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    @media (max-width: 980px){
-      .hero{ grid-template-columns: 1fr; }
-      .brand{ min-width:auto; }
-    }
-
-    .panel{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
-      border:1px solid var(--line);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-      padding:22px;
-      position:relative;
-      overflow:hidden;
-    }
-    .panel:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(400px 160px at 10% 10%, rgba(239,230,207,.10), transparent 60%),
-        radial-gradient(420px 180px at 85% 20%, rgba(116,199,211,.12), transparent 62%);
-      pointer-events:none;
-    }
-
-    /* Hero Image (kamu kasih gambar → tinggal ganti URL) */
-    .heroArt{
-      display:flex; align-items:center; justify-content:center;
-      border-radius: 18px;
-      border:1px solid rgba(239,230,207,.16);
-      background: rgba(0,0,0,.18);
-      overflow:hidden;
-      aspect-ratio: 16/10;
-      position:relative;
-    }
-    .heroArt img{
-      width:100%; height:100%; object-fit:cover;
-      opacity:.92;
-      transform: scale(1.02);
-      filter: contrast(1.02) saturate(1.08);
-    }
-    .heroArt .artGlow{
-      position:absolute; inset:-30%;
-      background: radial-gradient(circle at 30% 30%, rgba(116,199,211,.18), transparent 55%),
-                  radial-gradient(circle at 70% 60%, rgba(233,196,180,.12), transparent 60%);
-      filter: blur(22px);
-      animation: artPulse 5.5s ease-in-out infinite alternate;
-      pointer-events:none;
-    }
-    @keyframes artPulse{
-      from{ transform: translate3d(-10px,-8px,0) scale(1); opacity:.55; }
-      to{ transform: translate3d(12px,10px,0) scale(1.05); opacity:.8; }
-    }
-
-    /* Animated ticker (FAST SUPPLY • INTERNATIONAL) */
-    .ticker{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      padding:10px 12px;
-      border:1px solid rgba(239,230,207,.16);
-      background: rgba(0,0,0,.16);
-      border-radius: 999px;
-      overflow:hidden;
-      width: fit-content;
-      max-width:100%;
-    }
-    .dot{
-      width:10px; height:10px; border-radius:99px;
-      background: rgba(116,199,211,.9);
-      box-shadow: 0 0 16px rgba(116,199,211,.35);
-      flex:0 0 auto;
-      animation: dotBlink 1.4s ease-in-out infinite;
-    }
-    @keyframes dotBlink{
-      0%,100%{ transform: scale(.9); opacity:.7; }
-      50%{ transform: scale(1.25); opacity:1; }
-    }
-    .marquee{
-      position:relative;
-      white-space:nowrap;
-      font-size:11px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      opacity:.9;
-      min-width: 240px;
-    }
-    .marquee span{
-      display:inline-block;
-      padding-left: 0;
-      animation: marquee 7.5s linear infinite;
-    }
-    @keyframes marquee{
-      0%{ transform: translateX(0); }
-      100%{ transform: translateX(-50%); }
-    }
-
-    .heroTitle{
-      font-family: "Cormorant Garamond", serif;
-      font-size: 44px;
-      line-height:1.02;
-      margin:12px 0 10px;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-    }
-    @media (max-width: 480px){
-      .heroTitle{ font-size: 36px; }
-    }
-    .heroSub{
-      font-size: 14px;
-      line-height:1.65;
-      color: var(--muted);
-      letter-spacing:.06em;
-      text-transform:uppercase;
-      margin:0 0 16px;
-    }
-
-    .ctaRow{
-      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
-      margin-top:8px;
-      position:relative;
-      z-index:1;
-    }
-    .btn{
-      display:inline-flex; gap:10px; align-items:center; justify-content:center;
-      padding:12px 14px;
-      border-radius: 14px;
-      border:1px solid rgba(239,230,207,.18);
-      background: rgba(255,255,255,.06);
-      font-size:12px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
-    }
-    .btn:hover{ transform: translateY(-3px); background: rgba(255,255,255,.10); border-color: rgba(116,199,211,.22); }
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(116,199,211,.22), rgba(233,196,180,.12));
-      border-color: rgba(116,199,211,.25);
-    }
-    .chips{
-      display:flex; flex-wrap:wrap; gap:8px;
-      margin-top:14px;
-      position:relative;
-      z-index:1;
-    }
-    .chip{
-      font-size:11px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      padding:8px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(239,230,207,.14);
-      background: rgba(0,0,0,.14);
-      opacity:.92;
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-    }
-    .chip i{ color: rgba(116,199,211,.9); }
-
-    /* Sections */
-    section{ padding: 14px 0; }
-    .secTitle{
-      font-family: "Cormorant Garamond", serif;
-      font-size: 22px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      margin: 16px 0 10px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
-    @media (max-width: 980px){ .grid{ grid-template-columns: 1fr; } }
-
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
-      border:1px solid var(--line);
-      border-radius: 18px;
-      padding:14px;
-      box-shadow: 0 16px 55px rgba(0,0,0,.35);
-      transition: transform .2s ease, border-color .2s ease;
-      position:relative;
-      overflow:hidden;
-    }
-    .card:hover{
-      transform: translateY(-6px);
-      border-color: rgba(116,199,211,.22);
-    }
-    .card h3{
-      margin:0;
-      font-size:14px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-    }
-    .card p{
-      margin:8px 0 12px;
-      color: var(--muted);
-      font-size:12px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      line-height:1.55;
-    }
-    .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
-    .tag{
-      font-size:10px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      padding:6px 8px;
-      border-radius: 999px;
-      border:1px solid rgba(239,230,207,.14);
-      background: rgba(0,0,0,.14);
-      opacity:.95;
-    }
-    .row{
-      display:flex; justify-content:space-between; align-items:center; gap:10px;
-    }
-    .miniBtn{
-      padding:10px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(116,199,211,.22);
-      background: rgba(116,199,211,.10);
-      font-size:11px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      display:inline-flex; gap:8px; align-items:center;
-      transition: transform .18s ease, background .18s ease;
-      white-space:nowrap;
-    }
-    .miniBtn:hover{ transform: translateY(-3px); background: rgba(116,199,211,.16); }
-
-    /* Social animated badges */
-    .socialGrid{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:12px;
-    }
-    @media (max-width: 980px){ .socialGrid{ grid-template-columns: repeat(2, 1fr);} }
-    .social{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px;
-      border-radius:18px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.05);
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
-      position:relative;
-      overflow:hidden;
-    }
-    .social:hover{ transform: translateY(-5px); border-color: rgba(233,196,180,.22); background: rgba(255,255,255,.07); }
-    .social .left{ display:flex; align-items:center; gap:10px; }
-    .badge{
-      width:42px; height:42px; border-radius:14px;
-      display:grid; place-items:center;
-      border:1px solid rgba(239,230,207,.18);
-      background: radial-gradient(circle at 30% 30%, rgba(239,230,207,.10), rgba(116,199,211,.08));
-      position:relative;
-      overflow:hidden;
-    }
-    .badge:after{
-      content:"";
-      position:absolute; inset:-60%;
-      background: conic-gradient(from 90deg, transparent, rgba(116,199,211,.20), transparent);
-      animation: spin 4.8s linear infinite;
-      opacity:.7;
-    }
-    @keyframes spin{ to{ transform: rotate(360deg);} }
-    .badge i{ position:relative; z-index:1; font-size:18px; color: rgba(239,230,207,.92); text-shadow: 0 0 18px rgba(116,199,211,.2); }
-    .social b{
-      font-size:12px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-    }
-    .social small{
-      display:block;
-      margin-top:3px;
-      font-size:10px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      opacity:.78;
-    }
-    .go{
-      font-size:12px;
-      opacity:.9;
-      padding:10px 10px;
-      border-radius: 12px;
-      border:1px solid rgba(239,230,207,.14);
-      background: rgba(0,0,0,.12);
-      transition: transform .18s ease;
-    }
-    .social:hover .go{ transform: translateX(2px); }
-
-    /* FAQ kecil */
-    .faqGrid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; }
-    @media (max-width: 980px){ .faqGrid{ grid-template-columns: 1fr; } }
-    details{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      border-radius: 18px;
-      padding:12px 14px;
-    }
-    summary{
-      cursor:pointer;
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      list-style:none;
-    }
-    details p{
-      margin:10px 0 0;
-      color: var(--muted);
-      font-size:11px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      line-height:1.6;
-    }
-
-    footer{
-      margin-top:18px;
-      padding:18px 0 26px;
-      border-top:1px solid var(--line);
-      color: rgba(234,244,255,.75);
-      font-size:11px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      text-align:center;
-    }
-
-    /* Reveal on scroll */
-    .reveal{ opacity:0; transform: translateY(18px) scale(.985); filter: blur(6px);
-      transition: opacity .7s ease, transform .7s ease, filter .7s ease;
-    }
-    .reveal.show{ opacity:1; transform:none; filter: blur(0); }
-  </style>
-</head><body>
-  <!-- Floating petals background -->
-  <div class="petals" aria-hidden="true" id="petals"></div>
-
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div class="brandText">
-          <b>MII STORE</b>
-          <span>PREMIUM DIGITAL SERVICES</span>
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#top">
+        <img class="brand-logo" id="brandLogo" alt="MII STORE logo" />
+        <div class="brand-text">
+          <div class="brand-name">MII STORE</div>
+          <div class="brand-sub">PREMIUM DIGITAL SERVICES</div>
         </div>
-      </div>
+      </a>
 
-      <div class="navLinks">
+      <nav class="nav">
         <a href="#products">PRODUCTS</a>
         <a href="#how">HOW TO ORDER</a>
         <a href="#social">SOCIAL</a>
         <a href="#faq">FAQ</a>
-      </div>
+      </nav>
     </div>
-  </header><main class="container">
-    <div class="heroWrap">
-      <div class="hero">
-        <div class="panel reveal">
-          <div class="ticker">
-            <div class="dot"></div>
-            <div class="marquee">
-              <span>FAST SUPPLY • INTERNATIONAL • FAST SUPPLY • INTERNATIONAL • FAST SUPPLY • INTERNATIONAL • </span>
-            </div>
-          </div>
+  </header>
 
-          <div class="heroTitle">PREMIUM DIGITAL SERVICES</div>
+  <!-- HERO -->
+  <main id="top" class="container">
+    <section class="hero">
+      <div class="hero-marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>FAST SUPPLY • INTERNATIONAL • FAST SUPPLY • INTERNATIONAL • </span>
+          <span>FAST SUPPLY • INTERNATIONAL • FAST SUPPLY • INTERNATIONAL • </span>
+        </div>
+      </div>
 
-          <!-- SEMUA KAPITAL (sesuai request) -->
-          <p class="heroSub">
-            TRUSTED PROVIDER OF PREMIUM DIGITAL SUBSCRIPTIONS (SHARING/PRIVATE DEPENDING ON PRODUCT).
-            EASY ORDER VIA WHATSAPP, FAST PROCESSING, AND CLEAR GUIDANCE AFTER PURCHASE.
+      <div class="hero-card">
+        <div class="hero-left">
+          <h1 class="title">PREMIUM DIGITAL SERVICES</h1>
+
+          <p class="desc">
+            PENYEDIA LANGGANAN DIGITAL PREMIUM TEPERCAYA (BERBAGI/PRIBADI TERGANTUNG PRODUK).
+            PEMESANAN MUDAH MELALUI WHATSAPP, PROSES CEPAT, DAN PANDUAN JELAS SETELAH PEMBELIAN.
           </p>
 
-          <div class="ctaRow">
-            <a class="btn primary" href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20TO%20ORDER." target="_blank" rel="noopener">
-              <i class="fa-brands fa-whatsapp"></i> ORDER VIA WHATSAPP
-            </a>
-            <a class="btn" href="#products"><i class="fa-solid fa-bag-shopping"></i> VIEW PRODUCTS</a>
-            <a class="btn" href="#how"><i class="fa-solid fa-list-check"></i> HOW TO ORDER</a>
+          <div class="cta-row">
+            <a class="btn primary" id="btnWaTop" target="_blank" rel="noreferrer">ORDER VIA WHATSAPP</a>
+            <a class="btn" href="#products">VIEW PRODUCTS</a>
+            <a class="btn" href="#how">HOW TO ORDER</a>
           </div>
 
-          <div class="chips">
-            <span class="chip"><i class="fa-solid fa-bolt"></i> FAST RESPONSE</span>
-            <span class="chip"><i class="fa-solid fa-book"></i> CLEAR GUIDANCE</span>
-            <span class="chip"><i class="fa-solid fa-globe"></i> INTERNATIONAL FRIENDLY</span>
-            <span class="chip"><i class="fa-solid fa-triangle-exclamation"></i> STOCK MAY CHANGE</span>
+          <div class="pill-row">
+            <div class="pill">⚡ FAST RESPONSE</div>
+            <div class="pill">✅ CLEAR GUIDANCE</div>
+            <div class="pill">🌍 INTERNATIONAL FRIENDLY</div>
+            <div class="pill">📦 STOCK MAY CHANGE</div>
           </div>
         </div>
 
-        <div class="panel reveal">
-          <div class="heroArt">
-            <!-- GANTI LINK GAMBAR DI BAWAH dengan gambar yang kamu kirim / gambar AI -->
-            <img src="PASTE_IMAGE_URL_HERE" alt="Violet-inspired theme art">
-            <div class="artGlow"></div>
+        <div class="hero-right">
+          <div class="hero-art">
+            <img id="heroImage" alt="Violet-inspired hero art" />
+            <div class="hero-glow"></div>
           </div>
-
-          <div style="margin-top:14px">
-            <div class="secTitle">WHY MII STORE?</div>
-            <div class="card" style="margin-top:10px">
-              <h3>FOCUSED ON CLEAN SERVICE</h3>
-              <p>CLEAR INFO • FAST PROCESSING • SUPPORT AFTER PURCHASE</p>
-              <div class="tags">
-                <span class="tag">WHATSAPP ORDERING</span>
-                <span class="tag">FAST DELIVERY</span>
-                <span class="tag">AFTER-SALES SUPPORT</span>
-              </div>
-              <p style="margin:0">
-                NOTE: POLICIES MAY VARY BY PRODUCT TYPE (SHARING/PRIVATE/INVITE). PLEASE CONFIRM BEFORE ORDERING.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-              </div><section id="products" class="reveal">
-      <div class="secTitle">PRODUCTS</div>
-
-      <div class="grid">
-        <div class="card">
-          <h3>CANVA PRO</h3>
-          <p>1 MONTH — SHARING / PRIVATE</p>
-          <div class="tags">
-            <span class="tag">SHARING</span><span class="tag">PRIVATE</span><span class="tag">ASK STOCK</span>
-          </div>
-          <div class="row">
-            <span class="tag">ASK PRICE</span>
-            <a class="miniBtn" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20CANVA%20PRO%201%20MONTH%20(SHARING%2FPRIVATE).%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
-              <i class="fa-brands fa-whatsapp"></i> ORDER
-            </a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>YOUTUBE PREMIUM</h3>
-          <p>1 MONTH — INVITE</p>
-          <div class="tags">
-            <span class="tag">INVITE</span><span class="tag">NO ADS</span><span class="tag">ASK STOCK</span>
-          </div>
-          <div class="row">
-            <span class="tag">ASK PRICE</span>
-            <a class="miniBtn" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20YOUTUBE%20PREMIUM%201%20MONTH%20(INVITE).%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
-              <i class="fa-brands fa-whatsapp"></i> ORDER
-            </a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>GEMINI PRO</h3>
-          <p>1 MONTH — SHARING / PRIVATE</p>
-          <div class="tags">
-            <span class="tag">SHARING</span><span class="tag">PRIVATE</span><span class="tag">ASK STOCK</span>
-          </div>
-          <div class="row">
-            <span class="tag">ASK PRICE</span>
-            <a class="miniBtn" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20GEMINI%20PRO%201%20MONTH%20(SHARING%2FPRIVATE).%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
-              <i class="fa-brands fa-whatsapp"></i> ORDER
-            </a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>CHATGPT GO</h3>
-          <p>1 YEAR — PRIVATE</p>
-          <div class="tags">
-            <span class="tag">PRIVATE</span><span class="tag">LONG-TERM</span><span class="tag">ASK STOCK</span>
-          </div>
-          <div class="row">
-            <span class="tag">ASK PRICE</span>
-            <a class="miniBtn" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20CHATGPT%20GO%201%20YEAR%20(PRIVATE).%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
-              <i class="fa-brands fa-whatsapp"></i> ORDER
-            </a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>CHATGPT PLUS</h3>
-          <p>1 MONTH — SHARING / PRIVATE</p>
-          <div class="tags">
-            <span class="tag">SHARING</span><span class="tag">PRIVATE</span><span class="tag">ASK STOCK</span>
-          </div>
-          <div class="row">
-            <span class="tag">ASK PRICE</span>
-            <a class="miniBtn" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20CHATGPT%20PLUS%201%20MONTH%20(SHARING%2FPRIVATE).%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
-              <i class="fa-brands fa-whatsapp"></i> ORDER
-            </a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>CAPCUT PRO</h3>
-          <p>1 MONTH — PRIVATE</p>
-          <div class="tags">
-            <span class="tag">PRIVATE</span><span class="tag">EDITING</span><span class="tag">ASK STOCK</span>
-          </div>
-          <div class="row">
-            <span class="tag">ASK PRICE</span>
-            <a class="miniBtn" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20CAPCUT%20PRO%201%20MONTH%20(PRIVATE).%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
-              <i class="fa-brands fa-whatsapp"></i> ORDER
-            </a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>GETCONTACT</h3>
-          <p>1 MONTH</p>
-          <div class="tags">
-            <span class="tag">PREMIUM</span><span class="tag">1 MONTH</span><span class="tag">ASK STOCK</span>
-          </div>
-          <div class="row">
-            <span class="tag">ASK PRICE</span>
-            <a class="miniBtn" target="_blank" rel="noopener"
-              href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20GETCONTACT%201%20MONTH.%20PLEASE%20SEND%20PRICE%20%26%20STOCK.">
-              <i class="fa-brands fa-whatsapp"></i> ORDER
-            </a>
-          </div>
-        </div>
-      </div>
-              </section><section id="how" class="reveal">
-      <div class="secTitle">HOW TO ORDER</div>
-
-      <div class="grid">
-        <div class="card">
-          <h3>STEP 1 — CHOOSE PRODUCT</h3>
-          <p>PICK A PRODUCT FROM THE LIST ABOVE.</p>
-        </div>
-        <div class="card">
-          <h3>STEP 2 — WHATSAPP ORDER</h3>
-          <p>CLICK “ORDER” AND SEND YOUR REQUEST VIA WHATSAPP.</p>
-        </div>
-        <div class="card">
-          <h3>STEP 3 — PROCESS & GUIDANCE</h3>
-          <p>WE PROCESS FAST AND PROVIDE CLEAR GUIDANCE AFTER PURCHASE.</p>
         </div>
       </div>
     </section>
 
-    <section id="social" class="reveal">
-      <div class="secTitle">SOCIAL</div>
+    <!-- WHY -->
+    <section class="section why">
+      <div class="section-card">
+        <div class="section-title">WHY MII STORE?</div>
+        <div class="why-head">FOCUSED ON CLEAN SERVICE</div>
+        <div class="why-sub">CLEAR INFO • FAST PROCESSING • SUPPORT AFTER PURCHASE</div>
 
-      <div class="socialGrid">
-        <a class="social" target="_blank" rel="noopener"
-          href="https://www.instagram.com/miistore.99?igsh=ZmFqanZuOXo4cG92">
-          <div class="left">
-            <div class="badge"><i class="fa-brands fa-instagram"></i></div>
-            <div>
-              <b>INSTAGRAM</b>
-              <small>PROFILE</small>
-            </div>
-          </div>
-          <div class="go"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="mini-tags">
+          <span class="chip">WHATSAPP ORDERING</span>
+          <span class="chip">FAST DELIVERY</span>
+          <span class="chip">AFTER-SALES SUPPORT</span>
+        </div>
+
+        <div class="note">
+          NOTE: POLICIES MAY VARY BY PRODUCT TYPE (SHARING/PRIVATE/INVITE). PLEASE CONFIRM BEFORE ORDERING.
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section" id="products">
+      <div class="section-title">PRODUCTS</div>
+      <div class="grid" id="productGrid"></div>
+    </section>
+
+    <!-- HOW TO ORDER -->
+    <section class="section" id="how">
+      <div class="section-title">HOW TO ORDER</div>
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="how-num">01</div>
+          <div class="how-h">CHOOSE PRODUCT</div>
+          <div class="how-p">PILIH PRODUK & DURASI, LALU KLIK ORDER.</div>
+        </div>
+        <div class="how-card">
+          <div class="how-num">02</div>
+          <div class="how-h">SEND DETAILS</div>
+          <div class="how-p">KIRIM DETAIL YANG DIBUTUHKAN (EMAIL/INVITE/AKUN) SESUAI PRODUK.</div>
+        </div>
+        <div class="how-card">
+          <div class="how-num">03</div>
+          <div class="how-h">PROCESS & GUIDE</div>
+          <div class="how-p">PROSES CEPAT + PANDUAN JELAS SETELAH PEMBELIAN.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL -->
+    <section class="section" id="social">
+      <div class="section-title">SOCIAL</div>
+      <div class="social-row">
+        <a class="social-btn wa" id="waBtn" target="_blank" rel="noreferrer">
+          <span class="icon">📲</span><span>WHATSAPP</span>
         </a>
-
-        <a class="social" target="_blank" rel="noopener"
-          href="https://wa.me/6282191223912?text=HELLO%20MII%20STORE%2C%20I%20WANT%20TO%20ASK%20ABOUT%20PRODUCTS.">
-          <div class="left">
-            <div class="badge"><i class="fa-brands fa-whatsapp"></i></div>
-            <div>
-              <b>WHATSAPP</b>
-              <small>CHAT ORDER</small>
-            </div>
-          </div>
-          <div class="go"><i class="fa-solid fa-arrow-right"></i></div>
+        <a class="social-btn ig" id="igBtn" target="_blank" rel="noreferrer">
+          <span class="icon">📷</span><span>INSTAGRAM</span>
         </a>
-
-        <a class="social" target="_blank" rel="noopener"
-          href="https://youtube.com/@asami.0111?si=aUNOvu6z0I-8cdNz">
-          <div class="left">
-            <div class="badge"><i class="fa-brands fa-youtube"></i></div>
-            <div>
-              <b>YOUTUBE</b>
-              <small>CHANNEL</small>
-            </div>
-          </div>
-          <div class="go"><i class="fa-solid fa-arrow-right"></i></div>
+        <a class="social-btn yt" id="ytBtn" target="_blank" rel="noreferrer">
+          <span class="icon">▶️</span><span>YOUTUBE</span>
         </a>
-
-        <a class="social" target="_blank" rel="noopener"
-          href="https://www.tiktok.com/@mii._002?_r=1&_t=ZS-9389yLXFP0v">
-          <div class="left">
-            <div class="badge"><i class="fa-brands fa-tiktok"></i></div>
-            <div>
-              <b>TIKTOK</b>
-              <small>PROFILE</small>
-            </div>
-          </div>
-          <div class="go"><i class="fa-solid fa-arrow-right"></i></div>
+        <a class="social-btn tk" id="ttBtn" target="_blank" rel="noreferrer">
+          <span class="icon">🎵</span><span>TIKTOK</span>
         </a>
       </div>
-    </section><section id="faq" class="reveal">
-      <div class="secTitle">FAQ</div>
+    </section>
 
-      <div class="faqGrid">
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="section-title">FAQ</div>
+
+      <div class="faq">
         <details>
-          <summary>HOW FAST IS DELIVERY?</summary>
-          <p>DEPENDS ON STOCK & QUEUE. USUALLY FAST WHEN ORDER FORMAT IS CLEAR.</p>
+          <summary>GARANSI ADA?</summary>
+          <div class="faq-body">GARANSI TERGANTUNG PRODUK. TANYA DULU SAAT ORDER.</div>
         </details>
-
         <details>
-          <summary>IS THERE WARRANTY?</summary>
-          <p>POLICY DEPENDS ON PRODUCT TYPE. PLEASE CONFIRM BEFORE PAYMENT.</p>
+          <summary>BISA ORDER INTERNATIONAL?</summary>
+          <div class="faq-body">BISA. FAST SUPPLY • INTERNATIONAL FRIENDLY.</div>
         </details>
-
         <details>
-          <summary>CAN I ASK FOR GUIDANCE?</summary>
-          <p>YES. WE PROVIDE CLEAR GUIDANCE AFTER PURCHASE FOR COMMON ISSUES.</p>
+          <summary>PRODUK SHARING / PRIVATE?</summary>
+          <div class="faq-body">TERGANTUNG PRODUK. LABELNYA ADA DI CARD PRODUK.</div>
         </details>
       </div>
     </section>
 
-    <footer>
-      © 2026 MII STORE — ESTABLISHED SINCE 2024
+    <footer class="footer">
+      <div class="footer-line"></div>
+      <div class="footer-text">© <span id="year"></span> MII STORE — PREMIUM DIGITAL SERVICES</div>
     </footer>
   </main>
 
-  <script>
-    // Petals generator
-    const petals = document.getElementById('petals');
-    const count = 18;
-    for(let i=0;i<count;i++){
-      const p = document.createElement('div');
-      p.className = 'petal';
-      const left = Math.random()*100;
-      const top = Math.random()*60;
-      const size = 6 + Math.random()*9;
-      const dur = 7 + Math.random()*9;
-      const delay = -(Math.random()*dur);
-      p.style.left = left + 'vw';
-      p.style.top = top + 'vh';
-      p.style.width = size + 'px';
-      p.style.height = size + 'px';
-      p.style.animationDuration = dur + 's';
-      p.style.animationDelay = delay + 's';
-      p.style.opacity = (0.35 + Math.random()*0.45).toFixed(2);
-      petals.appendChild(p);
-    }
-
-    // Reveal on scroll
-    const items = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting) e.target.classList.add('show');
-      });
-    }, { threshold: 0.12 });
-    items.forEach(el=>io.observe(el));
-  </script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </body>
-</html>
+</html>:root{
+  --bg:#0b1220;
+  --bg2:#070c15;
+  --card: rgba(255,255,255,.06);
+  --card2: rgba(255,255,255,.08);
+  --stroke: rgba(255,255,255,.10);
+
+  --text:#eaf2ff;
+  --muted: rgba(234,242,255,.72);
+
+  --gold: #c7ab6a;
+  --gold2:#e0c98a;
+
+  --violet:#31415e;
+  --violet2:#22304a;
+
+  --shadow: 0 16px 50px rgba(0,0,0,.45);
+  --radius: 22px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-serif, Georgia, "Times New Roman", serif;
+  background: radial-gradient(1200px 700px at 20% 10%, rgba(199,171,106,.12), transparent 55%),
+              radial-gradient(900px 600px at 80% 20%, rgba(49,65,94,.22), transparent 60%),
+              linear-gradient(180deg, var(--bg), var(--bg2));
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+a{color:inherit;text-decoration:none}
+.container{
+  width:min(1100px, calc(100% - 32px));
+  margin:0 auto;
+}
+
+.bg-grain{
+  position:fixed; inset:0;
+  pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity:.35;
+}
+.bg-vignette{
+  position:fixed; inset:-1px;
+  pointer-events:none;
+  background: radial-gradient(circle at 50% 35%, transparent 50%, rgba(0,0,0,.55) 100%);
+  opacity:.8;
+}
+
+.section{margin:26px 0 0}
+.section-title{
+  font-family: ui-serif, Georgia, "Times New Roman", serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-size:14px;
+  color:rgba(224,201,138,.92);
+  margin:18px 4px 12px;
+}
+
+.footer{padding:34px 0 40px}
+.footer-line{
+  height:1px;background:linear-gradient(90deg, transparent, rgba(199,171,106,.35), transparent);
+  margin-bottom:14px;
+}
+.footer-text{
+  font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+  color:rgba(234,242,255,.55);
+}.topbar{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(7,12,21,.78), rgba(7,12,21,.35));
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.topbar-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 0;
+  gap:16px;
+}
+.brand{display:flex; align-items:center; gap:12px}
+.brand-logo{
+  width:42px;height:42px;border-radius:14px;
+  border:1px solid rgba(199,171,106,.25);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  object-fit:cover;
+}
+.brand-name{
+  font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+  font-size:13px;
+}
+.brand-sub{
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:rgba(234,242,255,.55);
+}
+.nav{display:flex; gap:16px; align-items:center}
+.nav a{
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(234,242,255,.7);
+  padding:10px 10px;
+  border-radius:12px;
+}
+.nav a:hover{background:rgba(255,255,255,.06); color:rgba(234,242,255,.9)}
+
+.hero{padding:18px 0 0}
+.hero-marquee{
+  position:relative;
+  height:34px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  overflow:hidden;
+  margin:12px 0 12px;
+}
+.marquee-track{
+  display:flex;
+  width:max-content;
+  gap:0;
+  padding-left:10px;
+}
+.marquee-track span{
+  font-size:12px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(224,201,138,.9);
+  white-space:nowrap;
+  padding:9px 0;
+}
+
+.hero-card{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap:16px;
+  padding:18px;
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.09);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  box-shadow: var(--shadow);
+}
+.title{
+  margin:0;
+  font-size:32px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.desc{
+  margin:12px 0 16px;
+  color:rgba(234,242,255,.72);
+  letter-spacing:.06em;
+  line-height:1.55;
+  text-transform:uppercase;
+  font-size:12px;
+}
+
+.cta-row{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 14px}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.06);
+  color:rgba(234,242,255,.86);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-size:11px;
+}
+.btn:hover{background: rgba(255,255,255,.09)}
+.btn.primary{
+  background: linear-gradient(180deg, rgba(199,171,106,.24), rgba(199,171,106,.12));
+  border-color: rgba(199,171,106,.35);
+}
+
+.pill-row{display:flex; flex-wrap:wrap; gap:10px}
+.pill{
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:9px 12px;
+  border-radius:999px;
+  background: rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  color:rgba(234,242,255,.78);
+}
+
+.hero-right{display:flex; align-items:stretch}
+.hero-art{
+  position:relative;
+  width:100%;
+  border-radius: 20px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  background: radial-gradient(700px 380px at 40% 0%, rgba(199,171,106,.14), transparent 60%),
+              linear-gradient(180deg, rgba(34,48,74,.7), rgba(7,12,21,.6));
+  min-height: 290px;
+}
+.hero-art img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  opacity:.95;
+  transform: scale(1.02);
+}
+.hero-glow{
+  position:absolute; inset:-30%;
+  background: radial-gradient(circle at 70% 20%, rgba(224,201,138,.18), transparent 55%),
+              radial-gradient(circle at 20% 60%, rgba(49,65,94,.28), transparent 60%);
+  mix-blend-mode: screen;
+}
+
+.section-card{
+  padding:18px;
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.09);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  box-shadow: var(--shadow);
+}
+.why-head{
+  margin-top:8px;
+  font-size:14px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.why-sub{
+  margin-top:6px;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(234,242,255,.65);
+}
+.mini-tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+.chip{
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  padding:8px 10px;
+  border-radius:999px;
+  background: rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  color:rgba(234,242,255,.75);
+}
+.note{
+  margin-top:12px;
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(234,242,255,.55);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:12px;
+}
+.card{
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.09);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+.card-top{
+  display:flex; gap:12px;
+  padding:14px;
+  align-items:center;
+}
+.prod-img{
+  width:54px; height:54px;
+  border-radius:16px;
+  object-fit:cover;
+  border:1px solid rgba(199,171,106,.25);
+  background: rgba(255,255,255,.04);
+}
+.prod-title{
+  font-size:13px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  margin:0 0 4px;
+}
+.prod-sub{
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(234,242,255,.62);
+  margin:0;
+}
+.card-mid{padding:0 14px 14px}
+.tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+.tag{
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  padding:7px 9px;
+  border-radius:999px;
+  background: rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  color:rgba(234,242,255,.75);
+}
+.card-actions{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 14px 14px;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.order-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(199,171,106,.35);
+  background: linear-gradient(180deg, rgba(199,171,106,.22), rgba(199,171,106,.10));
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-size:11px;
+}
+.order-btn:hover{filter:brightness(1.06)}
+.small-muted{
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(234,242,255,.55);
+}
+
+.how-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:12px;
+}
+.how-card{
+  padding:16px;
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.09);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  box-shadow: var(--shadow);
+}
+.how-num{
+  font-size:12px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:rgba(224,201,138,.9);
+}
+.how-h{
+  margin-top:8px;
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.how-p{
+  margin-top:8px;
+  font-size:11px;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  color:rgba(234,242,255,.65);
+  line-height:1.55;
+}
+
+.social-row{
+  display:flex; flex-wrap:wrap; gap:12px;
+}
+.social-btn{
+  flex:1;
+  min-width: 170px;
+  display:flex; align-items:center; justify-content:center;
+  gap:10px;
+  padding:12px 14px;
+  border-radius: 18px;
+  border:1px solid rgba(255,255,255,.09);
+  background: rgba(255,255,255,.05);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-size:11px;
+  box-shadow: var(--shadow);
+}
+.social-btn .icon{font-size:16px}
+.social-btn:hover{background: rgba(255,255,255,.08)}
+
+.faq details{
+  border-radius: 18px;
+  border:1px solid rgba(255,255,255,.09);
+  background: rgba(255,255,255,.05);
+  padding:12px 14px;
+  margin-bottom:10px;
+}
+.faq summary{
+  cursor:pointer;
+  list-style:none;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-size:11px;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq-body{
+  margin-top:10px;
+  color:rgba(234,242,255,.65);
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  font-size:11px;
+  line-height:1.55;
+}
+
+.decor-wrap{
+  position:fixed; inset:0;
+  pointer-events:none;
+  z-index:5;
+}
+
+@media (max-width: 880px){
+  .hero-card{grid-template-columns:1fr}
+  .nav{display:none}
+  .grid{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr}
+  .title{font-size:26px}
+}.topbar{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(7,12,21,.78), rgba(7,12,21,.35));
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.topbar-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 0;
+  gap:16px;
+}
+.brand{display:flex; align-items:center; gap:12px}
+.brand-logo{
+  width:42px;height:42px;border-radius:14px;
+  border:1px solid rgba(199,171,106,.25);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  object-fit:cover;
+}
+.brand-name{
+  font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+  font-size:13px;
+}
+.brand-sub{
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:rgba(234,242,255,.55);
+}
+.nav{display:flex; gap:16px; align-items:center}
+.nav a{
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(234,242,255,.7);
+  padding:10px 10px;
+  border-radius:12px;
+}
+.nav a:hover{background:rgba(255,255,255,.06); color:rgba(234,242,255,.9)}
+
+.hero{padding:18px 0 0}
+.hero-marquee{
+  position:relative;
+  height:34px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  overflow:hidden;
+  margin:12px 0 12px;
+}
+.marquee-track{
+  display:flex;
+  width:max-content;
+  gap:0;
+  padding-left:10px;
+}
+.marquee-track span{
+  font-size:12px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(224,201,138,.9);
+  white-space:nowrap;
+  padding:9px 0;
+}
+
+.hero-card{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap:16px;
+  padding:18px;
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.09);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  box-shadow: var(--shadow);
+}
+.title{
+  margin:0;
+  font-size:32px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.desc{
+  margin:12px 0 16px;
+  color:rgba(234,242,255,.72);
+  letter-spacing:.06em;
+  line-height:1.55;
+  text-transform:uppercase;
+  font-size:12px;
+}
+
+.cta-row{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 14px}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.06);
+  color:rgba(234,242,255,.86);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-size:11px;
+}
+.btn:hover{background: rgba(255,255,255,.09)}
+.btn.primary{
+  background: linear-gradient(180deg, rgba(199,171,106,.24), rgba(199,171,106,.12));
+  border-color: rgba(199,171,106,.35);
+}
+
+.pill-row{display:flex; flex-wrap:wrap; gap:10px}
+.pill{
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:9px 12px;
+  border-radius:999px;
+  background: rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  color:rgba(234,242,255,.78);
+}
+
+.hero-right{display:flex; align-items:stretch}
+.hero-art{
+  position:relative;
+  width:100%;
+  border-radius: 20px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  background: radial-gradient(700px 380px at 40% 0%, rgba(199,171,106,.14), transparent 60%),
+              linear-gradient(180deg, rgba(34,48,74,.7), rgba(7,12,21,.6));
+  min-height: 290px;
+}
+.hero-art img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  opacity:.95;
+  transform: scale(1.02);
+}
+.hero-glow{
+  position:absolute; inset:-30%;
+  background: radial-gradient(circle at 70% 20%, rgba(224,201,138,.18), transparent 55%),
+              radial-gradient(circle at 20% 60%, rgba(49,65,94,.28), transparent 60%);
+  mix-blend-mode: screen;
+}
+
+.section-card{
+  padding:18px;
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.09);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  box-shadow: var(--shadow);
+}
+.why-head{
+  margin-top:8px;
+  font-size:14px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.why-sub{
+  margin-top:6px;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(234,242,255,.65);
+}
+.mini-tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+.chip{
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  padding:8px 10px;
+  border-radius:999px;
+  background: rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  color:rgba(234,242,255,.75);
+}
+.note{
+  margin-top:12px;
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(234,242,255,.55);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:12px;
+}
+.card{
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.09);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+.card-top{
+  display:flex; gap:12px;
+  padding:14px;
+  align-items:center;
+}
+.prod-img{
+  width:54px; height:54px;
+  border-radius:16px;
+  object-fit:cover;
+  border:1px solid rgba(199,171,106,.25);
+  background: rgba(255,255,255,.04);
+}
+.prod-title{
+  font-size:13px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  margin:0 0 4px;
+}
+.prod-sub{
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(234,242,255,.62);
+  margin:0;
+}
+.card-mid{padding:0 14px 14px}
+.tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+.tag{
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  padding:7px 9px;
+  border-radius:999px;
+  background: rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  color:rgba(234,242,255,.75);
+}
+.card-actions{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 14px 14px;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.order-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(199,171,106,.35);
+  background: linear-gradient(180deg, rgba(199,171,106,.22), rgba(199,171,106,.10));
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-size:11px;
+}
+.order-btn:hover{filter:brightness(1.06)}
+.small-muted{
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(234,242,255,.55);
+}
+
+.how-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:12px;
+}
+.how-card{
+  padding:16px;
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.09);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  box-shadow: var(--shadow);
+}
+.how-num{
+  font-size:12px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:rgba(224,201,138,.9);
+}
+.how-h{
+  margin-top:8px;
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.how-p{
+  margin-top:8px;
+  font-size:11px;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  color:rgba(234,242,255,.65);
+  line-height:1.55;
+}
+
+.social-row{
+  display:flex; flex-wrap:wrap; gap:12px;
+}
+.social-btn{
+  flex:1;
+  min-width: 170px;
+  display:flex; align-items:center; justify-content:center;
+  gap:10px;
+  padding:12px 14px;
+  border-radius: 18px;
+  border:1px solid rgba(255,255,255,.09);
+  background: rgba(255,255,255,.05);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-size:11px;
+  box-shadow: var(--shadow);
+}
+.social-btn .icon{font-size:16px}
+.social-btn:hover{background: rgba(255,255,255,.08)}
+
+.faq details{
+  border-radius: 18px;
+  border:1px solid rgba(255,255,255,.09);
+  background: rgba(255,255,255,.05);
+  padding:12px 14px;
+  margin-bottom:10px;
+}
+.faq summary{
+  cursor:pointer;
+  list-style:none;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-size:11px;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq-body{
+  margin-top:10px;
+  color:rgba(234,242,255,.65);
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  font-size:11px;
+  line-height:1.55;
+}
+
+.decor-wrap{
+  position:fixed; inset:0;
+  pointer-events:none;
+  z-index:5;
+}
+
+@media (max-width: 880px){
+  .hero-card{grid-template-columns:1fr}
+  .nav{display:none}
+  .grid{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr}
+  .title{font-size:26px}
+}/* Marquee loop */
+.marquee-track{
+  animation: marquee 14s linear infinite;
+}
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* Floating particles (light) */
+@keyframes floaty {
+  0%{transform:translateY(0) translateX(0)}
+  50%{transform:translateY(-10px) translateX(4px)}
+  100%{transform:translateY(0) translateX(0)}
+}
+
+/* Social bounce loop */
+.social-btn{
+  animation: softPulse 2.8s ease-in-out infinite;
+}
+.social-btn.ig{animation-delay:.2s}
+.social-btn.yt{animation-delay:.4s}
+.social-btn.tk{animation-delay:.6s}
+
+@keyframes softPulse{
+  0%,100%{transform:translateY(0); filter:brightness(1)}
+  50%{transform:translateY(-3px); filter:brightness(1.06)}
+}
+
+/* Decorations float */
+.decor{
+  position:absolute;
+  opacity:.9;
+  filter: drop-shadow(0 18px 28px rgba(0,0,0,.35));
+  animation: decorFloat 6s ease-in-out infinite;
+}
+.decor.d2{animation-duration:7.5s}
+.decor.d3{animation-duration:8.2s}
+
+@keyframes decorFloat{
+  0%,100%{transform:translateY(0) rotate(-1deg)}
+  50%{transform:translateY(-14px) rotate(1deg)}
+}// === CONFIG ===
+// WA kamu:
+const WHATSAPP_NUMBER = "6282191223912";
+
+// Social links (isi sesuai akunmu)
+const SOCIAL = {
+  instagram: "https://www.instagram.com/asami.am0/",
+  youtube: "https://www.youtube.com/@mii._002",
+  tiktok: "https://www.tiktok.com/@mii._002/"
+};
+
+// Images (pakai nama file yang kamu upload di folder /ID)
+const ASSETS = {
+  // Logo 1:1 (kamu sudah punya ini)
+  logo: "Picsart_26-01-16_21-26-39-597.jpg",
+
+  // Hero art 16:32 (kamu upload yang wide itu)
+  hero: "0ee77f13d04bd9cb4b5dfa8bd8fbab3e.jpg",
+
+  // Decorations (3 PNG Violet) — isi dengan nama file PNG kamu (lebih enak kalau rename jadi deco1.png dll)
+  // Kalau kamu belum rename, nanti aku ajarin cara ambil nama + linknya (copy raw).
+  deco1: "", // contoh: "deco-1.png"
+  deco2: "",
+  deco3: ""
+};
+
+// Product images (yang kamu sebut)
+const PRODUCT_IMAGES = {
+  CANVA: "Canva.jpg",
+  CAPCUT: "Capcut.jpg",
+  YOUTUBE: "YOUTUBE.jpg",
+  CHATGPT: "CHATGPT.jpg",
+  GEMINI: "GEMINI.jpg",
+  SPOTIFY: "Spotify.jpg",
+  ALIGHT: "ALIGHT MOTION.jpg"
+};
+
+// Product list
+const PRODUCTS = [
+  {
+    id: "canva",
+    name: "CANVA PRO",
+    duration: "1 MONTH",
+    type: "SHARING / PRIVATE",
+    image: PRODUCT_IMAGES.CANVA,
+    tags: ["SHARING", "PRIVATE", "ASK STOCK"],
+    waText: "ORDER CANVA PRO (1 MONTH) — SHARING/PRIVATE. PLEASE CONFIRM STOCK & PRICE."
+  },
+  {
+    id: "youtube",
+    name: "YOUTUBE PREMIUM",
+    duration: "1 MONTH",
+    type: "INVITE",
+    image: PRODUCT_IMAGES.YOUTUBE,
+    tags: ["INVITE", "NO ADS", "ASK STOCK"],
+    waText: "ORDER YOUTUBE PREMIUM (1 MONTH) — INVITE. PLEASE CONFIRM STOCK & PRICE."
+  },
+  {
+    id: "gemini",
+    name: "GEMINI PRO",
+    duration: "1 MONTH",
+    type: "SHARING / PRIVATE",
+    image: PRODUCT_IMAGES.GEMINI,
+    tags: ["SHARING", "PRIVATE", "ASK STOCK"],
+    waText: "ORDER GEMINI PRO (1 MONTH) — SHARING/PRIVATE. PLEASE CONFIRM STOCK & PRICE."
+  },
+  {
+    id: "chatgpt",
+    name: "CHATGPT",
+    duration: "1 MONTH / 1 YEAR",
+    type: "PRIVATE (DEPENDS)",
+    image: PRODUCT_IMAGES.CHATGPT,
+    tags: ["PRIVATE", "FAST", "ASK STOCK"],
+    waText: "ORDER CHATGPT — PLEASE CONFIRM PLAN (MONTH/YEAR) + STOCK & PRICE."
+  },
+  {
+    id: "capcut",
+    name: "CAPCUT PRO",
+    duration: "1 MONTH",
+    type: "PRIVATE / INVITE (DEPENDS)",
+    image: PRODUCT_IMAGES.CAPCUT,
+    tags: ["FAST", "GUIDE", "ASK STOCK"],
+    waText: "ORDER CAPCUT PRO (1 MONTH) — PLEASE CONFIRM TYPE (PRIVATE/INVITE) + PRICE."
+  },
+  {
+    id: "spotify",
+    name: "SPOTIFY PREMIUM",
+    duration: "3 MONTHS",
+    type: "INVITE / UPGRADE (DEPENDS)",
+    image: PRODUCT_IMAGES.SPOTIFY,
+    tags: ["3 MONTHS", "FAST", "ASK STOCK"],
+    waText: "ORDER SPOTIFY PREMIUM (3 MONTHS) — PLEASE CONFIRM TYPE (INVITE/UPGRADE) + PRICE."
+  },
+  {
+    id: "alight",
+    name: "ALIGHT MOTION PRO",
+    duration: "1 YEAR",
+    type: "PRIVATE / LICENSE (DEPENDS)",
+    image: PRODUCT_IMAGES.ALIGHT,
+    tags: ["1 YEAR", "MOBILE", "ASK STOCK"],
+    waText: "ORDER ALIGHT MOTION PRO (1 YEAR) — PLEASE CONFIRM TYPE (PRIVATE/LICENSE) + PRICE."
+  }
+];function waLink(message){
+  const text = encodeURIComponent(message);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+}
+
+function setImage(el, fileName){
+  // kalau fileName sudah berupa URL https://... maka pakai langsung
+  if (!fileName) return;
+  if (fileName.startsWith("http")) {
+    el.src = fileName;
+    return;
+  }
+  el.src = fileName; // asumsi file ada di folder /ID yang sama dengan index.html
+}
+
+function renderProducts(){
+  const grid = document.getElementById("productGrid");
+  grid.innerHTML = "";
+
+  PRODUCTS.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <div class="card-top">
+        <img class="prod-img" alt="${p.name}" />
+        <div>
+          <p class="prod-title">${p.name}</p>
+          <p class="prod-sub">${p.duration} — ${p.type}</p>
+        </div>
+      </div>
+
+      <div class="card-mid">
+        <div class="tag-row">
+          ${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <div class="small-muted">FAST SUPPLY • INTERNATIONAL</div>
+        <a class="order-btn" target="_blank" rel="noreferrer">ORDER</a>
+      </div>
+    `;
+
+    // set image
+    const img = card.querySelector(".prod-img");
+    setImage(img, p.image);
+
+    // wa button
+    const btn = card.querySelector(".order-btn");
+    btn.href = waLink(p.waText);
+
+    grid.appendChild(card);
+  });
+}
+
+function renderDecor(){
+  const wrap = document.getElementById("decorWrap");
+  wrap.innerHTML = "";
+
+  const list = [
+    { src: ASSETS.deco1, cls:"decor d1", style:"left:-14px; top:130px; width:160px; opacity:.85;" },
+    { src: ASSETS.deco2, cls:"decor d2", style:"right:-18px; top:260px; width:170px; opacity:.82;" },
+    { src: ASSETS.deco3, cls:"decor d3", style:"left:18px; bottom:60px; width:150px; opacity:.78;" }
+  ].filter(x => x.src && x.src.trim().length);
+
+  list.forEach(d => {
+    const img = document.createElement("img");
+    img.className = d.cls;
+    img.style = d.style;
+    setImage(img, d.src);
+    wrap.appendChild(img);
+  });
+}
+
+function initTopLinks(){
+  // Logo & Hero
+  setImage(document.getElementById("brandLogo"), ASSETS.logo);
+  setImage(document.getElementById("heroImage"), ASSETS.hero);
+
+  // Top WA button
+  const topWa = document.getElementById("btnWaTop");
+  topWa.href = waLink("HALO MII STORE, SAYA MAU ORDER. PRODUK: ____ DURASI: ____");
+
+  // Social buttons
+  document.getElementById("waBtn").href = waLink("HALO MII STORE, SAYA MAU ORDER. PRODUK: ____ DURASI: ____");
+  document.getElementById("igBtn").href = SOCIAL.instagram;
+  document.getElementById("ytBtn").href = SOCIAL.youtube;
+  document.getElementById("ttBtn").href = SOCIAL.tiktok;
+
+  // Year
+  document.getElementById("year").textContent = new Date().getFullYear();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initTopLinks();
+  renderProducts();
+  renderDecor();
+});
