@@ -10,31 +10,18 @@ Simpan Sebagai: index.html
   <meta name="color-scheme" content="light dark" />
   <title>Mii Store — Premium Digital Services</title>
 
-  <!-- Elegant fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Creamy (Crema) Palette */
-      --cream-0:#fbf5ea;
-      --cream-1:#f3eadb;
-      --cream-2:#eadcc7;
-      --cream-3:#dbc9ad;
-
-      --dark-0:#16110c;
-      --dark-1:#20170f;
-      --dark-2:#2a1e13;
-
-      --green:#2f7a4a;
-      --green2:#3fae67;
-
+      --cream-0:#fbf5ea; --cream-1:#f3eadb; --cream-2:#eadcc7;
+      --ink-0:#1b120c; --ink-1:#2b1e14;
+      --green:#2f7a4a; --green2:#3fae67;
       --shadow: 0 18px 55px rgba(20,12,8,.22);
-      --stroke: rgba(40,22,14,.14);
-      --radius: 22px;
-      --radius2: 16px;
-
+      --stroke2: rgba(30,18,12,.12);
+      --radius: 22px; --radius2: 16px;
       --fontTitle: "Cinzel", ui-serif, Georgia, serif;
       --fontBody: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
@@ -49,11 +36,9 @@ Simpan Sebagai: index.html
       --muted2: rgba(30,18,12,.50);
       --icon: rgba(30,18,12,.82);
       --chip: rgba(30,18,12,.08);
-      --stroke2: rgba(30,18,12,.12);
       --blur: 18px;
       --heroOverlay: rgba(255,255,255,.14);
     }
-
     html[data-theme="dark"]{
       --bg: #241a12;
       --bg2: #17100b;
@@ -80,21 +65,19 @@ Simpan Sebagai: index.html
         radial-gradient(900px 650px at 88% 22%, rgba(255,165,90,.16), transparent 60%),
         linear-gradient(180deg, var(--bg), var(--bg2));
       overflow-x:hidden;
-      text-transform: capitalize; /* Semua Kata Awal Huruf Besar */
+      text-transform: capitalize;
     }
 
-    /* background image layer */
+    /* Background image */
     body::before{
       content:"";
-      position:fixed;
-      inset:0;
+      position:fixed; inset:0;
       background:
         linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.14)),
         url("background.jpg") center/cover no-repeat;
       opacity:.22;
       pointer-events:none;
       z-index:-3;
-      transform: translateZ(0);
     }
     html[data-theme="dark"] body::before{
       background:
@@ -103,60 +86,56 @@ Simpan Sebagai: index.html
       opacity:.34;
     }
 
-    /* floating soft bubbles (alive effect) */
+    /* bubbles */
     .bubbles{position:fixed; inset:0; pointer-events:none; z-index:-2; overflow:hidden}
     .bubble{
-      position:absolute;
-      border-radius:999px;
+      position:absolute; border-radius:999px;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), rgba(255,255,255,.06));
-      opacity:.55;
+      opacity:.50;
       animation: floatUp linear infinite;
-      filter: blur(0.2px);
     }
     html[data-theme="dark"] .bubble{
       background: radial-gradient(circle at 30% 30%, rgba(255,245,232,.22), rgba(255,245,232,.05));
-      opacity:.40;
+      opacity:.38;
     }
     @keyframes floatUp{
-      from{ transform: translate3d(0, 18vh, 0) scale(1); }
-      to{ transform: translate3d(0, -130vh, 0) scale(1.05); }
+      from{ transform: translate3d(0, 18vh, 0) }
+      to{ transform: translate3d(0, -130vh, 0) }
     }
 
     .wrap{max-width:1100px; margin:0 auto; padding:18px 14px 110px}
 
     /* Topbar */
     .topbar{
-      position: sticky;
-      top: 10px;
-      z-index: 30;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
+      position:sticky; top:10px; z-index:40;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
       padding:12px 14px;
-      border-radius: 999px;
+      border-radius:999px;
       background: var(--card);
-      border: 1px solid var(--stroke2);
+      border:1px solid var(--stroke2);
       box-shadow: var(--shadow);
       backdrop-filter: blur(var(--blur));
     }
-    .brand{display:flex; gap:10px; align-items:center; min-width: 190px;}
+    .brand{display:flex; gap:10px; align-items:center; min-width:170px}
     .avatar{
-      width:38px; height:38px; border-radius:14px;
-      overflow:hidden; border:1px solid var(--stroke2);
+      width:38px; height:38px; border-radius:14px; overflow:hidden;
+      border:1px solid var(--stroke2);
       box-shadow: 0 10px 25px rgba(0,0,0,.10);
-      flex:0 0 auto;
       background: rgba(255,255,255,.3);
+      flex:0 0 auto;
     }
     .avatar img{width:100%; height:100%; object-fit:cover; display:block}
     .brandTxt{display:flex; flex-direction:column; line-height:1.05}
     .brandTxt b{font-size:14px; letter-spacing:.2px}
-    .brandTxt span{font-size:12px; color:var(--muted)}
+    .brandTxt span{font-size:12px; color:var(--muted); text-transform:none}
 
+    /* Nav Pills (rapi di HP: kecil & bisa scroll) */
     .nav{
       display:flex; gap:8px; align-items:center;
-      overflow:auto;
-      scrollbar-width: none;
+      overflow:auto; scrollbar-width:none;
+      padding:2px 0;
+      max-width: 52vw;
     }
     .nav::-webkit-scrollbar{display:none}
     .pill{
@@ -166,16 +145,16 @@ Simpan Sebagai: index.html
       border:1px solid var(--stroke2);
       color: var(--text);
       text-decoration:none;
-      font-weight:600;
+      font-weight:800;
       font-size:12px;
       letter-spacing:.2px;
-      transition: transform .18s ease, background .18s ease;
       white-space:nowrap;
+      transition: transform .18s ease;
     }
     html[data-theme="dark"] .pill{background: rgba(255,255,255,.06)}
     .pill:hover{transform: translateY(-1px)}
 
-    .actions{display:flex; gap:8px; align-items:center; min-width: 120px; justify-content:flex-end}
+    .actions{display:flex; gap:8px; align-items:center; min-width:110px; justify-content:flex-end}
     .iconBtn{
       width:40px; height:40px;
       border-radius:999px;
@@ -184,7 +163,7 @@ Simpan Sebagai: index.html
       color: var(--icon);
       display:grid; place-items:center;
       cursor:pointer;
-      transition: transform .18s ease, background .18s ease;
+      transition: transform .18s ease;
       position:relative;
     }
     html[data-theme="dark"] .iconBtn{background: rgba(255,255,255,.06)}
@@ -192,13 +171,13 @@ Simpan Sebagai: index.html
     .badge{
       position:absolute; top:-6px; right:-6px;
       background: var(--green2);
-      color: #fff;
+      color:#fff;
       border:2px solid rgba(255,255,255,.65);
       width:20px; height:20px;
       border-radius:999px;
       display:grid; place-items:center;
       font-size:11px;
-      font-weight:800;
+      font-weight:900;
       text-transform:none;
     }
 
@@ -206,58 +185,51 @@ Simpan Sebagai: index.html
     .hero{
       margin-top:14px;
       border-radius: var(--radius);
-      border: 1px solid var(--stroke2);
+      border:1px solid var(--stroke2);
       background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
       box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
     }
-    .hero::after{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(700px 320px at 15% 30%, rgba(63,174,103,.18), transparent 60%),
-                  radial-gradient(700px 320px at 85% 40%, rgba(255,165,90,.18), transparent 60%);
-      pointer-events:none;
-      opacity:.85;
-    }
     .heroInner{
-      position:relative;
-      z-index:1;
       display:grid;
       grid-template-columns: 1.2fr .8fr;
       gap:14px;
       padding:18px;
+      align-items:stretch;
     }
     .heroLeft{
       border-radius: calc(var(--radius) - 8px);
       background: var(--heroOverlay);
-      border: 1px solid var(--stroke2);
+      border:1px solid var(--stroke2);
       padding:16px;
       backdrop-filter: blur(calc(var(--blur) - 6px));
+      min-width: 0; /* IMPORTANT: biar teks nggak kepotong */
     }
 
+    /* FIX: judul tidak kepotong di HP */
     .title{
       font-family: var(--fontTitle);
       margin:10px 0 10px;
-      font-size: 44px;
-      line-height: 1.02;
+      font-size: clamp(30px, 5vw, 44px);
+      line-height: 1.05;
       letter-spacing: .4px;
-      text-shadow: 0 8px 25px rgba(0,0,0,.12);
+      word-break: keep-all;
+      overflow-wrap: anywhere;
     }
+    .title .line{display:block}
+
     .sub{
       margin: 0 0 14px;
       color: var(--muted);
       font-size: 14px;
       line-height: 1.6;
-      max-width: 58ch;
-      text-transform:none; /* biar kalimat normal */
+      max-width: 60ch;
+      text-transform:none;
     }
 
-    /* Ticker */
     .ticker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
+      display:inline-flex; align-items:center;
       border-radius:999px;
       border:1px solid var(--stroke2);
       background: rgba(0,0,0,.05);
@@ -267,14 +239,12 @@ Simpan Sebagai: index.html
     }
     html[data-theme="dark"] .ticker{background: rgba(255,255,255,.06)}
     .tickerTrack{
-      display:flex;
-      gap:18px;
-      white-space:nowrap;
+      display:flex; gap:18px; white-space:nowrap;
       animation: marquee 18s linear infinite;
       will-change: transform;
     }
     .ticker span{
-      font-weight:800;
+      font-weight:900;
       font-size:12px;
       letter-spacing:.6px;
       color: var(--muted);
@@ -288,16 +258,16 @@ Simpan Sebagai: index.html
     .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
       border-radius:999px;
       padding:12px 14px;
-      border: 1px solid var(--stroke2);
+      border:1px solid var(--stroke2);
       text-decoration:none;
-      font-weight:800;
+      font-weight:900;
       font-size:13px;
       cursor:pointer;
-      transition: transform .18s ease, filter .18s ease;
+      transition: transform .18s ease;
       user-select:none;
+      text-transform:none;
     }
     .btn:hover{transform: translateY(-1px)}
     .btnPrimary{
@@ -312,13 +282,7 @@ Simpan Sebagai: index.html
     }
     html[data-theme="dark"] .btnGhost{background: rgba(255,255,255,.06)}
 
-    .socialRow{
-      margin-top:12px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
+    .socialRow{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
     .sIcon{
       width:44px; height:44px;
       border-radius: 14px;
@@ -327,33 +291,30 @@ Simpan Sebagai: index.html
       display:grid; place-items:center;
       color: var(--icon);
       text-decoration:none;
-      transition: transform .20s ease, filter .20s ease;
+      transition: transform .20s ease;
       animation: pop 2.8s ease-in-out infinite;
     }
     html[data-theme="dark"] .sIcon{background: rgba(255,255,255,.06)}
     .sIcon:nth-child(2){animation-delay:.2s}
     .sIcon:nth-child(3){animation-delay:.4s}
     .sIcon:nth-child(4){animation-delay:.6s}
-    @keyframes pop{
-      0%,100%{transform: translateY(0)}
-      50%{transform: translateY(-3px)}
-    }
-    .sIcon:hover{transform: translateY(-4px) scale(1.03); filter: brightness(1.05)}
+    @keyframes pop{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+    .sIcon:hover{transform: translateY(-4px) scale(1.03)}
 
+    /* HERO IMAGE */
     .heroRight{
       border-radius: calc(var(--radius) - 8px);
       overflow:hidden;
-      border: 1px solid var(--stroke2);
+      border:1px solid var(--stroke2);
       background: rgba(0,0,0,.06);
       position:relative;
       min-height: 260px;
     }
     .heroRight img{
-      width:100%;
-      height:100%;
+      width:100%; height:100%;
       object-fit: cover;
+      object-position: center;
       display:block;
-      transform: scale(1.02);
     }
     .heroRight::after{
       content:"";
@@ -362,7 +323,7 @@ Simpan Sebagai: index.html
       pointer-events:none;
     }
     html[data-theme="light"] .heroRight::after{
-      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(0,0,0,.12));
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.12));
     }
 
     /* Sections */
@@ -375,20 +336,15 @@ Simpan Sebagai: index.html
     }
     .note{margin:0 0 14px; color:var(--muted); font-size:13px; text-transform:none}
 
-    /* Product grid */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
+    /* Products */
+    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
     .card{
       border-radius: var(--radius2);
-      border: 1px solid var(--stroke2);
+      border:1px solid var(--stroke2);
       background: var(--card);
       box-shadow: var(--shadow);
       overflow:hidden;
       backdrop-filter: blur(var(--blur));
-      transform: translateZ(0);
       transition: transform .18s ease;
     }
     .card:hover{transform: translateY(-2px)}
@@ -396,7 +352,7 @@ Simpan Sebagai: index.html
     .pImg img{width:100%; height:100%; object-fit:cover; display:block}
     .pBody{padding:12px}
     .pTitle{margin:0; font-weight:900; font-size:15px}
-    .pMeta{margin:6px 0 10px; color: var(--muted); font-size:12px; text-transform:none}
+    .pMeta{margin:6px 0 10px; color:var(--muted); font-size:12px; text-transform:none}
     .chips{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px}
     .chip{
       padding:6px 9px;
@@ -404,9 +360,25 @@ Simpan Sebagai: index.html
       border:1px solid var(--stroke2);
       background: var(--chip);
       font-size:11px;
-      font-weight:800;
+      font-weight:900;
       color: var(--muted);
     }
+
+    /* Type Select */
+    .typeRow{display:flex; gap:8px; align-items:center; margin-bottom:10px}
+    .typeRow label{font-size:12px; color:var(--muted); font-weight:900}
+    .typeSelect{
+      flex:1;
+      border-radius:12px;
+      border:1px solid var(--stroke2);
+      background: rgba(0,0,0,.05);
+      padding:10px 10px;
+      font-weight:900;
+      color: var(--text);
+      outline:none;
+    }
+    html[data-theme="dark"] .typeSelect{background: rgba(255,255,255,.06)}
+    .typeSelect{ text-transform: capitalize; }
 
     .pActions{display:flex; gap:8px}
     .miniBtn{
@@ -427,12 +399,8 @@ Simpan Sebagai: index.html
       border-color: rgba(255,255,255,.22);
     }
 
-    /* How to order */
-    .steps{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:10px;
-    }
+    /* Steps */
+    .steps{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px}
     .step{
       border-radius: var(--radius2);
       border:1px solid var(--stroke2);
@@ -443,17 +411,9 @@ Simpan Sebagai: index.html
     .step p{margin:0; color:var(--muted); font-size:12px; text-transform:none}
 
     /* Cart Drawer */
-    .drawerBackdrop{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.35);
-      display:none;
-      z-index:80;
-    }
+    .drawerBackdrop{position:fixed; inset:0; background: rgba(0,0,0,.35); display:none; z-index:80}
     .drawer{
-      position:fixed;
-      right:14px;
-      top:14px;
-      bottom:14px;
+      position:fixed; right:14px; top:14px; bottom:14px;
       width:min(420px, calc(100% - 28px));
       border-radius: var(--radius);
       border:1px solid var(--stroke2);
@@ -463,60 +423,36 @@ Simpan Sebagai: index.html
       transform: translateX(120%);
       transition: transform .22s ease;
       z-index:90;
-      display:flex;
-      flex-direction:column;
+      display:flex; flex-direction:column;
       overflow:hidden;
     }
     .drawer.open{transform: translateX(0)}
     .drawerBackdrop.open{display:block}
-    .drawerHead{
-      padding:14px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      border-bottom:1px solid var(--stroke2);
-    }
-    .drawerHead b{font-size:14px}
-    .drawerBody{
-      padding:12px 14px;
-      overflow:auto;
-      flex:1;
-    }
+    .drawerHead{padding:14px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--stroke2)}
+    .drawerHead b{font-size:14px; text-transform:none}
+    .drawerBody{padding:12px 14px; overflow:auto; flex:1}
     .cartItem{
-      display:flex;
-      gap:10px;
-      padding:10px;
+      display:flex; gap:10px; padding:10px;
       border-radius: 14px;
       border:1px solid var(--stroke2);
       background: rgba(0,0,0,.04);
       margin-bottom:10px;
     }
     html[data-theme="dark"] .cartItem{background: rgba(255,255,255,.06)}
-    .cartThumb{
-      width:56px; height:56px;
-      border-radius:14px;
-      overflow:hidden;
-      border:1px solid var(--stroke2);
-      flex:0 0 auto;
-    }
+    .cartThumb{width:56px; height:56px; border-radius:14px; overflow:hidden; border:1px solid var(--stroke2); flex:0 0 auto}
     .cartThumb img{width:100%; height:100%; object-fit:cover; display:block}
-    .cartMid{flex:1}
-    .cartMid b{display:block; font-size:13px}
+    .cartMid{flex:1; min-width:0}
+    .cartMid b{display:block; font-size:13px; text-transform:none}
     .cartMid span{display:block; font-size:12px; color:var(--muted); margin-top:4px; text-transform:none}
-    .qtyRow{
-      display:flex; align-items:center; gap:8px; margin-top:8px;
-    }
+    .qtyRow{display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap}
     .qtyBtn{
-      width:34px; height:34px;
-      border-radius:12px;
+      width:34px; height:34px; border-radius:12px;
       border:1px solid var(--stroke2);
       background: rgba(0,0,0,.05);
-      cursor:pointer;
-      font-weight:900;
-      color: var(--text);
+      cursor:pointer; font-weight:900; color: var(--text);
     }
     html[data-theme="dark"] .qtyBtn{background: rgba(255,255,255,.06)}
-    .qtyVal{min-width:26px; text-align:center; font-weight:900}
+    .qtyVal{min-width:26px; text-align:center; font-weight:900; text-transform:none}
     .removeBtn{
       border:1px solid var(--stroke2);
       background: rgba(0,0,0,.05);
@@ -524,42 +460,44 @@ Simpan Sebagai: index.html
       padding:8px 10px;
       cursor:pointer;
       font-weight:900;
+      text-transform:none;
     }
     html[data-theme="dark"] .removeBtn{background: rgba(255,255,255,.06)}
 
-    .drawerFoot{
-      padding:12px 14px;
-      border-top:1px solid var(--stroke2);
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
+    .cartTypeSelect{
+      width:100%;
+      margin-top:8px;
+      border-radius:12px;
+      border:1px solid var(--stroke2);
+      background: rgba(0,0,0,.05);
+      padding:10px 10px;
+      font-weight:900;
+      color: var(--text);
+      outline:none;
+      text-transform: capitalize;
     }
+    html[data-theme="dark"] .cartTypeSelect{background: rgba(255,255,255,.06)}
+
+    .drawerFoot{padding:12px 14px; border-top:1px solid var(--stroke2); display:flex; gap:10px; align-items:center; justify-content:space-between}
     .small{color:var(--muted); font-size:12px; text-transform:none}
 
     /* Qty Modal */
-    .modalBackdrop{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.35);
-      display:none;
-      z-index:95;
-    }
+    .modalBackdrop{position:fixed; inset:0; background: rgba(0,0,0,.35); display:none; z-index:95}
     .modal{
-      position:fixed;
-      left:50%; top:50%;
-      transform: translate(-50%,-50%) scale(.98);
+      position:fixed; left:50%; top:50%;
+      transform: translate(-50%,-50%);
       width:min(420px, calc(100% - 28px));
       border-radius: var(--radius);
       border:1px solid var(--stroke2);
       background: var(--card2);
       backdrop-filter: blur(var(--blur));
       box-shadow: var(--shadow);
-      display:none;
-      z-index:100;
+      display:none; z-index:100;
       overflow:hidden;
     }
     .modal.open, .modalBackdrop.open{display:block}
     .modalHead{padding:12px 14px; border-bottom:1px solid var(--stroke2); display:flex; justify-content:space-between; align-items:center}
+    .modalHead b{ text-transform:none }
     .modalBody{padding:14px}
     .modalBody p{margin:0 0 10px; color:var(--muted); text-transform:none}
     .modalRow{display:flex; gap:10px; align-items:center; justify-content:space-between}
@@ -567,18 +505,12 @@ Simpan Sebagai: index.html
 
     /* WhatsApp Floating Bottom */
     .waFloat{
-      position:fixed;
-      right:14px;
-      bottom:14px;
-      z-index:70;
-      display:flex;
-      align-items:center;
-      gap:10px;
+      position:fixed; right:14px; bottom:14px; z-index:70;
+      display:flex; align-items:center; gap:10px;
       padding:12px 14px;
       border-radius:999px;
       background: linear-gradient(180deg, var(--green2), var(--green));
-      color:#fff;
-      text-decoration:none;
+      color:#fff; text-decoration:none;
       font-weight:900;
       border:1px solid rgba(255,255,255,.25);
       box-shadow: 0 18px 45px rgba(63,174,103,.20);
@@ -587,42 +519,38 @@ Simpan Sebagai: index.html
     }
     .waFloat:hover{transform: translateY(-2px)}
 
-    footer{
-      margin-top:18px;
-      text-align:center;
-      color:var(--muted2);
-      font-size:12px;
-      text-transform:none;
-    }
+    footer{margin-top:18px; text-align:center; color:var(--muted2); font-size:12px; text-transform:none}
 
-    /* Responsive */
+    /* Responsive Fix (HP) */
     @media (max-width: 980px){
       .grid{grid-template-columns: repeat(2, 1fr);}
-      .heroInner{grid-template-columns: 1fr; }
-      .heroRight{min-height:220px}
+    }
+    @media (max-width: 860px){
+      /* FIX: HERO jadi 1 kolom di HP supaya tidak "desktop mode" */
+      .heroInner{grid-template-columns: 1fr;}
+      .heroRight{min-height: 240px;}
+      .nav{max-width: 46vw;}
     }
     @media (max-width: 520px){
       .grid{grid-template-columns: 1fr;}
-      .title{font-size: 40px;}
-      .brand{min-width: 160px}
-      .actions{min-width: 96px}
       .steps{grid-template-columns: 1fr}
+      .nav{max-width: 40vw;}
+      .pill{padding:9px 10px; font-size:11px;}
+      .actions{min-width: 96px;}
     }
 
-    /* Icons */
     svg{display:block}
   </style>
 </head>
 <body>
   <div class="bubbles" id="bubbles"></div>
+
   <div class="drawerBackdrop" id="drawerBackdrop"></div>
 
   <aside class="drawer" id="drawer" aria-label="Cart">
     <div class="drawerHead">
       <b>Cart</b>
-      <button class="iconBtn" id="closeCart" aria-label="Close Cart" title="Close">
-        ✕
-      </button>
+      <button class="iconBtn" id="closeCart" aria-label="Close Cart" title="Close">✕</button>
     </div>
     <div class="drawerBody" id="cartList"></div>
     <div class="drawerFoot">
@@ -634,11 +562,20 @@ Simpan Sebagai: index.html
   <div class="modalBackdrop" id="modalBackdrop"></div>
   <div class="modal" id="qtyModal" role="dialog" aria-modal="true" aria-label="Quantity Selector">
     <div class="modalHead">
-      <b id="qtyTitle">Add Item</b>
+      <b id="qtyTitle">Add To Cart</b>
       <button class="iconBtn" id="closeQty" aria-label="Close" title="Close">✕</button>
     </div>
     <div class="modalBody">
       <p id="qtyDesc">Select Quantity</p>
+
+      <div class="typeRow">
+        <label for="qtyType">Type</label>
+        <select class="typeSelect" id="qtyType">
+          <option value="Private">Private</option>
+          <option value="Sharing">Sharing</option>
+        </select>
+      </div>
+
       <div class="modalRow">
         <button class="qtyBtn" id="qtyMinus">−</button>
         <div class="qtyVal" id="qtyValue">1</div>
@@ -674,9 +611,7 @@ Simpan Sebagai: index.html
           🛒
           <span class="badge" id="cartCount" style="display:none">0</span>
         </button>
-        <button class="iconBtn" id="themeBtn" aria-label="Toggle Theme" title="Theme">
-          🌙
-        </button>
+        <button class="iconBtn" id="themeBtn" aria-label="Toggle Theme" title="Theme">🌙</button>
       </div>
     </header>
     <!-- =========================
@@ -694,9 +629,10 @@ PART 2/3 — BODY CONTENT
             </div>
           </div>
 
-          <!-- Mobile Friendly Title (2 Lines) -->
+          <!-- FIX: 2 baris rapi di HP & Desktop -->
           <h1 class="title">
-            Premium Digital<br/>Services
+            <span class="line">Premium Digital</span>
+            <span class="line">Services</span>
           </h1>
 
           <p class="sub">
@@ -710,7 +646,6 @@ PART 2/3 — BODY CONTENT
           </div>
 
           <div class="socialRow" aria-label="Social Icons">
-            <!-- WhatsApp Icon -->
             <a class="sIcon" id="waIcon" href="#" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                 <path d="M20.5 11.9c0 4.7-3.9 8.6-8.6 8.6-1.5 0-2.9-.4-4.1-1.1L3.5 20.5l1.2-4.1c-.8-1.2-1.2-2.7-1.2-4.2 0-4.7 3.9-8.6 8.6-8.6 4.7 0 8.4 3.6 8.4 8.3z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -718,7 +653,6 @@ PART 2/3 — BODY CONTENT
               </svg>
             </a>
 
-            <!-- Instagram -->
             <a class="sIcon" href="https://www.instagram.com/asami.am0/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                 <path d="M7.5 2.8h9c2.6 0 4.7 2.1 4.7 4.7v9c0 2.6-2.1 4.7-4.7 4.7h-9c-2.6 0-4.7-2.1-4.7-4.7v-9c0-2.6 2.1-4.7 4.7-4.7z" stroke="currentColor" stroke-width="1.6"/>
@@ -727,7 +661,6 @@ PART 2/3 — BODY CONTENT
               </svg>
             </a>
 
-            <!-- TikTok -->
             <a class="sIcon" href="https://www.tiktok.com/@mii._002/" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                 <path d="M14 3v10.2a3.8 3.8 0 1 1-3.2-3.7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
@@ -735,7 +668,6 @@ PART 2/3 — BODY CONTENT
               </svg>
             </a>
 
-            <!-- YouTube (Your New Link) -->
             <a class="sIcon" href="https://youtube.com/@asami.0111?si=aCmKvQvwMrfKZgyd" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                 <path d="M21 8.2c0-1.2-1-2.2-2.2-2.2H5.2C4 6 3 7 3 8.2v7.6C3 17 4 18 5.2 18h13.6c1.2 0 2.2-1 2.2-2.2V8.2z" stroke="currentColor" stroke-width="1.6"/>
@@ -746,7 +678,6 @@ PART 2/3 — BODY CONTENT
         </div>
 
         <div class="heroRight" aria-label="Hero Image">
-          <!-- Hero Image Violet -->
           <img src="banner.jpg" alt="Hero Banner">
         </div>
       </div>
@@ -754,14 +685,13 @@ PART 2/3 — BODY CONTENT
 
     <section class="section" id="products">
       <h2 class="h2">Products</h2>
-      <p class="note">Choose Product — Add To Cart Or Order Via WhatsApp — Fast Processing.</p>
-
+      <p class="note">Choose Product — Select Type (Private / Sharing) — Add To Cart Or Order Via WhatsApp.</p>
       <div class="grid" id="productGrid"></div>
     </section>
 
     <section class="section" id="how">
       <h2 class="h2">How To Order</h2>
-      <p class="note">Step 1 — Choose Product. Step 2 — Add To Cart Or Order. Step 3 — Send Details On WhatsApp.</p>
+      <p class="note">Step 1 — Choose Product. Step 2 — Select Type. Step 3 — Checkout On WhatsApp.</p>
 
       <div class="steps">
         <div class="step">
@@ -769,12 +699,12 @@ PART 2/3 — BODY CONTENT
           <p>Scroll Products Section And Select The Product.</p>
         </div>
         <div class="step">
-          <b>2) Add To Cart Or Click Order</b>
-          <p>You Can Set Quantity Before Adding To Cart.</p>
+          <b>2) Select Type And Quantity</b>
+          <p>Choose Private Or Sharing, Then Set Quantity.</p>
         </div>
         <div class="step">
-          <b>3) Send Details On WhatsApp</b>
-          <p>Send Email / Invite Info If Needed. We Process Fast.</p>
+          <b>3) Checkout Via WhatsApp</b>
+          <p>Send Details And We Process Fast.</p>
         </div>
       </div>
     </section>
@@ -784,7 +714,7 @@ PART 2/3 — BODY CONTENT
       <p class="note">Follow For Updates, Proof, And New Stock.</p>
 
       <div class="socialRow">
-        <a class="sIcon" href="https://www.instagram.com/asami.am0/" target="_blank" rel="noopener" aria-label="Instagram"> 
+        <a class="sIcon" href="https://www.instagram.com/asami.am0/" target="_blank" rel="noopener" aria-label="Instagram">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <path d="M7.5 2.8h9c2.6 0 4.7 2.1 4.7 4.7v9c0 2.6-2.1 4.7-4.7 4.7h-9c-2.6 0-4.7-2.1-4.7-4.7v-9c0-2.6 2.1-4.7 4.7-4.7z" stroke="currentColor" stroke-width="1.6"/>
             <path d="M12 16.3a4.3 4.3 0 1 0 0-8.6 4.3 4.3 0 0 0 0 8.6z" stroke="currentColor" stroke-width="1.6"/>
@@ -811,95 +741,157 @@ PART 2/3 — BODY CONTENT
     <footer>© 2026 Mii Store — Established Since 2024</footer>
   </div>
 
-  <!-- WhatsApp Floating Bottom -->
   <a class="waFloat" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Order Via WhatsApp">
     WhatsApp
   </a>
   <!-- =========================
-PART 3/3 — SCRIPT (PRODUCTS + CART + THEME + ANIMATION)
+PART 2/3 — BODY CONTENT
+========================= -->
+    <section class="hero" id="top">
+      <div class="heroInner">
+        <div class="heroLeft">
+          <div class="ticker" aria-label="Ticker">
+            <div class="tickerTrack" id="tickerTrack">
+              <span>Fast Supply • International • Trusted Seller •</span>
+              <span>Fast Supply • International • Trusted Seller •</span>
+              <span>Fast Supply • International • Trusted Seller •</span>
+              <span>Fast Supply • International • Trusted Seller •</span>
+            </div>
+          </div>
+
+          <!-- FIX: 2 baris rapi di HP & Desktop -->
+          <h1 class="title">
+            <span class="line">Premium Digital</span>
+            <span class="line">Services</span>
+          </h1>
+
+          <p class="sub">
+            Trusted Provider Of Premium Digital Subscriptions (Sharing Or Private Depending On Product).
+            Simple Ordering Via WhatsApp, Fast Processing, And Clear Guidance After Purchase.
+          </p>
+
+          <div class="ctaRow">
+            <a class="btn btnPrimary" id="waHero" href="#" target="_blank" rel="noopener">Order Via WhatsApp</a>
+            <a class="btn btnGhost" href="#products">View Products</a>
+          </div>
+
+          <div class="socialRow" aria-label="Social Icons">
+            <a class="sIcon" id="waIcon" href="#" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M20.5 11.9c0 4.7-3.9 8.6-8.6 8.6-1.5 0-2.9-.4-4.1-1.1L3.5 20.5l1.2-4.1c-.8-1.2-1.2-2.7-1.2-4.2 0-4.7 3.9-8.6 8.6-8.6 4.7 0 8.4 3.6 8.4 8.3z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8.8 8.7c.2-.4.4-.4.7-.4h.6c.2 0 .5.1.6.4l.6 1.6c.1.3.1.5 0 .7l-.4.5c-.1.2-.2.4 0 .6.4.7 1.2 1.6 2.3 2.2.2.1.5.1.6 0l.7-.7c.2-.2.4-.2.6-.1l1.7.8c.2.1.4.4.4.6 0 .8-.3 1.3-.8 1.6-.5.3-1.2.4-1.8.2-1.4-.4-2.6-1.2-3.7-2.3-1.2-1.1-2-2.4-2.4-3.8-.2-.6-.1-1.3.2-1.9z" fill="currentColor" opacity=".85"/>
+              </svg>
+            </a>
+
+            <a class="sIcon" href="https://www.instagram.com/asami.am0/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M7.5 2.8h9c2.6 0 4.7 2.1 4.7 4.7v9c0 2.6-2.1 4.7-4.7 4.7h-9c-2.6 0-4.7-2.1-4.7-4.7v-9c0-2.6 2.1-4.7 4.7-4.7z" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M12 16.3a4.3 4.3 0 1 0 0-8.6 4.3 4.3 0 0 0 0 8.6z" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M17.7 6.6h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </a>
+
+            <a class="sIcon" href="https://www.tiktok.com/@mii._002/" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M14 3v10.2a3.8 3.8 0 1 1-3.2-3.7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14 6.2c1.3 1.8 3 2.7 5 2.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              </svg>
+            </a>
+
+            <a class="sIcon" href="https://youtube.com/@asami.0111?si=aCmKvQvwMrfKZgyd" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M21 8.2c0-1.2-1-2.2-2.2-2.2H5.2C4 6 3 7 3 8.2v7.6C3 17 4 18 5.2 18h13.6c1.2 0 2.2-1 2.2-2.2V8.2z" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M10.2 9.6v4.8l4.6-2.4-4.6-2.4z" fill="currentColor" opacity=".9"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="heroRight" aria-label="Hero Image">
+          <img src="banner.jpg" alt="Hero Banner">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <h2 class="h2">Products</h2>
+      <p class="note">Choose Product — Select Type (Private / Sharing) — Add To Cart Or Order Via WhatsApp.</p>
+      <div class="grid" id="productGrid"></div>
+    </section>
+
+    <section class="section" id="how">
+      <h2 class="h2">How To Order</h2>
+      <p class="note">Step 1 — Choose Product. Step 2 — Select Type. Step 3 — Checkout On WhatsApp.</p>
+
+      <div class="steps">
+        <div class="step">
+          <b>1) Choose The Product You Want</b>
+          <p>Scroll Products Section And Select The Product.</p>
+        </div>
+        <div class="step">
+          <b>2) Select Type And Quantity</b>
+          <p>Choose Private Or Sharing, Then Set Quantity.</p>
+        </div>
+        <div class="step">
+          <b>3) Checkout Via WhatsApp</b>
+          <p>Send Details And We Process Fast.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="social">
+      <h2 class="h2">Social</h2>
+      <p class="note">Follow For Updates, Proof, And New Stock.</p>
+
+      <div class="socialRow">
+        <a class="sIcon" href="https://www.instagram.com/asami.am0/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M7.5 2.8h9c2.6 0 4.7 2.1 4.7 4.7v9c0 2.6-2.1 4.7-4.7 4.7h-9c-2.6 0-4.7-2.1-4.7-4.7v-9c0-2.6 2.1-4.7 4.7-4.7z" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M12 16.3a4.3 4.3 0 1 0 0-8.6 4.3 4.3 0 0 0 0 8.6z" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M17.7 6.6h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </a>
+
+        <a class="sIcon" href="https://www.tiktok.com/@mii._002/" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M14 3v10.2a3.8 3.8 0 1 1-3.2-3.7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 6.2c1.3 1.8 3 2.7 5 2.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </a>
+
+        <a class="sIcon" href="https://youtube.com/@asami.0111?si=aCmKvQvwMrfKZgyd" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M21 8.2c0-1.2-1-2.2-2.2-2.2H5.2C4 6 3 7 3 8.2v7.6C3 17 4 18 5.2 18h13.6c1.2 0 2.2-1 2.2-2.2V8.2z" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M10.2 9.6v4.8l4.6-2.4-4.6-2.4z" fill="currentColor" opacity=".9"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <footer>© 2026 Mii Store — Established Since 2024</footer>
+  </div>
+
+  <a class="waFloat" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Order Via WhatsApp">
+    WhatsApp
+  </a><!-- =========================
+PART 3/3 — SCRIPT (TYPE + CART + RESPONSIVE INIT)
 ========================= -->
   <script>
-    // ====== SETTINGS ======
     const WA_NUMBER = "6282191223912";
     const WA_BASE = "https://wa.me/" + WA_NUMBER;
 
-    // NOTE: Pastikan nama file ini sama persis dengan yang ada di repo kamu
     const PRODUCTS = [
-      {
-        id: "canva_pro",
-        name: "Canva Pro",
-        duration: "1 Month — Sharing / Private",
-        tags: ["Sharing", "Private", "Ask Stock"],
-        image: "Canva.jpg",
-        waHint: "Canva Pro"
-      },
-      {
-        id: "capcut_pro",
-        name: "CapCut Pro",
-        duration: "1 Month — Private",
-        tags: ["Private", "No Ads", "Fast"],
-        image: "Capcut.jpg",
-        waHint: "CapCut Pro"
-      },
-      {
-        id: "youtube_premium",
-        name: "YouTube Premium",
-        duration: "1 Month — Invite",
-        tags: ["Invite", "No Ads", "Ask Stock"],
-        image: "YOUTUBE.jpg",
-        waHint: "YouTube Premium"
-      },
-      {
-        id: "chatgpt_go_1y",
-        name: "ChatGPT Go",
-        duration: "1 Year — Private",
-        tags: ["Private", "Fast", "Guided"],
-        image: "CHATGPT.jpg",
-        waHint: "ChatGPT Go 1 Year Private"
-      },
-      {
-        id: "chatgpt_plus_1m",
-        name: "ChatGPT Plus",
-        duration: "1 Month — Sharing / Private",
-        tags: ["Sharing", "Private", "Ask Stock"],
-        image: "CHATGPT.jpg",
-        waHint: "ChatGPT Plus 1 Month (Sharing / Private)"
-      },
-      {
-        id: "gemini_pro_1m",
-        name: "Gemini Pro",
-        duration: "1 Month — Private / Sharing",
-        tags: ["Private", "Sharing", "Ask Stock"],
-        image: "GEMINI.jpg",
-        waHint: "Gemini Pro 1 Month"
-      },
-      {
-        id: "gemini_pro_1y",
-        name: "Gemini Pro",
-        duration: "1 Year — Private / Sharing",
-        tags: ["Private", "Sharing", "Ask Stock"],
-        image: "GEMINI.jpg",
-        waHint: "Gemini Pro 1 Year"
-      },
-      {
-        id: "spotify_premium",
-        name: "Spotify Premium",
-        duration: "3 Months — Private",
-        tags: ["Private", "Music", "Fast"],
-        image: "Spotify.jpg",
-        waHint: "Spotify Premium 3 Months Private"
-      },
-      {
-        id: "alight_motion",
-        name: "Alight Motion",
-        duration: "1 Year — Private",
-        tags: ["Private", "Editor", "Long Term"],
-        image: "ALIGHT MOTION.jpg",
-        waHint: "Alight Motion 1 Year Private"
-      }
+      { id:"canva_pro", name:"Canva Pro", duration:"1 Month", image:"Canva.jpg", tags:["Ask Stock"], typeOptions:["Private","Sharing"] },
+      { id:"capcut_pro", name:"CapCut Pro", duration:"1 Month", image:"Capcut.jpg", tags:["Fast"], typeOptions:["Private"] },
+      { id:"youtube_premium", name:"YouTube Premium", duration:"1 Month", image:"YOUTUBE.jpg", tags:["Invite"], typeOptions:["Private","Sharing"] },
+      { id:"chatgpt_go_1y", name:"ChatGPT Go", duration:"1 Year", image:"CHATGPT.jpg", tags:["Guided"], typeOptions:["Private"] },
+      { id:"chatgpt_plus_1m", name:"ChatGPT Plus", duration:"1 Month", image:"CHATGPT.jpg", tags:["Ask Stock"], typeOptions:["Private","Sharing"] },
+      { id:"gemini_pro_1m", name:"Gemini Pro", duration:"1 Month", image:"GEMINI.jpg", tags:["Ask Stock"], typeOptions:["Private","Sharing"] },
+      { id:"gemini_pro_1y", name:"Gemini Pro", duration:"1 Year", image:"GEMINI.jpg", tags:["Ask Stock"], typeOptions:["Private","Sharing"] },
+      { id:"spotify_premium", name:"Spotify Premium", duration:"3 Months", image:"Spotify.jpg", tags:["Music"], typeOptions:["Private"] },
+      { id:"alight_motion", name:"Alight Motion", duration:"1 Year", image:"ALIGHT MOTION.jpg", tags:["Editor"], typeOptions:["Private"] }
     ];
 
-    // ====== HELPERS ======
     const $ = (id) => document.getElementById(id);
 
     function waLink(message){
@@ -911,33 +903,14 @@ PART 3/3 — SCRIPT (PRODUCTS + CART + THEME + ANIMATION)
         "Hi Mii Store, I Want To Order.",
         "",
         "Product: (Write Product Name)",
-        "Type: (Sharing / Private)",
-        "Duration: (1 Month / 1 Year / 3 Months)",
+        "Duration: (1 Month / 3 Months / 1 Year)",
+        "Type: (Private / Sharing)",
+        "Quantity: 1",
         "",
         "Thank You."
       ].join("\n");
       return waLink(msg);
     }
-
-    // ====== UI INIT ======
-    const productGrid = $("productGrid");
-    const cartBtn = $("cartBtn");
-    const cartCount = $("cartCount");
-    const drawer = $("drawer");
-    const drawerBackdrop = $("drawerBackdrop");
-    const closeCart = $("closeCart");
-    const cartList = $("cartList");
-    const cartSummary = $("cartSummary");
-    const checkoutBtn = $("checkoutBtn");
-    const themeBtn = $("themeBtn");
-
-    const waHero = $("waHero");
-    const waFloat = $("waFloat");
-    const waIcon = $("waIcon");
-
-    waHero.href = buildDefaultWA();
-    waFloat.href = buildDefaultWA();
-    waIcon.href = buildDefaultWA();
 
     // ====== BUBBLES ======
     (function initBubbles(){
@@ -957,28 +930,42 @@ PART 3/3 — SCRIPT (PRODUCTS + CART + THEME + ANIMATION)
       }
     })();
 
+    // ====== ELEMENTS ======
+    const productGrid = $("productGrid");
+    const cartBtn = $("cartBtn");
+    const cartCount = $("cartCount");
+    const drawer = $("drawer");
+    const drawerBackdrop = $("drawerBackdrop");
+    const closeCart = $("closeCart");
+    const cartList = $("cartList");
+    const cartSummary = $("cartSummary");
+    const checkoutBtn = $("checkoutBtn");
+    const themeBtn = $("themeBtn");
+
+    const waHero = $("waHero");
+    const waFloat = $("waFloat");
+    const waIcon = $("waIcon");
+
+    waHero.href = buildDefaultWA();
+    waFloat.href = buildDefaultWA();
+    waIcon.href = buildDefaultWA();
+
     // ====== CART STORAGE ======
-    const CART_KEY = "mii_cart_v2";
+    const CART_KEY = "mii_cart_v3";
     let cart = loadCart();
 
     function loadCart(){
-      try{
-        const raw = localStorage.getItem(CART_KEY);
-        return raw ? JSON.parse(raw) : {};
-      }catch(e){
-        return {};
-      }
+      try{ return JSON.parse(localStorage.getItem(CART_KEY) || "{}"); }
+      catch(e){ return {}; }
     }
-
     function saveCart(){
       localStorage.setItem(CART_KEY, JSON.stringify(cart));
       renderCartBadge();
+      updateWaLinks();
     }
-
     function cartTotalQty(){
       return Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
     }
-
     function renderCartBadge(){
       const total = cartTotalQty();
       if(total > 0){
@@ -989,7 +976,7 @@ PART 3/3 — SCRIPT (PRODUCTS + CART + THEME + ANIMATION)
       }
     }
 
-    // ====== QUANTITY MODAL ======
+    // ====== MODAL (QTY + TYPE) ======
     const qtyModal = $("qtyModal");
     const modalBackdrop = $("modalBackdrop");
     const qtyTitle = $("qtyTitle");
@@ -1000,20 +987,26 @@ PART 3/3 — SCRIPT (PRODUCTS + CART + THEME + ANIMATION)
     const qtyConfirm = $("qtyConfirm");
     const qtyCancel = $("qtyCancel");
     const closeQty = $("closeQty");
+    const qtyType = $("qtyType");
 
     let pendingProduct = null;
     let pendingQty = 1;
 
-    function openQtyModal(product){
+    function openQtyModal(product, preType){
       pendingProduct = product;
       pendingQty = 1;
       qtyValue.textContent = pendingQty;
+
+      // set type options
+      qtyType.innerHTML = product.typeOptions.map(t => `<option value="${t}">${t}</option>`).join("");
+      if(preType && product.typeOptions.includes(preType)) qtyType.value = preType;
+
       qtyTitle.textContent = "Add To Cart";
       qtyDesc.textContent = product.name + " — " + product.duration;
+
       qtyModal.classList.add("open");
       modalBackdrop.classList.add("open");
     }
-
     function closeQtyModal(){
       qtyModal.classList.remove("open");
       modalBackdrop.classList.remove("open");
@@ -1034,38 +1027,55 @@ PART 3/3 — SCRIPT (PRODUCTS + CART + THEME + ANIMATION)
 
     qtyConfirm.addEventListener("click", () => {
       if(!pendingProduct) return;
-      addToCart(pendingProduct, pendingQty);
+      addToCart(pendingProduct, pendingQty, qtyType.value);
       closeQtyModal();
       openCart();
     });
 
     // ====== CART ACTIONS ======
-    function addToCart(product, qty){
-      const existing = cart[product.id];
-      if(existing){
-        existing.qty = Math.min(99, existing.qty + qty);
+    function addToCart(product, qty, type){
+      const key = product.id + "::" + (type || "Private"); // beda type = beda item
+      if(cart[key]){
+        cart[key].qty = Math.min(99, cart[key].qty + qty);
       }else{
-        cart[product.id] = {
+        cart[key] = {
+          key,
           id: product.id,
           name: product.name,
           duration: product.duration,
           image: product.image,
-          waHint: product.waHint,
-          qty: qty
+          type: type || "Private",
+          qty
         };
       }
       saveCart();
     }
 
-    function setQty(id, qty){
-      if(!cart[id]) return;
-      cart[id].qty = Math.max(1, Math.min(99, qty));
+    function setQty(key, qty){
+      if(!cart[key]) return;
+      cart[key].qty = Math.max(1, Math.min(99, qty));
       saveCart();
       renderCart();
     }
+    function removeItem(key){
+      delete cart[key];
+      saveCart();
+      renderCart();
+    }
+    function setType(key, newType){
+      const item = cart[key];
+      if(!item) return;
 
-    function removeItem(id){
-      delete cart[id];
+      const newKey = item.id + "::" + newType;
+      if(newKey === key) return;
+
+      // merge if exists
+      if(cart[newKey]){
+        cart[newKey].qty = Math.min(99, cart[newKey].qty + item.qty);
+      }else{
+        cart[newKey] = {...item, key:newKey, type:newType};
+      }
+      delete cart[key];
       saveCart();
       renderCart();
     }
@@ -1096,6 +1106,9 @@ PART 3/3 — SCRIPT (PRODUCTS + CART + THEME + ANIMATION)
       }
 
       items.forEach(item => {
+        const p = PRODUCTS.find(x => x.id === item.id);
+        const typeOptions = p ? p.typeOptions : ["Private","Sharing"];
+
         const row = document.createElement("div");
         row.className = "cartItem";
         row.innerHTML = `
@@ -1103,59 +1116,91 @@ PART 3/3 — SCRIPT (PRODUCTS + CART + THEME + ANIMATION)
           <div class="cartMid">
             <b>${item.name}</b>
             <span>${item.duration}</span>
+
+            <select class="cartTypeSelect" data-act="type" data-key="${item.key}">
+              ${typeOptions.map(t => `<option value="${t}" ${t===item.type?"selected":""}>${t}</option>`).join("")}
+            </select>
+
             <div class="qtyRow">
-              <button class="qtyBtn" data-act="minus" data-id="${item.id}">−</button>
+              <button class="qtyBtn" data-act="minus" data-key="${item.key}">−</button>
               <div class="qtyVal">${item.qty}</div>
-              <button class="qtyBtn" data-act="plus" data-id="${item.id}">+</button>
-              <button class="removeBtn" data-act="remove" data-id="${item.id}">Remove</button>
+              <button class="qtyBtn" data-act="plus" data-key="${item.key}">+</button>
+              <button class="removeBtn" data-act="remove" data-key="${item.key}">Remove</button>
             </div>
           </div>
         `;
         cartList.appendChild(row);
       });
 
-      const totalQty = cartTotalQty();
-      cartSummary.textContent = "Total Items: " + totalQty;
+      cartSummary.textContent = "Total Items: " + cartTotalQty();
+      checkoutBtn.href = buildCheckoutMessage();
+    }
+
+    cartList.addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if(!btn) return;
+
+      const act = btn.getAttribute("data-act");
+      const key = btn.getAttribute("data-key");
+      if(!key || !cart[key]) return;
+
+      if(act === "minus") setQty(key, cart[key].qty - 1);
+      if(act === "plus") setQty(key, cart[key].qty + 1);
+      if(act === "remove") removeItem(key);
+    });
+
+    cartList.addEventListener("change", (e) => {
+      const sel = e.target.closest("select[data-act='type']");
+      if(!sel) return;
+      const key = sel.getAttribute("data-key");
+      const val = sel.value;
+      setType(key, val);
+    });
+
+    function buildCheckoutMessage(){
+      const items = Object.values(cart);
+      if(items.length === 0) return buildDefaultWA();
 
       const lines = [];
       lines.push("Hi Mii Store, I Want To Order.");
       lines.push("");
       lines.push("Order List:");
       items.forEach((it, idx) => {
-        lines.push(`${idx+1}) ${it.waHint} — Qty: ${it.qty}`);
+        lines.push(`${idx+1}) ${it.name} — ${it.duration} — Type: ${it.type} — Qty: ${it.qty}`);
       });
       lines.push("");
       lines.push("Please Send Price And Stock Info. Thank You.");
-
-      checkoutBtn.href = waLink(lines.join("\n"));
+      return waLink(lines.join("\n"));
     }
 
-    cartList.addEventListener("click", (e) => {
-      const btn = e.target.closest("button");
-      if(!btn) return;
-      const act = btn.getAttribute("data-act");
-      const id = btn.getAttribute("data-id");
-      if(!id || !cart[id]) return;
-
-      if(act === "minus") setQty(id, cart[id].qty - 1);
-      if(act === "plus") setQty(id, cart[id].qty + 1);
-      if(act === "remove") removeItem(id);
-    });
-
-    // ====== PRODUCTS RENDER ======
+    // ====== PRODUCTS RENDER (Type selector per product) ======
     function renderProducts(){
       productGrid.innerHTML = "";
       PRODUCTS.forEach(p => {
         const card = document.createElement("article");
         card.className = "card";
+
+        const typeSelectHtml = `
+          <div class="typeRow">
+            <label>Type</label>
+            <select class="typeSelect" data-type="${p.id}">
+              ${p.typeOptions.map(t => `<option value="${t}">${t}</option>`).join("")}
+            </select>
+          </div>
+        `;
+
         card.innerHTML = `
           <div class="pImg"><img src="${p.image}" alt="${p.name}"></div>
           <div class="pBody">
             <h3 class="pTitle">${p.name}</h3>
             <div class="pMeta">${p.duration}</div>
+
             <div class="chips">
               ${p.tags.map(t => `<span class="chip">${t}</span>`).join("")}
             </div>
+
+            ${typeSelectHtml}
+
             <div class="pActions">
               <button class="miniBtn miniPrimary" data-add="${p.id}">Add</button>
               <button class="miniBtn" data-order="${p.id}">Order</button>
@@ -1166,6 +1211,11 @@ PART 3/3 — SCRIPT (PRODUCTS + CART + THEME + ANIMATION)
       });
     }
 
+    function getSelectedType(productId){
+      const sel = document.querySelector(`select[data-type="${productId}"]`);
+      return sel ? sel.value : "Private";
+    }
+
     productGrid.addEventListener("click", (e) => {
       const addBtn = e.target.closest("[data-add]");
       const orderBtn = e.target.closest("[data-order]");
@@ -1174,17 +1224,22 @@ PART 3/3 — SCRIPT (PRODUCTS + CART + THEME + ANIMATION)
         const id = addBtn.getAttribute("data-add");
         const p = PRODUCTS.find(x => x.id === id);
         if(!p) return;
-        openQtyModal(p);
+        const t = getSelectedType(id);
+        openQtyModal(p, t);
       }
 
       if(orderBtn){
         const id = orderBtn.getAttribute("data-order");
         const p = PRODUCTS.find(x => x.id === id);
         if(!p) return;
+
+        const t = getSelectedType(id);
         const msg = [
           "Hi Mii Store, I Want To Order.",
           "",
-          "Product: " + p.waHint,
+          "Product: " + p.name,
+          "Duration: " + p.duration,
+          "Type: " + t,
           "Quantity: 1",
           "",
           "Please Send Price And Stock Info. Thank You."
@@ -1193,48 +1248,28 @@ PART 3/3 — SCRIPT (PRODUCTS + CART + THEME + ANIMATION)
       }
     });
 
-    // ====== THEME TOGGLE ======
+    // ====== THEME ======
     function setTheme(mode){
       document.documentElement.setAttribute("data-theme", mode);
       localStorage.setItem("mii_theme", mode);
       themeBtn.textContent = (mode === "dark") ? "☀️" : "🌙";
     }
-    const savedTheme = localStorage.getItem("mii_theme") || "light";
-    setTheme(savedTheme);
-
+    setTheme(localStorage.getItem("mii_theme") || "light");
     themeBtn.addEventListener("click", () => {
       const cur = document.documentElement.getAttribute("data-theme");
       setTheme(cur === "dark" ? "light" : "dark");
     });
 
-    // ====== INIT ======
-    renderProducts();
-    renderCartBadge();
-
-    // Make WhatsApp bottom link dynamic (cart aware)
-    function updateWaFloat(){
-      const items = Object.values(cart);
-      if(items.length === 0){
-        waFloat.href = buildDefaultWA();
-        waHero.href = buildDefaultWA();
-        waIcon.href = buildDefaultWA();
-        return;
-      }
-      const lines = [];
-      lines.push("Hi Mii Store, I Want To Order.");
-      lines.push("");
-      lines.push("Order List:");
-      items.forEach((it, idx) => lines.push(`${idx+1}) ${it.waHint} — Qty: ${it.qty}`));
-      lines.push("");
-      lines.push("Please Send Price And Stock Info. Thank You.");
-      const link = waLink(lines.join("\n"));
+    // ====== WA LINKS (Hero + Floating + Icon) ======
+    function updateWaLinks(){
+      const link = buildCheckoutMessage();
       waFloat.href = link;
       waHero.href = link;
       waIcon.href = link;
+      checkoutBtn.href = link;
     }
-    setInterval(updateWaFloat, 1000);
 
-    // Smooth anchor scroll
+    // Smooth anchor
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener("click",(e)=>{
         const href = a.getAttribute("href");
@@ -1245,6 +1280,11 @@ PART 3/3 — SCRIPT (PRODUCTS + CART + THEME + ANIMATION)
         el.scrollIntoView({behavior:"smooth", block:"start"});
       });
     });
+
+    // INIT
+    renderProducts();
+    renderCartBadge();
+    updateWaLinks();
   </script>
 </body>
 </html>
